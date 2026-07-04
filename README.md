@@ -58,11 +58,17 @@ formal/
   InfoCausalSignature.v               Sign constructed from order comparability; exact PSD-split; a concrete (1,3)-signature witness. Th_coqc.
   InfoGraphNoether.v                  Graph automorphism => exact conserved (momentum-like) quantity. Th_coqc.
   InfoGraphGrowth.v                   Graph growth: curvature/energy laws, order-collapse obstruction theorems, and an exact discrete dilution law -- a native, non-continuum expansion analog. Th_coqc.
+  InfoActionStationarity.v            The mother equation is an exact Euler-Lagrange stationarity readout (field + geometry sides); NOT claimed to narrow any gap to GR. Th_coqc.
+  InfoCurvatureBalance.v              Forman curvature composed into an exact affine horizon threshold + an unconditional no_escape/repair_exists dichotomy; a separate curvature-affine balance law is conditional on an explicit modeling ansatz. Th_coqc.
+  InfoProductSpectrum.v               n-D spectral ladder step 1: Kronecker/Rayleigh additivity for product graphs. Th_coqc.
+  InfoContinuumLimit_nD.v             n-D spectral ladder step 2: flat/weighted multi-axis continuum-limit readout; reproduces this repo's own lorentz_box as an instance. +reals (Tier-1, no classic).
+  InfoWeightedReadout.v               n-D spectral ladder step 3: variable-coefficient (a*u')' readout from the discrete flux stencil. +reals (Tier-1, no classic).
+  InfoCrossTermDominance.v            n-D spectral ladder step 4: an iff between graph-form representability and diagonal dominance, both directions sharp. Th_coqc.
 scripts/
   verify_quantum_gravity_root_bridge.py   Finite-graph (PML) quasinormal-mode eigenvalue solver; converges to the literature Schwarzschild QNM. finite_diagnostic.
 ```
 
-18 Coq files, 61 theorems, every one Tier-0 axiom-free or +reals as marked.
+24 Coq files, 123 theorems, every one Tier-0 axiom-free or +reals as marked.
 
 ## How to reproduce
 
@@ -111,9 +117,15 @@ and prints a `PASS`/`FAIL` summary. Expected per-file result:
 | `InfoCausalSignature.v` | `Closed under the global context` |
 | `InfoGraphNoether.v` | `Closed under the global context` |
 | `InfoGraphGrowth.v` | `Closed under the global context` |
+| `InfoActionStationarity.v` | `Closed under the global context` |
+| `InfoCurvatureBalance.v` | `Closed under the global context` |
+| `InfoProductSpectrum.v` | `Closed under the global context` |
+| `InfoCrossTermDominance.v` | `Closed under the global context` |
 | `InfoAnalysisLift.v` | `ClassicalDedekindReals.sig_forall_dec`, `FunctionalExtensionality.functional_extensionality_dep` |
 | `InfoQuantumGravityRootBridge.v` | same two Reals axioms as above |
 | `InfoLorentzContinuum.v` | same two Reals axioms as above |
+| `InfoContinuumLimit_nD.v` | same two Reals axioms as above |
+| `InfoWeightedReadout.v` | same two Reals axioms as above |
 
 ### 4. Run the QNM script standalone
 
@@ -147,7 +159,7 @@ context. Original authorship dates, by file:
 |---|---|
 | `InfoLorentz.v`, `InfoLorentzContinuum.v`, `InfoLorentzInvariance.v` | 2026-06-27 |
 | `RDL_GammaSpectral.v`, `InfoCoercivityBoundedClosure.v`, `InfoDiscreteGraphCurvature.v`, `InfoSchrodinger.v`, `InfoAnalysisLift.v`, `InfoQuantumGravityRootBridge.v`, `InfoQuantumRelativityUnification.v`, `scripts/verify_quantum_gravity_root_bridge.py` | 2026-07-04 / 2026-07-05 |
-| `InfoSpectralCeiling.v`, `InfoRecurrenceEnergy.v`, `InfoQuantumFrequencyCeiling.v`, `InfoGraphFluxBalance.v`, `InfoCompanionSkew.v`, `InfoCausalSignature.v`, `InfoGraphNoether.v`, `InfoGraphGrowth.v` | 2026-07-05 |
+| `InfoSpectralCeiling.v`, `InfoRecurrenceEnergy.v`, `InfoQuantumFrequencyCeiling.v`, `InfoGraphFluxBalance.v`, `InfoCompanionSkew.v`, `InfoCausalSignature.v`, `InfoGraphNoether.v`, `InfoGraphGrowth.v`, `InfoActionStationarity.v`, `InfoCurvatureBalance.v`, `InfoProductSpectrum.v`, `InfoContinuumLimit_nD.v`, `InfoWeightedReadout.v`, `InfoCrossTermDominance.v` | 2026-07-05 |
 
 See [SUPPLEMENT.md](SUPPLEMENT.md) for the full narrative, the dependency DAG, the
 numerical validation (Hückel benzene, Forman curvature sanity checks), the

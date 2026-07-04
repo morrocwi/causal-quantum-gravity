@@ -22,7 +22,13 @@ COQFILES = \
 	formal/InfoCompanionSkew.v \
 	formal/InfoCausalSignature.v \
 	formal/InfoGraphNoether.v \
-	formal/InfoGraphGrowth.v
+	formal/InfoGraphGrowth.v \
+	formal/InfoActionStationarity.v \
+	formal/InfoCurvatureBalance.v \
+	formal/InfoProductSpectrum.v \
+	formal/InfoContinuumLimit_nD.v \
+	formal/InfoWeightedReadout.v \
+	formal/InfoCrossTermDominance.v
 
 verify:
 	@set -e; \

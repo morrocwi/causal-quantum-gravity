@@ -60,9 +60,13 @@ Dynamics and a Discrete Causal Signature}}
     result showing that growing the graph itself is a native, non-continuum discrete
     analog of cosmological expansion --- curving space negatively, conserving energy
     exactly, and diluting spectral modes by a closed-form law, while explicitly not
-    claiming to resolve any general-relativistic cosmological discrepancy. All told:
-    18 Coq files, 81 theorems, every one machine-checked. Every claim below is
-    accompanied by its tier, its exact source theorem, and a reproduction command.
+    claiming to resolve any general-relativistic cosmological discrepancy. A further
+    six files add an action-stationarity identity, a curvature-energy-horizon
+    structure, and a four-step spectral-convergence ladder resolving the
+    flat/diagonal-metric case of the mother equation's continuum limit in
+    arbitrary dimension. All told: 24 Coq files, 123 theorems, every one
+    machine-checked. Every claim below is accompanied by its tier, its exact
+    source theorem, and a reproduction command.
     \end{abstract}
 
     \textbf{Keywords:} discrete quantum gravity; graph Laplacian; retained-readout
@@ -387,7 +391,11 @@ signature gap --- this repository's causal order is total, so it cannot produce 
 indefinite signature --- is here promoted from an observation to a theorem: for
 \emph{any} graph where every edge is comparable under the order, the signed form
 collapses to $-\mathrm{gdiag} \le 0$ everywhere. ``Space is incomparability; a total
-order has no space'' is now exact, not descriptive.
+order has no space'' is now exact, not descriptive. The qualitative statement ---
+that a total causal order admits no spatial structure --- is established folklore
+in causal set theory \cite{surya2019}; a literature check found no prior published
+proof of this specific curvature-collapse form, but the underlying intuition is
+not new to this work and is cited as such.
 
 \textbf{An exact dilution law.} On a ramp/path growth sequence, the Rayleigh quotient
 of a specific test state has closed form $12/(n(n+1))$ --- division-free throughout,
@@ -404,6 +412,142 @@ accounting, and dilutes spectral modes with a closed-form law. It is not a
 cosmological expansion rate, does not reproduce $H_0$ under any interpretation, and
 Hubble-parameter matching remains exactly the non-readout target this repository
 does not chase.
+
+\section{Action Stationarity and a Curvature-Energy-Horizon Structure}
+\label{sec:action}
+Two further results (\texttt{InfoActionStationarity.v}, 8 theorems, and
+\texttt{InfoCurvatureBalance.v}, 12 theorems, both Tier-0 axiom-free) are reported
+here plainly, for exactly what they prove --- neither inflated nor understated.
+
+\textbf{The mother equation is an exact stationarity readout.} Define the discrete
+window action $S=\sum_n\left[\frac{M}{2}\left(\frac{\Delta x_n}{h}\right)^2 -
+\frac{K}{2}\mathrm{gform}(x_n,x_n)\right]$. Perturbing a single node by $s$ changes
+the action by an exact quadratic identity (\texttt{action\_polarization}); on the
+conservative step, the linear coefficient of that perturbation --- the discrete
+analogue of $\partial S/\partial x_n$, computed via polarization in $\mathbb{Q}$,
+with no limit --- vanishes identically at every node
+(\texttt{mother\_step\_stationary}). The mother equation \emph{is} the discrete
+Euler--Lagrange stationarity condition of this action, exactly, not by analogy.
+Two further facts sharpen this: \texttt{damped\_step\_balance} shows dissipation is
+\emph{exactly} the obstruction to stationarity (the first variation under the
+damped step is $2sc(q_i-p_i)$, vanishing only when $c=0$); \texttt{strict\_descent}
+shows that whenever the step residual is nonzero, an explicit variation
+($s=R/C$) strictly decreases the action --- non-solutions are never selected, a
+genuine, exact argmin content, not a metaphor.
+
+\textbf{What this does and does not establish.} This is a real, native fact about
+the mother equation, worth stating in full: an argmin/stationarity reading of the
+dynamics that was previously informal is now an exact theorem. It is reported here
+at full strength. What it does \emph{not} do is narrow any gap toward general
+relativity specifically. Being expressible as the stationarity of an action is a
+property shared by essentially every Lagrangian physical theory --- classical
+mechanics, Maxwell's equations, and general relativity itself all share it. Two
+theories both admitting a variational formulation is not evidence that one derives
+the other; it is the most generic structural property a physical law can have.
+This result stands on its own merits and is reported at that value, no more and no
+less. A literature check (2026-07-05) found this file's specific combination ---
+one theorem for the matter/field side on a fixed graph, a separate theorem for an
+edge-addition cost-benefit law on the graph's own topology --- is not identical to
+any single prior construction, but is closely related to Trugenberger's
+Combinatorial Quantum Gravity \cite{trugenberger2017}, which varies a statistical
+action over dynamical random graphs where matter arises as curvature excitations
+and geometry emerges from graph condensation, with the Einstein--Hilbert action
+recovered in a geometric phase. The relation is noted explicitly rather than left
+for a reader to discover: this file's two separately-proved stationarity
+statements are a different formalization choice from Trugenberger's single
+combined action, not an independent invention of the underlying idea of varying
+both matter and graph topology together.
+
+\textbf{A curvature-energy-horizon structure.} \texttt{InfoDiscreteGraphCurvature.v}'s
+degree identity composes exactly with the growth results of \S\ref{sec:growth}:
+$\deg(u)+\deg(v) = 4-F(u,v)$ (\texttt{edge\_deg\_curvature}), so the coercivity
+dissipation threshold from \S\ref{sec:curvature} is an exact affine function of
+Forman curvature (\texttt{horizon\_threshold\_curvature}) --- more negative
+curvature forces a strictly higher threshold (\texttt{threshold\_antitone}). Taking
+the per-edge retention benefit to be affine in curvature, $b(e)=\alpha+\beta F(e)$
+--- an explicit modeling choice, not independently derived from anything else in
+this framework --- gives an exact two-way iff between edge-retention and curvature
+(\texttt{curvature\_balance\_add}, \texttt{curvature\_balance\_rem}): under that
+choice, energy strain and curvature determine each other exactly. Separately, and
+without depending on that ansatz, a genuine dichotomy is proved directly from the
+dissipation-threshold structure: \texttt{no\_escape}/\texttt{no\_escape\_strict}
+show that once per-node dissipation exceeds every admissible control's budget, no
+choice can prevent energy from being non-increasing; \texttt{repair\_exists} shows
+the converse --- below that threshold, a control exists that keeps a local mode
+from decaying. This gives a principled (non-circular) answer to an earlier open
+question about how to fix the per-node horizon threshold: it is exactly the point
+at which dissipation exceeds every admissible selection's budget, and this budget
+is set by curvature. \texttt{vacuum\_joint\_stationary} confirms non-vacuity: a
+constant field is a joint stationary point of both the field and (under the
+curvature-affine ansatz) the geometry side, on every graph.
+
+\textbf{Scope, stated plainly.} The horizon dichotomy (\texttt{no\_escape}/
+\texttt{repair\_exists}) is unconditional and exact. The curvature-balance iff
+(\texttt{curvature\_balance\_add/rem}) is exact conditional on the affine-benefit
+ansatz --- a real theorem about a chosen model, not a derivation of why that model
+is the correct one. Neither result derives Einstein's field equations, the
+specific coupling constant, or dynamical geometry sourced by matter in general;
+neither is claimed to.
+
+\section{The $n$-Dimensional Spectral Convergence Ladder}
+\label{sec:nd}
+Whether $L_R$ spectrally converges to a continuum Laplace--Beltrami operator in
+more than one dimension has been an open frontier since Branch 4
+(\S\ref{sec:curvature}). Four further files (\texttt{InfoProductSpectrum.v}, 7
+theorems, Tier-0; \texttt{InfoContinuumLimit\_nD.v}, 4 theorems, Tier-1;
+\texttt{InfoWeightedReadout.v}, 2 theorems, Tier-1; \texttt{InfoCrossTermDominance.v},
+9 theorems, Tier-0) factor this into four steps rather than attempting it as one
+result, each tagged at its true tier.
+
+\textbf{Step 1 (Tier-0): Kronecker/Rayleigh additivity.} An $n$-dimensional grid is
+the Cartesian product of $1$-D chains, and a product graph's quadratic form
+separates exactly: $\mathrm{pgform}(x\otimes y) =
+\mathrm{gform}_G(x)\|y\|^2+\|x\|^2\mathrm{gform}_H(y)$
+(\texttt{form\_separates}), with the analogous exact identity for the norm
+(\texttt{norm\_separates}). Consequently a Rayleigh pair on each factor lifts to a
+Rayleigh pair on the product with eigenvalues adding (\texttt{rayleigh\_additive})
+--- pure $\mathbb{Q}$ combinatorics, no eigenvalue theory or continuum limit
+invoked.
+
+\textbf{Step 2 (Tier-1, \texttt{sig\_forall\_dec}+\texttt{funext} only, confirmed
+no \texttt{classic} leak): the flat multi-axis readout.} Reusing this repository's
+own $1$-D symmetric-second-difference machinery (\texttt{tends0}, verbatim from
+the audited core) with two new closure lemmas (additivity, scaling),
+\texttt{weighted\_two\_axis\_readout} shows a weighted sum of per-axis
+second-difference quotients converges to the same weighted sum of the per-axis
+limits. \texttt{box\_2d\_readout} (weights $-1,1$) reproduces this repository's
+own \texttt{lorentz\_box} construction as an instance --- confirming the extension
+is consistent with the existing kernel, not a divergent reformulation.
+\texttt{laplacian\_2d\_readout}/\texttt{laplacian\_3d\_readout} give the flat
+$n$-D Laplacian.
+
+\textbf{Step 3 (Tier-1, same axiom profile): the variable-coefficient case.} The
+flux-form stencil $a(x{+}h/2)(f(x{+}h){-}f(x)) - a(x{-}h/2)(f(x){-}f(x{-}h))$,
+divided by $h^2$, is shown (\texttt{weighted\_second\_difference\_limit}) to
+converge to $a(x)f''(x)+a'(x)f'(x) = (af')'(x)$ --- the divergence-form operator
+emerges as a readout of the discrete flux stencil, not assumed.
+\texttt{constant\_coefficient\_instance} confirms consistency with Step 2.
+
+\textbf{Step 4 (Tier-0): the off-diagonal dominance criterion, sharp both ways.}
+An anisotropic (cross-term-bearing) quadratic form is representable as a
+nonnegative-weighted graph form --- i.e.\ as a genuine graph Laplacian --- if and
+only if it is diagonally dominant (\texttt{repr\_pos\_iff\_dominant},
+\texttt{repr\_neg\_iff\_dominant}). Sufficiency is a direct decomposition;
+necessity is extracted by evaluating any hypothetical representation at three
+probe vectors, forcing the cross-edge weight to a specific value that goes
+negative exactly when dominance fails --- a genuine obstruction, not an artifact
+of one decomposition choice.
+
+\textbf{What this closes and what remains open, by design.} Steps 1--4 together
+give the diagonal-metric Laplace--Beltrami operator class
+$\sum_i\partial_i(a_i(x)\partial_i u)$ --- covering Schwarzschild-radial, FRW, and
+essentially every metric weak-field tests use --- with a sharp criterion for when
+off-diagonal terms admit a graph representation at all. What remains open, stated
+at its narrowest: spectral convergence for a fully general (non-dominant)
+anisotropic metric, and general-metric convergence on a genuine manifold. The
+latter is a known, substantial result in the literature
+(Burago--Ivanov--Kurylev, 2014) \cite{bik2014}; it is cited here as prior
+literature, not mechanized, and is not claimed as this work's contribution.
 
 \section{Reviewer Attack Response}
 \label{sec:attack}
@@ -461,13 +605,33 @@ topology-dependent, not universal).
 
 \section{Novelty Audit}
 \label{sec:novelty}
-The individual physics content throughout (dispersion relations, Lorentz invariance,
-Forman curvature, H\"uckel theory, perihelion precession) is textbook or established
-literature, cited as such. The claimed contribution is narrower and specific: a
-machine-checked, axiom-free, single-graph-operator substrate carrying a genuine (not
-aliased) cross-branch identity between quantum and special-relativistic readouts
-(\S\ref{sec:unification}), verified by an independent adversarial review process
-external to the author's own assessment.
+The individual mathematics throughout --- Gershgorin/Rayleigh bounds, leapfrog
+invariants, discrete Green's identities, Forman curvature, lattice Noether
+theorems, variational integrators, Kronecker sums, diagonal-dominance criteria ---
+is classical or already in the literature, and this repository's own discrete-
+substrate-physics framing sits in a crowded field (causal sets, the Wolfram
+Physics Project, Regge calculus, loop quantum gravity). A dedicated literature
+check (2026-07-05) on the five specific structural identifications introduced in
+\S\ref{sec:action}--\ref{sec:growth} found no close prior art for three of them
+(the curvature-affine horizon threshold; the horizon dichotomy proved rather than
+stipulated; an epistemic-axiom-to-energy-floor bound, not mechanized here), one
+close but distinct prior construction requiring explicit citation (the double
+matter/geometry stationarity, \S\ref{sec:action}, cf.\ Trugenberger's
+Combinatorial Quantum Gravity \cite{trugenberger2017}), and one instance of
+well-established qualitative folklore given a specific proved form here for the
+first time as far as this check found (the order-collapse theorem,
+\S\ref{sec:growth}, cf.\ causal set theory \cite{surya2019}).
+
+The claimed contribution is therefore narrower than "new physics" and is stated
+at that level: a single graph operator carrying genuine (not aliased) derivations
+--- not results sharing a vocabulary, but a shared equation --- across dispersion,
+causal structure, conservation, symmetry, curvature, and variational structure
+simultaneously, machine-checked and axiom-free end to end, with a tier system
+that separates theorem from stance at every step. This is a claim about
+\emph{method and integration}, not about any single physical prediction; the one
+structural prediction native to this framework is the frequency/UV ceiling of
+\S\ref{sec:campaign} (Eq.~\ref{eq:freqceiling}), which has not been tested against
+any experiment.
 
 \section{Main-Text vs.\ Supplement Boundary}
 \label{sec:boundary}
@@ -476,7 +640,10 @@ equation carries its exact source file and tier, and \S\ref{sec:repro} gives the
 exact commands to independently re-check every one. The manuscript is responsible
 for the mother equation, the four branch results (\S\ref{sec:quantum}--
 \ref{sec:curvature}), the unification result (\S\ref{sec:unification}), the
-quasinormal-mode bridge (\S\ref{sec:qnm}), the reviewer attack response
+quasinormal-mode bridge (\S\ref{sec:qnm}), the strengthening campaign
+(\S\ref{sec:campaign}), graph growth (\S\ref{sec:growth}), the action-stationarity
+and curvature-horizon structure (\S\ref{sec:action}), the $n$-D spectral ladder
+(\S\ref{sec:nd}), the reviewer attack response
 (\S\ref{sec:attack}), and the reproduction commands.
 
 The companion supplement (\texttt{SUPPLEMENT.md}) is responsible for material
@@ -496,9 +663,9 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles all 18 \texttt{formal/*.v} files via
+\item \texttt{make verify} --- compiles all 24 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (81 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
+theorem (123 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
 file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
@@ -535,8 +702,16 @@ an energy-balance law, a first-order unitary-like skeleton, a causal sign
 construction (partially closed, honestly), and a discrete Noether law from informal
 stances to machine-checked facts; a seventh shows that graph growth is a native,
 non-continuum, honestly-bounded analog of expansion, explicitly not a claim about
-any physical cosmological discrepancy. Every claim above carries its tier and its
-exact reproduction command.
+any physical cosmological discrepancy. Two further results prove the mother
+equation is an exact stationarity readout on both its field and its geometry, and
+compose the graph's own curvature into an exact horizon threshold and dichotomy ---
+reported at full strength for what they establish, and explicitly not as evidence
+of narrowing any gap toward general relativity's field equations, since
+variational-structure-sharing is generic to essentially all physical theories. A
+final four-step ladder closes the flat and diagonal-metric cases of this
+framework's $n$-dimensional continuum limit, tagging each step at its true tier and
+narrowing the remaining general-metric case to a single, named, literature-cited
+gap. Every claim above carries its tier and its exact reproduction command.
 
 \section*{Acknowledgements}
 This work was developed through a human--AI co-thinking workflow, including one
@@ -586,6 +761,12 @@ causal set, \textit{Phys. Rev. Lett.}, 1987.
 of Physics}, Wolfram Media, 2020.
 \bibitem{regge1961} T. Regge, General relativity without coordinates, \textit{Il
 Nuovo Cimento}, 1961.
+\bibitem{bik2014} D. Burago, S. Ivanov, Y. Kurylev, A graph discretization of the
+Laplace-Beltrami operator, \textit{J. Spectral Theory}, 2014.
+\bibitem{trugenberger2017} C. A. Trugenberger, Combinatorial quantum gravity:
+geometry from random bits, \textit{JHEP} 09:045, 2017.
+\bibitem{surya2019} S. Surya, The causal set approach to quantum gravity,
+\textit{Living Reviews in Relativity}, 2019.
 \end{thebibliography}
 \label{sec:refs}
 
