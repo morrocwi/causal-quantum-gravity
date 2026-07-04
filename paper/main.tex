@@ -357,8 +357,10 @@ theorem, printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
 \item Expected result: all Coq files compile with exit code 0; the tier report
-matches Table~\ref{tab:tiers}; the QNM script's $N=1600$ row matches
-Eq.~\ref{eq:qnmresult} to the printed precision.
+matches Table~\ref{tab:tiers}; the QNM script's $N=3200$ row matches
+Eq.~\ref{eq:qnmresult} to the printed precision ($N=1600$ is already close,
+$0.4838-0.0958i$, but the digits quoted in Eq.~\ref{eq:qnmresult} are the
+$N=3200$ row).
 \end{enumerate}
 
 \section{Open Problems}
