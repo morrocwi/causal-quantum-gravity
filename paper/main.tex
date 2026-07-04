@@ -50,13 +50,24 @@ Dynamics and a Discrete Causal Signature}}
     algebraic link to an independently-proven stability theorem. A companion
     finite-domain Perfectly-Matched-Layer numerical bridge reproduces a literature
     quasinormal-mode frequency to $\sim$0.1--1.2\%, honestly tiered as
-    \texttt{finite\_diagnostic}, not \texttt{Th\_coqc}. Every claim below is
+    \texttt{finite\_diagnostic}, not \texttt{Th\_coqc}. Responding to an independent
+    adversarial referee review by proving more rather than retreating any claim, we
+    further report six results promoting previously informal stances to theorems: an
+    exact frequency/UV ceiling forced by the graph's own maximum degree, an exact
+    ``no local creation'' energy-balance law, a Schr\"odinger-shaped skew-adjoint
+    first-order skeleton, a causal sign-construction theorem (with an honestly
+    disclosed partial closure), and a discrete Noether theorem; and one further
+    result showing that growing the graph itself is a native, non-continuum discrete
+    analog of cosmological expansion --- curving space negatively, conserving energy
+    exactly, and diluting spectral modes by a closed-form law, while explicitly not
+    claiming to resolve any general-relativistic cosmological discrepancy. All told:
+    18 Coq files, 61 theorems, every one machine-checked. Every claim below is
     accompanied by its tier, its exact source theorem, and a reproduction command.
     \end{abstract}
 
     \textbf{Keywords:} discrete quantum gravity; graph Laplacian; retained-readout
-    framework; Klein--Gordon unification; Forman--Ricci curvature; Coq formal
-    verification; quasinormal modes; reproducibility.
+    framework; Klein--Gordon unification; Forman--Ricci curvature; discrete Noether
+    theorem; graph growth; Coq formal verification; quasinormal modes; reproducibility.
 
     \textit{\footnotesize Preprint notice. This manuscript is a preprint (v1.0) and
     has not undergone formal peer review. It has, however, undergone one internal
@@ -279,6 +290,119 @@ $M\omega\approx0.4836-0.0968\,i$ \cite{leaver1985,berti2009} to $\sim$0.1\% (rea
 part) / $\sim$1.2\% (imaginary part), robust across grid resolution, absorbing-layer
 strength, and domain size.
 
+\section{A Strengthening Campaign: Six Results Closing Referee-Flagged Gaps}
+\label{sec:campaign}
+Following the same referee review, six further results were added, each promoting a
+previously informal (\texttt{Dr}-tier) stance to a \texttt{Th\_coqc} theorem --- by
+proving more, not retreating any existing claim. Every file: pre-verified by
+exact-rational numerical testing before authoring, then independently compiled and
+\texttt{Print Assumptions}-checked here; all Tier-0 axiom-free; zero \texttt{funext},
+zero classical axioms, zero \texttt{admit}.
+
+\textbf{Frequency ceiling and CFL window (\texttt{InfoSpectralCeiling.v},
+\texttt{InfoRecurrenceEnergy.v}, \texttt{InfoQuantumFrequencyCeiling.v}, 20 theorems).}
+A pure degree-sum argument --- no eigenvalue theory, no square root --- gives
+$\lambda \le 2 d_{\max}$, a Rayleigh-quotient form of the Gershgorin bound. Composed
+with Branch 1's dispersion relation, this gives a hard frequency ceiling
+\begin{equation}
+M\omega^2 \le K \cdot (2 d_{\max}),
+\label{eq:freqceiling}
+\end{equation}
+forced by the graph's own maximum degree, not asserted as a physical constant.
+Composed further with an exact discrete-leapfrog Lyapunov identity, the same degree
+bound guarantees both a CFL-style stability window $0\le a\le4$ and energy-non-
+increasing dynamics under dissipation. This replaces an earlier interpretive
+``$\tau_c$ floor'' stance with an exact structural theorem about what sets it.
+
+\textbf{No local creation (\texttt{InfoGraphFluxBalance.v}, 8 theorems).} A discrete
+divergence theorem plus Green's identity (summation-by-parts) prove that $L_R$'s
+coupling term contributes exactly zero to the mother equation's total energy budget
+--- it telescopes to zero across every edge. Energy can only change via dissipation
+($\le0$) or source work.
+
+\textbf{A Schr\"odinger-shaped skeleton (\texttt{InfoCompanionSkew.v}, 5 theorems).}
+Writing the conservative sector as a first-order companion system $\Psi=(x,v)$ with
+generator $B(x,v)=(Mv,-KLx)$, the generator is proved skew-adjoint under the energy
+inner product $\langle(x,v),(y,w)\rangle_E = K\cdot\mathrm{gform}(x,y)+M\langle
+v,w\rangle$, moving every state exactly orthogonal to its own energy level set. This
+is the algebraic core of norm-preserving first-order evolution --- the $i\hbar
+\partial_t\psi=H\psi$ skeleton without $i$, without $\mathbb{C}$, without $\sqrt{\ }$.
+
+\textbf{Causal signature (\texttt{InfoCausalSignature.v}, 7 theorems).} \S5 disclosed
+that $\mathrm{sgn}$ is a free parameter. This file proves a sign function can instead
+be \emph{constructed} from a relation's comparability (comparable pairs $\to -1$,
+incomparable pairs $\to +1$), yielding an exact PSD-minus-PSD split, two lightcone-
+style cone inequalities, and, on a concrete star-graph example, a genuine rational-
+congruence witness of Minkowski type $(1,3)$. \textbf{This does not fully close the
+gap.} This repository's own causal order (built from a strict total order on its
+domain, proved order-isomorphic to $\mathbb{N}$) admits no incomparable pairs at all
+--- applying the construction to it would degenerate to an all-timelike signature,
+not the indefinite structure demonstrated on the constructed example. The
+construction is real and general; it does not yet connect to this repository's own
+specific causal order, which would require a genuinely richer (non-total) structure.
+
+\textbf{Discrete Noether (\texttt{InfoGraphNoether.v}, 7 theorems).} Given a graph
+automorphism $\sigma$, the Laplacian commutes with it, every quadratic structure
+built from $L_R$ is $\sigma$-invariant, and the antisymmetric pairing
+$W(p,q)=\sum_i p(\sigma i)q_i - p_i q(\sigma i)$ is exactly conserved under the
+conservative step: genuine Noether shape, the inertial term cancels pointwise and the
+coupling term dies by equivariance plus summation-by-parts. A concrete instance (the
+6-cycle with a rotation automorphism) confirms the theorem is non-vacuous.
+
+\section{Graph Growth: A Native Discrete Expansion Analog}
+\label{sec:growth}
+A natural question, raised independently, is whether this framework can address a
+real cosmological discrepancy such as the Hubble tension (the $\sim5$--$6\sigma$
+disagreement between early-universe and local-distance-ladder measurements of
+$H_0$). The honest answer is no: that is a general-relativistic/FRW-cosmology
+problem, and \S\ref{sec:gr} establishes this repository derives no general-relativity
+content at all. Forcing a connection would repeat the same category error as the
+eight refuted GR attempts of \S\ref{sec:gr}.
+
+Following the same discipline that produced Branch 4 (curvature, \S\ref{sec:curvature}
+--- a native discrete object in place of an unreachable continuum target), a natural
+discrete analog of \emph{expansion} was investigated instead: growing the graph
+itself. \texttt{InfoGraphGrowth.v} (13 theorems, axiom-free) proves, for the mother
+equation's own graph structure:
+
+\textbf{Growth curves space negatively.} Adding an edge $e^*$ to a graph strictly
+decreases the Forman curvature (\S\ref{sec:curvature}) of every edge adjacent to
+$e^*$ by at least~1, exactly:
+\begin{equation}
+F_{e^*::E}(e) = F_E(e) - \mathrm{share}(e^*,u) - \mathrm{share}(e^*,v).
+\label{eq:growthcurve}
+\end{equation}
+``Space creation curves space negatively'' is a combinatorial identity, not an
+analogy.
+
+\textbf{Growth has an exact energy account.} Adding an edge changes the vector energy
+balance (\S\ref{sec:campaign}) by exactly $h^2K$ times the product of the field
+difference across the new edge; a field continuous across the new edge changes the
+energy not at all (adiabatic growth).
+
+\textbf{The order-collapse obstruction, proved.} \S\ref{sec:campaign}'s causal-
+signature gap --- this repository's causal order is total, so it cannot produce an
+indefinite signature --- is here promoted from an observation to a theorem: for
+\emph{any} graph where every edge is comparable under the order, the signed form
+collapses to $-\mathrm{gdiag} \le 0$ everywhere. ``Space is incomparability; a total
+order has no space'' is now exact, not descriptive.
+
+\textbf{An exact dilution law.} On a ramp/path growth sequence, the Rayleigh quotient
+of a specific test state has closed form $12/(n(n+1))$ --- division-free throughout,
+via an $\mathbb{N}\to\mathbb{Q}$ power-sum injection. Paired with the frequency
+ceiling (Eq.~\ref{eq:freqceiling}), the growing graph brackets its own spectrum from
+both sides: a ceiling set by degree, a floor that dilutes as $\sim 1/n^2$.
+
+\textbf{Scope (\texttt{finite\_diagnostic}, honestly bounded).} No exponential or de
+Sitter-type dilution law was found; only power laws were observed, and a star-growth
+sequence does not dilute at all --- the dilution law is a property of the growth
+\emph{topology}, not of growth per se. This is a native, non-continuum, discrete
+expansion analog: growth simultaneously curves space negatively, has exact energy
+accounting, and dilutes spectral modes with a closed-form law. It is not a
+cosmological expansion rate, does not reproduce $H_0$ under any interpretation, and
+Hubble-parameter matching remains exactly the non-readout target this repository
+does not chase.
+
 \section{Reviewer Attack Response}
 \label{sec:attack}
 This section pre-empts questions an adversarial referee will ask, following an
@@ -313,6 +437,25 @@ requirement. This is disclosed, not obscured.
 citations flagged as unresolved in an internal draft (an anonymous arXiv preprint and
 a mismatched preprint server) have been removed from this version pending independent
 verification, rather than retained on trust.
+
+\noindent\textit{Does the frequency ceiling (Eq.~\ref{eq:freqceiling}) claim a
+physical Planck-scale minimal length?} No. It is a structural/discretization bound: a
+property of $L_R$'s finite maximum degree. It states \emph{that} a ceiling exists and
+\emph{exactly} what sets it ($d_{\max}$, $M$, $K$), not a numerical value for any
+particular physical system.
+
+\noindent\textit{Is the causal-signature closure (\S\ref{sec:campaign}) actually
+complete?} No, and the manuscript says so directly: the construction is proved for an
+arbitrary relation with genuine incomparable pairs, demonstrated on a constructed
+example, but this repository's own causal order is a total order and cannot host one.
+This is reported as a partial result with a named obstruction, not a closed gap.
+
+\noindent\textit{Does the graph-growth result (\S\ref{sec:growth}) address the Hubble
+tension or any cosmological discrepancy?} No, explicitly. That is a general-
+relativistic problem and \S\ref{sec:gr} establishes no general relativity is derived
+here. The growth result is offered only as a native discrete analog of expansion,
+with an honestly bounded scope (power-law dilution only; no de Sitter behavior found;
+topology-dependent, not universal).
 
 \section{Novelty Audit}
 \label{sec:novelty}
@@ -351,9 +494,10 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles every \texttt{formal/*.v} file via
+\item \texttt{make verify} --- compiles all 17 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem, printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per file).
+theorem (61 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
+file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
 \item Expected result: all Coq files compile with exit code 0; the tier report
@@ -365,20 +509,32 @@ $N=3200$ row).
 
 \section{Open Problems}
 \label{sec:open}
-(1) Derive $\mathrm{sgn}$ in Eq.~\ref{eq:causalform} from a genuine partial (not
-linear) causal order on the graph, rather than leaving it a free parameter.
+(1) Construct a genuinely non-total (partial, multi-dimensional) causal order on this
+repository's graphs, so that the sign-construction theorem of \S\ref{sec:campaign}
+produces a non-degenerate indefinite signature on the repository's \emph{own} causal
+structure, not only on a constructed example.
 (2) Extend the quasinormal-mode bridge (\S\ref{sec:qnm}) to spin-2 perturbations.
 (3) Determine whether Ollivier--Ricci curvature \cite{ollivier2009} offers a
 non-shallow alternative to Eq.~\ref{eq:curvlink}'s exact-but-shallow link.
+(4) Does the dilution law of \S\ref{sec:growth} admit a principled selection rule for
+which growth topologies are physically relevant, or is topology-dependence the final
+answer?
+(5) Does \S\ref{sec:campaign}'s Noether pairing admit a principled dissipative
+correction, or is exact conservation strictly a conservative-sector fact?
 
 \section{Conclusion}
-One graph-Laplacian root equation genuinely derives, and --- new to this manuscript
---- genuinely unifies, a quantum dispersion relation and a special-relativistic wave
-operator. It honestly does not derive general relativity, for a stated philosophical
-reason rather than a numerical shortfall, and offers in its place a native discrete
-curvature readout with an exact, if shallow, link to an independently-proven
-stability result. Every claim above carries its tier and its exact reproduction
-command.
+One graph-Laplacian root equation genuinely derives, and genuinely unifies, a
+quantum dispersion relation and a special-relativistic wave operator. It honestly
+does not derive general relativity, for a stated philosophical reason rather than a
+numerical shortfall, and offers in its place a native discrete curvature readout
+with an exact, if shallow, link to an independently-proven stability result.
+Responding to adversarial review, six further theorems promote a frequency ceiling,
+an energy-balance law, a first-order unitary-like skeleton, a causal sign
+construction (partially closed, honestly), and a discrete Noether law from informal
+stances to machine-checked facts; a seventh shows that graph growth is a native,
+non-continuum, honestly-bounded analog of expansion, explicitly not a claim about
+any physical cosmological discrepancy. Every claim above carries its tier and its
+exact reproduction command.
 
 \section*{Acknowledgements}
 This work was developed through a human--AI co-thinking workflow, including one

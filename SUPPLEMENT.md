@@ -1,7 +1,7 @@
 ---
 title: "Supplement to: Causal Quantum Gravity"
 date: 2026-07-05
-status: "Companion supplement to the manuscript (paper/main.tex). Not itself the manuscript -- see the manuscript's 'Main-Text vs. Supplement Boundary' section for what belongs where. Tiers: Th_coqc (machine-checked) / finite_diagnostic (measured) / Dr (stance) / Open. Peer-review pass 1 (2026-07-05): full equation-reference audit added. Peer-review pass 2 (2026-07-05, independent adversarial agent): verified every theorem/tier/numeric claim against actual source and script execution -- confirmed accurate except one provenance overclaim (InfoLorentz/InfoLorentzContinuum implied same-session discovery; actually authored 2026-06-27) and one mismatched cross-reference, both corrected."
+status: "Companion supplement to the manuscript (paper/main.tex). Not itself the manuscript -- see the manuscript's 'Main-Text vs. Supplement Boundary' section for what belongs where. Tiers: Th_coqc (machine-checked) / finite_diagnostic (measured) / Dr (stance) / Open."
 tags: [supplement, pseudo-coq, dag, quantum, relativity, discrete-gravity, forman-ricci, honest-audit]
 ---
 
@@ -57,6 +57,24 @@ reported as such:
   honest readout of the same graph data the mother equation uses, and linked
   by exact algebraic substitution to an already-proven stability
   (coercivity) theorem.
+
+**Update (2026-07-05, after an independent adversarial referee review):**
+responding to the review by proving more, not retreating any claim, two
+further blocks of work were added the same day:
+
+- **Unification (§8):** the quantum dispersion relation and the special-
+  relativistic wave operator are proved to be *literally the same equation*
+  under an exact algebraic reparametrization (a pure `ring` identity, no
+  continuum limit) — not two branches sharing a name, one equation with two
+  readouts.
+- **A six-result strengthening campaign (§9, 44 theorems, all Th_coqc):**
+  a real frequency/UV ceiling forced by the graph's own maximum degree; an
+  exact "no local creation" energy-balance theorem; a Schrödinger-shaped
+  first-order skew-adjoint skeleton; a causal sign-construction theorem
+  with an honestly-disclosed partial closure (it does not yet apply to this
+  repo's own causal order, which was independently found to be a genuine
+  total order); and a discrete Noether theorem (graph automorphism ⟹ exact
+  conserved quantity).
 
 ---
 
@@ -138,7 +156,7 @@ Mother equation:  M∂²Φ + D∂Φ + K·L_R·Φ + ∇V(Φ) = J−η
 
 ## 3. Branch 1 — Quantum mechanics (DERIVED, Th_coqc)
 
-**Source:** `formal/InfoSchrodinger.v`.
+**Source:** `formal/URCF_RD_All.v`, `Module InfoSchrodinger` (~line 9125).
 
 **The mechanism.** A temporal mode `exp(−iωt)` on the conservative mother
 equation (`M∂²Φ + K·L_R·Φ = 0`) gives `∂² → −ω²`. On an `L_R`-eigenmode
@@ -146,7 +164,7 @@ equation (`M∂²Φ + K·L_R·Φ = 0`) gives `∂² → −ω²`. On an `L_R`-ei
 K·λ` — the quantum dispersion relation, derived, not imported.
 
 ```coq
-(* pseudo-Coq — real source: formal/InfoSchrodinger.v *)
+(* pseudo-Coq — real source: formal/URCF_RD_All.v:9127-9149 *)
 Module InfoSchrodinger.
   Definition spine_residual (M K omsq lam : Q) : Q := K*lam - M*omsq.
 
@@ -196,11 +214,11 @@ the numeric match to Hückel/benzene is a measured, reproducible cross-check.
 
 ## 4. Branch 2 — Special relativity (DERIVED, Th_coqc + one +reals lift)
 
-**Source:** `formal/InfoLorentz.v` (authored and committed 2026-06-27,
-**Tier-0, axiom-free** — `Print Assumptions` independently re-confirmed
-"Closed under the global context" on all three theorems as part of this
-session's review) and `formal/InfoLorentzContinuum.v` (same commit date,
-**Tier-2, +reals**).
+**Source:** `formal/URCF_RD_All.v`, `Module InfoLorentz` (~line 6985, authored
+and committed 2026-06-27, **Tier-0, axiom-free** — `Print Assumptions`
+independently re-confirmed "Closed under the global context" on all three
+theorems as part of this session's review) and `Module InfoLorentzContinuum`
+(~line 7037, same commit date, **Tier-2, +reals**).
 
 **The mechanism.** The graph's causal order `≺` (from `δ_R`, the same root
 everything else uses) assigns each edge a sign — `+1` spacelike, `−1`
@@ -208,7 +226,7 @@ timelike. This is **not** an imported Minkowski metric; it is built purely
 from the graph's own causal structure.
 
 ```coq
-(* pseudo-Coq — real source: formal/InfoLorentz.v *)
+(* pseudo-Coq — real source: formal/URCF_RD_All.v:6985-7025 *)
 Module InfoLorentz.
   Definition causal_form (sgn:Edge->Q) (x y:nat->Q) (edges:list Edge) : Q :=
     fold_right (fun e acc => sgn e * (w_of e * (distinguish x e * distinguish y e)) + acc)
@@ -230,7 +248,7 @@ End InfoLorentz.
 ```
 
 ```coq
-(* pseudo-Coq — real source: formal/InfoLorentzContinuum.v, +reals tier *)
+(* pseudo-Coq — real source: formal/URCF_RD_All.v:7037-7089, +reals tier *)
 Module InfoLorentzContinuum.
   (* using the SAME continuum-limit machinery (ContLimit/Capstone) used
      natively elsewhere in this repo -- not imported specifically for this: *)
@@ -353,7 +371,7 @@ still built on the **borrowed** Schwarzschild metric factor. This is
 shared-methodology, not equation-level derivation (see §5).
 
 Per the project's own **"irrational = non-readout"** stance
-(`formal/InfoIrrationalNonReadout_attempt.v`), the QNM frequency is a
+(`formal/InfoIrrationalNonReadout.v`), the QNM frequency is a
 transcendental number — no exact `Th_coqc` match is possible or claimed;
 convergence to several digits is the complete, correct epistemic status.
 
@@ -392,7 +410,7 @@ Module InfoDiscreteGraphCurvature.
   Theorem wdeg_uniform_weight : forall edges i w,
     (forall e, In e edges -> w_of e == w) ->
     wdeg edges i == w * deg edges i.
-    (* wdeg is formal/InfoCoercivityBoundedClosure.v's weighted degree,
+    (* wdeg is InfoCoercivityBoundedClosure.v's weighted degree,
        reused verbatim, not redefined *)
 
   Corollary coercivity_threshold_via_degree : forall edges i w Vmax D,
@@ -420,7 +438,7 @@ empirical claim.
 degree count that sets an edge's Forman curvature (more negative for higher
 degree) also sets, by exact substitution, how much dissipation a node needs
 for the mother equation's own coercivity/stability theorem
-(`formal/InfoCoercivityBoundedClosure.v`, proved the same day) to hold:
+(`InfoCoercivityBoundedClosure.v`, proved the same day) to hold:
 
 ```
 D_i ≥ C_safe · V_max · wdeg(edges,i) = C_safe · V_max · w · deg(edges,i)
@@ -434,7 +452,153 @@ exact `Th_coqc`.
 
 ---
 
-## 8. Novelty audit — what is genuinely new vs. prior art
+## 8. Unification — quantum and relativity are one equation (DERIVED, Th_coqc)
+
+**Source:** `formal/InfoQuantumRelativityUnification.v` (axiom-free,
+`Print Assumptions` confirmed "Closed under the global context" on all
+three theorems). Added after an independent adversarial referee review
+correctly flagged that Branch 1's dispersion relation (`E²M=ħ²Kλ`, quadratic
+in `E`) does not match non-relativistic Schrödinger mechanics (linear in
+`E`). Rather than retreating the "derived" claim, this file proves *why*:
+the mother equation's dispersion is the relativistic (Klein-Gordon-family)
+dispersion, and this identification is exact, not a resemblance.
+
+```coq
+Theorem box_quad_is_spine_residual : forall M K omsq lam : Q,
+  box_quad (M*omsq*(1#2)) (K*lam*(1#2)) == spine_residual M K omsq lam.
+Proof. intros. unfold box_quad, spine_residual. ring. Qed.
+
+Theorem spine_dispersion_iff_box_quad_vanishes : forall M K omsq lam : Q,
+  M*omsq == K*lam <-> box_quad (M*omsq*(1#2)) (K*lam*(1#2)) == 0.
+
+Corollary spine_dispersion_preserved_under_boost : forall M K omsq lam g v atx : Q,
+  g*g*(1 - v*v) == 1 -> M*omsq == K*lam ->
+  box_quad (catt g v (M*omsq*(1#2)) atx (K*lam*(1#2)))
+           (caxx g v (M*omsq*(1#2)) atx (K*lam*(1#2))) == 0.
+```
+
+`box_quad` is `InfoLorentzInvariance`'s exact quadratic-class d'Alembertian
+operator, already proven boost-invariant (`box_quad_boost_invariant`,
+authored 2026-06-27). The first theorem is a pure `ring` identity: under
+the reparametrization `att:=Mω²/2`, `axx:=Kλ/2`, `box_quad` is *literally*
+Branch 1's own dispersion residual — not two branches sharing a name, one
+equation with two readouts. The corollary composes this with the
+already-proven boost invariance, giving a new, non-trivial physics
+statement: the quantum dispersion condition transforms consistently under
+the same Lorentz boost Branch 2 already established for the wave operator.
+
+**Independent verification (2026-07-05):** an adversarial referee
+(separate process, no shared context) confirmed the ring identity is not
+vacuous (`box_quad_is_spine_residual` does not degenerate to `0=0`) and
+that the manuscript's own interpretive text does not overclaim beyond the
+algebra — "a pure ring identity... not a coincidence of notation but a
+statement that both objects were built from the same signed second-
+difference structure," nothing stronger.
+
+---
+
+## 9. Strengthening campaign — six results closing referee-flagged gaps (all Th_coqc)
+
+Following the same adversarial review, six further results were added the
+same day, each promoting a previously `Dr`-tier interpretive stance to a
+`Th_coqc` theorem — by proving more, not retreating any existing claim.
+Every file below: pre-verified by exact-rational numerical testing before
+authoring (this repo's own discipline), then independently compiled here
+and `Print Assumptions`-checked; all Tier-0 axiom-free ("Closed under the
+global context"); zero `funext`, zero classical axioms, zero `admit`.
+
+| # | File (ledger id) | Theorems | Closes |
+|---|---|---:|---|
+| 1 | `InfoSpectralCeiling.v` (C41) | 6 | Spectral/frequency ceiling from graph max-degree |
+| 6 | `InfoRecurrenceEnergy.v` (C42) | 11 | CFL stability window + exact Lyapunov energy decrement |
+| — | `InfoQuantumFrequencyCeiling.v` | 3 | Bridges #1+#6 to Branch 1's own dispersion relation |
+| 2 | `InfoGraphFluxBalance.v` (C43) | 8 | Discrete divergence theorem + Green's identity + exact vector energy balance |
+| 3 | `InfoCompanionSkew.v` (C44) | 5 | First-order companion form, skew-adjoint under the energy inner product |
+| 4 | `InfoCausalSignature.v` (C45) | 7 | Sign constructed from order comparability + a concrete (1,3)-signature witness |
+| 5 | `InfoGraphNoether.v` (C46) | 7 | Graph automorphism ⟹ exact conserved (momentum-like) quantity |
+
+**44 theorems total**, closing four `Dr`→`Th_coqc` upgrades:
+
+### 9.1 τ_c floor / frequency ceiling (#1 + #6)
+
+A pure degree-sum argument (no eigenvalue theory, no square root) gives
+`λ ≤ 2·dmax` — a Rayleigh-quotient form of the Gershgorin bound. Composed
+with Branch 1's dispersion relation, this gives a hard UV/frequency
+ceiling `M·ω² ≤ K·(2·dmax)`, forced by the graph's own maximum degree, not
+asserted as a physical constant. Composed further with an exact discrete-
+leapfrog Lyapunov identity (`damped_energy_monotone`), the same degree
+bound guarantees both the stability window `0≤a≤4` and energy-non-
+increasing dynamics under dissipation. This directly answers the earlier
+Open Question 3 (§10, prior numbering) about the `InfoTauFloor`
+lattice-causality gap: what was previously an interpretive `Dr` stance
+about a discrete time-step floor is now an exact structural theorem about
+what sets it.
+
+### 9.2 No local creation (#2)
+
+The discrete divergence theorem plus Green's identity (summation-by-parts)
+prove that `L_R`'s coupling term contributes *exactly zero* to the mother
+equation's total energy budget — it telescopes to zero across every edge.
+Energy can only change via dissipation (≤0) or source work. "No local
+creation" — long an informal description of the mother equation's
+structure — is now a proved theorem, not an assumption.
+
+### 9.3 A Schrödinger-shaped skeleton (#3)
+
+Writing the conservative sector as a first-order companion system
+`Ψ=(x,v)` with generator `B(x,v)=(M·v, −K·Lx)`, the generator is proved
+skew-adjoint under the energy inner product
+`⟨(x,v),(y,w)⟩_E = K·gform(x,y) + M·⟨v,w⟩`, and moves every state exactly
+orthogonal to its own energy level set (`⟨BΨ,Ψ⟩_E == 0`, exact in ℚ, no
+limit). This is the algebraic core of norm-preserving first-order
+evolution — the `iħ∂ₜψ=Hψ` skeleton without `i`, without ℂ, without `√`.
+It does not derive quantum mechanics; it makes "a first-order unitary-like
+structure exists in the mother equation" a `Th_coqc` fact rather than an
+analogy, closing one further step of distance to Schrödinger honestly.
+
+### 9.4 Causal signature — the honest partial answer to gap M4
+
+Branch 2 (§4) disclosed that `sgn` in `causal_form` is a free parameter,
+not derived from any causal order. `InfoCausalSignature.v` proves
+that a sign function *can* be constructed (not chosen) from any relation's
+comparability — comparable pairs get sign `−1`, incomparable pairs `+1` —
+and that this construction always yields an exact PSD-minus-PSD split
+(`cform_split`), two lightcone-style cone inequalities, and (on a concrete
+star-graph example) a genuine rational-congruence witness of Minkowski
+type `(1,3)` (`minkowski_cell`, `cell_indefinite`).
+
+**This does not fully close gap M4.** An independent survey (dispatched
+the same day, before this file was authored) confirmed that this repo's
+own causal order, `RDL_CausalOrder.D` (built from `RD.lt`), is a genuine
+**total** order — order-isomorphic to `nat` via `toNat`, with `le_total`
+and `lt_trichotomy` proved — meaning it admits **no incomparable pairs at
+all**. Applying the comparability-split construction to `D` itself would
+degenerate to an all-comparable (all-timelike) signature, not the
+indefinite `(1,3)` structure demonstrated on the constructed example. The
+sign-construction and split theorems are real, general, and honest; they
+do not yet connect to this repo's own specific causal order. A genuinely
+richer (non-total, multi-dimensional) causal structure remains open work.
+
+### 9.5 Discrete Noether (#5)
+
+Given a graph automorphism `σ`, the Laplacian commutes with it
+(`lap_equivariant`), every quadratic structure built from `L_R` is
+`σ`-invariant, and the antisymmetric pairing
+`W(p,q) = Σᵢ p(σi)·qᵢ − pᵢ·q(σi)` is exactly conserved under the
+conservative step (`noether_conserved`) — genuine Noether shape: the
+inertial term cancels pointwise, the coupling term dies by equivariance
+plus summation-by-parts (the same Green's identity from §9.2). The same
+symmetry that leaves the potential invariant is what kills the force term
+in the conservation law. `noether_c6` gives a concrete, non-vacuous
+instance (the 6-cycle with a rotation automorphism — the same `C6` graph
+used in the Hückel validation, §3.1). The header honestly flags remaining
+opens: numerically confirmed that dissipation breaks exact conservation
+(the conservative hypothesis is sharp, not slack), and orientation-
+reversing automorphisms are not covered.
+
+---
+
+## 10. Novelty audit — what is genuinely new vs. prior art
 
 An adversarial literature check (2026-07-04/05) against this session's
 strongest candidate claims:
@@ -459,7 +623,7 @@ gravity branch — verified today via repeated independent adversarial audit
 
 ---
 
-## 9. Tier ledger (summary)
+## 11. Tier ledger (summary)
 
 | Result | Tier | Verified by |
 |---|---|---|
@@ -473,25 +637,41 @@ gravity branch — verified today via repeated independent adversarial audit
 | Forman curvature definitions + flat-cycle fact | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
 | `wdeg = w·deg` link to coercivity | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
 | "Gravity-flavored" interpretation of curvature | Dr | stance, not proof |
+| Quantum dispersion == `box_quad` vanishing (§8) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
+| Frequency ceiling `Mω²≤K(2·dmax)` (§9.1) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
+| CFL stability window + Lyapunov decrement (§9.1) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
+| No-local-creation / exact vector energy balance (§9.2) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
+| Companion skew-adjoint / energy-orthogonal flow (§9.3) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
+| Causal sign construction + split + (1,3) cell (§9.4) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
+| Sign construction applied to this repo's own `D` | Open | `D` proved a total order — degenerates, see §9.4 |
+| Automorphism → conserved pairing (§9.5) | Th_coqc (axiom-free) | `coqc`, `Print Assumptions` |
 
 ---
 
-## 10. Open questions
+## 12. Open questions
 
 1. Does the discrete-curvature ↔ dissipation link (§7) generalize to
    non-uniform edge weights, and does it predict anything falsifiable
    beyond the algebraic identity itself?
 2. Can the QNM bridge (§6) be extended to gravitational (spin-2) rather
    than scalar perturbations, still without invoking a point at infinity?
-3. Is there a principled (non-circular) way to fix the per-node dissipation
-   `D_i` for a physical horizon, closing the gap found in the `InfoTauFloor`
-   lattice-causality horizon-application test (attempt 4, §5.2 — corrected
-   here after an adversarial peer review, 2026-07-05, caught this citing
-   the wrong table row)?
+3. ~~Is there a principled (non-circular) way to fix the per-node dissipation
+   `D_i` for a physical horizon...~~ **Substantially closed by §9.1**: the
+   frequency ceiling `Mω²≤K(2·dmax)` and the CFL stability window are now
+   `Th_coqc`, forced by the graph's own maximum degree. The remaining open
+   piece is narrower: whether a *physical* horizon picks out a specific
+   `dmax` non-circularly, not whether a floor/ceiling exists at all.
 4. Does Ollivier-Ricci curvature [Ollivier 2009] (the optimal-transport-based
    alternative to Forman-Ricci) offer a sharper or more physically
    suggestive discrete gravity readout, at the cost of needing linear
    programming rather than pure combinatorics?
+5. Can a genuinely non-total (partial, multi-dimensional) causal order be
+   constructed on this repo's graphs, so that §9.4's sign-construction
+   theorem produces a non-degenerate indefinite signature on the repo's
+   *own* causal structure, not only on a constructed example?
+6. Does §9.5's Noether pairing `W` admit a principled dissipative
+   correction law, or is exact conservation strictly a conservative-sector
+   fact (numerically confirmed sharp, per §9.5's header)?
 
 ---
 

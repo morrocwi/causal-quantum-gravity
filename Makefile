@@ -14,7 +14,15 @@ COQFILES = \
 	formal/InfoLorentzInvariance.v \
 	formal/InfoQuantumRelativityUnification.v \
 	formal/InfoLorentz.v \
-	formal/InfoLorentzContinuum.v
+	formal/InfoLorentzContinuum.v \
+	formal/InfoSpectralCeiling.v \
+	formal/InfoRecurrenceEnergy.v \
+	formal/InfoQuantumFrequencyCeiling.v \
+	formal/InfoGraphFluxBalance.v \
+	formal/InfoCompanionSkew.v \
+	formal/InfoCausalSignature.v \
+	formal/InfoGraphNoether.v \
+	formal/InfoGraphGrowth.v
 
 verify:
 	@set -e; \
