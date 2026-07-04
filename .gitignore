@@ -1,0 +1,9 @@
+*.vo
+*.vok
+*.vos
+*.glob
+.*.aux
+.nra.cache
+paper/*.aux
+paper/*.log
+paper/*.out

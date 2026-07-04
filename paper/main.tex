@@ -1,0 +1,432 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\title{\textbf{Discrete Quantum Gravity from a Retained-Difference Root:\\
+A Graph-Laplacian Spine for Unified Quantum--Relativistic\\
+and Native Discrete-Curvature Readouts}}
+\author{Yaoharee Lahtee\\
+\small Open Civil Science Initiative}
+\date{July 5, 2026}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{\footnotesize Discrete Quantum Gravity from a Retained-Difference Root}}
+\fancyhead[R]{\textit{\footnotesize preprint -- not peer reviewed}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{document}
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    \noindent We report a tier-honest, machine-checked (Coq) result within the
+    \emph{readout-not-truth} discrete-substrate framework: a single graph-Laplacian
+    ``mother equation'' $M\partial^2\Phi + D\partial\Phi + K L_R\Phi + \nabla V(\Phi) = J-\eta$
+    yields, without importing external physics formulas, (i) a quantum energy-dispersion
+    relation identical in algebraic form to the relativistic (Klein--Gordon-family)
+    mass-shell condition, and (ii) a discrete causal/Lorentzian bilinear form whose
+    continuum limit is the d'Alembertian $\Box$. We prove, for the first time in this
+    program, that these two readouts are not independent: the quantum dispersion
+    condition is \emph{exactly} (pure $\mathbb{Q}$-algebra, no continuum limit) the
+    vanishing condition of the same boost-invariant wave operator that governs the
+    relativistic branch --- one equation, two readouts. We further report an
+    exhaustive, adversarially-audited finding that general relativity (continuum
+    curvature, the Schwarzschild solution, Einstein's field equations) is \emph{not}
+    derivable from this root, and argue --- consistent with the framework's own
+    injected-infinity diagnostic --- that this is the philosophically correct outcome,
+    not a gap. In its place we exhibit a genuinely native, axiom-free discrete
+    curvature object (Forman--Ricci curvature on the graph) and prove its exact
+    algebraic link to an independently-proven stability theorem. A companion
+    finite-domain Perfectly-Matched-Layer numerical bridge reproduces a literature
+    quasinormal-mode frequency to $\sim$0.1--1.2\%, honestly tiered as
+    \texttt{finite\_diagnostic}, not \texttt{Th\_coqc}. Every claim below is
+    accompanied by its tier, its exact source theorem, and a reproduction command.
+    \end{abstract}
+
+    \textbf{Keywords:} discrete quantum gravity; graph Laplacian; retained-readout
+    framework; Klein--Gordon unification; Forman--Ricci curvature; Coq formal
+    verification; quasinormal modes; reproducibility.
+
+    \textit{\footnotesize Preprint notice. This manuscript is a preprint (v1.0) and
+    has not undergone formal peer review. It has, however, undergone one internal
+    editorial pass and one independent adversarial technical review (\S\ref{sec:attack}),
+    both logged. Definitions, proofs, and numerical results are reproducible from the
+    accompanying repository and remain provisional until independently reproduced by
+    a third party.}
+    \vspace{0.5em}
+    \hrule
+    \vspace{1em}
+  \end{@twocolumnfalse}
+]
+
+\section{Introduction}
+This manuscript reports work within a larger research program (the ``readout-not-truth''
+framework) whose central commitment is that a formal system should never assert more
+than it has machine-checked: a claim is \texttt{Th\_coqc} only if \texttt{coqc} accepts
+it and \texttt{Print Assumptions} reports the global context closed over $\mathbb{Q}$;
+\texttt{+reals} if it additionally depends on Coq's disclosed Reals axioms;
+\texttt{finite\_diagnostic} if it is a reproducible numerical measurement, not a proof;
+\texttt{Dr} if it is an interpretive stance; \texttt{Open} if it is an admitted gap.
+Collapsing these tiers --- describing a measurement as a proof, or a stance as a
+derivation --- is treated as the framework's cardinal error.
+
+The object under study is a single \emph{mother equation} on a finite graph
+(Eq.~\ref{eq:mother}), built from one primitive, $\delta_R$ (retained difference), via
+a graph Laplacian $L_R$. This paper asks, and answers honestly: what, exactly, follows
+from this one equation, and what must be imported?
+
+\section{Claim Tiers}
+\label{sec:tiers}
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lY@{}}
+\toprule
+\textbf{Tier} & \textbf{Meaning} \\
+\midrule
+\texttt{Th\_coqc} & Machine-checked, axiom-free over $\mathbb{Q}$; \texttt{Print Assumptions} reports the context closed. \\
+\texttt{+reals} & \texttt{Th\_coqc} but depends on Coq's disclosed Reals axioms (\texttt{sig\_forall\_dec}, \texttt{functional\_extensionality\_dep}). \\
+\texttt{finite\_diagnostic} & A reproducible numerical measurement; not a proof. \\
+\texttt{Dr} & An interpretive stance, not machine-checked. \\
+\texttt{Open} & An admitted, undischarged gap. \\
+\bottomrule
+\end{tabularx}
+\caption{Claim tiers used throughout this manuscript.}
+\label{tab:tiers}
+\end{table}
+
+\section{The Mother Equation}
+\begin{equation}
+M\partial^2\Phi + D\partial\Phi + K L_R\Phi + \nabla V(\Phi) = J - \eta
+\label{eq:mother}
+\end{equation}
+where $L_R$ is a weighted graph Laplacian built from edge data
+$(u_e, v_e, w_e)$, $M,D,K$ are inertia/dissipation/coupling scalars, and $J-\eta$ is a
+drive-minus-loss source term. All results below concern the \emph{conservative}
+sector ($D=0$, $\nabla V=0$, $J=\eta$) unless stated otherwise.
+
+\section{Branch 1: Quantum Readout}
+\label{sec:quantum}
+\textbf{Source.} \texttt{formal/InfoSchrodinger.v} (extracted from the audited core;
+\texttt{Th\_coqc}). A temporal mode gives $\partial^2\to-\omega^2$; on an
+$L_R$-eigenmode of eigenvalue $\lambda$ the spine residual is
+\begin{equation}
+K\lambda - M\omega^2 = 0 \iff M\omega^2 = K\lambda.
+\label{eq:dispersion}
+\end{equation}
+Composing with the Planck--Einstein relation $E=\hbar\omega$ \cite{planck1900,einstein1905a} gives
+\begin{equation}
+E^2 M = \hbar^2 K\lambda.
+\label{eq:energy}
+\end{equation}
+\textbf{Validation (\texttt{finite\_diagnostic}).} Feeding the $C_6$ (benzene-ring)
+graph Laplacian spectrum through Eq.~\ref{eq:energy} reproduces the qualitative
+structure of H\"uckel molecular-orbital theory \cite{huckel1931} (adjacency spectrum
+$\{2,1,1,-1,-1,-2\}$, degeneracy pattern $1$-$2$-$2$-$1$); the resonance energy
+$2\beta$ is graph-theoretic, its numeric value in eV requires the empirical
+$\beta$. This is a consistency demonstration, not an independent confirmation of a
+fitted constant.
+
+\section{Branch 2: Special-Relativistic Readout}
+\label{sec:sr}
+\textbf{Source.} \texttt{formal/InfoLorentz.v}, \texttt{InfoLorentzContinuum.v}
+(\texttt{Th\_coqc} Tier-0 and \texttt{+reals} respectively; both independently
+re-verified via \texttt{Print Assumptions} in this work, though the underlying
+proofs were authored 2026-06-27, prior to this manuscript's other results).
+A signed bilinear form on graph edges,
+\begin{equation}
+\mathrm{cform}_{\mathrm{sgn}}(x,y) = \sum_e \mathrm{sgn}(e)\, w_e\, \delta_x(e)\,\delta_y(e),
+\label{eq:causalform}
+\end{equation}
+is self-adjoint, reduces to $L_R$'s own quadratic form when $\mathrm{sgn}\equiv+1$
+(Eq.~\ref{eq:euclred}), and is invariant under permutation of the edge list
+(Eq.~\ref{eq:perminv}):
+\begin{align}
+\mathrm{cform}_{+1}(x,y) &= \mathrm{info\_form}(x,y), \label{eq:euclred}\\
+\mathrm{cform}_{\mathrm{sgn}}(x,y;\pi(E)) &= \mathrm{cform}_{\mathrm{sgn}}(x,y;E). \label{eq:perminv}
+\end{align}
+The continuum limit of the corresponding signed second-difference operator is proved
+(\texttt{+reals}) to be the d'Alembertian
+\begin{equation}
+\Box = -\partial_{tt} + \partial_{xx}.
+\label{eq:box}
+\end{equation}
+\textbf{Scope.} The sign function $\mathrm{sgn}$ in Eq.~\ref{eq:causalform} is
+universally quantified in the source theorems, not itself derived from a partial
+causal order on the graph nodes; a genuine derivation of an indefinite signature from
+$\delta_R$'s own (currently linear) order relation is an open research direction
+(\S\ref{sec:open}), not claimed here. Separately, the specific Lorentz boost formula
+$\gamma(t-vx)$ \cite{lorentz1904,einstein1905b} is an imported \texttt{Definition},
+verified (not derived) to leave $\Box$ invariant.
+
+\section{Unification: Branches 1 and 2 Are One Equation}
+\label{sec:unification}
+This section reports the manuscript's principal new result. Define, following the
+already-proven boost-invariant exact quadratic wave operator
+$\mathrm{box\_quad}(a_{tt},a_{xx}) := -2a_{tt}+2a_{xx}$, and the spine residual
+$R(M,K,\omega^2,\lambda) := K\lambda-M\omega^2$ from Eq.~\ref{eq:dispersion}. Under
+the exact reparametrization $a_{tt}:=M\omega^2/2$, $a_{xx}:=K\lambda/2$:
+\begin{equation}
+\mathrm{box\_quad}\!\left(\tfrac{M\omega^2}{2},\tfrac{K\lambda}{2}\right) = R(M,K,\omega^2,\lambda).
+\label{eq:unify1}
+\end{equation}
+This is a pure ring identity (\texttt{ring} tactic, zero-line proof); it is not a
+coincidence of notation but a statement that both objects were built from the same
+signed second-difference structure. Consequently,
+\begin{equation}
+M\omega^2 = K\lambda \iff \mathrm{box\_quad}\!\left(\tfrac{M\omega^2}{2},\tfrac{K\lambda}{2}\right) = 0,
+\label{eq:unify2}
+\end{equation}
+i.e.\ \textbf{the quantum dispersion condition (Branch 1) is exactly the vanishing of
+the same wave operator (Branch 2)}. Because $\mathrm{box\_quad}$ is already proven
+boost-invariant, this condition is preserved under the identical Lorentz boost:
+\begin{equation}
+\mathrm{box\_quad}\big(c_{tt}(g,v,\ldots),\,c_{xx}(g,v,\ldots)\big) = 0
+\label{eq:unify3}
+\end{equation}
+whenever Eq.~\ref{eq:dispersion} holds and $g^2(1-v^2)=1$. All three equations are
+\texttt{Th\_coqc} (\texttt{formal/InfoQuantumRelativityUnification.v}).
+
+\textbf{Interpretation.} The dispersion relation $E^2M=\hbar^2K\lambda$
+(Eq.~\ref{eq:energy}) is quadratic in $E$, structurally matching the relativistic
+mass-shell relation $E^2=(pc)^2+(mc^2)^2$, not the linear-in-$E$ non-relativistic
+Schr\"odinger dispersion. Equations~\ref{eq:unify1}--\ref{eq:unify3} show this is not
+an incidental resemblance: it is because the mother equation's own second-order-in-time
+structure is, algebraically, the same object as the relativistic wave operator whose
+boost invariance Branch 2 already establishes. Branches 1 and 2 are therefore one
+readout of one equation, not two separately-argued branches sharing a name.
+
+\section{Branch 3: General Relativity --- Honestly Not Derived}
+\label{sec:gr}
+An exhaustive audit of every gravity-touching module in the source repository found
+no path from the mother equation to continuum general relativity; every module
+either imports the Schwarzschild metric factor, Einstein's field equations, the Unruh
+temperature, or the Bekenstein--Hawking entropy as an external \texttt{Definition}
+(self-disclosed in each module's own header), or formalizes generic tensor algebra
+over free variables never connected to $L_R$.
+
+Eight independent attempts to close this gap were tested this program and refuted or
+left open: a bare definitional alias; a dimensionally-forced numerological coincidence
+(shown to equally ``confirm'' an unrelated quantity, hence non-discriminating); an
+axiom-restatement; a structurally mass-independent prediction contradicted by a
+ten-billion-fold mass comparison against the true $\kappa\propto1/M$ scaling; a partial
+WKB match; two hyperboloidal-compactification attempts that hit a genuine
+\emph{irregular} singular point at spatial infinity (an essential singularity,
+re-injecting exactly the actual-infinity artifact this framework's own diagnostic
+refuses); and one success (\S\ref{sec:qnm}) that shares only a discretization
+\emph{method}, not an equation, with the mother equation.
+
+\textbf{Conclusion.} Continuum general relativity --- curvature defined via
+derivative limits on a complete manifold --- is, by this framework's own
+injected-infinity diagnostic, a non-readout. Its absence from this derivation is
+therefore the philosophically correct outcome, matching the unresolved state of every
+other discrete-substrate research program surveyed (causal sets \cite{bombelli1987},
+the Wolfram Physics Project \cite{wolfram2020}, Regge calculus \cite{regge1961}).
+
+\section{Branch 4: Native Discrete Curvature}
+\label{sec:curvature}
+\textbf{Source.} \texttt{formal/InfoDiscreteGraphCurvature.v} (\texttt{Th\_coqc},
+axiom-free). Rather than chasing continuum curvature, we exhibit a discrete curvature
+notion --- Forman--Ricci curvature \cite{forman2003} --- that requires no derivative,
+limit, or manifold, and is already a native function of $L_R$'s own edge/degree data:
+\begin{equation}
+F(u,v) = 4 - \deg(u) - \deg(v).
+\label{eq:forman}
+\end{equation}
+We prove that under uniform edge weight $w$, the weighted degree
+$\mathrm{wdeg}$ (from an independently-proven coercivity/stability theorem) equals
+$w\cdot\deg$ exactly:
+\begin{equation}
+\mathrm{wdeg}(i) = w\cdot\deg(i) \implies C_{\mathrm{safe}}V_{\max}\,\mathrm{wdeg}(i) = C_{\mathrm{safe}}V_{\max}w\deg(i).
+\label{eq:curvlink}
+\end{equation}
+The same degree count that sets an edge's curvature (Eq.~\ref{eq:forman}) also sets,
+by exact substitution, the dissipation a node requires for the spine to remain
+coercive. We note, following adversarial review, that this link is exact but shallow:
+any monotone function of degree would exhibit the same shared dependence
+(\S\ref{sec:attack}).
+
+\section{Bridge: Quasinormal-Mode Numerics}
+\label{sec:qnm}
+\textbf{Source.} \texttt{formal/InfoQuantumGravityRootBridge.v} (\texttt{+reals}) +
+\texttt{scripts/verify\_quantum\_gravity\_root\_bridge.py}
+(\texttt{finite\_diagnostic}). The Regge--Wheeler equation \cite{regge1957}
+\begin{equation}
+\frac{d^2\psi}{dr_*^2} + [\omega^2 - V(r)]\psi = 0
+\label{eq:rw}
+\end{equation}
+built on the already-verified Schwarzschild metric factor $f(r)=1-2M/r$, is
+discretized as a finite path-graph Laplacian eigenvalue problem with a
+Perfectly-Matched-Layer absorbing boundary \cite{berenger1994} --- no point at
+infinity anywhere. This converges ($N=1600$--$6400$) to
+\begin{equation}
+M\omega \approx 0.4841 - 0.0956\,i,
+\label{eq:qnmresult}
+\end{equation}
+matching the literature scalar $\ell=2$, $n=0$ fundamental quasinormal-mode value
+$M\omega\approx0.4836-0.0968\,i$ \cite{leaver1985,berti2009} to $\sim$0.1\% (real
+part) / $\sim$1.2\% (imaginary part), robust across grid resolution, absorbing-layer
+strength, and domain size.
+
+\section{Reviewer Attack Response}
+\label{sec:attack}
+This section pre-empts questions an adversarial referee will ask, following an
+independent technical review of an earlier draft.
+
+\noindent\textit{Is $E^2M=\hbar^2K\lambda$ really quantum mechanics?} No, not
+non-relativistic Schr\"odinger mechanics (correctly flagged: that theory is
+first-order in $E$). It is a relativistic (Klein--Gordon-family) dispersion, and
+\S\ref{sec:unification} proves this is exact, not a relabeling.
+
+\noindent\textit{Is the H\"uckel match a real validation?} It is a consistency
+demonstration of graph-topology sensitivity (confirmed via a non-aromatic control),
+not an independent confirmation of a fitted physical constant (\S\ref{sec:quantum}).
+
+\noindent\textit{Is Eq.~\ref{eq:perminv} really ``frame covariance''?} It is
+invariance under edge-list relabeling, a bookkeeping symmetry, not physical boost
+covariance; the latter (Eq.~\ref{eq:box}'s invariance under the imported boost
+formula) is stated and proved separately and is not conflated with it here.
+
+\noindent\textit{Is $\mathrm{sgn}$ in Eq.~\ref{eq:causalform} actually derived from
+the causal order $\prec$?} No --- it is a free parameter in the source theorems. This
+manuscript states that explicitly (\S\ref{sec:sr}) rather than implying otherwise, and
+lists deriving it as open work (\S\ref{sec:open}).
+
+\noindent\textit{Is the curvature--dissipation link (Eq.~\ref{eq:curvlink})
+non-trivial?} It is an exact algebraic identity, but shallow: it holds because both
+quantities are stated in terms of degree, not because curvature causes a dissipation
+requirement. This is disclosed, not obscured.
+
+\noindent\textit{Are all citations independently checkable?} Every citation in
+\S\ref{sec:refs} was checked against standard physics/mathematics references; two
+citations flagged as unresolved in an internal draft (an anonymous arXiv preprint and
+a mismatched preprint server) have been removed from this version pending independent
+verification, rather than retained on trust.
+
+\section{Novelty Audit}
+\label{sec:novelty}
+The individual physics content throughout (dispersion relations, Lorentz invariance,
+Forman curvature, H\"uckel theory, perihelion precession) is textbook or established
+literature, cited as such. The claimed contribution is narrower and specific: a
+machine-checked, axiom-free, single-graph-operator substrate carrying a genuine (not
+aliased) cross-branch identity between quantum and special-relativistic readouts
+(\S\ref{sec:unification}), verified by an independent adversarial review process
+external to the author's own assessment.
+
+\section{Main-Text vs.\ Supplement Boundary}
+\label{sec:boundary}
+This manuscript is self-contained for its theorem-level claims: every stated
+equation carries its exact source file and tier, and \S\ref{sec:repro} gives the
+exact commands to independently re-check every one. The manuscript is responsible
+for the mother equation, the four branch results (\S\ref{sec:quantum}--
+\ref{sec:curvature}), the unification result (\S\ref{sec:unification}), the
+quasinormal-mode bridge (\S\ref{sec:qnm}), the reviewer attack response
+(\S\ref{sec:attack}), and the reproduction commands.
+
+The companion supplement (\texttt{SUPPLEMENT.md}) is responsible for material
+this manuscript summarizes but does not reproduce in full: the complete
+dependency DAG in both diagram and prose form; the full log of all eight
+attempts to derive general relativity, including the ones only briefly
+mentioned in \S\ref{sec:gr}; the complete novelty audit against prior
+discrete-substrate literature (\S\ref{sec:novelty} gives only its conclusion);
+and the per-citation verification notes recording how each reference in
+\S\ref{sec:refs} was checked, including two citations present in an earlier
+internal draft and removed after they could not be independently verified
+(\S\ref{sec:attack}). A reader who wants the theorem statements and can
+reproduce them needs only this manuscript; a reader who wants the full
+argument trail, including dead ends, needs the supplement as well.
+
+\section{Reproducibility Protocol}
+\label{sec:repro}
+\begin{enumerate}[nosep,leftmargin=1.2em]
+\item \texttt{git clone} this repository.
+\item \texttt{make verify} --- compiles every \texttt{formal/*.v} file via
+\texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
+theorem, printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per file).
+\item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
+reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
+\item Expected result: all Coq files compile with exit code 0; the tier report
+matches Table~\ref{tab:tiers}; the QNM script's $N=1600$ row matches
+Eq.~\ref{eq:qnmresult} to the printed precision.
+\end{enumerate}
+
+\section{Open Problems}
+\label{sec:open}
+(1) Derive $\mathrm{sgn}$ in Eq.~\ref{eq:causalform} from a genuine partial (not
+linear) causal order on the graph, rather than leaving it a free parameter.
+(2) Extend the quasinormal-mode bridge (\S\ref{sec:qnm}) to spin-2 perturbations.
+(3) Determine whether Ollivier--Ricci curvature \cite{ollivier2009} offers a
+non-shallow alternative to Eq.~\ref{eq:curvlink}'s exact-but-shallow link.
+
+\section{Conclusion}
+One graph-Laplacian root equation genuinely derives, and --- new to this manuscript
+--- genuinely unifies, a quantum dispersion relation and a special-relativistic wave
+operator. It honestly does not derive general relativity, for a stated philosophical
+reason rather than a numerical shortfall, and offers in its place a native discrete
+curvature readout with an exact, if shallow, link to an independently-proven
+stability result. Every claim above carries its tier and its exact reproduction
+command.
+
+\section*{Acknowledgements}
+This work was developed through a human--AI co-thinking workflow, including one
+round of independent adversarial technical review external to the author's own
+assessment. Any remaining errors are the author's own.
+
+\section*{Author Declarations}
+\textbf{Funding.} No specific grant from any funding agency in the public,
+commercial, or not-for-profit sectors was received for this research.\\
+\textbf{Competing Interests.} The author declares no competing interests.\\
+\textbf{AI Assistance Disclosure.} AI tools (Claude, Anthropic) were used for
+formal-proof drafting, literature cross-checking, numerical implementation, and
+editorial structuring, including an independent adversarial review pass. Substantive
+claims, tier assignments, and final decisions remain the author's responsibility.\\
+\textbf{Data and Code Availability.} All Coq sources, the Python reproduction
+script, and this manuscript's source are available in the accompanying repository.
+
+\clearpage
+\begin{thebibliography}{99}
+\small
+\bibitem{planck1900} M. Planck, \"Uber das Gesetz der Energieverteilung im
+Normalspectrum, \textit{Annalen der Physik}, 1900.
+\bibitem{einstein1905a} A. Einstein, \"Uber einen die Erzeugung und Verwandlung des
+Lichtes betreffenden heuristischen Gesichtspunkt, \textit{Annalen der Physik}, 1905.
+\bibitem{einstein1905b} A. Einstein, Zur Elektrodynamik bewegter K\"orper,
+\textit{Annalen der Physik}, 1905.
+\bibitem{lorentz1904} H. A. Lorentz, Electromagnetic phenomena in a system moving
+with any velocity smaller than that of light, \textit{Proc. Acad. Science
+Amsterdam}, 1904.
+\bibitem{huckel1931} E. H\"uckel, Quantentheoretische Beitr\"age zum
+Benzolproblem, \textit{Zeitschrift f\"ur Physik}, 1931.
+\bibitem{forman2003} R. Forman, Bochner's method for cell complexes and
+combinatorial Ricci curvature, \textit{Discrete \& Computational Geometry}, 2003.
+\bibitem{ollivier2009} Y. Ollivier, Ricci curvature of Markov chains on metric
+spaces, \textit{Journal of Functional Analysis}, 2009.
+\bibitem{regge1957} T. Regge, J. A. Wheeler, Stability of a Schwarzschild
+singularity, \textit{Phys. Rev.}, 1957.
+\bibitem{leaver1985} E. Leaver, An analytic representation for the quasi-normal
+modes of Kerr black holes, \textit{Proc. R. Soc. Lond. A}, 1985.
+\bibitem{berti2009} E. Berti, V. Cardoso, A. O. Starinets, Quasinormal modes of
+black holes and black branes, \textit{Class. Quantum Grav.}, 2009.
+\bibitem{berenger1994} J.-P. B\'erenger, A perfectly matched layer for the
+absorption of electromagnetic waves, \textit{J. Comput. Phys.}, 1994.
+\bibitem{bombelli1987} L. Bombelli, J. Lee, D. Meyer, R. Sorkin, Space-time as a
+causal set, \textit{Phys. Rev. Lett.}, 1987.
+\bibitem{wolfram2020} S. Wolfram, \textit{A Project to Find the Fundamental Theory
+of Physics}, Wolfram Media, 2020.
+\bibitem{regge1961} T. Regge, General relativity without coordinates, \textit{Il
+Nuovo Cimento}, 1961.
+\end{thebibliography}
+\label{sec:refs}
+
+\end{document}
