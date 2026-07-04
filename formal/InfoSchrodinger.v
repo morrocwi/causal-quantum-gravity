@@ -40,4 +40,8 @@ Module InfoSchrodinger.
     assert (HKl : 0 <= K*lam) by nra.
     assert (0 <= hbar*hbar*(K*lam)) by nra.
     nra. Qed.
+
+  Print Assumptions spine_mode_dispersion.
+  Print Assumptions energy_spectrum_from_laplacian.
+  Print Assumptions energy_nonneg_from_psd.
 End InfoSchrodinger.

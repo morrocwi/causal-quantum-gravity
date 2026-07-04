@@ -64,4 +64,8 @@ Module InfoLorentzInvariance.
     { unfold box_quad, catt, caxx. ring. }
     rewrite Hid, Hg. ring.
   Qed.
+
+  Print Assumptions boost_preserves_interval.
+  Print Assumptions box_symbol_boost_invariant.
+  Print Assumptions box_quad_boost_invariant.
 End InfoLorentzInvariance.

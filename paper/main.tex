@@ -61,7 +61,7 @@ Dynamics and a Discrete Causal Signature}}
     analog of cosmological expansion --- curving space negatively, conserving energy
     exactly, and diluting spectral modes by a closed-form law, while explicitly not
     claiming to resolve any general-relativistic cosmological discrepancy. All told:
-    18 Coq files, 61 theorems, every one machine-checked. Every claim below is
+    18 Coq files, 81 theorems, every one machine-checked. Every claim below is
     accompanied by its tier, its exact source theorem, and a reproduction command.
     \end{abstract}
 
@@ -327,8 +327,10 @@ inner product $\langle(x,v),(y,w)\rangle_E = K\cdot\mathrm{gform}(x,y)+M\langle
 v,w\rangle$, moving every state exactly orthogonal to its own energy level set. This
 is the algebraic core of norm-preserving first-order evolution --- the $i\hbar
 \partial_t\psi=H\psi$ skeleton without $i$, without $\mathbb{C}$, without $\sqrt{\ }$.
+(One of the five, \texttt{green\_identity}, is a helper lemma re-proved inside this
+file so it checks standalone, not a fifth headline result beyond the four above.)
 
-\textbf{Causal signature (\texttt{InfoCausalSignature.v}, 7 theorems).} \S5 disclosed
+\textbf{Causal signature (\texttt{InfoCausalSignature.v}, 7 theorems).} \S\ref{sec:sr} disclosed
 that $\mathrm{sgn}$ is a free parameter. This file proves a sign function can instead
 be \emph{constructed} from a relation's comparability (comparable pairs $\to -1$,
 incomparable pairs $\to +1$), yielding an exact PSD-minus-PSD split, two lightcone-
@@ -494,9 +496,9 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles all 17 \texttt{formal/*.v} files via
+\item \texttt{make verify} --- compiles all 18 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (61 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
+theorem (81 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
 file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).

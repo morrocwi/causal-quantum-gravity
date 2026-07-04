@@ -39,3 +39,5 @@ Proof.
   rewrite derive_pt_minus, derive_pt_const, derive_pt_scal, derive_pt_inv, derive_pt_id.
   unfold id, Rsqr. field. exact Hr.
 Qed.
+
+Print Assumptions schwarzschild_force_real.
