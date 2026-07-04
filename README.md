@@ -1,4 +1,4 @@
-# Discrete Quantum Gravity from a Graph Laplacian
+# Causal Quantum Gravity
 
 **One mother equation — `M∂²Φ + D∂Φ + K·L_R·Φ + ∇V(Φ) = J−η` on a graph Laplacian
 `L_R` — genuinely derives quantum mechanics and special relativity at the equation

@@ -1,11 +1,11 @@
 ---
-title: "Supplement to: Discrete Quantum Gravity from a Retained-Difference Root"
+title: "Supplement to: Causal Quantum Gravity"
 date: 2026-07-05
 status: "Companion supplement to the manuscript (paper/main.tex). Not itself the manuscript -- see the manuscript's 'Main-Text vs. Supplement Boundary' section for what belongs where. Tiers: Th_coqc (machine-checked) / finite_diagnostic (measured) / Dr (stance) / Open. Peer-review pass 1 (2026-07-05): full equation-reference audit added. Peer-review pass 2 (2026-07-05, independent adversarial agent): verified every theorem/tier/numeric claim against actual source and script execution -- confirmed accurate except one provenance overclaim (InfoLorentz/InfoLorentzContinuum implied same-session discovery; actually authored 2026-06-27) and one mismatched cross-reference, both corrected."
 tags: [supplement, pseudo-coq, dag, quantum, relativity, discrete-gravity, forman-ricci, honest-audit]
 ---
 
-# Supplement: Discrete Quantum Gravity from a Retained-Difference Root
+# Supplement: Causal Quantum Gravity
 
 **Companion supplement to the manuscript (`paper/main.tex` / `paper/main.pdf`).
 Contains the full dependency DAG, the complete eight-attempt General-Relativity
