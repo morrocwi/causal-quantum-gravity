@@ -1039,18 +1039,32 @@ not externally verified.
    the strain/`Sgeo`-difference, connected to the record-entropy object
    `δS_count` at the joint stationary point). What is missing is the
    TRAJECTORY version — cumulative dissipation versus net bits inscribed
-   over a whole run, not just at one instant:
-   `Σ_t c·‖v_t‖²·Δt` (field entropy dissipated so far) compared against
-   `T·s0·ΔS_count` (record entropy inscribed so far), as an iff or
-   inequality, regime-dependent — currently OPEN. The apparatus for both
-   sides already exists (the damped-decrement identity for the left side;
-   `entropy_step`/`clausius_form` for the right side); only the temporal
-   linking theorem is missing. A cheap numerical probe is available before
-   any proof attempt: on the existing ring simulation, plot cumulative
-   dissipation against `s0`×edges-retained-so-far and check whether their
-   ratio settles. Do not, in the meantime, use the bare word "entropy"
-   unqualified anywhere a reader could confuse the two — say "field entropy"
-   / "record entropy" explicitly.
+   over a whole run, not just at one instant. **A numerical probe was run
+   and its own naive hypothesis was refuted, narrowing the target rather
+   than closing it:** the ratio of cumulative dissipation to cumulative
+   inscribed bits did NOT settle (`~62%` drift across checkpoints on a ring
+   run) — cumulative field-entropy dissipated plateaus quickly (the field
+   calms fast, `~0.20` from an early checkpoint onward) while inscription
+   continues (`27→33` net bits over the same window), so a CUMULATIVE,
+   whole-trajectory ratio cannot be the right object: late-run inscriptions
+   are happening near `strain≈0`, paying almost no marginal dissipation.
+   **The refined, narrower target**: an operational temperature should be
+   defined MARGINALLY, only during the field's genuinely active phase, not
+   averaged over the whole run — and the honest form of the bridge is
+   plausibly a one-directional bound, not an iff:
+   `δE_dissipated ≥ (a minimum price)·δS_count`, restricted to bits
+   inscribed *against* a still-active (not-yet-settled) field, rather than
+   an equality relating the full cumulative quantities. This is a real,
+   useful narrowing from one probe, not a failure of the idea — the
+   apparatus for both sides still exists (the damped-decrement identity;
+   `entropy_step`/`clausius_form`); what changed is which quantities the
+   eventual theorem should actually relate. (Bonus baseline recorded from
+   the same run: the ceiling-saturation ratio `ω²M/(2K·dmax)` measured
+   `~0.695` — the extremal mode sits at roughly 70% of the ceiling, not
+   saturated — worth tracking as a baseline for the hunting-type-2
+   saturation-surface search, §12.1.) Do not use the bare word "entropy"
+   unqualified anywhere a reader could confuse the two — say "field
+   entropy" / "record entropy" explicitly.
 8. **[named: OB-EXPANDER]** A UNIFORM lower bound on the graph Laplacian's
    second-smallest eigenvalue (λ₂, algebraic connectivity / Fiedler 1973),
    i.e. a genuine spectral-gap/expander property, is explicitly NOT claimed
@@ -1067,7 +1081,23 @@ not externally verified.
    The tractable, currently-open sub-parts (a monotone "floor never drops
    under retention" fact, and a qualitative "λ₂>0 iff connected" theorem)
    are believed low-to-moderate risk and are queued separately, distinct
-   from this named uniform-bound gap.
+   from this named uniform-bound gap. **A numerical probe measuring
+   Ramanujan-graph quality** (comparing a retention-grown graph's `λ₂`
+   against the Alon–Boppana expander bound, `2√(d̄−1)`) found grown graphs
+   are WORSE expanders than a random graph of the same size/degree
+   (measured ratio `q≈1.63` for the grown graph vs. `q≈1.23` for a random
+   comparison graph — larger is worse). This is not a defect; it is the
+   expected physical content of retention read correctly: an expander
+   mixes information fast precisely because it has no persistent local
+   structure, and this project's own retention mechanism exists to BUILD
+   persistent local structure (a "well" at the birthplace of a distinction,
+   local clustering) — a graph that remembered well would have to be a bad
+   mixer. Recorded as a trade-off note under this same gap: **retention
+   trades spectral gap (mixing speed) for locality (memory)**, a second,
+   independent piece of evidence (alongside the ring/lattice non-expander
+   observation above) that this project's own graphs are not, and should
+   not be expected to become, expanders — reinforcing rather than
+   contradicting the disclaimer already stated in this item.
 9. **[named: OB-RG-FIXED-POINT]** Does iterated 2:1 block coarse-graining
    of a retention-grown graph (both field values and topology) converge to
    a universal limiting structure independent of the starting seed —  a
@@ -1151,6 +1181,107 @@ named target already present in this project:
   land exactly on OB-ENTROPY-BRIDGE; a two-slit/two-state setup — expected
   to land on the separately-developed quantum/URCF layer) and record
   whether each one points at an existing named gap or forces a new one.
+
+## 12.2 Three middle-school physics problems, run on this kernel
+
+The §12.1 methodology was applied to three specific canonical problems
+every student meets before university: heat equilibration ("does tea cool
+faster with a wider heat-conducting wall"), free fall ("do a heavy and a
+light object fall together"), and series/parallel resistor networks. All
+three were run as actual numerical simulations on this repository's own
+graph-Laplacian substrate — `finite_diagnostic` tier throughout, not
+`Th_coqc` — and independently re-verified (not merely taken on report)
+before being recorded here. All three land cleanly in the three buckets
+§12.1 predicts: something the kernel already proves, something that is
+this week's queued work, or a pointer at an already-named debt. None of
+the three forced a new open problem.
+
+**A. Heat equilibration = the Fiedler value, exactly, in the asymptotic
+regime — with an honest caveat about what "asymptotic" excludes.** Two
+cliques joined by a `k`-edge bridge (`k=1,2,4`), a unit heat spike injected
+at one node, evolved under linear diffusion `du/dt = -L u` (the first-order
+heat-equation reading of this project's own graph Laplacian). Independently
+re-verified via eigendecomposition: in the LATE-time tail (once the fast,
+non-Fiedler modes have died out), the decay rate of the deviation from
+equilibrium matches `λ₂` to numerical precision (ratio `1.0000` at `k=1,2,4`
+in re-verification), so the tail half-life obeys `t_half · λ₂ = ln 2`
+exactly, independent of bridge width. **Caveat found during
+re-verification, not in the original report: this only holds in the
+asymptotic tail.** A naive "half-life measured from the initial spike"
+definition is dominated by fast-decaying non-Fiedler modes and does
+*not* show the invariant (re-verification found ratios of `0.04`-`0.05`,
+not `\ln 2`, under that definition) — "how fast does heat cross a narrow
+doorway" is a statement about the *tail* of equilibration, not the whole
+approach to it. This is exactly why `λ₂`'s significance (queued as Tier A/B
+of `OB-EXPANDER`, §12 item 8) is not an abstract spectral-graph-theory
+curiosity: it is, quite literally, the answer to "why does tea cool slower
+behind a thicker wall" once the transient has died down. The three-part
+split the original report used maps directly onto existing/queued
+machinery: the second law (`E` monotone, `Th_coqc` already) is the fact
+that guarantees monotone approach to equilibrium at all; exact conservation
+(`InfoGraphFluxBalance.v`, `Th_coqc` already) is the fact that fixes *what*
+equilibrium value is approached; the *rate* is exactly the not-yet-
+mechanized `λ₂` floor (Tier A/B, queued).
+
+**B. Galileo's equal-fall claim is a corollary of substrate linearity, not
+a separate physical postulate — and the claim's honest limit is the same
+weak-field debt already named.** Two field packets of different amplitude
+(a 3:1 ratio was used) evolved under this project's own mother-equation
+dynamics (no separate "gravity" term — acceleration arises purely from the
+`K`-weighted Laplacian gradient acting on the packet). Independently
+re-verified on a minimal linear system (`a = -Kx`): the ratio `a/x` is
+exactly `-K`, identically, regardless of amplitude, because the governing
+equation is linear — a linear ODE's trajectory *shape* cannot depend on its
+own amplitude, by the superposition principle. So "heavy and light objects
+fall together" is not a coincidence requiring an equivalence-principle
+postulate in this framework; it is what linearity of the mother equation
+already forces, stated plainly: **equal-fall is a corollary of linearity,
+not a separate physical input.** The one place this stays honest, not
+free: the *sign* of "falling toward" (whether locally denser retention
+reads as attractive, i.e. packets accelerate toward regions of lower `K`,
+or repulsive) is exactly the same open weak-field dictionary question
+already named as joint D under the gravity-arm closure discussion (§12
+item, `mass_note.tex` §holo's `β↔1/8πG` dictionary) — this problem points
+at that *same* existing debt rather than manufacturing a new one, which is
+itself a small piece of evidence the open-problem ledger is not silently
+incomplete.
+
+**C. Series/parallel resistor laws are the composition laws of screen
+capacity — the same object as this project's own boundary-screening
+theorem, not a separate translation.** A standard two-resistor series
+circuit and a two-resistor parallel circuit were built directly as
+weighted graphs (edge weight = conductance) and solved via the Laplacian
+pseudoinverse (`L⁺`), the standard exact method for effective resistance.
+Independently re-verified: series (two unit resistors) gives effective
+resistance `2.0000` (exactly `R1+R2`), parallel gives `0.5000` (exactly
+`1/(1/R1+1/R2)`), and the Kirchhoff current-balance residual
+(`L·v − i_injected`) is `5.6e-16` — zero to floating-point precision, i.e.
+this project's own exact discrete divergence theorem
+(`InfoGraphFluxBalance.v`, `Th_coqc`) *is* Kirchhoff's current law, not an
+analogy to it. The genuinely new reading, not present in the original
+translation exercise until checked here: series composition is exactly
+two screen-partitions (§7's `gform_screen_partition`) chained end to end,
+shrinking the effective cut capacity; parallel composition is two cuts
+between the same two regions added side by side, increasing it. The
+grade-school "resistors in series add, in parallel their reciprocals add"
+rule is, read this way, the composition law for how much a boundary lets
+through when two boundaries are chained versus doubled — the same object
+`InfoBoundaryScreening.v`'s `Exterior`/`capacity` machinery already
+formalizes, not a new one.
+
+**What this exercise is, and is not, offered as.** All three are
+`finite_diagnostic`: numerical demonstrations that a theorem-backed
+substrate reproduces textbook physics under a direct, non-forced
+translation, not new theorems in themselves. None of the three exposed a
+gap the open-problem ledger did not already name. This is offered
+honestly as two things at once: outreach material (three ordinary,
+universally-recognized physics facts, reproduced from first principles on
+a machine-checked substrate, understandable without weakening any of the
+existing rigor), and a second data point (after the earlier rolling-
+cylinder exercise, §12.1) that the completeness-audit method itself works
+— it keeps finding existing debt, not manufacturing new debt, which is
+itself the kind of evidence this project treats as meaningful rather than
+decorative.
 
 ---
 
