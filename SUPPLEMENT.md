@@ -1442,6 +1442,41 @@ not to invent a translation where none exists; the gap itself, quoted
 from the real function rather than assumed, is the more honest and more
 useful thing to record.
 
+**Two follow-up checks, same method, with a different outcome each —
+both worth recording precisely rather than from memory.**
+
+*"The spine" already covers exactly this document's own Level-1
+unification claim, and needs no new coinage.* `master_equation` resolves
+in `GLOSSARY` to: *"the spine:* `M∂²Φ + D∂Φ + K·L_R Φ + ∇V(Φ) = J − η`
+*(There is exactly one master equation ('the spine') and every regime of
+physics (classical, quantum, GR, biology, chemistry, economics...) is
+that same equation read in a different basis; M/D/K/V are readout
+artifacts of one information unit, not independently dimensionful.)*
+`[Th_coqc]`*"* — the definition text itself already names quantum
+mechanics and GR as readouts of one equation, which is precisely §13's
+Level-1 claim stated in this project's own native vocabulary rather than
+borrowed physics language. (`unification` and `physical law` alone do
+NOT resolve — only the exact phrase `master equation` does; a reader or
+a fellow AI session reaching for "unification" as a search term should
+reach for "the spine" instead.)
+
+*"Orbit" has no entry of its own, but is not a bare gap the way the nine
+terms above are — it is the closed special case of an entry that
+already exists.* `orbit`, `periodic orbit`, `closed orbit`, `trajectory`,
+and `cycle` all pass through untranslated (checked, not assumed), but
+the concept an "orbit" names in `InfoShiftAverage_attempt.v`/TEST 5 (a
+discrete evolution that returns EXACTLY to its own starting readout after
+finitely many steps) is a root-of-unity closure of the SAME branch this
+project already names `quantum state / wavefunction evolution`:
+*"R4_EVOLVE readout, exp(−iLt) unitary branch of the spine ... under-
+damped (looping) reading of the one spine on the oscillatory side of the
+λ_c threshold"* `[Th_coqc]`. The correct fix, when this glossary is next
+extended, is not a brand-new `orbit` entry but an added clause on the
+EXISTING `quantum state / wavefunction evolution` entry naming its
+periodic/closed special case — matching this project's own
+minimum-parameter instinct: extend what already exists before minting
+something new.
+
 ## 12.1 A method for finding open problems, not just open problems
 
 A worked classical-mechanics exercise (rolling cylinder vs. hollow cylinder
