@@ -1452,6 +1452,7 @@ Honest status of each, not glossed:
 | Ramanujan-graph expander quality (§12 item 8) | `probe_ramanujan_expander_quality.py` | **Does NOT reproduce** — this reconstruction found grown graphs are an equal-or-better expander than random in 4/5 seeds tested, the OPPOSITE of the originally-reported `q≈1.63` (grown, worse) vs. `q≈1.23` (random, better). Flagged as an open, unresolved discrepancy — NOT silently tuned to match, and NOT treated as a refutation of the original finding either, since the exact retention-growth rule and random-graph construction used here are an independent guess at the described method, not the original code. Whoever revisits `OB-EXPANDER` should treat this specific sub-claim as unconfirmed until either script is checked against the other's exact parameters. |
 | OB-ENTROPY-BRIDGE cumulative-ratio probe | `probe_entropy_bridge.py` | **Inconclusive by design flaw**, already disclosed at first use: default parameters allow too few retention events (1-5 over 600 steps) for the ratio to be a fair test either way; not yet rerun with corrected parameters |
 | Effective-inertia mode-locking probe (§12 item 11 mechanism demo) | *(no script checked in yet)* | **Not yet reproduced independently** — reported numbers (`+3.4%` linear control, `+32.5%/+47.3%/+69.1%` at increasing mode amplitude) have no corresponding script in this repo as of this entry; add one before citing these numbers as settled |
+| Price-type late-time tail on the Schwarzschild QNM bridge (SS13 Schwarzschild addendum) | `price_tail.py` | **Reproduces cleanly, including the required T1 control** — time-symmetric slopes `−7.89/−8.03/−8.01`, momentum-type control `−7.03/−7.02/−7.01`, family split `1.00` |
 
 ## 13. Completeness scoreboard: is this finished?
 
@@ -1485,12 +1486,25 @@ frequency numerically (`finite_diagnostic`, independently re-run:
 `M·ω=0.4838−0.0958i` at N=1600 vs. the literature target
 `0.4836−0.0968i`, `|diff|≈0.001` — matches
 `scripts/verify_quantum_gravity_root_bridge.py`'s own claim). **A
-late-time Price power-law tail was also reported this session, but is NOT
-yet independently reproduced** — no script for it exists in this repo as
-of this entry; it is recorded here as an unverified claim, not a
-confirmed result, until a checked-in reproduce script exists (this
-project's own standing rule: no numerical claim enters this document
-without one). *Generatively*, no: the profile `V(r)` is written in by hand
+late-time Price power-law tail is now also independently reproduced**
+(`scripts/price_tail.py`, `finite_diagnostic`): time-symmetric (`ψ̇=0`)
+initial data on the same potential gives local tail slopes
+`−7.89 / −8.03 / −8.01` across three time windows (`t∈[250,450]`,
+`[450,650]`, `[650,850]`) — steepening, not approaching the generic Price
+`−(2l+3)=−7` value, so this is NOT massaged toward the textbook number. A
+required control run (momentum-type data, `ψ=0, ψ̇=`Gaussian) was also run
+and gives `−7.03 / −7.02 / −7.01` — the classic value — confirming the two
+initial-data families are genuinely distinct (split of `1.00`, matching
+the ~1-unit acceptance criterion), not a lattice or observer artifact.
+Both runs and the exact reproduction recipe are pinned in
+`scripts/price_tail.py`, with a passing pytest in
+`scripts/test_reproduce.py`. **What is still open, honestly:** the
+causality currency of this bridge — that Schwarzschild dynamics is
+covered by this project's own Tier-0 causal-cone theorem, not merely
+imported at `+reals` — depends on a file (`InfoConeInheritance.v`) that
+has been described but not yet delivered to this repo for independent
+verification; until it is compiled and its hash checked here, that
+currency is reported, not confirmed. *Generatively*, no: the profile `V(r)` is written in by hand
 (imported from `f=1-2M/r` via `InfoAnalysisLift.v`), not grown by the
 substrate's own dynamics — the open question is whether a bound energy
 lump in this kernel can PRODUCE a `~1/r`-shaped long-range mass profile on
