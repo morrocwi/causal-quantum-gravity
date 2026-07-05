@@ -1379,10 +1379,41 @@ not externally verified.
     actual retention dynamics elsewhere in this kernel operates anywhere
     near this regime in practice, which would need a genuine leapfrog
     field's own natural frequency compared against its own decision
-    cadence, not asserted from this idealized case. Two items remain in
-    the battery (TEST 3, needing redesign; TEST 5, a single-flip action
-    quantum `ħ_geom`); per §14's Unification Claim Card, no claim of
-    quantized geometry is made anywhere in this update.
+    cadence, not asserted from this idealized case. **TEST 5 (single-flip
+    action quantum, "does geometry share `ħ_geom` with the field?") was
+    run and is INCONCLUSIVE BY CONSTRUCTION, reported as such rather than
+    presented as a finding** (`scripts/probe_single_flip_quantum.py`,
+    two executed passing pytest tests confirming the algebra, not the
+    physics): using `InfoShiftAverage_attempt.v`'s own exact period-4
+    orbit, the field-sector action `A_loop=2(x²+y²)` is exact; a proposed
+    geometry-sector "flip action" `A_flip`, built as a strain-like sum
+    over the SAME orbit's own coordinates, comes out to exactly `4(x²+y²)`
+    — giving `Q=A_flip/A_loop=2` exactly, for every amplitude tested. This
+    constancy is **provably an algebraic artifact, not physical content**:
+    both quantities are homogeneous quadratics built from the same
+    4-point orbit via closely related functional forms, so a fixed ratio
+    is close to inevitable regardless of what this kernel's geometry
+    sector actually does. A genuinely decisive version of this test needs
+    `A_flip` derived from an ACTUAL retention-decision event (a real
+    strain-vs-benefit toggle during real growth dynamics), not a proxy
+    sharing the field's own orbit — not attempted here, and flagged as
+    the concrete next step if this test is revisited.
+
+**Battery summary, all five tests now attempted:** TEST 2 (order-memory)
+positive and robust; TEST 3 (tie-manifold occupancy) inconclusive by a
+caught design confound; TEST 1 (ledger-wave dispersion) positive but
+conditional on one undisclosed-elsewhere modeling choice (`M_w`); TEST 4
+(adiabatic breakdown) precisely characterized, richer than expected, but
+scoped to an idealized toy model; TEST 5 (single-flip action quantum)
+inconclusive by its own construction. **None of the five tests
+quantizes anything.** What they collectively establish is a map of where
+the classical structure a quantization would have to consume is present
+(TEST 2's history-connection, TEST 1's conditional oscillation) versus
+where the test design itself is not yet sharp enough to say
+(TESTS 3 and 5) — precisely the kind of honest, incomplete-but-precise
+status this project's own completeness scoreboard (§13) and Unification
+Claim Card (§14) were built to hold. `OB-QUANTUM-GEOMETRY` remains
+`[Open]`.
 
 ## 12.1 A method for finding open problems, not just open problems
 
