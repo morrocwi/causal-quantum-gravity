@@ -31,9 +31,13 @@ the same author composing several of this repository's theorems (none
 individually about mass) into a curvature-limited mass bound, with its own
 ten-stream literature review, circularity audit, and open-problem register,
 pinned to this repository's own SHA-256 hashes at a specific commit. The
-main manuscript's `\S`"A Composed Reading: Curvature-Limited Mass" states the
-overlapping claim at main-text weight and is the authoritative, narrower
+main manuscript's section "A Composed Reading: Curvature-Limited Mass"
+states the overlapping claim at main-text weight and is the authoritative
 version where the two differ.
+**Project logbook:** [LOGBOOK.md](LOGBOOK.md) — a chronological, captain's-log
+style record of the project's actual history: every positive result,
+negative result, and scope decision, in the order it happened, including
+ones later superseded (never rewritten with hindsight).
 
 ## Tier legend
 
