@@ -1332,11 +1332,34 @@ not externally verified.
     the SHAPE of the distribution around that point — not just retry
     parameter values hoping to land near it by luck, which is the mistake
     this attempt made and corrected mid-probe rather than reporting a
-    number from it. Four further tests in the same battery (TEST 3 needs
-    redesign as above; ledger-wave dispersion; adiabatic breakdown; and a
-    single-flip action quantum `ħ_geom`) remain open; TEST 2 alone does
-    not close `OB-QUANTUM-GEOMETRY`, and per §14's Unification Claim
-    Card, no claim of quantized geometry is made here.
+    number from it. **TEST 1 (ledger-wave dispersion, "graviton
+    spectroscopy") was run and gives a clean positive, with an explicit
+    disclosed caveat** (`scripts/probe_ledger_wave_dispersion.py`,
+    `finite_diagnostic`, two executed passing pytest tests): this test
+    necessarily introduces ONE quantity with no precedent anywhere else
+    in this kernel — an edge-inertia `M_w` for a graded (continuous,
+    not binary) retention weight `w_e∈[0,1]` — since the existing binary
+    retention rule is instantaneous and has no inertia concept to draw
+    on; this is disclosed, not hidden. Using ONLY constants already
+    established elsewhere in this project's own probes (spring constant
+    `κ=K=1`, damping `γ=c=0.1`) plus `M_w=1` (matching the node mass
+    convention used everywhere else, not derived), the analytic
+    dispersion relation for a perturbation on a ring predicts
+    UNDERDAMPED (oscillatory) behavior at every tested wavenumber
+    (`k=2π/16·{1..7}`), and the independent numerical simulation confirms
+    this exactly: all seven modes oscillate (`5` to `25` sign changes
+    over the run), matching the analytic `ω_L(k)` prediction. (Mode 8,
+    the Nyquist mode, has a degenerate initial condition —
+    `sin(π·i)≡0` — and is excluded, not reported as a finding.) **What
+    this does NOT establish:** `M_w` is a modeling CHOICE, not a derived
+    quantity — the finding is conditional ("IF edge-inertia exists at
+    this natural scale, THEN a ledger-wave with real frequencies
+    exists"), not unconditional; deriving `M_w` from anything else in the
+    kernel is itself a new open question this test surfaces rather than
+    closes. Two tests in the same battery (TEST 3, needing redesign per
+    above; a single-flip action quantum `ħ_geom`, and adiabatic
+    breakdown) remain open; per §14's Unification Claim Card, no claim of
+    quantized geometry is made anywhere in this update.
 
 ## 12.1 A method for finding open problems, not just open problems
 
