@@ -1357,6 +1357,82 @@ these rather than trust the prose. Honest status of each, not glossed:
 | OB-ENTROPY-BRIDGE cumulative-ratio probe | `probe_entropy_bridge.py` | **Inconclusive by design flaw**, already disclosed at first use: default parameters allow too few retention events (1-5 over 600 steps) for the ratio to be a fair test either way; not yet rerun with corrected parameters |
 | Effective-inertia mode-locking probe (§12 item 11 mechanism demo) | *(no script checked in yet)* | **Not yet reproduced independently** — reported numbers (`+3.4%` linear control, `+32.5%/+47.3%/+69.1%` at increasing mode amplitude) have no corresponding script in this repo as of this entry; add one before citing these numbers as settled |
 
+## 13. Completeness scoreboard: is this finished?
+
+This question gets asked repeatedly, in different words, and deserves one
+standing, precise answer instead of a fresh improvised one each time.
+**Short answer: no, not finished — and the gap is not vague, it
+decomposes into exactly six named items.** "Complete" needs a definition
+first; four levels are used here, and the two branches (quantum mechanics,
+general relativity) are at different levels, which is itself the
+important fact — collapsing them into one "how done are we" number would
+hide that.
+
+**Level 1 — the same equation, read two ways (dispersion/wave identity).**
+`Th_coqc`, **closed**, both branches. The mother equation composes into
+quantum dispersion (`M·ω²=K·λ`) and into the wave/box operator
+(`Box_quad`), and `InfoQuantumRelativityUnification.v` proves
+these are literally the same statement, not an analogy. This is the level
+at which this project's actual, checkable unification claim lives, and it
+is done.
+
+**Level 2 — full first-order dynamical structure on both arms.**
+QM half: **closed**, `Th_coqc` (`InfoCompanionSkew.v`'s skew-adjoint
+first-order form, with the imaginary unit forced out of the stability
+window itself, not imported). GR half: **open**, named `GAP-2` — a frame
+for the strain/curvature tensor exists (`InfoTensorFrame.v`), but no
+evolution equation for it has been derived or mechanized. This level is
+half-closed, and the two halves are not close to symmetric in difficulty.
+
+**Level 3 — deep structure (what the equations are equations OF).**
+QM half: **open** — no Born rule, no measurement, no entanglement
+structure on this kernel; the CPTP/Kraus formalism lives in the separate
+URCF companion work and has not been welded to this repo's own kernel.
+What exists is *the equation of* QM, not *the probability structure of*
+QM, and the note's own phrase for this ("dispersion-level readout") is
+accurate, not softened. GR half: **open by design, not by failure** — this
+project deliberately imports Jacobson's 1995 conclusion (§masschain's own
+`[AX/import]` tag) rather than attempting to derive the Einstein field
+equation as a theorem on this substrate; the eight refuted/abandoned
+direct-derivation attempts (§5.2) are why that choice was made, not an
+oversight.
+
+**Level 4 — numerical constants from the substrate.** **Open on both
+arms.** Neither `ħ` nor `G` is derived from graph-native quantities; the
+weak-field coupling `1/(8π·β)` and the `α/β` ratio remain
+`finite_diagnostic`, not theorems.
+
+**The six named gaps, precisely, so "what's missing" has a checklist
+instead of a mood:**
+
+1. **`GAP-2`** — no evolution equation for the strain/curvature tensor
+   `T_g`; a frame exists, dynamics do not.
+2. **Bridge / `ansatz-T`** — the Clausius-form iff
+   (`InfoStrainTensorBridge_attempt.v`) is conditional on an explicit,
+   disclosed ansatz until `OB-ENTROPY-BRIDGE` (§12 item 7) closes with a
+   genuine trajectory-level bridge theorem.
+3. **Capacity-equality / `ansatz-H`** — the screen-partition boundary fact
+   (§7, §arealaw) is a half-quantitative resemblance to an area law, not
+   a proven equality, and is explicitly disclosed as such.
+4. **Cut-growth (Raychaudhuri slot)** — queued, not started: no discrete
+   analogue of the Raychaudhuri equation has been attempted yet on this
+   kernel.
+5. **Born-rule weld** — the URCF companion's CPTP/Kraus machinery has not
+   been connected to this repo's own kernel; they are separate, unwelded
+   pieces of work today.
+6. **Numerical constants** — `ħ`, `G` not derived from the substrate;
+   `α/β` and the weak-field `1/(8π·β)` coupling remain
+   `finite_diagnostic`.
+
+**One line, for whenever this question is asked again:** *the equations
+of quantum mechanics and general relativity are genuinely connected to the
+mother equation at Level 1 — real, checkable, and unmatched elsewhere in
+this form — but the theories themselves are not fully connected, and the
+incompleteness decomposes into exactly the six items above, not into an
+unbounded fog.* Knowing precisely what is missing, rather than only
+knowing that something is missing, is what distinguishes this document
+from a manifesto.
+
 ---
 
 ## References — every external equation used in this journal, by branch
