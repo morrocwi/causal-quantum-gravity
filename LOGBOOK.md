@@ -283,6 +283,65 @@ label stays true no matter how much work lands next to it."
 
 ---
 
+## 2026-07-05 (later same evening) — Second same-day recurrence of the foothold/closed conflation; a reviewer-pattern note
+
+**Type:** Negative (a bias, caught and named, not yet fully eliminated) ·
+commit pending, `InfoBackReaction.v` (sha256 prefix `369e17320544e147`)
+
+Hours after the 17:03 entry above named the foothold-vs-closed distinction
+explicitly, it recurred: a new file, `InfoBackReaction.v` (5 theorems,
+axiom-free — the exact strain-splitting identity for a background field
+plus a perturbation, the "matter acts on geometry" joint of the feedback
+loop `stored energy -> edge strain -> retention decision -> geometry ->
+inertia -> motion`), was summarized in chat as closing "every joint...
+except one." A second-pass review of the loop's actual tier map found
+this false in the same way as before: the loop has **two** open joints,
+not one — `OB-HOMOGENIZATION` (the pointwise coefficient shift `3gψ²` from
+`InfoCubicLinearization.v` has not been shown to average, over time, into
+an effective inertia — that step is disclosed as not proven, not merely
+unproven-but-assumed-fine) and `OB-GEODESIC` (no general trajectory
+theorem exists; only a one-dimensional numerical demonstration does). The
+file's own header was corrected before commit to state plainly: *"this
+file closes ONE joint... the loop is NOT closed: two joints remain Open
+and are named."* No proof content changed; only the header, and the
+SHA-256 changed as a direct consequence (`7b20167f...` to `369e1732...` —
+caught before the earlier hash was pinned anywhere, so no citation needed
+correcting).
+
+**The pattern, named so it can be checked for on purpose next time:**
+this assistant appears to have a **systematic bias, specifically after
+producing a run of consecutive positive results, toward summarizing
+"most joints/gaps have an artifact" as "all but one are done."** It
+happened twice in one day, on two different loops (the six-gap
+completeness scoreboard, and this feedback loop specifically), and both
+times the correction came from the human operator's own re-count, not
+from this assistant's own review pass. **Standing mitigation, to apply
+going forward and not just this once:** before writing any sentence of
+the shape "N of M are done" or "only one is left," do an explicit
+tier-recount against the actual `Th_coqc`/`finite_diagnostic`/`Dr`/`Open`
+status of each item, out loud, before the summary sentence is written —
+not after. A summary produced by memory of "how the work felt" rather
+than a fresh recount is the failure mode; the recount itself is cheap and
+should not be skipped under time pressure or momentum.
+
+The probe work reported alongside this file (a two-layer falsification —
+mean-field `⟨ψ³⟩=0` plus a numerical leakage measurement of `~2×10⁻⁶` —
+finding the scalar channel is a contact interaction with no long-range
+`1/r²` carrier) is assessed separately as sound: the retention-cascade
+half of that same probe run died from a parameter choice (`α+βF=0` exactly,
+zero benefit even in the control case) and was correctly disclosed as
+**untested, not falsified** — this distinction was drawn correctly and is
+not part of the pattern above. The resulting open question,
+`OB-LONG-RANGE` (long-range gravity in this framework must be
+operator-mediated — a permanent local change to `L` itself, read at a
+distance through the linear channel's own Green's function — rather than
+amplitude-mediated), is a real and sharp candidate, but is recorded with
+an explicit qualifier: *conditional on the loop's two remaining open
+joints closing as expected* — evidence-grade, not theorem-grade, until
+they do.
+
+---
+
 ## How to append to this log
 
 - One entry per commit, or per distinct event inside a commit worth

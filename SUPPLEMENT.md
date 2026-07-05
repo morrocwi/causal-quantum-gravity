@@ -1182,6 +1182,59 @@ not externally verified.
     hand). Until that closing step, this stays `[Open]`, upgraded from
     `[Dr]` only in the sense that its two previously-separate open
     questions are now known to be the same question.
+    **Update:** two further pieces landed, each precisely scoped, neither
+    closing the full feedback loop. `InfoBackReaction.v` (5 theorems,
+    axiom-free) mechanizes the exact strain-splitting identity for a
+    background field plus a perturbation — the "matter acts on geometry"
+    joint of the loop `stored energy -> edge strain -> retention decision
+    -> geometry -> inertia -> motion`. Its header names the two joints
+    that remain open: `OB-HOMOGENIZATION` (this item, above) and
+    `OB-GEODESIC` (no general trajectory theorem; only a 1D numerical
+    demonstration exists). `InfoShiftAverage.v` (5 theorems, axiom-free)
+    then closes `OB-HOMOGENIZATION` **at one exact instance**: at the
+    mother equation's stability-window center, the one-step mode map is
+    the exact period-4 rotation on `Q^2` (a crystallographic-period gift
+    from `InfoModeRotation.v`), so the time-average of the pointwise
+    coefficient shift `3gψ²` over one period is an EXACT rational
+    constant `(3g/2)(x²+y²)` — homogenization as pure algebra, no limit
+    taken, because the period is exact. The general statement (an
+    effective coefficient for APERIODIC backgrounds) and the weld from
+    the averaged coefficient into the propagation problem both remain
+    `[Open]`, stated as such in the file's own header — this closes one
+    instance of the joint, not the joint in general, and not the loop.
+12. **[named: OB-LONG-RANGE]** Does this kernel's gravity-like effect have
+    a genuine long-range carrier, or is it contact-only? Two rounds of
+    probing, both `[numeric, box-limited]`, give the current, still
+    incomplete picture. Round one falsified the naive candidate cleanly,
+    on two independent grounds: a mean-field argument (`⟨ψ³⟩=0` for a
+    symmetric mode, so a quartic scalar has no monopole source) and a
+    direct numerical leakage measurement (`~2×10⁻⁶` outside a bound
+    lump's core) both show the bare scalar-amplitude channel is
+    contact-only, with no `1/r²`-style far field of its own. Round two,
+    designed specifically to test the channel round one's own control
+    accidentally disabled (a zero-benefit parameter choice that made
+    retention untested rather than falsified, corrected before rerunning),
+    found something real: a bound lump measurably suppresses the local
+    retention (edge-addition) rate in a surrounding bath, out to the edge
+    of the simulated box (`−24%` at r=3 down to `−9%` at r=17, relative to
+    a control baseline, 4 trials) — a "retention shadow" that is
+    long-range in extent and correctly signed (a wider shadow means lower
+    local connectivity, hence a slower local medium, hence bending toward
+    the lump — the same sign every other reading in this ledger requires,
+    reached by a third, independent route). **What is NOT yet
+    established, stated plainly:** the decay exponent — the actual
+    `1/r²` question — is not resolved; the box is small enough (41 nodes)
+    and reflective enough that a genuine power law cannot yet be
+    distinguished from a finite-size/boundary artifact (the same failure
+    mode already caught once this project, in the heat-equilibration
+    check of §12.2, and in round one of this very probe's box-edge
+    profile). The concrete next step, before any exponent claim: rerun
+    with a substantially larger box AND absorbing (non-reflective)
+    boundary conditions, and check the shadow's shape is unchanged when
+    the box size changes — if the falloff scale grows with the box, it is
+    still an artifact; if it does not, it is real. A second, independent
+    next step (a direct two-lump force measurement) is the more direct
+    route to the actual `1/r²` question and is queued alongside it.
 
 ## 12.1 A method for finding open problems, not just open problems
 

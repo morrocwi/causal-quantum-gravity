@@ -47,7 +47,9 @@ COQFILES = \
 	formal/InfoSpectralCeilingSharp.v \
 	formal/InfoTensorEvolution.v \
 	formal/InfoCutGrowth.v \
-	formal/InfoModeWeights.v
+	formal/InfoModeWeights.v \
+	formal/InfoBackReaction.v \
+	formal/InfoShiftAverage.v
 
 verify:
 	@set -e; \

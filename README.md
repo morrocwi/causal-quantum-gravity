@@ -38,6 +38,11 @@ version where the two differ.
 style record of the project's actual history: every positive result,
 negative result, and scope decision, in the order it happened, including
 ones later superseded (never rewritten with hindsight).
+**External audit gate:** [AUDIT_BRIEF.md](AUDIT_BRIEF.md) — an adversarial
+attack form for the companion note's four load-bearing claims (C1-C4),
+each given verbatim with an exact, actionable refutation condition,
+pinned artifact hashes, and a standing retraction pledge. Open this if
+you are trying to break something, not just read about it.
 
 ## Tier legend
 
