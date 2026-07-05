@@ -1464,6 +1464,34 @@ these are literally the same statement, not an analogy. This is the level
 at which this project's actual, checkable unification claim lives, and it
 is done.
 
+**A precise addendum on Schwarzschild specifically, because "connected to
+GR" is ambiguous and this project has exactly one half of it.** The word
+"connect" has two different meanings here, and only one is done.
+*Structurally*, yes: dynamics around a Schwarzschild background is an
+INSTANCE of the mother equation's own class — the same node-level equation
+with a specific mass profile `m(i)=V(r_i)` built from the imported
+Schwarzschild lift, its causal structure inherited from the same theorem
+family as every other instance, and its Regge-Wheeler form on this
+project's own lattice reproduces both the literature quasinormal-mode
+frequency and the late-time Price power-law tail numerically
+(`finite_diagnostic`). This is real and, as far as this project's own
+literature search shows, without precedent in a discrete-gravity
+programme. *Generatively*, no: the profile `V(r)` is written in by hand
+(imported from `f=1-2M/r` via `InfoAnalysisLift.v`), not grown by the
+substrate's own dynamics — the open question is whether a bound energy
+lump in this kernel can PRODUCE a `~1/r`-shaped long-range mass profile on
+its own, and every result to date (the contact-only scalar channel, the
+box-limited single-lump shadow, the still-unreplicated two-lump tail) says
+not yet. This is exactly `OB-LONG-RANGE` (item 12 above) restated at the
+Schwarzschild-specific case, not a separate gap. **The precise sentence,
+worth quoting exactly because the imprecise version overclaims:** *the
+mother equation now SUPPORTS Schwarzschild — proven to be in the same
+class, and shown numerically to reproduce both its ringing and its
+shadow on this project's own lattice — but the mother equation does not
+yet PRODUCE Schwarzschild: the potential profile is still borrowed, not
+grown, until the retention loop is shown to generate a `~1/r` mass
+profile on its own.*
+
 **Level 2 — full first-order dynamical structure on both arms.**
 QM half: **closed**, `Th_coqc` (`InfoCompanionSkew.v`'s skew-adjoint
 first-order form, with the imaginary unit forced out of the stability
