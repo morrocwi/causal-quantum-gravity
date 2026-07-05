@@ -1269,7 +1269,70 @@ not externally verified.
     alongside the interaction signal, in the same run, before any sign or
     magnitude claim — reproducibility across seeds is necessary but not
     sufficient to rule out a systematic (non-cancelling, nonlinear
-    dressing) artifact.
+    dressing) artifact. **Round four, the twin-field common-noise
+    estimator (`research_universal_solver/scripts/probe_twolump_twinfield.py`,
+    `finite_diagnostic`), ran as the broadband-bath rerun round three
+    called for, with one further design change beyond "broadband": rather
+    than evolving each of the compared configurations (two-lump at
+    separation `d`, single-lump-A reference) under an independent random
+    draw and relying on averaging over many seeds to cancel bath noise,
+    the exact same kick sequence is generated once per seed and replayed
+    bit-identically across every configuration compared for that seed
+    ("twin-field"), and the `d`-dependence is read off as a WITHIN-seed
+    paired slope `dU/dd` (comparing `U` at neighbouring `d` under the
+    SAME seed's noise) rather than as a difference of across-seed means.
+    **This mechanism works exactly as designed and is directly checked**
+    (`scripts/test_twolump_twinfield.py::test_paired_slope_cancels_per_seed_offset_better_than_raw_mean`,
+    passing): the raw common-noise-differenced `U(d)` (two-lump minus
+    single-lump-A, corridor-averaged) carries an enormous per-seed
+    offset — one order of magnitude of spread seed-to-seed (from
+    `-0.0001` to `-0.07` across 20 seeds at the same `d`) that is almost
+    exactly constant across all six scanned separations `d=6..26` within
+    a given seed (e.g. seed 15: `-0.0664, -0.0700, -0.0724, -0.0734,
+    -0.0720, -0.0699` — a ~10% spread across the whole `d` range, against
+    a ~700× spread across seeds) — confirming the offset is a per-seed
+    bath-resonance artifact near lump A's own position, not a genuine
+    `d`-dependent two-body effect, and confirming the paired-slope design
+    removes it as intended. **After that cancellation, the honest result
+    is null, not positive:** every adjacent-pair mean slope across 20
+    seeds has `|signal/noise| < 0.25` (six pairs, `d=6→10` through
+    `d=22→26`; the largest is `0.23`), i.e. no adjacent-pair slope is
+    even a quarter of one standard error from zero, and the across-seed
+    mean of `U(d)` itself is flat-to-noisy rather than monotone
+    (`-0.01424, -0.01427, -0.01398, -0.01358, -0.01386, -0.01386` for
+    `d=6,10,14,18,22,26` — not monotone in either direction). **Verdict,
+    stated plainly: the twin-field/paired-slope fix successfully solved
+    the problem it targeted (cancelling per-seed additive bath offset,
+    which round three's drift audit correctly identified as the dominant
+    contaminant) but the resulting cleaned signal is consistent with
+    zero, not with a genuine long-range monotone channel, at this probe's
+    noise level (`kick_sigma=0.05`), ring size (`n=60`), and integration
+    time (`6000` leapfrog steps after `1000`-step burn-in).** This is a
+    DIFFERENT failure mode than round three's: round three had a real,
+    non-monotone (optical-binding) signal well above the noise floor;
+    round four, with the estimator fixed, finds the residual `d`-signal
+    is now BELOW the achievable noise floor of this configuration — no
+    exponent can honestly be fit (a power-law fit routine is included in
+    the probe script and was exercised only on synthetic data to confirm
+    it recovers a known exponent correctly; it was deliberately NOT run
+    on this round's real, non-monotone `U(d)`, per the script's own
+    verdict gate, because fitting a power law to a signal indistinguishable
+    from zero would be exactly the kind of overclaim this project's tier
+    discipline exists to prevent). **What is NOT yet established:**
+    whether a genuine long-range channel exists below this noise floor
+    (would need lower kick variance, longer integration, and/or a larger
+    ring to average down further before concluding a true null), and
+    whether the corridor-energy readout itself is even the right
+    observable for a `d`-dependent binding energy on a ring (a direct
+    force/gradient readout on the lumps themselves, rather than a
+    bath-energy proxy in the corridor between them, is the natural next
+    refinement). The concrete next step, if this channel is still worth
+    pursuing: repeat this exact twin-field/paired-slope design with
+    substantially longer integration (more steps and/or more seeds, to
+    push the paired-slope noise floor down) before concluding either a
+    genuine null or a genuine power law — this round's run is not long
+    enough to distinguish "no signal" from "signal below current
+    sensitivity."
 13. **[named: OB-QUANTUM-GEOMETRY]** Untouched — no file, no probe, not
     even a prior attempt to state it precisely. Named here specifically
     because a gap that has never been named is the one most likely to be
