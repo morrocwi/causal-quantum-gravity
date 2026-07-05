@@ -1406,20 +1406,43 @@ weak-field coupling `1/(8π·β)` and the `α/β` ratio remain
 instead of a mood:**
 
 1. **`GAP-2`** — no evolution equation for the strain/curvature tensor
-   `T_g`; a frame exists, dynamics do not.
+   `T_g`; a frame exists, dynamics do not. **First foothold, not closed**:
+   `InfoTensorEvolution.v` (4 theorems, axiom-free) mechanizes the exact
+   componentwise update law of the rank-one tensor `tens(x,i,j):=x(i)*x(j)`
+   under a perturbation — pure algebra any evolution-equation attempt
+   would need. The actual gap content (what field equation `T_g` obeys,
+   covariance, conservation) is untouched.
 2. **Bridge / `ansatz-T`** — the Clausius-form iff
    (`InfoStrainTensorBridge_attempt.v`) is conditional on an explicit,
    disclosed ansatz until `OB-ENTROPY-BRIDGE` (§12 item 7) closes with a
-   genuine trajectory-level bridge theorem.
+   genuine trajectory-level bridge theorem. A numerical probe confirmed
+   the shape of a lower bound in the active-phase regime only (the run had
+   no quiet-phase epoch to compare against) — `finite_diagnostic`, zero
+   theorems changed.
 3. **Capacity-equality / `ansatz-H`** — the screen-partition boundary fact
    (§7, §arealaw) is a half-quantitative resemblance to an area law, not
-   a proven equality, and is explicitly disclosed as such.
-4. **Cut-growth (Raychaudhuri slot)** — queued, not started: no discrete
-   analogue of the Raychaudhuri equation has been attempted yet on this
-   kernel.
+   a proven equality, and is explicitly disclosed as such. A rank/
+   boundary-node/cut chain inequality was confirmed numerically (200/200
+   random graphs), but the corresponding theorem file has not yet passed
+   this repo's own audit, and the equality case is permanently
+   graph-dependent, not a universal fact.
+4. **Cut-growth (Raychaudhuri slot)** — **first foothold, not closed**:
+   `InfoCutGrowth.v` (5 theorems, axiom-free) mechanizes the STATIC half
+   only — exact cut bookkeeping under retention growth, and
+   `priced_screen_growth` (admitted strain across a screen is bounded by
+   benefit granted there, edge by edge). The DYNAMIC half a
+   Raychaudhuri-style argument actually needs — a rate law, focusing —
+   stays fully open; Raychaudhuri (1955) is registered as the named target
+   engine, not mechanized.
 5. **Born-rule weld** — the URCF companion's CPTP/Kraus machinery has not
    been connected to this repo's own kernel; they are separate, unwelded
-   pieces of work today.
+   pieces of work today. **First foothold, not closed**: `InfoModeWeights.v`
+   (4 theorems, axiom-free) mechanizes the Born SHAPE — not the rule — on
+   one concrete graph, the 6-cycle (the largest graph with a fully
+   rational Laplacian eigenbasis): an exact, universal Parseval identity
+   and exact reconstruction/completeness. It is an instance on one graph,
+   not a general theorem, and explicitly claims no probability
+   interpretation, no measurement postulate, and no CPTP weld.
 6. **Numerical constants** — `ħ`, `G` not derived from the substrate;
    `α/β` and the weak-field `1/(8π·β)` coupling remain
    `finite_diagnostic`.

@@ -44,7 +44,10 @@ COQFILES = \
 	formal/InfoBoundaryScreening.v \
 	formal/InfoCubicLinearization.v \
 	formal/InfoReadabilityBoundary.v \
-	formal/InfoSpectralCeilingSharp.v
+	formal/InfoSpectralCeilingSharp.v \
+	formal/InfoTensorEvolution.v \
+	formal/InfoCutGrowth.v \
+	formal/InfoModeWeights.v
 
 verify:
 	@set -e; \

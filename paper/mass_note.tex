@@ -163,6 +163,19 @@ them with their owners; each paragraph closes with where the present programme
 stands relative to it. Table~\ref{tab:streams} condenses the positioning;
 Figure~\ref{fig:dag} draws the assembly itself.
 
+\paragraph*{Kernel additions in this revision.} Four further standalone
+files accompany this revision, each axiom-free and numerically pre-verified: the
+exact linearization of the cubic on-site term of the mother force
+(\code{InfoCubicLinearization.v}; its coefficient shift $3g\psi^2$ carries the
+attraction sign identified by the three-channel probe); the exact componentwise
+update law of the field tensor (\code{InfoTensorEvolution.v}), the first
+mechanized piece of the tensor-evolution gap; the screen-growth ledger
+(\code{InfoCutGrowth.v}): cut increments are exact crossing counts, and the
+strain admitted across a screen is bounded by the benefit granted there --- the
+static half of the discrete Raychaudhuri slot; and the six-cycle Plancherel
+identities (\code{InfoModeWeights.v}). Hashes and check counts appear in
+Table~\ref{tab:artifacts}.
+
 \begin{table*}[t]
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}lYYY@{}}
@@ -328,7 +341,13 @@ the Stinespring--Choi--Kraus structure at its axiom-free Tier-0 root
 kernel file \code{URCF\_RD\_All.v}, not by the literature cited here), so the
 quantum layer enters the programme at the
 same evidential standard as this note's classical strain --- the two are sections
-of one kernel, and no quantum claim is smuggled through the classical one.
+of one kernel, and no quantum claim is smuggled through the classical one. A first weld step on this note's side is now kernel-checked: on the
+six-cycle --- the largest graph whose full Laplacian eigenbasis is rational, by
+this programme's own readability classification --- energy mode-weights are
+exactly amplitude-squared, with exact completeness of the mode decomposition
+(\code{InfoModeWeights.v}, SHA-256 prefix \code{9e97c7f6ad08d6cd}, four closed
+checks); the probability weld to the CPTP layer remains open and is named as
+such.
 
 \emph{Spectral graph theory and discrete curvature.} Fiedler's algebraic
 connectivity \cite{fiedler} and Chung's spectral theory \cite{chung} ground the
@@ -910,15 +929,19 @@ File & Tag & Contents (selected) & Checks & SHA-256 prefix (16 hex)\\
 \code{InfoModeRotation.v} & --- & window stepper is the $i$-rotation; periods $4,6,3$ & 8 & \code{624372fe5c2ab73e}\\
 \code{InfoPentagonSpectrum.v} & --- & $C_5$ golden cubic; $C_6$ rational spectrum & 5 & \code{ab4ff5b6b1599994}\\
 \code{InfoSpectralCeilingSharp.v} & --- & Anderson--Morley edge ceiling; sharp mass cap & 6 & \code{1f478ed777172de3}\\
+\code{InfoCubicLinearization.v} & --- & cubic-force linearization; coefficient shift $3g\psi^2$ & 6 & \code{4df87c1dd7f531e8}\\
+\code{InfoTensorEvolution.v} & --- & exact componentwise tensor update law & 4 & \code{b5638ddf507fa5b2}\\
+\code{InfoCutGrowth.v} & --- & screen-growth ledger; priced cut increment & 5 & \code{4d46a4374296f375}\\
+\code{InfoModeWeights.v} & --- & $C_6$ Plancherel: quadratic mode weights, completeness & 4 & \code{9e97c7f6ad08d6cd}\\
 \midrule
-\multicolumn{3}{@{}l}{Totals: twenty Tier-0 files, $157$ closed checks; two \Tone{} files, $6$ checks} & $163$ & \\
+\multicolumn{3}{@{}l}{Totals: twenty-four Tier-0 files, $176$ closed checks; two \Tone{} files, $6$ checks} & $182$ & \\
 \bottomrule
 \end{tabularx}
 \caption{Artifact inventory --- authoritative copies at
 \code{formal/} of \url{https://github.com/morrocwi/causal-quantum-gravity};
 SHA-256 prefixes (first 16 of 64 hex characters) computed on the repository
-files at commit \code{49945bd71b05}; the sharp-ceiling file postdates the pinned
-commit, its hash is of the delivered source, pending synchronization. Each file is standalone; each compiled
+files at commit \code{49945bd71b05}; the files below \code{InfoPentagonSpectrum.v} postdate the pinned
+commit; their hashes are of the delivered sources, pending synchronization. Each file is standalone; each compiled
 under \code{coqc}~8.18.0 with exit status~0. ``Checks'' counts \code{Print Assumptions}
 blocks; Tier-0 blocks all report \emph{Closed under the global context}; \Tone{}
 blocks report exactly \code{sig\_forall\_dec} and functional extensionality, with no

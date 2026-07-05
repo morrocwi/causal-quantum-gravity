@@ -212,6 +212,75 @@ tone imply the gate is closed. The next entry in this log, whenever it
 comes, should be either the record of that external review actually
 happening, or an honest note that it still hasn't.
 
+## 2026-07-05 17:03 — Six named gaps each got a first foothold; none closed, and saying otherwise was caught in real time
+
+**Type:** Mixed (Positive result + a self-caught overclaim, corrected before
+it reached any document) · commits pending
+
+The busiest single day this project has had: five new mechanized Coq files
+(`InfoCubicLinearization.v`, `InfoSpectralCeilingSharp.v`,
+`InfoTensorEvolution.v`, `InfoCutGrowth.v`, `InfoModeWeights.v`, 25 theorems/
+lemmas total, all axiom-free) plus four numerical probes (gravity-sign
+three-channel test, the mode-locking mechanism demonstration, a Poisson-
+coupling coefficient extraction, and a capacity/rank/cut chain check), each
+one landing directly on one of the six gaps named in `SUPPLEMENT.md` §13's
+completeness scoreboard (written earlier the same day).
+
+**The overclaim, caught before it landed anywhere permanent:** mid-session
+chat language drifted to "หกช่องแตะครบ" / "มี Th core" (roughly, "all six
+boxes touched / have a theorem core") for the whole set. This is not what
+happened, and the author caught it in the same conversation, unprompted,
+before it reached this logbook, `SUPPLEMENT.md`, or the companion note.
+The precise, corrected accounting:
+
+- **`GAP-2`** — got an exact tensor *update law* (`InfoTensorEvolution.v`).
+  The actual gap content — what field equation `T` obeys, covariance,
+  conservation — is untouched. Opened the door; the room behind it is
+  still empty.
+- **Cut-growth** — got the *static* half (exact bookkeeping + priced
+  screen growth, `InfoCutGrowth.v`). The *dynamic* half a Raychaudhuri-
+  style argument actually needs (a rate law, focusing) is fully open.
+- **Born-weld** — got the Born *shape* on one concrete graph (C6,
+  `InfoModeWeights.v`): a quadratic-form identity, not a probability
+  structure. No measurement, no CPTP weld, and it is an instance on one
+  graph, not a general theorem.
+- **Bridge/`ansatz-T`** — a probe confirmed the *shape* of a lower bound
+  (and only for the active-phase regime; the run had no quiet-phase epoch
+  to compare against). Zero theorems changed.
+- **Constants** — the field-side Poisson coupling extraction is at 89%,
+  not 100%; the geometry-side `G=1/(8πβ)` is still pure `Dr`; `α/β` did
+  not move at all.
+- **Capacity/`ansatz-H`** — the rank/boundary/cut chain was confirmed
+  numerically (200/200), but the corresponding theorem sits in a file
+  that has not yet passed this repo's own audit, and the equality case is
+  permanently graph-dependent, not a universal fact.
+
+Checked against the four-level completeness criterion from §13, written
+the same afternoon: **no level moved.** Level 1 was already closed before
+today. Level 2's GR half is still open (an update law is not an evolution
+equation). Levels 3 and 4 were not touched by anything today.
+
+**The lesson, stated once so it does not need re-deriving:** the honest
+description of a day like this is *"six gaps each got a first foothold;
+none of the six is closed"* — not "six gaps closed" and not "six gaps
+touched" (too vague to falsify). The distinction matters because this
+project's stated identity (§13) is not "every gap closed" but "every gap
+has a status label that is actually true" — and a chat-language shortcut
+that inflates "foothold" into "closed" is exactly the kind of drift that
+would make that identity false without any single sentence in a committed
+document being wrong. This is the fourth time this specific failure mode
+(enthusiasm inflating a real result into more than it is) has been caught
+in this project's history; the first three are named in earlier entries
+and in `feedback-short-review-per-decision` in the operator's own memory
+system. Also worth naming plainly, once, rather than leaving as an
+implicit assumption: some of these six gaps may not be closable at all in
+the form stated — the Jacobson conclusion is imported by deliberate razor,
+not derived, and is not a target; capacity equality is graph-dependent by
+its nature, not a temporary limitation; a full Born rule may need
+structure this kernel's tier does not have room for. "Complete" here has
+never meant "every gap eventually closes" — it means "every gap's status
+label stays true no matter how much work lands next to it."
+
 ---
 
 ## How to append to this log
