@@ -64,11 +64,22 @@ formal/
   InfoContinuumLimit_nD.v             n-D spectral ladder step 2: flat/weighted multi-axis continuum-limit readout; reproduces this repo's own lorentz_box as an instance. +reals (Tier-1, no classic).
   InfoWeightedReadout.v               n-D spectral ladder step 3: variable-coefficient (a*u')' readout from the discrete flux stencil. +reals (Tier-1, no classic).
   InfoCrossTermDominance.v            n-D spectral ladder step 4: an iff between graph-form representability and diagonal dominance, both directions sharp. Th_coqc.
+  InfoDiskBeforeLock.v                Anisotropic retention: a perpendicular candidate strictly worsens the retention functional while a parallel one never does, immediate at every decision point. Th_coqc.
+  InfoGrowthFold.v                    Multi-edge curvature fold: exact, order-independent cumulative curvature shift over any list of added edges. Th_coqc.
+  InfoCeilingMonotone.v               Rayleigh ceiling monotonicity under retention; explicitly does NOT claim individual eigenvalue interlacing. Th_coqc.
+  InfoCurvatureNoether.v              Forman curvature is invariant under any graph automorphism (extends an existing quadratic-form invariance result to curvature). Th_coqc.
+  InfoModeRotation.v                  The mother equation's CFL stepper at one window point IS the i-rotation matrix; two more window points give crystallographic periods 6 and 3. Th_coqc.
+  InfoPentagonSpectrum.v              5-cycle Laplacian cubic identity lands in the golden ratio's own field; 6-cycle exhibits all 4 rational eigenvalues explicitly. Th_coqc.
+  InfoAreaLaw.v                       A uniform region's energy comes entirely from its boundary -- a graph-native fact, explicitly not the holographic bound. Th_coqc.
+  InfoDegreeFromCurvature.v           Degree bounded by 4 minus local Forman curvature; feeds the spectral ceiling with a curvature-derived value. Th_coqc.
+  InfoTensorFrame.v                   General symmetric-tensor reconstruction from diagonal + face-diagonal evaluations, any dimension -- an abstract fact, not yet about this repo's own graphs. Th_coqc.
+  InfoStrainTensorBridge.v            Connects curvature to the tensor-reconstruction fact, conditional on an affine-cell hypothesis; also a native local-screen split and a disclosed-ansatz Clausius-type inequality. Th_coqc.
+  InfoOptimizerWindow.v               Heavy-ball/momentum optimization on a quadratic mode is exactly the mother equation's own leapfrog energy theory, under an exact reparametrization. Th_coqc.
 scripts/
   verify_quantum_gravity_root_bridge.py   Finite-graph (PML) quasinormal-mode eigenvalue solver; converges to the literature Schwarzschild QNM. finite_diagnostic.
 ```
 
-24 Coq files, 123 theorems, every one Tier-0 axiom-free or +reals as marked.
+35 Coq files, 196 theorems, every one Tier-0 axiom-free or +reals as marked.
 
 ## How to reproduce
 
@@ -121,6 +132,17 @@ and prints a `PASS`/`FAIL` summary. Expected per-file result:
 | `InfoCurvatureBalance.v` | `Closed under the global context` |
 | `InfoProductSpectrum.v` | `Closed under the global context` |
 | `InfoCrossTermDominance.v` | `Closed under the global context` |
+| `InfoDiskBeforeLock.v` | `Closed under the global context` |
+| `InfoGrowthFold.v` | `Closed under the global context` |
+| `InfoCeilingMonotone.v` | `Closed under the global context` |
+| `InfoCurvatureNoether.v` | `Closed under the global context` |
+| `InfoModeRotation.v` | `Closed under the global context` |
+| `InfoPentagonSpectrum.v` | `Closed under the global context` |
+| `InfoAreaLaw.v` | `Closed under the global context` |
+| `InfoDegreeFromCurvature.v` | `Closed under the global context` |
+| `InfoTensorFrame.v` | `Closed under the global context` |
+| `InfoStrainTensorBridge.v` | `Closed under the global context` |
+| `InfoOptimizerWindow.v` | `Closed under the global context` |
 | `InfoAnalysisLift.v` | `ClassicalDedekindReals.sig_forall_dec`, `FunctionalExtensionality.functional_extensionality_dep` |
 | `InfoQuantumGravityRootBridge.v` | same two Reals axioms as above |
 | `InfoLorentzContinuum.v` | same two Reals axioms as above |
@@ -159,7 +181,7 @@ context. Original authorship dates, by file:
 |---|---|
 | `InfoLorentz.v`, `InfoLorentzContinuum.v`, `InfoLorentzInvariance.v` | 2026-06-27 |
 | `RDL_GammaSpectral.v`, `InfoCoercivityBoundedClosure.v`, `InfoDiscreteGraphCurvature.v`, `InfoSchrodinger.v`, `InfoAnalysisLift.v`, `InfoQuantumGravityRootBridge.v`, `InfoQuantumRelativityUnification.v`, `scripts/verify_quantum_gravity_root_bridge.py` | 2026-07-04 / 2026-07-05 |
-| `InfoSpectralCeiling.v`, `InfoRecurrenceEnergy.v`, `InfoQuantumFrequencyCeiling.v`, `InfoGraphFluxBalance.v`, `InfoCompanionSkew.v`, `InfoCausalSignature.v`, `InfoGraphNoether.v`, `InfoGraphGrowth.v`, `InfoActionStationarity.v`, `InfoCurvatureBalance.v`, `InfoProductSpectrum.v`, `InfoContinuumLimit_nD.v`, `InfoWeightedReadout.v`, `InfoCrossTermDominance.v` | 2026-07-05 |
+| `InfoSpectralCeiling.v`, `InfoRecurrenceEnergy.v`, `InfoQuantumFrequencyCeiling.v`, `InfoGraphFluxBalance.v`, `InfoCompanionSkew.v`, `InfoCausalSignature.v`, `InfoGraphNoether.v`, `InfoGraphGrowth.v`, `InfoActionStationarity.v`, `InfoCurvatureBalance.v`, `InfoProductSpectrum.v`, `InfoContinuumLimit_nD.v`, `InfoWeightedReadout.v`, `InfoCrossTermDominance.v`, `InfoDiskBeforeLock.v`, `InfoGrowthFold.v`, `InfoCeilingMonotone.v`, `InfoCurvatureNoether.v`, `InfoModeRotation.v`, `InfoPentagonSpectrum.v`, `InfoAreaLaw.v`, `InfoDegreeFromCurvature.v`, `InfoTensorFrame.v`, `InfoStrainTensorBridge.v`, `InfoOptimizerWindow.v` | 2026-07-05 |
 
 See [SUPPLEMENT.md](SUPPLEMENT.md) for the full narrative, the dependency DAG, the
 numerical validation (Hückel benzene, Forman curvature sanity checks), the

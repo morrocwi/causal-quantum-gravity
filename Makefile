@@ -28,7 +28,18 @@ COQFILES = \
 	formal/InfoProductSpectrum.v \
 	formal/InfoContinuumLimit_nD.v \
 	formal/InfoWeightedReadout.v \
-	formal/InfoCrossTermDominance.v
+	formal/InfoCrossTermDominance.v \
+	formal/InfoDiskBeforeLock.v \
+	formal/InfoGrowthFold.v \
+	formal/InfoCeilingMonotone.v \
+	formal/InfoCurvatureNoether.v \
+	formal/InfoModeRotation.v \
+	formal/InfoPentagonSpectrum.v \
+	formal/InfoAreaLaw.v \
+	formal/InfoDegreeFromCurvature.v \
+	formal/InfoTensorFrame.v \
+	formal/InfoStrainTensorBridge.v \
+	formal/InfoOptimizerWindow.v
 
 verify:
 	@set -e; \

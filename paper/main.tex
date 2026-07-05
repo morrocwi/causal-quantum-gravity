@@ -64,9 +64,15 @@ Dynamics and a Discrete Causal Signature}}
     six files add an action-stationarity identity, a curvature-energy-horizon
     structure, and a four-step spectral-convergence ladder resolving the
     flat/diagonal-metric case of the mother equation's continuum limit in
-    arbitrary dimension. All told: 24 Coq files, 123 theorems, every one
-    machine-checked. Every claim below is accompanied by its tier, its exact
-    source theorem, and a reproduction command.
+    arbitrary dimension. A further eleven files add a discrete disk-before-lock
+    analog, close a seed-to-spectral-ceiling chain, bridge to an algebraic
+    track (curvature-Noether invariance, a rotation-matrix identity, a
+    golden-ratio-adjacent pentagon spectrum), a graph-native area law and a
+    degree-curvature bound, a general tensor-reconstruction fact with a
+    curvature bridge conditional on one stated hypothesis, and a momentum-
+    optimizer/kernel-energy identification. All told: 35 Coq files, 196
+    theorems, every one machine-checked. Every claim below is accompanied by
+    its tier, its exact source theorem, and a reproduction command.
     \end{abstract}
 
     \textbf{Keywords:} discrete quantum gravity; graph Laplacian; retained-readout
@@ -549,6 +555,143 @@ latter is a known, substantial result in the literature
 (Burago--Ivanov--Kurylev, 2014) \cite{bik2014}; it is cited here as prior
 literature, not mechanized, and is not claimed as this work's contribution.
 
+\section{A Discrete Disk-Before-Lock Analog}
+\label{sec:disklock}
+A discrete, graph-native analog of an unrelated preprint's continuum claim
+("Disk Before Mass," a PDE result stated with a provenance map but no worked
+derivation, hence \texttt{Dr} tier and not relied upon here) is built from
+scratch using only this repository's own retention machinery. Under an
+explicit \emph{anisotropy hypothesis} --- edges classified ``perpendicular''
+or ``parallel,'' with the perpendicular class's benefit always strictly below
+its strain, and the parallel class's always at or above --- a perpendicular
+candidate edge is shown to strictly worsen the retention functional while a
+parallel candidate never does, from any current graph state, unconditionally.
+This is an immediate, per-decision fact, not an asymptotic claim about many
+growth steps: \texttt{InfoDiskBeforeLock.v} (5~theorems, \texttt{Th\_coqc}).
+The anisotropy hypothesis itself is disclosed as input data, not derived.
+
+\section{Closing the Seed-to-Ceiling Chain}
+\label{sec:seedchain}
+A separate card (Supplement) tracks a chain from the seed's own retention
+criterion through curvature to an internal spectral ceiling. Two remaining
+gaps in that chain are closed here. \texttt{InfoGrowthFold.v}
+(5~theorems, \texttt{Th\_coqc}) generalizes the single-edge curvature-shift
+law of \S\ref{sec:campaign} to an arbitrary \emph{list} of added edges via an
+exact, order-independent closed form (\texttt{forman\_fold}), and shows
+retention only ever bends curvature in one direction regardless of growth
+order. \texttt{InfoCeilingMonotone.v} (6~theorems, \texttt{Th\_coqc}) shows
+growth never decreases the quadratic form a Rayleigh quotient is built from,
+that every exact Rayleigh level achieved before growth is still dominated
+after growth, and that the degree data feeding the spectral ceiling of
+\S\ref{sec:campaign} only grows --- explicitly disclosing what is \emph{not}
+claimed (individual eigenvalue monotonicity/interlacing, which needs
+spectral theory not invoked here). Together these make the seed-through-
+ceiling portion of that chain gap-free up to one disclosed ansatz and one
+pre-existing, direction-undecidable axiom relating an internal oscillation
+period to mass --- neither of which is discharged by this section, and
+neither of which is claimed to be.
+
+\section{Algebraic Bridges: Curvature Symmetry, Rotation, and a Pentagon Spectrum}
+\label{sec:algebra}
+Three results connect the curvature/growth track to a separately-developed
+algebraic track (complex roots of unity, the golden ratio) via concrete
+shared objects, not analogy. \texttt{InfoCurvatureNoether.v}
+(7~theorems, \texttt{Th\_coqc}) proves Forman curvature is invariant under
+any graph automorphism with a correspondingly permuted edge list, extending
+an existing Noether-style invariance result (proved there only for the
+Laplacian-built quadratic form) to curvature specifically for the first
+time; a concrete instance reuses an existing order-6 rotation witness, with
+the honest caveat that this particular witness graph is regular, so its
+curvature is trivially constant there --- the general theorem is what
+matters for non-regular graphs. \texttt{InfoModeRotation.v}
+(8~theorems, \texttt{Th\_coqc}) shows the mother equation's own leapfrog/CFL
+stepper matrix, at the specific stability-window parameter value where its
+trace is zero, is \emph{literally} the standard matrix representation of
+multiplication by $i$ (verified: the same squares-to-negation, period-4
+identity already known for $i$), and that two further window points give
+periods 6 and 3 --- instances of the crystallographic restriction theorem,
+cited as prior literature for the general claim (only $n\in\{1,2,3,4,6\}$
+are reachable by a rational stepper parameter), not re-derived here.
+\texttt{InfoPentagonSpectrum.v} (5~theorems, \texttt{Th\_coqc}) proves the
+5-cycle graph Laplacian satisfies an exact cubic operator identity whose
+nonzero-eigenvalue factor has the same defining-relation shape as the golden
+ratio's own characterizing equation (both are minimal polynomials of
+elements of $\mathbb{Q}(\sqrt5)$), and exhibits all four distinct
+eigenvalues of the 6-cycle (the same graph used as the automorphism witness
+above) via explicit rational eigenvectors --- the 6-cycle is, in this
+precise sense, the last cycle whose full spectrum stays rational; the
+5-cycle is the first whose spectrum leaves $\mathbb{Q}$.
+
+\section{A Graph-Native Area Law and a Degree-Curvature Bound}
+\label{sec:arealaw}
+Two small, self-contained results, explicitly not claimed as more than what
+they state. \texttt{InfoAreaLaw.v} (3~theorems, \texttt{Th\_coqc}) proves
+that if a field is constant across a region of a graph, every edge strictly
+interior to that region contributes exactly zero to the quadratic energy
+form --- all of a uniform region's energy comes from its boundary. This
+shares a qualitative flavor with the Bekenstein--Hawking holographic bound
+(``boundary determines the budget, not the interior'') but is not that
+bound and makes no claim about entropy, metric area, or general relativity;
+sharing a qualitative flavor is not sharing a theorem.
+\texttt{InfoDegreeFromCurvature.v} (4~theorems, \texttt{Th\_coqc}) proves a
+node's degree is bounded by $4$ minus the local Forman curvature of any
+incident edge, and, given a curvature floor over a graph, that the maximum
+degree is bounded by $4$ minus that floor --- a purely combinatorial fact
+usable to feed the spectral ceiling of \S\ref{sec:campaign} with a
+curvature-derived value.
+
+\section{General Tensor Reconstruction and a Conditional Curvature Bridge}
+\label{sec:tensorframe}
+\texttt{InfoTensorFrame.v} (8~theorems, \texttt{Th\_coqc}, division-free
+over $\mathbb{Q}$) proves a general, dimension-independent linear-algebra
+fact: a symmetric bilinear form on an $n$-dimensional space is fully and
+uniquely reconstructible from its $n$ axis (diagonal) evaluations plus its
+$\binom{n}{2}$ face-diagonal evaluations, via the polarization identity ---
+the counting identity $2n+n(n-1)=n(n+1)$ confirms no slack in any
+dimension, and in $4$D, $4$ axes $+$ $6$ face-diagonals $=10$ matches a
+rank-2 symmetric tensor's component count exactly. This is stated plainly
+as an \emph{abstract} fact: it does not by itself establish that any graph
+actually used elsewhere in this work contains face-diagonal edges (the
+$n$-D ladder of \S\ref{sec:nd} uses axis-aligned edges only).
+
+\texttt{InfoStrainTensorBridge.v} (12~theorems, \texttt{Th\_coqc}) connects
+this to curvature on a stated condition: on a $2{\times}2$ graph cell with a
+diagonal candidate edge, the strain on that edge equals the tensor-frame
+diagonal evaluation \emph{exactly when the cell is affine} (no discrete
+Hessian cross term), and differs from it by an exact, fully disclosed
+defect term in general. Under that affine condition, the seed's own
+retention criterion for the diagonal candidate is shown to be, verbatim, a
+price on a tensor-frame evaluation (\texttt{diagonal\_retention\_prices\_
+tensor}) --- curvature and this tensor-reconstruction fact are connected by
+a real theorem for the affine case, not merely both being expressible on
+the same graph. This is \emph{not} an unconditional closure; for a
+non-affine cell the disclosed defect term must be carried. The same file
+separately proves that any graph's quadratic form splits exactly into
+inside, outside, and cut contributions against any region
+(\texttt{gform\_screen\_partition}, unconditional), and, under one further
+disclosed lens (benefit per retained distinction taken proportional to a
+temperature-like parameter), that the retention criterion becomes a
+discrete Clausius-type inequality, both directions exact. None of this
+constitutes or is claimed to constitute Jacobson's thermodynamic
+derivation of the Einstein equation \cite{jacobson1995}; it is a small,
+honestly-tiered fragment sharing a qualitative shape with one step of that
+program, explicitly not the program itself.
+
+\section{Momentum Optimizer Theory Is the Kernel's Energy Theory}
+\label{sec:optimizer}
+\texttt{InfoOptimizerWindow.v} (10~theorems, \texttt{Th\_coqc}, division-free
+over $\mathbb{Q}$) shows the classical heavy-ball/momentum iteration on a
+quadratic mode is, under an exact reparametrization, the same dissipative
+two-step recurrence already proved for the mother equation's own leapfrog
+stepper in \S\ref{sec:campaign}. The reparametrized Lyapunov functional
+decrements by exactly one nonnegative square per step; a momentum
+dichotomy (never increases below a threshold, exactly conserved at the
+threshold, never decreases above it) is proved as a theorem; and an
+a-priori bound on every iterate is obtained from initial data alone, with
+no spectral computation or run-time tuning, inside the classical stability
+window. Divergence outside that window, convergence rates, and anything
+about non-quadratic objectives are explicitly not claimed.
+
 \section{Reviewer Attack Response}
 \label{sec:attack}
 This section pre-empts questions an adversarial referee will ask, following an
@@ -643,7 +786,12 @@ for the mother equation, the four branch results (\S\ref{sec:quantum}--
 quasinormal-mode bridge (\S\ref{sec:qnm}), the strengthening campaign
 (\S\ref{sec:campaign}), graph growth (\S\ref{sec:growth}), the action-stationarity
 and curvature-horizon structure (\S\ref{sec:action}), the $n$-D spectral ladder
-(\S\ref{sec:nd}), the reviewer attack response
+(\S\ref{sec:nd}), the disk-before-lock analog (\S\ref{sec:disklock}), the
+seed-to-ceiling closure (\S\ref{sec:seedchain}), the algebraic bridges
+(\S\ref{sec:algebra}), the area law and degree-curvature bound
+(\S\ref{sec:arealaw}), the tensor-reconstruction and conditional curvature
+bridge (\S\ref{sec:tensorframe}), the momentum-optimizer identification
+(\S\ref{sec:optimizer}), the reviewer attack response
 (\S\ref{sec:attack}), and the reproduction commands.
 
 The companion supplement (\texttt{SUPPLEMENT.md}) is responsible for material
@@ -663,9 +811,9 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles all 24 \texttt{formal/*.v} files via
+\item \texttt{make verify} --- compiles all 35 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (123 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
+theorem (196 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
 file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
@@ -711,7 +859,22 @@ variational-structure-sharing is generic to essentially all physical theories. A
 final four-step ladder closes the flat and diagonal-metric cases of this
 framework's $n$-dimensional continuum limit, tagging each step at its true tier and
 narrowing the remaining general-metric case to a single, named, literature-cited
-gap. Every claim above carries its tier and its exact reproduction command.
+gap. Eleven further files extend the reach without ever advancing a claim past
+its evidence: a discrete anisotropy result immediate at every decision point,
+not asymptotic; two files closing a seed-to-spectral-ceiling chain up to one
+disclosed ansatz and one pre-existing, direction-undecidable axiom, neither
+discharged here; three files bridging curvature and growth to a
+separately-built algebraic track via concrete shared objects (an
+automorphism-invariance extension, a literal identity between the mother
+equation's own stepper matrix and the standard $i$-rotation matrix, and a
+pentagon-graph spectrum landing in the same field as the golden ratio); a
+graph-native area law and a degree-curvature bound, each explicitly scoped
+against the physical results (holographic entropy, general relativity) they
+share only a qualitative flavor with, not a theorem; a general tensor-
+reconstruction fact and a curvature bridge to it that is conditional on one
+named hypothesis, not unconditional; and a momentum-optimizer identification
+inheriting the mother equation's own energy theory by exact reparametrization.
+Every claim above carries its tier and its exact reproduction command.
 
 \section*{Acknowledgements}
 This work was developed through a human--AI co-thinking workflow, including one
@@ -767,6 +930,8 @@ Laplace-Beltrami operator, \textit{J. Spectral Theory}, 2014.
 geometry from random bits, \textit{JHEP} 09:045, 2017.
 \bibitem{surya2019} S. Surya, The causal set approach to quantum gravity,
 \textit{Living Reviews in Relativity}, 2019.
+\bibitem{jacobson1995} T. Jacobson, Thermodynamics of spacetime: the Einstein
+equation of state, \textit{Phys. Rev. Lett.} 75, 1260, 1995.
 \end{thebibliography}
 \label{sec:refs}
 
