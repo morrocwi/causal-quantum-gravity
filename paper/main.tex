@@ -75,8 +75,14 @@ Dynamics and a Discrete Causal Signature}}
     mass bound conditional on a single disclosed, non-theorem identification,
     whose contrapositive states that sufficiently large mass forces negative
     combinatorial curvature; a companion synthesis note included as a
-    supplement gives the full derivation and literature positioning. All told:
-    35 Coq files, 188 theorems, every one machine-checked. Every claim below
+    supplement gives the full derivation and literature positioning. Two
+    further files restate the degree/frequency-ceiling family in
+    entropy-flavored language (explicitly disclosed as a naming choice, not a
+    physical claim) and prove a graph-native boundary-screening theorem
+    (information confined to a region's strict interior cannot reach a fixed
+    exterior weighting), each explicitly scoped against holographic or
+    general-relativistic over-reading. All told:
+    37 Coq files, 199 theorems, every one machine-checked. Every claim below
     is accompanied by its tier, its exact source theorem, and a reproduction
     command.
     \end{abstract}
@@ -777,6 +783,70 @@ named \textsc{ob-forman-ricci} in the companion note --- neither claim is
 stronger than that dependence allows, and the companion note states this
 explicitly rather than eliding it.
 
+\section{An Entropy-Language Restatement, and a Boundary-Screening Theorem}
+\label{sec:entropyscreen}
+Two further small, self-contained results, each explicitly scoped to state
+no more than what it proves.
+
+\texttt{InfoEntropyLicense.v} (6~theorems, \texttt{Th\_coqc}, division-free
+over $\mathbb{Q}$) restates the degree/frequency-ceiling family of
+\S\ref{sec:campaign} in entropy-flavored language: defining a per-node
+quantity $S_{\mathrm{loc}}(s_0,E,i):=s_0\cdot\deg_E(i)$ for an arbitrary
+weight $s_0$, the handshake identity becomes
+$\sum_i S_{\mathrm{loc}}(s_0,E,i)=2s_0\lvert E\rvert$; $S_{\mathrm{loc}}$ is
+proved monotone non-decreasing under retention-only graph growth (the same
+$E_s{+}{+}E$ shape as \S\ref{sec:growth}); and, given the ``achieving''
+hypothesis $2d_{\max}=\deg_E(u)+\deg_E(v)$ (an explicit hypothesis, of
+exactly the same kind \S\ref{sec:campaign}'s own spectral ceiling already
+takes for $d_{\max}$), the frequency-ceiling inequality $M\omega^2\le
+K\cdot2d_{\max}$ composes \emph{genuinely} with the entropy identity into a
+bound on the entropy-language quantity itself,
+$M\omega^2\le K\cdot(S_{\mathrm{loc}}(s_0,E,u)+S_{\mathrm{loc}}(s_0,E,v))/s_0$
+--- not a mere side-by-side pairing of two unrelated facts, but one
+inequality substituted into the other. A further rearrangement gives a
+lower bound on $S_{\mathrm{loc}}$ at the degree-realizing node in terms of a
+plain-$\mathbb{Q}$ energy relation. We state plainly what this is and is
+not: $s_0$ is an arbitrary $\mathbb{Q}$-parameter and $S_{\mathrm{loc}}$ is,
+by definition, a rescaling of degree; calling it ``entropy'' is a naming
+choice in the same family as the qualitative Bekenstein--Hawking
+resemblance already disclaimed for the boundary-energy fact of
+\S\ref{sec:arealaw}, not a new physical claim, not the Bekenstein
+bound~\cite{bekenstein1973}, and not an instance of Wheeler's ``it from
+bit''~\cite{wheeler1990}. No thermodynamic, statistical-mechanical, or
+information-theoretic (in the Shannon or Szil\'ard--Landauer
+bit-erasure~\cite{szilard1929,landauer1961} sense) identification of $s_0$
+or $S_{\mathrm{loc}}$ is claimed or used anywhere in the file.
+
+\texttt{InfoBoundaryScreening.v} (5~theorems, \texttt{Th\_coqc}) proves a
+graph-native screening fact on top of \texttt{InfoStrainTensorBridge.v}'s
+region-partition identity of \S\ref{sec:tensorframe}
+(\texttt{gform\_screen\_partition}): calling the outside-plus-cut part of
+the quadratic form against a region \emph{Exterior}, and calling a node
+\emph{strictly interior} when it is in the region and every incident edge
+of the graph stays inside the region, Exterior's value is exactly
+unchanged by any change to a field's values confined to non-interior
+nodes---two fields that agree everywhere off the strict interior give
+\emph{identical} Exterior values, unconditionally and exactly, for any
+graph, region, and pair of fields (\texttt{exterior\_invisible\_to\_
+interior\_swap}). The proof is a direct case analysis on which of the
+region-partition's three edge classes (inside/outside/cut) each edge falls
+into: every edge contributing to Exterior has at least one endpoint outside
+the region, and that very edge already witnesses that both its endpoints
+fail the strict-interior test, so the fixed weighting is untouched when the
+field is redefined there. We state plainly what this does and does not
+establish. It \emph{does} show that, on this graph's own native quadratic
+form, information about the field's values in the strict interior cannot
+propagate into Exterior --- a purely combinatorial, unconditional fact
+about which edges carry a given field to the outside. It does \emph{not}
+establish anything about physical entropy, the holographic
+principle~\cite{thooft1993,susskind1995}, a Bekenstein-Hawking area
+law~\cite{bekenstein1973}, or general relativity; ``boundary'',
+``screening'', ``Exterior'', and ``capacity'' (the trivially field-independent
+cut-edge count, stated for completeness with a one-line proof) are
+graph-native names chosen for readability, not physical identifications, in
+the same spirit as \S\ref{sec:arealaw}'s explicit disclaimer that a
+qualitative resemblance to the Bekenstein--Hawking bound is not that bound.
+
 \section{Reviewer Attack Response}
 \label{sec:attack}
 This section pre-empts questions an adversarial referee will ask, following an
@@ -928,8 +998,9 @@ seed-to-ceiling closure (\S\ref{sec:seedchain}), the algebraic bridges
 (\S\ref{sec:arealaw}), the tensor-reconstruction and conditional curvature
 bridge (\S\ref{sec:tensorframe}), the momentum-optimizer identification
 (\S\ref{sec:optimizer}), the composed curvature-limited mass reading
-(\S\ref{sec:masschain}), the reviewer attack response
-(\S\ref{sec:attack}), and the reproduction commands.
+(\S\ref{sec:masschain}), the entropy-language restatement and
+boundary-screening theorem (\S\ref{sec:entropyscreen}), the reviewer attack
+response (\S\ref{sec:attack}), and the reproduction commands.
 
 The companion synthesis note (\texttt{paper/mass\_note.tex}, compiling to
 \texttt{paper/mass\_note.pdf}) is a separate, self-contained preprint by the
@@ -963,9 +1034,9 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles all 35 \texttt{formal/*.v} files via
+\item \texttt{make verify} --- compiles all 37 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (188 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
+theorem (199 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
 file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
@@ -1096,6 +1167,20 @@ geometry from random bits, \textit{JHEP} 09:045, 2017.
 \textit{Living Reviews in Relativity}, 2019.
 \bibitem{jacobson1995} T. Jacobson, Thermodynamics of spacetime: the Einstein
 equation of state, \textit{Phys. Rev. Lett.} 75, 1260, 1995.
+\bibitem{bekenstein1973} J. D. Bekenstein, Black holes and entropy,
+\textit{Phys. Rev. D} 7, 2333, 1973.
+\bibitem{wheeler1990} J. A. Wheeler, Information, physics, quantum: the search
+for links, in \textit{Complexity, Entropy and the Physics of Information},
+Addison-Wesley, 1990.
+\bibitem{szilard1929} L. Szil\'ard, \"Uber die Entropieverminderung in einem
+thermodynamischen System bei Eingriffen intelligenter Wesen, \textit{Zeitschrift
+f\"ur Physik} 53, 840, 1929.
+\bibitem{landauer1961} R. Landauer, Irreversibility and heat generation in the
+computing process, \textit{IBM J. Res. Dev.} 5, 183, 1961.
+\bibitem{thooft1993} G. 't Hooft, Dimensional reduction in quantum gravity, in
+\textit{Salamfestschrift}, World Scientific, 1993; arXiv:gr-qc/9310026.
+\bibitem{susskind1995} L. Susskind, The world as a hologram, \textit{J. Math.
+Phys.} 36, 6377, 1995.
 \end{thebibliography}
 \label{sec:refs}
 

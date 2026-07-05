@@ -39,7 +39,9 @@ COQFILES = \
 	formal/InfoDegreeFromCurvature.v \
 	formal/InfoTensorFrame.v \
 	formal/InfoStrainTensorBridge.v \
-	formal/InfoOptimizerWindow.v
+	formal/InfoOptimizerWindow.v \
+	formal/InfoEntropyLicense.v \
+	formal/InfoBoundaryScreening.v
 
 verify:
 	@set -e; \
