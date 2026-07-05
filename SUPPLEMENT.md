@@ -1288,7 +1288,33 @@ not externally verified.
     object), and this kernel currently has no vocabulary to even write
     that statement down, let alone prove or probe it — this is a frontier
     question, not an engineering backlog item, and should not be
-    confused with one.
+    confused with one. **Update — TEST 2 of a five-test battery
+    (order-memory / "seed of interference") run and independently
+    verified** (`scripts/probe_order_memory.py`, `finite_diagnostic`,
+    with two executed, passing pytest tests in
+    `scripts/test_order_memory.py`): starting from an identical field on
+    a ring graph, retaining two candidate chords `e1, e2` in opposite
+    orders (A: `e1` then `e2`; B: `e2` then `e1`), evolving the SAME
+    total number of leapfrog steps in each case, and comparing the final
+    field state on the two paths — even though the final GRAPH (and its
+    curvature, by the fold theorem, `InfoGrowthFold_attempt.v`/C55) is
+    identical either way. **Result: the relative difference
+    `D(T)/‖u(T)‖` does NOT decay to zero as `T` grows — it plateaus
+    around `0.7–1.3` out to `T=5120`, robust across five random seeds and
+    several chord distances.** This is the "gate opens" branch of the
+    test's own decision rule: retention ORDER is recorded in the field
+    even though it is invisible to curvature — a genuine history-connection
+    curvature exists in the field sector, which is the necessary
+    precondition (not yet a proof) for any phase that a
+    sum-over-geometries construction for `OB-QUANTUM-GEOMETRY` would
+    need. What this does NOT establish, stated plainly: no phase, no
+    amplitude, no quantization — only that the classical structure a
+    quantization would have to consume is present, not absent. Four
+    further tests in the same battery (tie-manifold occupancy,
+    ledger-wave dispersion, adiabatic breakdown, and a single-flip action
+    quantum `ħ_geom`) remain queued; TEST 2 alone does not close
+    `OB-QUANTUM-GEOMETRY`, and per §14's Unification Claim Card, no
+    claim of quantized geometry is made here.
 
 ## 12.1 A method for finding open problems, not just open problems
 
