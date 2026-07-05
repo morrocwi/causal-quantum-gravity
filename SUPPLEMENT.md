@@ -1235,6 +1235,41 @@ not externally verified.
     still an artifact; if it does not, it is real. A second, independent
     next step (a direct two-lump force measurement) is the more direct
     route to the actual `1/r²` question and is queued alongside it.
+    **Round three, the direct two-lump force measurement, ran and was
+    self-corrected within the same session it was reported — recorded
+    here in its corrected form, not its first-draft form.** A first
+    narrowband-bath run measured attraction between two lumps at several
+    separations `d` and was initially read as confirmation; a same-session
+    big-box rerun with an explicit reference-drift audit (holding lump A
+    fixed, moving lump B, and separately measuring how much a single
+    lump's own signal drifts with box position) found the drift itself
+    (`spread ≈ 0.195`) is the SAME ORDER as the measured force signal, and
+    that `U(d)` **changes sign non-monotonically with `d`**
+    (`+, −, −, +, +` across `d=12..28` in the corrected run) — the
+    signature of narrowband optical/acoustic binding (two scatterers in a
+    bath with a dominant wavelength attract and repel in bands, `~cos(2k·d)`),
+    not of a monotone Newtonian carrier. **The correct, downgraded
+    reading: "two-body interaction confirmed" (existence, at very high
+    significance), NOT "attraction confirmed" in the Newtonian sense** —
+    the interaction exists and is real, but its shape is the optical-binding
+    class, produced by the narrowband (periodic-kick) bath used in that
+    run. The physics of the failure points directly at the next test: an
+    optical-binding oscillation is exactly what a spectrally NARROW bath
+    produces; a genuinely monotone, gravity-like tail is expected only
+    from a spectrally BROAD (thermal-like) bath, where the oscillatory
+    components at different wavelengths average out and only a decaying
+    envelope survives — the textbook distinction between optical binding
+    and a thermal Casimir-type force. A broadband-bath rerun (weak,
+    white-in-time kicks instead of strong periodic ones), with the same
+    drift-audit built in from the start rather than added after a false
+    positive, is the next probe and the one that actually adjudicates
+    `1/r²`-style monotonicity. **Standing lesson, added to this project's
+    own probe-design checklist as of this finding:** every two-body
+    interaction probe must print its own single-body reference drift
+    alongside the interaction signal, in the same run, before any sign or
+    magnitude claim — reproducibility across seeds is necessary but not
+    sufficient to rule out a systematic (non-cancelling, nonlinear
+    dressing) artifact.
 
 ## 12.1 A method for finding open problems, not just open problems
 

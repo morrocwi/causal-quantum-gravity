@@ -357,3 +357,37 @@ they do.
 - Never delete or silently rewrite an entry. If a later entry corrects or
   supersedes an earlier one, say so in the later entry and leave the earlier
   one exactly as it was written.
+
+---
+
+## 2026-07-05 (evening) — Falsification #5: a two-lump "attraction" milestone downgraded within the same turn it was reported
+
+**Type:** Negative (a claim self-caught before it reached any committed
+document) · SUPPLEMENT.md SS12 item 12 (`OB-LONG-RANGE`)
+
+A direct two-lump force measurement first read as "attraction confirmed"
+was rerun, same session, with a bigger box and an explicit reference-drift
+audit built in (hold one lump fixed, move the other, and separately
+measure how much a single lump's own signal drifts with box position).
+The rerun found the drift (`spread≈0.195`) is the same order as the
+measured signal, and that `U(d)` changes sign non-monotonically with
+separation — the signature of narrowband optical/acoustic binding, not a
+monotone Newtonian carrier. The corrected reading is "two-body
+interaction confirmed" (existence, high significance) with the shape
+downgraded to "optical-binding class, produced by a narrowband bath," not
+"attraction, Newton-like." No document had yet recorded the first,
+uncorrected claim — it was caught and rewritten before ever being
+committed, which is the version of this discipline that costs the least.
+
+**The lesson, added to the standing probe-design checklist:** every
+two-body interaction probe must print its own single-body reference
+drift alongside the interaction signal, in the same run, before any sign
+or magnitude claim. Reproducibility across seeds (small standard
+deviation between runs of the same configuration) is necessary but not
+sufficient — it does not rule out a systematic, non-cancelling,
+nonlinear-dressing artifact that is identical across seeds but still
+wrong. This is the fifth self-caught falsification recorded in this
+project's history, and the second in one day (see the 17:03 and later
+entries above) — the rate at which the project catches its own
+overreaching claims is treated here as a health signal, not an
+embarrassment.
