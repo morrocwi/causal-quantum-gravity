@@ -1477,6 +1477,37 @@ periodic/closed special case — matching this project's own
 minimum-parameter instinct: extend what already exists before minting
 something new.
 
+**Why the "action = 2·info" identity is scoped to the isometric orbit
+specifically — an information-native explanation, not just an
+observation** (`scripts/probe_action_glossary_generalization.py`,
+verified geometrically, not merely asserted): the classical action of a
+closed orbit is, by a standard fact of Hamiltonian mechanics, the
+phase-space AREA the orbit encloses. Checked directly against the
+period-4 i-rotation orbit's own four points — `(3/2,−5/7)`,
+`(−5/7,−3/2)`, `(−3/2,5/7)`, `(5/7,3/2)` for one sample amplitude — all
+four have EXACTLY the same `info(x,y)=x²+y²` value (`541/196`),
+confirming they sit on a single circle, spaced 90° apart. **A loop
+confined to one circle has its enclosed area fixed entirely by that
+circle's radius — there is no other quantity the area could depend on —
+which is why `action` is forced into a fixed multiple of `info` exactly
+when the step conserves `info` (an isometry).** For the non-isometric
+orbits (`a=1`, `a=3`), the loop visits DIFFERENT `info` values at
+different points (no single circle, no single radius), so its enclosed
+area depends on the whole trajectory of retained-information rather than
+any one readout — there is no longer a single number for the action to
+be proportional to. In this project's own vocabulary: `info` IS energy
+(`R0_ENERGY`, `Th_coqc`), so an isometry here is exactly an
+energy-conserving automorphism of the step, and this is the discrete
+finite-orbit form of the standard classical-mechanics fact that action
+variables of an integrable system are built from its own conserved
+quantities — the same Noether-type phenomenon (symmetry ⟹ conserved
+charge) this kernel already mechanizes elsewhere
+(`InfoGraphNoether_attempt.v`, `InfoCurvatureNoether_attempt.v`,
+this project's own `conservation law` glossary entry). Not a coincidence
+of one small case, but not a universal fact about orbits either — a
+genuine boundary condition, now named in the vocabulary this project
+already has rather than left as an unexplained empirical pattern.
+
 ## 12.1 A method for finding open problems, not just open problems
 
 A worked classical-mechanics exercise (rolling cylinder vs. hollow cylinder
