@@ -19,12 +19,17 @@ object is identified instead: Forman-Ricci curvature on the graph, proved to be 
 honest readout of the same data the mother equation uses, and linked by exact
 algebraic substitution to an already-proven stability (coercivity) theorem.
 
+**Knowledge map:** [KGMAP.md](KGMAP.md) — a one-page document graph and
+"which file answers which question" table; start here if you are new to
+this repo and want to know where to look before reading anything else.
 **Manuscript:** [paper/main.pdf](paper/main.pdf) (compile from `paper/main.tex`) —
 theorem-level claims, tiers, and reproduction commands, self-contained.
 **Supplement:** [SUPPLEMENT.md](SUPPLEMENT.md) — full dependency DAG, the complete
 eight-attempt GR refutation log, the full novelty audit, and the extended
-reference-verification trail. See the manuscript's "Main-Text vs. Supplement
-Boundary" section for what belongs where.
+reference-verification trail. Split into four files (see its own index at
+the top); the open-problem ledger, completeness scoreboard, and reference
+list each live in [`supplement/`](supplement/). See the manuscript's
+"Main-Text vs. Supplement Boundary" section for what belongs where.
 **Companion synthesis note:** [paper/mass_note.pdf](paper/mass_note.pdf)
 (compile from `paper/mass_note.tex`) — a separate, self-contained preprint by
 the same author composing several of this repository's theorems (none
@@ -218,5 +223,7 @@ Jacobson, etc.) should already be registered, with owner and year, in
 memory, is the canonical source if you need to add or verify a citation.
 
 See [SUPPLEMENT.md](SUPPLEMENT.md) for the full narrative, the dependency DAG, the
-numerical validation (Hückel benzene, Forman curvature sanity checks), the
-honest audit of what was and was not derived, and the complete reference list.
+numerical validation (Hückel benzene, Forman curvature sanity checks), and the
+honest audit of what was and was not derived; the open-problem ledger and the
+complete reference list are in [`supplement/`](supplement/) (see SUPPLEMENT.md's
+own index).
