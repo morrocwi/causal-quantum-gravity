@@ -290,16 +290,323 @@ derivations from the mother equation's own causal order. The specific boost
 
 ### 5.2 Eight attempts to derive GR from `L_R`, tested and refuted this session
 
-| # | Approach | Result |
+**Why this log is written up in full, not just as a one-line verdict per
+row.** Quantum-gravity papers routinely report what worked; they almost
+never report, with comparable technical detail, what was tried and failed
+and *why* it failed — the discipline of writing a negative result down with
+the same rigor as a positive one is rare in this field specifically, even
+though it is exactly the information a reader needs to avoid repeating a
+dead end. Each attempt below states the hypothesis, why it looked
+plausible, the concrete test applied, the failure mode, and the
+generalizable lesson — not just "refuted."
+
+**Quick-reference table:**
+
+| # | Approach | Verdict |
 |---|---|---|
-| 1 | `horizon_is_spine_knife_edge := spine_split_boundary` | **DEFINITIONAL_ALIAS_ONLY** — bare `Definition X := Y`, no derivation, confirmed by independent adversarial audit |
-| 2 | Numerology: solve `D/(2M) = κ = 1/(4M)` for `D` | **REFUTED** — dimensionally-forced equality; the *same* trick "confirms" the unrelated quasinormal-mode damping rate equally well, proving no discriminating power |
-| 3 | Informationist reframing via `mass_priority_axiom` | Reduces to restating the axiom; no new content |
-| 4 | Independently fix `K` from lattice-causality (`K/M = c²/l_Planck²`), derive predicted decay rate | **REFUTED, structurally** — predicted rate is mass-*independent*, while real `κ ∝ 1/M`; confirmed by 10-billion-fold mass comparison |
-| 5 | Regge-Wheeler equation as a graph-Laplacian eigenvalue problem (real frequency only) | **Partial success** — WKB real-frequency scale matched literature to ~3%, no fitting |
-| 6 | Hyperboloidal compactification + naive finite differences | Equation verified symbolically regular at both endpoints, but discretization did not converge (regular-singular-point boundary treatment inadequate) |
-| 7 | Hyperboloidal + bare Chebyshev collocation | Real part near WKB scale; imaginary (decay) part shrank to zero with resolution — diagnosed cause: **spatial infinity is a genuine *irregular* singular point** (essential singularity `~exp(iω/σ)`), which imports exactly the continuum-infinity (I3) this project's own philosophy refuses |
-| 8 | Finite-domain PML (no point at infinity at all) | **Genuine convergence** — `Mω ≈ 0.4841 − 0.0956i` vs. literature `0.4836 − 0.0968i`, ~0.1%/1.2% match, robust across grid resolution, PML strength, and domain size — see §6 |
+| 1 | `horizon_is_spine_knife_edge := spine_split_boundary` | DEFINITIONAL_ALIAS_ONLY |
+| 2 | Numerology: solve `D/(2M) = κ = 1/(4M)` for `D` | REFUTED (no discriminating power) |
+| 3 | Informationist reframing via `mass_priority_axiom` | Restates the axiom, no new content |
+| 4 | Fix `K` from lattice-causality, derive decay rate | REFUTED (wrong mass-scaling) |
+| 5 | Regge-Wheeler as a graph-Laplacian eigenvalue problem (real frequency) | Partial success (~3%, WKB only) |
+| 6 | Hyperboloidal compactification + naive finite differences | Did not converge |
+| 7 | Hyperboloidal + bare Chebyshev collocation | Diagnosed the actual obstruction |
+| 8 | Finite-domain PML (no point at infinity) | Genuine convergence (~0.1%/1.2%) |
+
+#### Attempt 1 — `horizon_is_spine_knife_edge := spine_split_boundary`
+
+**Hypothesis.** If the project's own "spine split boundary" construction
+(a graph-native notion of where a region's quadratic form separates into
+inside/outside/cut, the same object later formalized properly as
+`gform_screen_partition` in `InfoStrainTensorBridge.v`) already captures
+something horizon-like, naming it `horizon_is_spine_knife_edge` and citing
+that name would constitute a derivation of a native horizon notion tied to
+gravity.
+
+**Why it looked plausible.** The vocabulary lines up: "knife edge" and
+"horizon" both evoke a sharp boundary condition, and the underlying object
+(`spine_split_boundary`) is a genuine, already-proven theorem about the
+graph's own structure — so the temptation is to believe that giving it a
+gravity-flavored name transfers gravity-flavored content.
+
+**The test.** An independent adversarial audit (a separate process,
+instructed to try to break the claim) inspected the actual Coq definition.
+
+**The failure mode.** The definition is a bare alias,
+`Definition horizon_is_spine_knife_edge := spine_split_boundary`. No new
+theorem is proved under the new name; nothing about the object's
+mathematical content changes. The audit confirmed this directly: renaming a
+theorem does not derive anything the original theorem did not already
+state, however suggestive the new name is.
+
+**Lesson.** A gravity-suggestive name attached to an existing, ungravitated
+theorem is not evidence of anything beyond the original theorem — a
+generalizable trap in any research program with a rich, evocative internal
+vocabulary (this project's own vocabulary, `L_R`, `δ_R`, `spine`, invites
+exactly this trap, which is why every subsequent gravity-flavored name
+introduced in this repository is cross-checked against its literal Coq
+statement, not its label).
+
+#### Attempt 2 — Numerology: solving `D/(2M) = κ = 1/(4M)` for `D`
+
+**Hypothesis.** The mother equation's dissipation parameter `D` and mass
+parameter `M` might be related by the same functional form as a
+Schwarzschild black hole's surface gravity `κ = 1/(4M)` (in natural units),
+so that solving `D/(2M) = κ` for `D` would give a first-principles value
+for the dissipation parameter tied to a physical horizon quantity.
+
+**Why it looked plausible.** The algebra is clean and the resulting
+relation is dimensionally consistent; a plausible-looking closed-form
+expression for `D` in terms of `M` is exactly the kind of result that
+*would* constitute progress if it discriminated between competing
+hypotheses.
+
+**The test.** Apply the identical algebraic trick to an unrelated quantity
+in the same framework — the quasinormal-mode damping rate, which has no
+claimed connection to the horizon-surface-gravity identification being
+tested.
+
+**The failure mode.** The same manipulation "confirms" the QNM damping rate
+equally well, with no additional justification. This is the signature of a
+dimensionally-forced equality: any two quantities with compatible units and
+one free parameter can typically be related this way, and doing so proves
+nothing about either quantity's physical origin. The identification has no
+discriminating power — it cannot distinguish "this is a real physical
+match" from "this is what happens when you divide two quantities of
+compatible dimension."
+
+**Lesson.** A single successful-looking numerical/algebraic match is not
+evidence without a check for whether the *same trick* would "succeed" on
+an unrelated, uncorrelated quantity. This is now a standing check applied
+before accepting any cross-domain numerical match in this project (see also
+Corollary 1's contrapositive in the companion mass-synthesis note, which
+was explicitly checked this way via sign analysis against two rejected
+alternative branches).
+
+#### Attempt 3 — Informationist reframing via `mass_priority_axiom`
+
+**Hypothesis.** Restating the claim that mass is downstream of information
+retention using the project's own `mass_priority_axiom` (an existing,
+disclosed non-theorem axiom) in gravity-specific language might expose new
+structure connecting retention to curvature that a plainer statement missed.
+
+**Why it looked plausible.** Reframing a known statement in a different
+vocabulary sometimes does expose latent structure — this is a real,
+occasionally productive move in mathematics generally, so it was worth
+trying rather than dismissing on priors.
+
+**The test.** Work through the reframing explicitly and check whether any
+step introduces content beyond the axiom's own statement.
+
+**The failure mode.** The reframing reduces, term by term, to restating
+`mass_priority_axiom` in different words. No new theorem, inequality, or
+constraint is produced; the "derivation" is the axiom read back to itself.
+
+**Lesson.** Reframing an axiom is not deriving a theorem from it, however
+different the surface vocabulary looks — a check worth stating explicitly
+because the failure mode is easy to miss from the inside (an axiom restated
+persuasively can *feel* like new content to the person restating it).
+
+#### Attempt 4 — Fixing `K` from lattice-causality and predicting a decay rate
+
+**Hypothesis.** If the graph's stiffness parameter `K` and inertia `M` are
+independently fixed from a lattice-causality argument (setting
+`K/M = c²/l_Planck²`, treating the lattice spacing as the Planck length),
+the mother equation should predict a black-hole decay/damping rate that can
+be checked against the literature's mass-dependent quasinormal-mode damping
+rate, `κ ∝ 1/M`.
+
+**Why it looked plausible.** Fixing free parameters from an independent
+physical argument (rather than fitting them to the target) is exactly the
+right methodological move if it works — a genuine, falsifiable prediction
+rather than a curve fit.
+
+**The test.** Compare the predicted decay rate's mass-dependence against
+the literature's, across a wide mass range (a ten-billion-fold comparison,
+spanning stellar-mass to supermassive black-hole scales).
+
+**The failure mode.** The predicted decay rate, under this fixing of `K`,
+comes out mass-*independent* — a constant, not a `1/M` scaling. This
+is a structural mismatch, not a numerical near-miss: no choice of overall
+scale rescues a constant prediction against a `1/M` target across ten
+orders of magnitude in mass. The refutation is confirmed by the scaling
+comparison itself, not by any single numerical value.
+
+**Lesson.** A structurally wrong scaling law is a stronger and more
+informative refutation than "the number was off" — it identifies that the
+entire approach (fixing `K/M` at a single lattice scale, independent of the
+excitation being described) cannot produce the right family of predictions,
+not just the wrong member of the right family. This ruled out an entire
+class of subsequent attempts that would have fixed `K` the same way.
+
+#### Attempt 5 — Regge-Wheeler as a graph-Laplacian eigenvalue problem, real frequency only
+
+**Hypothesis.** The Regge-Wheeler equation governing black-hole
+perturbations, discretized as a graph-Laplacian eigenvalue problem using
+this project's own `L_R` machinery, should reproduce the WKB
+(real-frequency) approximation to the literature's quasinormal-mode
+spectrum, as a first check before attempting the full complex-frequency
+(damped) problem.
+
+**Why it looked plausible.** The mother equation is already a graph-native
+wave operator; reusing the same discretization machinery for a different,
+externally-motivated potential (Regge-Wheeler) is a natural methodological
+extension, and restricting to the real-frequency WKB regime first is the
+standard, lower-risk way to validate a numerical scheme before tackling the
+harder complex-frequency problem.
+
+**The test.** Compare the discretized real-frequency eigenvalue against the
+literature's WKB approximation for the same potential.
+
+**The result.** Partial success: the real-frequency scale matched the
+literature to approximately 3%, with no fitting. This confirmed the
+discretization scheme itself was sound for the real part, and motivated
+proceeding to the harder complex-frequency (damped) problem in attempts
+6–8.
+
+**Lesson.** A partial, real-frequency-only success is useful precisely
+because it isolates which part of the harder problem is already working
+(the spatial discretization) and which part remains (handling the boundary
+condition at spatial infinity, which only matters once complex, decaying
+modes are sought) — this attempt is retained in the log specifically
+because it correctly scoped the remaining difficulty for attempts 6–8.
+
+#### Attempt 6 — Hyperboloidal compactification, naive finite differences
+
+**Hypothesis.** Hyperboloidal slicing (a standard technique for
+compactifying the radial domain so that future null infinity becomes a
+finite coordinate point, avoiding an explicit point at infinity in the
+computational domain) should let a straightforward finite-difference scheme
+converge to the literature's complex (damped) quasinormal-mode frequency.
+
+**Why it looked plausible.** Hyperboloidal slicing is an established,
+published method [Zenginoğlu 2011] specifically designed to handle this
+exact class of problem; applying it as documented was the natural next
+step after attempt 5's partial real-frequency success.
+
+**The test.** Verify the transformed equation is symbolically regular at
+both computational-domain endpoints (a necessary condition before
+attempting discretization), then discretize with naive finite differences
+and check for convergence as resolution increases.
+
+**The failure mode.** The equation itself checked out as symbolically
+regular at both endpoints, as expected from the published method — but the
+naive finite-difference discretization did not converge. The diagnosed
+cause was inadequate treatment of the regular-singular-point structure at
+the boundary: regularity in the continuum equation does not automatically
+transfer to a naive discrete scheme without additional care at exactly the
+points where the transformation does its compactifying work.
+
+**Lesson.** A symbolically correct continuum transformation does not
+guarantee a naively discretized version of it converges — the numerical
+scheme itself needs to respect the same structure the transformation was
+designed to expose, a gap that motivated trying a higher-order, structure-
+respecting discretization next (attempt 7).
+
+#### Attempt 7 — Hyperboloidal slicing with Chebyshev collocation
+
+**Hypothesis.** Replacing the naive finite-difference scheme of attempt 6
+with Chebyshev spectral collocation (a higher-order method well suited to
+exactly the kind of regular-singular-point structure that likely caused
+attempt 6's non-convergence) should recover the full complex quasinormal-
+mode frequency, real and imaginary parts both.
+
+**Why it looked plausible.** Spectral methods are the standard tool for
+this class of problem in the numerical-relativity literature specifically
+because they handle this structure well; if attempt 6's failure was really
+a discretization-order problem, this should fix it.
+
+**The test.** Run the Chebyshev-collocation discretization at increasing
+resolution and track convergence of both the real and imaginary parts of
+the eigenvalue separately.
+
+**The failure mode, and what it revealed.** The real part converged near
+the WKB scale, consistent with attempt 5 — but the imaginary (decay) part
+shrank toward zero as resolution increased, rather than converging to the
+literature's nonzero damping rate. This is a qualitatively different
+failure from attempt 6's outright non-convergence: it pointed to something
+structural about the compactified problem itself, not just the
+discretization order. Diagnosis: spatial infinity, even after hyperboloidal
+compactification, remains a genuine *irregular* singular point for
+this specific problem (an essential singularity, behavior of the form
+`~exp(iω/σ)` near the compactified boundary) — a strictly harder obstruction
+than the regular-singular-point structure the compactification was designed
+to handle. Any scheme that represents the domain as extending to this
+irregular point, however cleverly compactified, imports exactly the kind of
+continuum-infinity artifact (`I3` in this project's own diagnostic
+vocabulary) that the project's stated philosophy refuses to treat as
+physical content.
+
+**Lesson.** This is the load-bearing diagnostic result of the whole
+eight-attempt log: the obstruction to a convergent complex-frequency
+quasinormal-mode calculation was not "insufficiently sophisticated
+numerics" (attempts 6–7 tried genuinely sophisticated, published methods)
+but a genuine mismatch between the mathematical structure of the continuum
+problem (an essential singularity at infinity) and this project's own
+axiomatic refusal to treat "a point at infinity" as physically meaningful.
+The fix, in attempt 8, is not a better numerical method for the same
+problem — it is a different problem that never poses the question in a
+form requiring a point at infinity at all.
+
+#### Attempt 8 — Finite-domain Perfectly Matched Layer (PML): genuine convergence
+
+**Hypothesis.** If the domain is truncated to a genuinely finite region and
+outgoing radiation is absorbed via a Perfectly Matched Layer [Berenger
+1994] — a standard absorbing-boundary technique that requires no point at
+infinity anywhere in the computational domain — the resulting finite-graph
+eigenvalue problem should converge to the literature's complex quasinormal-
+mode frequency without importing the essential-singularity obstruction
+diagnosed in attempt 7.
+
+**Why it looked plausible, and why it is different in kind from attempts
+1–7.** This is not a cleverer way to handle the same infinite-domain
+problem; it is a reformulation that never poses a question about behavior
+at infinity in the first place — consistent with, not despite, this
+project's own refusal of injected-infinity constructions. The discretization
+method (a finite path-graph Laplacian eigenvalue problem, this project's own
+`L_R` construction in its one-dimensional case) is exactly the machinery
+already used everywhere else in this project, applied here to the
+externally-sourced Regge-Wheeler potential.
+
+**The test.** Discretize with a PML absorbing boundary and check
+convergence of the complex eigenvalue against the literature target
+(`Mω ≈ 0.4836 − 0.0968i`, e.g. Leaver 1985; Berti–Cardoso–Starinets 2009)
+across grid resolution `N`, domain half-width, and PML absorption strength
+independently.
+
+**The result.** Genuine convergence: `N=6400` gives `Mω ≈ 0.4841 − 0.0956i`,
+within `|diff| < 0.0013` of the literature value, with the same convergence
+confirmed across domain half-width (`r*_max ∈ [60,120]`) and PML strength
+(`σ_max ∈ [2,16]`) independently — see §6 for the full convergence table.
+This is the one attempt of eight that succeeds, and it succeeds precisely
+by refusing to ask the question attempts 1–7 were all, in different ways,
+still asking.
+
+**Lesson, stated at the level the whole eight-attempt log is really about.**
+The methodological takeaway generalizes beyond this specific calculation:
+when a discrete-substrate research program's own philosophy diagnoses
+continuum infinity as a non-readout, that diagnosis should be trusted as a
+*constraint on which numerical methods can possibly work*, not treated as
+a separate philosophical position independent of the numerics. Attempts 1–4
+failed for reasons unrelated to infinity (bad naming, no discriminating
+power, axiom restatement, wrong scaling); attempts 5–7 progressively
+isolated that the REAL remaining obstruction was exactly the kind of
+infinity the project's own stated philosophy already rules out; attempt 8
+succeeded by taking that philosophy at its word rather than treating it as
+a slogan to cite after the numerics were already designed.
+
+### 5.2b Note on this note's own place in the field
+
+A discrete-gravity research program publishing a *methodologically
+detailed* log of eight failed attempts to derive general relativity — with
+enough technical specificity that another researcher could either reproduce
+each failure or identify exactly where their own approach differs from a
+documented dead end — is, to this project's knowledge, uncommon in this
+literature (see §10's own novelty audit for the adjacent, narrower claim
+about the machine-checked kernel; this specific claim, about the negative-
+results log's format and detail level, has not been separately searched
+against the literature and should be read as a methodological observation,
+not an audited novelty claim).
 
 ### 5.3 The philosophical resolution
 
@@ -620,6 +927,46 @@ genuine (not aliased) derivations across quantum mechanics and special
 relativity, with an honestly-scoped discrete curvature notion for the
 gravity branch — verified today via repeated independent adversarial audit
 (`claude -p` as a separate process), not self-assessment.
+
+### 10.1 External audit status — an outstanding gate, stated plainly
+
+The companion mass-synthesis note (`paper/mass_note.tex`) states four
+specific claims to novelty against the rest of the field, labeled **C1–C4**
+there: *(C1)* the epistemic standard — a machine-checked kernel of any size
+in a discrete-gravity programme, which this project's own search protocol
+(the note's Appendix A) found no prior instance of; *(C2)* the tier-factored
+assembly itself, audited for acyclic dependency; *(C3)* the specific
+"welds" (retention pricing a tensor evaluation, the dissipation-threshold
+pair as a native horizon, the curvature-monotone mass cap and its
+contrapositive), claimed as not found in prior literature; *(C4)* the
+two-arm architecture (mass and holography reaching the same precursor
+independently, sharing no ansatz).
+
+Every one of C1–C4, and every self-audit in this supplement (§5.1's module
+audit, §5.2's eight-attempt log, this section's own novelty check, §9's
+adversarial-review responses), has so far been checked by: the author, and
+AI tooling instructed to act adversarially (a separate `claude -p` process
+asked to find fault, not to confirm). **Neither of these is an external
+audit.** Adversarial AI review is a real and useful check — it has found
+and forced fixes to genuine errors and overclaims across this project's own
+history — but an AI instance instructed to be skeptical of the same
+author's own work is not a substitute for an independent human expert with
+no stake in the outcome, reviewing the claims against their own domain
+knowledge and their own incentive to find a flaw.
+
+**This is stated here as an outstanding, unclosed gate, not a formality.**
+C1 in particular is an absence claim (`we searched and did not find a prior
+machine-checked discrete-gravity kernel`), and absence claims are exactly
+the kind of claim a field expert is best positioned to falsify with a single
+counter-example the search protocol's own query list did not think to try.
+Before any of C1–C4, or this supplement's own "genuinely first" framing in
+§5.2b, is asserted in a venue with peer review or cited as settled, an
+independent human review — someone with no authorship stake in this
+project, ideally from the discrete-gravity/causal-set/formal-methods
+communities directly — should be sought and its findings recorded here,
+in this section, alongside whatever it finds. Until that happens, C1–C4
+should be read exactly as tagged: self-audited and AI-adversarially-checked,
+not externally verified.
 
 ---
 
