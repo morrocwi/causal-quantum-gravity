@@ -1309,12 +1309,34 @@ not externally verified.
     sum-over-geometries construction for `OB-QUANTUM-GEOMETRY` would
     need. What this does NOT establish, stated plainly: no phase, no
     amplitude, no quantization — only that the classical structure a
-    quantization would have to consume is present, not absent. Four
-    further tests in the same battery (tie-manifold occupancy,
-    ledger-wave dispersion, adiabatic breakdown, and a single-flip action
-    quantum `ħ_geom`) remain queued; TEST 2 alone does not close
-    `OB-QUANTUM-GEOMETRY`, and per §14's Unification Claim Card, no
-    claim of quantized geometry is made here.
+    quantization would have to consume is present, not absent.
+    **TEST 3 (tie-manifold occupancy) was attempted and is INCONCLUSIVE
+    by design confound, reported honestly rather than tuned to a clean
+    number** (`scripts/probe_tie_manifold_occupancy.py`): measuring
+    `|strain(e)−benefit(e)|` across candidate edges is extremely
+    sensitive to the retention parameters `α, β` in a way this probe has
+    not yet controlled for. A first version (tracking one candidate edge
+    repeatedly across many decision windows) put its diff value near
+    zero at one specific `α`, but this turned out to be a near-coincidence
+    of a single oscillating pair, not a population statistic — corrected
+    to a proper cross-sectional design (every untried candidate, every
+    window). With the corrected design and the same `α, β` used
+    elsewhere in this project's probes, the population's diff values
+    cluster near `+4` (far above the tie boundary, essentially never
+    near-tie) rather than straddling zero — meaning these particular
+    parameters simply don't put the dynamics near the tie manifold at
+    all, and no thickness exponent or near-tie lifetime can be honestly
+    extracted from this run. **The concrete fix, not yet done:** calibrate
+    `α, β` (or use an adaptive/annealed benefit) so the population's
+    median `strain−benefit` sits near zero by construction, then measure
+    the SHAPE of the distribution around that point — not just retry
+    parameter values hoping to land near it by luck, which is the mistake
+    this attempt made and corrected mid-probe rather than reporting a
+    number from it. Four further tests in the same battery (TEST 3 needs
+    redesign as above; ledger-wave dispersion; adiabatic breakdown; and a
+    single-flip action quantum `ħ_geom`) remain open; TEST 2 alone does
+    not close `OB-QUANTUM-GEOMETRY`, and per §14's Unification Claim
+    Card, no claim of quantized geometry is made here.
 
 ## 12.1 A method for finding open problems, not just open problems
 
