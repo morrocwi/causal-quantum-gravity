@@ -1019,6 +1019,64 @@ not externally verified.
 6. Does §9.5's Noether pairing `W` admit a principled dissipative
    correction law, or is exact conservation strictly a conservative-sector
    fact (numerically confirmed sharp, per §9.5's header)?
+7. **[named: OB-ENTROPY-BRIDGE]** This project has TWO formalized notions
+   both readable as "entropy," and they are deliberately two different
+   objects, not a naming accident to be merged — but the theorem connecting
+   them along a trajectory is missing. **Field entropy** ("descent"): the
+   private repo's own official philosophy lexicon
+   (`research_universal_solver/engine/lexicon.py`, the "conservation law"
+   glossary entry, `Th_coqc`) reads the second law as the monotone
+   energy-descent fact `dE/dt≤0`, unified with the arrow of time — this is
+   about the FIELD dissipating. **Record entropy** ("count"): the
+   entropy-license work (`InfoEntropyLicense.v`, merged 2026-07-05) reads
+   entropy as a Bekenstein-style retained-distinction count,
+   `S_loc:=s0·deg(i)` — this is about the GEOMETRY accumulating. The
+   balance law is already the single-instant broker between them: `retain(e)
+   ⟺ strain≤b` prices exactly the trade "pay on the field side (raise
+   dissipation) to buy on the record side (write a retained distinction)" —
+   a Landauer-shaped cost already present, one decision at a time, via
+   `clausius_form` (whose `δE` term already is the field-entropy object,
+   the strain/`Sgeo`-difference, connected to the record-entropy object
+   `δS_count` at the joint stationary point). What is missing is the
+   TRAJECTORY version — cumulative dissipation versus net bits inscribed
+   over a whole run, not just at one instant:
+   `Σ_t c·‖v_t‖²·Δt` (field entropy dissipated so far) compared against
+   `T·s0·ΔS_count` (record entropy inscribed so far), as an iff or
+   inequality, regime-dependent — currently OPEN. The apparatus for both
+   sides already exists (the damped-decrement identity for the left side;
+   `entropy_step`/`clausius_form` for the right side); only the temporal
+   linking theorem is missing. A cheap numerical probe is available before
+   any proof attempt: on the existing ring simulation, plot cumulative
+   dissipation against `s0`×edges-retained-so-far and check whether their
+   ratio settles. Do not, in the meantime, use the bare word "entropy"
+   unqualified anywhere a reader could confuse the two — say "field entropy"
+   / "record entropy" explicitly.
+8. **[named: OB-EXPANDER]** A UNIFORM lower bound on the graph Laplacian's
+   second-smallest eigenvalue (λ₂, algebraic connectivity / Fiedler 1973),
+   i.e. a genuine spectral-gap/expander property, is explicitly NOT claimed
+   and not currently provable by anything in this repo's existing
+   "eigenpair as extensional hypothesis" framework (would need Cheeger-type
+   isoperimetric machinery, which is irrational-valued and awkward over
+   ℚ). More importantly: this project's own graphs (rings, lattices) are
+   demonstrably NOT expanders — their λ₂→0 as the graph grows — so a
+   uniform floor claim would be FALSE for graphs already used elsewhere in
+   this repo if stated without this qualification. Any future "mass gap"
+   framing (in the Yang-Mills sense) must stay `[Dr]` with this disclaimer
+   attached explicitly; a two-agent internal review (2026-07-05) rejected
+   an earlier, unqualified version of this framing for exactly this reason.
+   The tractable, currently-open sub-parts (a monotone "floor never drops
+   under retention" fact, and a qualitative "λ₂>0 iff connected" theorem)
+   are believed low-to-moderate risk and are queued separately, distinct
+   from this named uniform-bound gap.
+9. **[named: OB-RG-FIXED-POINT]** Does iterated 2:1 block coarse-graining
+   of a retention-grown graph (both field values and topology) converge to
+   a universal limiting structure independent of the starting seed —  a
+   discrete analogue of an RG fixed point / universality class? The
+   coarse-graining map itself is not yet defined for this repo's own
+   graphs, let alone proven to have a fixed point; the recommended next
+   step is a numerical probe (grow several seeds, coarse-grain repeatedly,
+   compare resulting degree/curvature distributions) before any theorem
+   attempt, not a proof attempt directly.
 
 ---
 
