@@ -49,7 +49,8 @@ COQFILES = \
 	formal/InfoCutGrowth.v \
 	formal/InfoModeWeights.v \
 	formal/InfoBackReaction.v \
-	formal/InfoShiftAverage.v
+	formal/InfoShiftAverage.v \
+	formal/InfoConeInheritance.v
 
 verify:
 	@set -e; \

@@ -1498,13 +1498,29 @@ initial-data families are genuinely distinct (split of `1.00`, matching
 the ~1-unit acceptance criterion), not a lattice or observer artifact.
 Both runs and the exact reproduction recipe are pinned in
 `scripts/price_tail.py`, with a passing pytest in
-`scripts/test_reproduce.py`. **What is still open, honestly:** the
-causality currency of this bridge — that Schwarzschild dynamics is
-covered by this project's own Tier-0 causal-cone theorem, not merely
-imported at `+reals` — depends on a file (`InfoConeInheritance.v`) that
-has been described but not yet delivered to this repo for independent
-verification; until it is compiled and its hash checked here, that
-currency is reported, not confirmed. *Generatively*, no: the profile `V(r)` is written in by hand
+`scripts/test_reproduce.py`. **The causality currency is also now
+independently verified**: `InfoConeInheritance.v` (3 theorems,
+axiom-free) proves that a single leapfrog step of the mother equation's
+own linear sector, taken over an ARBITRARY list of edges and an
+ARBITRARY per-node coefficient field `m` (no sign or shape assumed), is
+one-step-local — `shift_blind_step` (the result at a node is a function
+purely of that node's own previous value and its edge-neighbors' current
+values), `step_domain_of_dependence` (perturbing a node that shares no
+edge with `i` cannot change the result at `i`), and `step_path_local_stencil`
+(specialized to a path graph — the radial/1D case this bridge actually
+needs — an interior node's next value depends only on
+`prev(i), curr(i−1), curr(i), curr(i+1)`). Because `m` is universally
+quantified, ANY nonnegative coefficient field — including a
+Regge-Wheeler-shaped `V(r_i)` evaluated from the already-verified
+Schwarzschild lift — automatically inherits all three facts as an
+instance; this is a definitional weld, and nothing about Schwarzschild is
+assumed or referenced inside `InfoConeInheritance.v` itself. **All four
+bridge currencies (values, causality, spectrum, shadow) are therefore now
+independently verified in this repo**, not merely reported: values at
+`+reals` (`InfoAnalysisLift.v`), causality at `Th_coqc`
+(`InfoConeInheritance.v`), spectrum at `finite_diagnostic`
+(`verify_quantum_gravity_root_bridge.py`), and shadow at
+`finite_diagnostic` (`price_tail.py`). *Generatively*, no: the profile `V(r)` is written in by hand
 (imported from `f=1-2M/r` via `InfoAnalysisLift.v`), not grown by the
 substrate's own dynamics — the open question is whether a bound energy
 lump in this kernel can PRODUCE a `~1/r`-shaped long-range mass profile on

@@ -123,10 +123,29 @@ def main():
         slopes_mom.append(s)
         print(f"  window [{lo},{hi}]: local slope = {s:.2f}")
 
+    split = abs(slopes_ts[-1] - slopes_mom[-1])
     print(f"\nT1 acceptance check: |slope_ts - slope_mom| at last window "
-          f"= {abs(slopes_ts[-1] - slopes_mom[-1]):.2f} "
+          f"= {split:.2f} "
           f"(expect ~1 if families are genuinely distinct; if both ~ -8, "
           f"escalate per handoff SS6-T1 rather than reporting a pinned exponent)")
+
+    ts_in_family = all(-8.5 < s < -7.5 for s in slopes_ts)
+    mom_in_family = all(-7.5 < s < -6.5 for s in slopes_mom)
+    steepening = slopes_ts[-1] <= slopes_ts[0] + 0.3
+    split_ok = 0.7 < split < 1.3
+    ok = ts_in_family and mom_in_family and steepening and split_ok
+
+    print()
+    if ok:
+        print("PASS: time-symmetric tail in the -8 family (steepening, not "
+              "approaching -7), momentum-type control in the classic -7 "
+              "family, family split ~1 unit -- T1 acceptance test satisfied.")
+    else:
+        print("FAIL: one or more acceptance conditions not met -- "
+              f"ts_in_family={ts_in_family} mom_in_family={mom_in_family} "
+              f"steepening={steepening} split_ok={split_ok}. "
+              "Escalate per HANDOFF_SW_BRIDGE.md SS6-T1 rather than "
+              "reporting a pinned exponent.")
 
 
 if __name__ == "__main__":

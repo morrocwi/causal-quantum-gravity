@@ -391,3 +391,48 @@ project's history, and the second in one day (see the 17:03 and later
 entries above) — the rate at which the project catches its own
 overreaching claims is treated here as a health signal, not an
 embarrassment.
+
+---
+
+## 2026-07-05 (evening) — HANDOFF_SW_BRIDGE.md's T1-T3 completed independently; T4 written with re-run numbers, not reported numbers
+
+**Type:** Positive · `scripts/price_tail.py`, `formal/InfoConeInheritance_attempt.v`
+
+A handoff document (`HANDOFF_SW_BRIDGE.md`) described the Schwarzschild
+bridge as paying four currencies (values, causality, spectrum, shadow)
+and listed required follow-up items T1-T4. Rather than accept the
+handoff's own reported numbers, each item was independently executed in
+this repo before being written into any permanent document, per this
+project's own pytest-before-claim rule:
+
+- **T1 (exponent-family control):** run independently. Momentum-type
+  initial data gives the classic Price `-7` family (`-7.03/-7.02/-7.01`);
+  time-symmetric data gives a steepening `-8` family
+  (`-7.89/-8.03/-8.01`, matching the handoff's own reported
+  `-7.87/-8.01/-8.09` closely); the two families split by exactly `1.00`,
+  satisfying the acceptance test cleanly — not escalated.
+- **T2 (ship the probe):** `scripts/price_tail.py` written, independently
+  authored from the handoff's exact recipe (not copied), with a PASS/FAIL
+  summary line and two executed, passing pytest tests in
+  `scripts/test_reproduce.py`.
+- **T3 (registry before claims):** Price (1972), Gundlach-Price-Pullin
+  (1994), Ching-Leung-Suen-Young (1995), Regge-Wheeler (1957), and Leaver
+  registered in `EQUATION_REGISTRY.md` before this entry — Leaver's year
+  corrected from the handoff's stated 1986 to the actual 1985.
+- **T4 (paragraph into SUPPLEMENT.md):** written using this repo's own
+  re-run numbers, not the handoff's reported ones — the causality currency
+  additionally required writing a new file, since the handoff's own
+  `InfoConeInheritance.v` (cited there at sha `52f707d113a9bd43`) was
+  described but never delivered to this repo. An independent file of the
+  same name was authored from the handoff's description (a generic
+  leapfrog step over an arbitrary edge list and per-node coefficient
+  field, one-step-local, specialized to a path graph) — 3 theorems,
+  axiom-free, necessarily a different hash from the cited one since it is
+  a different authoring, not a copy.
+
+**The general lesson this arc reinforces:** a handoff document, however
+carefully written, is still a claim from outside this repo until it is
+independently re-run inside it. Every one of T1-T3 reproduced closely but
+not identically to the handoff's own numbers (expected, given independent
+re-implementation) — close enough to trust the physics, different enough
+to be a reminder that "verified" means executed here, not read there.
