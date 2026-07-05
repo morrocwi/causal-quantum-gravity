@@ -1359,7 +1359,21 @@ not externally verified.
     below the noise floor (the concrete next step above still stands),
     but it does rule out one specific candidate explanation — that a
     better, order-aware observable would reveal it — narrowing, not
-    widening, the space of remaining hypotheses.
+    widening, the space of remaining hypotheses. **Methodological caveat,
+    found by independent review and disclosed rather than buried:** the
+    kicks driving this probe are i.i.d. Gaussian draws, so the input
+    already carries no temporal correlation before shuffling, and a
+    LINEAR system (this probe's own conservative sector) driven by i.i.d.
+    noise is generically expected to give shuffle-invariant time-averaged
+    energy regardless of whether genuine lump-lump coupling exists. The
+    literal conclusion (this specific observable does not distinguish
+    shuffled from unshuffled kicks) stands, but the analogy to TEST 2 is
+    weaker than first presented: TEST 2's order-memory effect came from
+    retention DECISIONS, a genuinely path-dependent nonlinear process,
+    not from a linear system driven by white noise, which has no
+    comparable mechanism to be path-dependent at all. Read this result as
+    ruling out one specific, cheap explanation, not as a faithful re-run
+    of TEST 2's mechanism in a new setting.
 13. **[named: OB-QUANTUM-GEOMETRY]** Untouched — no file, no probe, not
     even a prior attempt to state it precisely. Named here specifically
     because a gap that has never been named is the one most likely to be
