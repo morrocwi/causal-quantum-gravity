@@ -79,7 +79,7 @@ scripts/
   verify_quantum_gravity_root_bridge.py   Finite-graph (PML) quasinormal-mode eigenvalue solver; converges to the literature Schwarzschild QNM. finite_diagnostic.
 ```
 
-35 Coq files, 196 theorems, every one Tier-0 axiom-free or +reals as marked.
+35 Coq files, 188 theorems, every one Tier-0 axiom-free or +reals as marked.
 
 ## How to reproduce
 
@@ -169,7 +169,7 @@ Removes all `.vo`/`.vok`/`.vos`/`.glob`/`.aux` build artifacts.
 ## Provenance
 
 This repository is an extracted, minimal, standalone subset of a private
-research repository — flattened into 17 independent `formal/*.v` files (each
+research repository — flattened into 35 independent `formal/*.v` files (each
 carrying only the definitions its own theorems actually use, trimmed from
 larger source modules) plus one Python script, copied verbatim. Nothing was
 renamed or altered beyond: dropping the `_attempt` suffix some source files

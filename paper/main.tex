@@ -67,10 +67,10 @@ Dynamics and a Discrete Causal Signature}}
     arbitrary dimension. A further eleven files add a discrete disk-before-lock
     analog, close a seed-to-spectral-ceiling chain, bridge to an algebraic
     track (curvature-Noether invariance, a rotation-matrix identity, a
-    golden-ratio-adjacent pentagon spectrum), a graph-native area law and a
+    golden-ratio-adjacent pentagon spectrum), a graph-native boundary-energy fact and a
     degree-curvature bound, a general tensor-reconstruction fact with a
     curvature bridge conditional on one stated hypothesis, and a momentum-
-    optimizer/kernel-energy identification. All told: 35 Coq files, 196
+    optimizer/kernel-energy identification. All told: 35 Coq files, 188
     theorems, every one machine-checked. Every claim below is accompanied by
     its tier, its exact source theorem, and a reproduction command.
     \end{abstract}
@@ -339,6 +339,14 @@ is the algebraic core of norm-preserving first-order evolution --- the $i\hbar
 \partial_t\psi=H\psi$ skeleton without $i$, without $\mathbb{C}$, without $\sqrt{\ }$.
 (One of the five, \texttt{green\_identity}, is a helper lemma re-proved inside this
 file so it checks standalone, not a fifth headline result beyond the four above.)
+This "without $i$" skew-adjoint skeleton is a separate, weaker claim than
+\S\ref{sec:algebra}'s later, narrower observation that the mother equation's
+own stepper matrix literally IS the standard $i$-rotation matrix at one
+specific stability-window parameter value: that later claim never invokes
+$\mathbb{C}$ or Hilbert-space structure either, and is scoped to a single
+real $2\times2$ matrix identity, not to the Schr\"odinger-shaped skeleton
+above. The two do not conflict, but should not be read as reinforcing each
+other without this note.
 
 \textbf{Causal signature (\texttt{InfoCausalSignature.v}, 7 theorems).} \S\ref{sec:sr} disclosed
 that $\mathrm{sgn}$ is a free parameter. This file proves a sign function can instead
@@ -596,7 +604,7 @@ neither of which is claimed to be.
 Three results connect the curvature/growth track to a separately-developed
 algebraic track (complex roots of unity, the golden ratio) via concrete
 shared objects, not analogy. \texttt{InfoCurvatureNoether.v}
-(7~theorems, \texttt{Th\_coqc}) proves Forman curvature is invariant under
+(3~theorems, \texttt{Th\_coqc}) proves Forman curvature is invariant under
 any graph automorphism with a correspondingly permuted edge list, extending
 an existing Noether-style invariance result (proved there only for the
 Laplacian-built quadratic form) to curvature specifically for the first
@@ -622,7 +630,7 @@ above) via explicit rational eigenvectors --- the 6-cycle is, in this
 precise sense, the last cycle whose full spectrum stays rational; the
 5-cycle is the first whose spectrum leaves $\mathbb{Q}$.
 
-\section{A Graph-Native Area Law and a Degree-Curvature Bound}
+\section{A Graph-Native Boundary-Energy Fact and a Degree-Curvature Bound}
 \label{sec:arealaw}
 Two small, self-contained results, explicitly not claimed as more than what
 they state. \texttt{InfoAreaLaw.v} (3~theorems, \texttt{Th\_coqc}) proves
@@ -633,16 +641,20 @@ shares a qualitative flavor with the Bekenstein--Hawking holographic bound
 (``boundary determines the budget, not the interior'') but is not that
 bound and makes no claim about entropy, metric area, or general relativity;
 sharing a qualitative flavor is not sharing a theorem.
-\texttt{InfoDegreeFromCurvature.v} (4~theorems, \texttt{Th\_coqc}) proves a
+\texttt{InfoDegreeFromCurvature.v} (2~theorems, \texttt{Th\_coqc}) proves a
 node's degree is bounded by $4$ minus the local Forman curvature of any
 incident edge, and, given a curvature floor over a graph, that the maximum
 degree is bounded by $4$ minus that floor --- a purely combinatorial fact
 usable to feed the spectral ceiling of \S\ref{sec:campaign} with a
-curvature-derived value.
+curvature-derived value. Stated plainly: given the file's own definition
+\texttt{forman(e) := 4 - deg(u) - deg(v)}, the local bound is an immediate
+one-line rearrangement (equivalent to non-negativity of degree); the
+contribution is packaging this as a directly-usable input to the spectral
+ceiling, not a deep new fact about curvature.
 
 \section{General Tensor Reconstruction and a Conditional Curvature Bridge}
 \label{sec:tensorframe}
-\texttt{InfoTensorFrame.v} (8~theorems, \texttt{Th\_coqc}, division-free
+\texttt{InfoTensorFrame.v} (7~theorems, \texttt{Th\_coqc}, division-free
 over $\mathbb{Q}$) proves a general, dimension-independent linear-algebra
 fact: a symmetric bilinear form on an $n$-dimensional space is fully and
 uniquely reconstructible from its $n$ axis (diagonal) evaluations plus its
@@ -650,11 +662,16 @@ $\binom{n}{2}$ face-diagonal evaluations, via the polarization identity ---
 the counting identity $2n+n(n-1)=n(n+1)$ confirms no slack in any
 dimension, and in $4$D, $4$ axes $+$ $6$ face-diagonals $=10$ matches a
 rank-2 symmetric tensor's component count exactly. This is stated plainly
-as an \emph{abstract} fact: it does not by itself establish that any graph
-actually used elsewhere in this work contains face-diagonal edges (the
-$n$-D ladder of \S\ref{sec:nd} uses axis-aligned edges only).
+as an \emph{abstract} linear-algebra fact, deliberately not identified with
+general relativity's metric or stress-energy tensor: no metric signature,
+no coordinate transformation law, and no field equation is claimed or used
+here, and the fact holds for a symmetric bilinear form on \emph{any}
+$n$-dimensional $\mathbb{Q}$-vector space, gravitational or not. It also
+does not by itself establish that any graph actually used elsewhere in this
+work contains face-diagonal edges (the $n$-D ladder of \S\ref{sec:nd} uses
+axis-aligned edges only).
 
-\texttt{InfoStrainTensorBridge.v} (12~theorems, \texttt{Th\_coqc}) connects
+\texttt{InfoStrainTensorBridge.v} (11~theorems, \texttt{Th\_coqc}) connects
 this to curvature on a stated condition: on a $2{\times}2$ graph cell with a
 diagonal candidate edge, the strain on that edge equals the tensor-frame
 diagonal evaluation \emph{exactly when the cell is affine} (no discrete
@@ -677,7 +694,7 @@ derivation of the Einstein equation \cite{jacobson1995}; it is a small,
 honestly-tiered fragment sharing a qualitative shape with one step of that
 program, explicitly not the program itself.
 
-\section{Momentum Optimizer Theory Is the Kernel's Energy Theory}
+\section{Momentum Optimizer Theory Coincides With the Kernel's Energy Theory on a Quadratic Mode}
 \label{sec:optimizer}
 \texttt{InfoOptimizerWindow.v} (10~theorems, \texttt{Th\_coqc}, division-free
 over $\mathbb{Q}$) shows the classical heavy-ball/momentum iteration on a
@@ -746,6 +763,24 @@ here. The growth result is offered only as a native discrete analog of expansion
 with an honestly bounded scope (power-law dilution only; no de Sitter behavior found;
 topology-dependent, not universal).
 
+\noindent\textit{Does the boundary-energy fact (\S\ref{sec:arealaw}) establish a
+holographic entropy bound?} No. It shares a qualitative flavor with the
+Bekenstein--Hawking bound (boundary determines the budget, not the interior) but
+proves a purely combinatorial fact about a quadratic energy form on a graph ---
+no entropy, no metric area, and no general-relativistic structure appears in the
+statement or the proof.
+
+\noindent\textit{Does \S\ref{sec:tensorframe}'s tensor-reconstruction fact
+establish anything about physical tensors (metric, stress-energy), and is the
+curvature bridge to it unconditional?} No on both counts. The reconstruction
+fact is an abstract linear-algebra identity holding for any symmetric bilinear
+form on any $n$-dimensional $\mathbb{Q}$-vector space; it is not applied to, or
+claimed to be, general relativity's metric or stress-energy tensor. The
+curvature bridge (\texttt{diagonal\_retention\_prices\_tensor}) holds only on
+the stated affine-cell hypothesis; for a non-affine cell an explicitly disclosed
+defect term must be carried, and this is not an unconditional closure of any
+kind.
+
 \section{Novelty Audit}
 \label{sec:novelty}
 The individual mathematics throughout --- Gershgorin/Rayleigh bounds, leapfrog
@@ -764,6 +799,17 @@ Combinatorial Quantum Gravity \cite{trugenberger2017}), and one instance of
 well-established qualitative folklore given a specific proved form here for the
 first time as far as this check found (the order-collapse theorem,
 \S\ref{sec:growth}, cf.\ causal set theory \cite{surya2019}).
+
+\textbf{Scope limit, stated plainly.} This literature check covers only
+\S\ref{sec:action}--\ref{sec:growth}. The eleven files and six sections added
+later (\S\ref{sec:disklock}--\ref{sec:optimizer}) have NOT been through an
+equivalent dedicated check and their novelty is therefore \emph{unaudited}:
+several of their individual ingredients are flagged in-line as classical or
+adjacent to known results (the crystallographic restriction theorem cited as
+prior literature in \S\ref{sec:algebra}; the Bekenstein--Hawking qualitative
+resemblance disclaimed in \S\ref{sec:arealaw}; the polarization identity
+underlying \S\ref{sec:tensorframe}), but no systematic search for close prior
+art was performed for these sections as a whole.
 
 The claimed contribution is therefore narrower than "new physics" and is stated
 at that level: a single graph operator carrying genuine (not aliased) derivations
@@ -788,7 +834,7 @@ quasinormal-mode bridge (\S\ref{sec:qnm}), the strengthening campaign
 and curvature-horizon structure (\S\ref{sec:action}), the $n$-D spectral ladder
 (\S\ref{sec:nd}), the disk-before-lock analog (\S\ref{sec:disklock}), the
 seed-to-ceiling closure (\S\ref{sec:seedchain}), the algebraic bridges
-(\S\ref{sec:algebra}), the area law and degree-curvature bound
+(\S\ref{sec:algebra}), the boundary-energy fact and degree-curvature bound
 (\S\ref{sec:arealaw}), the tensor-reconstruction and conditional curvature
 bridge (\S\ref{sec:tensorframe}), the momentum-optimizer identification
 (\S\ref{sec:optimizer}), the reviewer attack response
@@ -813,7 +859,7 @@ argument trail, including dead ends, needs the supplement as well.
 \item \texttt{git clone} this repository.
 \item \texttt{make verify} --- compiles all 35 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (196 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
+theorem (188 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
 file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
@@ -838,6 +884,14 @@ which growth topologies are physically relevant, or is topology-dependence the f
 answer?
 (5) Does \S\ref{sec:campaign}'s Noether pairing admit a principled dissipative
 correction, or is exact conservation strictly a conservative-sector fact?
+(6) Discharge, or find a counterexample to, the pre-existing,
+direction-undecidable axiom relating an internal oscillation period to mass
+that \S\ref{sec:seedchain} leaves untouched --- the seed-to-ceiling chain is
+gap-free only up to this axiom.
+(7) Derive, rather than disclose as input data, the anisotropy hypothesis of
+\S\ref{sec:disklock} (which edges count as ``perpendicular'' vs.\ ``parallel''
+and why) from a more primitive graph property, so the disk-before-lock result
+no longer depends on an externally-supplied classification.
 
 \section{Conclusion}
 One graph-Laplacian root equation genuinely derives, and genuinely unifies, a
@@ -868,7 +922,7 @@ separately-built algebraic track via concrete shared objects (an
 automorphism-invariance extension, a literal identity between the mother
 equation's own stepper matrix and the standard $i$-rotation matrix, and a
 pentagon-graph spectrum landing in the same field as the golden ratio); a
-graph-native area law and a degree-curvature bound, each explicitly scoped
+graph-native boundary-energy fact and a degree-curvature bound, each explicitly scoped
 against the physical results (holographic entropy, general relativity) they
 share only a qualitative flavor with, not a theorem; a general tensor-
 reconstruction fact and a curvature bridge to it that is conditional on one
