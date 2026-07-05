@@ -1433,7 +1433,15 @@ decorative.
 Every `finite_diagnostic` numerical claim in §12.2 and in the named
 open-problem ledger (§12 items 7, 8, 11) now has a checked-in, runnable
 script in `research_universal_solver/scripts/`, so a reader can re-run
-these rather than trust the prose. Honest status of each, not glossed:
+these rather than trust the prose. **As of this entry, every claim below
+also has a pytest assertion**, not just a runnable script — `pytest
+scripts/test_reproduce.py` in `research_universal_solver` covers the five
+`probe_*.py`-backed claims, and `pytest scripts/test_reproduce.py` in
+`causal-quantum-gravity` covers the QNM frequency claim (SS13's
+Schwarzschild addendum) — both suites were run and confirmed passing
+before this entry was written, per this project's standing rule that no
+numerical claim enters this document without an actual, executed test.
+Honest status of each, not glossed:
 
 | Claim | Script | Status |
 |---|---|---|
@@ -1472,11 +1480,17 @@ INSTANCE of the mother equation's own class — the same node-level equation
 with a specific mass profile `m(i)=V(r_i)` built from the imported
 Schwarzschild lift, its causal structure inherited from the same theorem
 family as every other instance, and its Regge-Wheeler form on this
-project's own lattice reproduces both the literature quasinormal-mode
-frequency and the late-time Price power-law tail numerically
-(`finite_diagnostic`). This is real and, as far as this project's own
-literature search shows, without precedent in a discrete-gravity
-programme. *Generatively*, no: the profile `V(r)` is written in by hand
+project's own lattice reproduces the literature quasinormal-mode
+frequency numerically (`finite_diagnostic`, independently re-run:
+`M·ω=0.4838−0.0958i` at N=1600 vs. the literature target
+`0.4836−0.0968i`, `|diff|≈0.001` — matches
+`scripts/verify_quantum_gravity_root_bridge.py`'s own claim). **A
+late-time Price power-law tail was also reported this session, but is NOT
+yet independently reproduced** — no script for it exists in this repo as
+of this entry; it is recorded here as an unverified claim, not a
+confirmed result, until a checked-in reproduce script exists (this
+project's own standing rule: no numerical claim enters this document
+without one). *Generatively*, no: the profile `V(r)` is written in by hand
 (imported from `f=1-2M/r` via `InfoAnalysisLift.v`), not grown by the
 substrate's own dynamics — the open question is whether a bound energy
 lump in this kernel can PRODUCE a `~1/r`-shaped long-range mass profile on
