@@ -41,7 +41,10 @@ COQFILES = \
 	formal/InfoStrainTensorBridge.v \
 	formal/InfoOptimizerWindow.v \
 	formal/InfoEntropyLicense.v \
-	formal/InfoBoundaryScreening.v
+	formal/InfoBoundaryScreening.v \
+	formal/InfoCubicLinearization.v \
+	formal/InfoReadabilityBoundary.v \
+	formal/InfoSpectralCeilingSharp.v
 
 verify:
 	@set -e; \

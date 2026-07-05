@@ -88,11 +88,16 @@ formal/
   InfoTensorFrame.v                   General symmetric-tensor reconstruction from diagonal + face-diagonal evaluations, any dimension -- an abstract fact, not yet about this repo's own graphs. Th_coqc.
   InfoStrainTensorBridge.v            Connects curvature to the tensor-reconstruction fact, conditional on an affine-cell hypothesis; also a native local-screen split and a disclosed-ansatz Clausius-type inequality. Th_coqc.
   InfoOptimizerWindow.v               Heavy-ball/momentum optimization on a quadratic mode is exactly the mother equation's own leapfrog energy theory, under an exact reparametrization. Th_coqc.
+  InfoEntropyLicense.v                Degree recast as a per-node entropy quantity; handshake identity, append-only monotonicity, and an entropy-language frequency ceiling. Th_coqc.
+  InfoBoundaryScreening.v             A region's exterior is invisible to interior field changes off the boundary; capacity and boundary-node count kept as separate, non-equal quantities. Th_coqc.
+  InfoCubicLinearization.v            First file to give the mother equation's nabla-V(Phi) slot a concrete nonzero instance; exact one-step polarization of an on-site cubic force term. Th_coqc.
+  InfoReadabilityBoundary.v           No rational stepper parameter gives the 5th-iterate period-5 case; one further instance in the crystallographic-restriction family, explicitly not the general theorem. Th_coqc.
+  InfoSpectralCeilingSharp.v          The Anderson-Morley eigenvalue ceiling, mechanized in witness form: lambda <= 4-F_min directly, a factor sqrt(2) tighter than the earlier 2*dmax route. Th_coqc.
 scripts/
   verify_quantum_gravity_root_bridge.py   Finite-graph (PML) quasinormal-mode eigenvalue solver; converges to the literature Schwarzschild QNM. finite_diagnostic.
 ```
 
-35 Coq files, 188 theorems, every one Tier-0 axiom-free or +reals as marked.
+40 Coq files, 186 theorems, every one Tier-0 axiom-free or +reals as marked.
 
 ## How to reproduce
 
@@ -156,6 +161,11 @@ and prints a `PASS`/`FAIL` summary. Expected per-file result:
 | `InfoTensorFrame.v` | `Closed under the global context` |
 | `InfoStrainTensorBridge.v` | `Closed under the global context` |
 | `InfoOptimizerWindow.v` | `Closed under the global context` |
+| `InfoEntropyLicense.v` | `Closed under the global context` |
+| `InfoBoundaryScreening.v` | `Closed under the global context` |
+| `InfoCubicLinearization.v` | `Closed under the global context` |
+| `InfoReadabilityBoundary.v` | `Closed under the global context` |
+| `InfoSpectralCeilingSharp.v` | `Closed under the global context` |
 | `InfoAnalysisLift.v` | `ClassicalDedekindReals.sig_forall_dec`, `FunctionalExtensionality.functional_extensionality_dep` |
 | `InfoQuantumGravityRootBridge.v` | same two Reals axioms as above |
 | `InfoLorentzContinuum.v` | same two Reals axioms as above |

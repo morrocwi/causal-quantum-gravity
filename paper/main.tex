@@ -82,7 +82,7 @@ Dynamics and a Discrete Causal Signature}}
     (information confined to a region's strict interior cannot reach a fixed
     exterior weighting), each explicitly scoped against holographic or
     general-relativistic over-reading. All told:
-    37 Coq files, 199 theorems, every one machine-checked. Every claim below
+    40 Coq files, 186 theorems, every one machine-checked. Every claim below
     is accompanied by its tier, its exact source theorem, and a reproduction
     command.
     \end{abstract}
@@ -734,12 +734,25 @@ is a genuine, checkable consequence of results already established above, not
 a new file; the companion note carries the full derivation, literature
 positioning, and a 21-file SHA-256-pinned artifact table.
 
-The degree bound of \S\ref{sec:arealaw} ($d_{\max}\le4-F_{\min}$,
-\texttt{InfoDegreeFromCurvature.v}) composes directly with the spectral
-ceiling of \S\ref{sec:campaign} ($\omega^2\le(K/M)\,2d_{\max}$,
-\texttt{InfoSpectralCeiling.v}) to give
+The Anderson--Morley eigenvalue ceiling (Anderson \& Morley, 1985) is now
+mechanized directly, in witness form over $\mathbb{Q}$
+(\texttt{InfoSpectralCeilingSharp.v}, 2~theorems plus 4~supporting lemmas,
+all \texttt{Th\_coqc}; \texttt{anderson\_morley\_witness}):
+for any exact eigenpair, some edge $(u,v)$ satisfies
+$\lvert\lambda\rvert\le\deg_E(u)+\deg_E(v)$, proved by taking the edge
+maximizing $\lvert x_u-x_v\rvert$ and comparing the eigen-equation at its two
+endpoints directly --- no edge-space Gershgorin matrix, no division. Composed
+with the exact identity $\deg_E(u)+\deg_E(v)=4-F(e)$
+(\texttt{InfoDegreeFromCurvature.v}) under a curvature floor, this gives the
+\emph{sharp} curvature ceiling directly
+(\texttt{sharp\_curvature\_ceiling}), $\lambda\le4-F_{\min}$ --- a factor
+$\sqrt2$ tighter, at the frequency level, than the coarser $2d_{\max}$ route
+this manuscript mechanized earlier (\S\ref{sec:campaign},
+\texttt{InfoSpectralCeiling.v}), which remains correct but is no longer the
+sharpest available bound. The mass ceiling below now uses the sharp form
+throughout:
 \begin{equation}
-\omega_{\mathrm{int}}^2 \;\le\; \frac{2K}{M}\,(4-F_{\min}),
+\omega_{\mathrm{int}}^2 \;\le\; \frac{K}{M}\,(4-F_{\min}),
 \label{eq:massomega}
 \end{equation}
 a direct algebraic substitution of two already-\texttt{Th\_coqc} facts, itself
@@ -752,7 +765,7 @@ the companion note, selected over two explicitly rejected sign-analysis
 alternatives there) --- Eq.~\ref{eq:massomega} becomes a curvature-limited
 mass bound,
 \begin{equation}
-m \;\le\; \frac{\hbar}{2c^2}\sqrt{\frac{2K}{M}\,(4-F_{\min})}.
+m \;\le\; \frac{\hbar}{2c^2}\sqrt{\frac{K}{M}\,(4-F_{\min})}.
 \label{eq:massceilmain}
 \end{equation}
 This bound is \texttt{Th\_coqc} \emph{conditional on} the one imported
@@ -772,7 +785,7 @@ distinction here rather than let the theorem-conditional-on-ansatz framing
 imply more than it does for the localized case, which is exactly the case the
 ``curvature license'' reading below is really about.
 Its contrapositive is the note's sharper claim: mass exceeding the
-$F_{\min}=0$ cap $(\hbar/2c^2)\sqrt{8K/M}$ forces negative curvature
+$F_{\min}=0$ cap $(\hbar/2c^2)\sqrt{4K/M}$ forces negative curvature
 somewhere on the excitation's support --- curvature is not sourced by mass
 here, it is a capacity mass requires, the reverse of general relativity's
 habitual direction of explanation, and inherits both caveats above. Both the
@@ -846,6 +859,50 @@ cut-edge count, stated for completeness with a one-line proof) are
 graph-native names chosen for readability, not physical identifications, in
 the same spirit as \S\ref{sec:arealaw}'s explicit disclaimer that a
 qualitative resemblance to the Bekenstein--Hawking bound is not that bound.
+
+\section{Opening the Nonlinear Sector, and a Readability-Boundary Instance}
+\label{sec:cubicreadability}
+Two further small results, one opening genuinely new ground for this
+kernel, one closing one more instance of an existing algebraic-restriction
+story.
+
+\texttt{InfoCubicLinearization.v} (6~theorems, \texttt{Th\_coqc},
+division-free over $\mathbb{Q}$) is the first file in this arc to give the
+mother equation's $\nabla V(\Phi)$ slot a concrete, nonzero, mechanized
+instance: every prior result in this manuscript works in the conservative,
+purely quadratic sector ($\nabla V=0$). Adding a single on-site cubic term
+$-g\Phi^3$ (from $V(\Phi)=(g/4)\Phi^4$) to the existing linear force, the
+file proves the exact one-step polarization identity for the force
+difference under a field perturbation, extracts the linear-order
+coefficient shift $q(i):=3g\,\Phi(i)^2$ that the perturbation acquires from
+the background, and its sign ($q\ge0$ for $g\ge0$, strictly positive on the
+background's support for $g>0$). What is \emph{not} claimed, stated in the
+file's own header: any time-averaging or homogenization step (the passage
+from a pointwise coefficient shift to an effective-medium mass reading),
+and any propagation or spectral consequence --- those remain explicitly
+disclosed, not mechanized. A companion numerical probe (not part of this
+manuscript's own claim set, reported in the project's supplementary
+material) found that locking energy into a zero-group-velocity mode of a
+region measurably slows a passing low-frequency packet only when $g\ne0$
+(a linear, $g=0$ control shows no effect, consistent with superposition);
+this is offered as motivation for why the $\nabla V$ term matters, not as
+something this file itself establishes.
+
+\texttt{InfoReadabilityBoundary.v} (3~theorems, \texttt{Th\_coqc}, plus one
+worked example and one small composing remark) proves that
+no rational parameter of \S\ref{sec:algebra}'s stepper matrix makes its
+5th iterate the identity: the relevant polynomial factors exactly as
+$-(a^2{-}5a{+}5)(a^2{-}3a{+}1)$ (an exact ring identity), and both
+quadratic factors have discriminant~5, so a rational root would force a
+rational square root of 5 --- proved impossible from scratch via integer
+descent. This is one further instance in the same family as
+\S\ref{sec:algebra}'s periods 3, 4, and 6, but is stated narrowly: it does
+\emph{not} establish that $\{1,2,3,4,6\}$ is the complete set of rational
+periods reachable by this stepper, which would require the general
+crystallographic restriction theorem (cited as literature, not mechanized
+here) --- an earlier, broader draft of this result was reviewed, found not
+to follow from the rest, and dropped rather than weakened into an
+inaccurate statement.
 
 \section{Reviewer Attack Response}
 \label{sec:attack}

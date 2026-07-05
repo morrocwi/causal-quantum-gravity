@@ -56,7 +56,7 @@ identification. On this base we assemble the mass chain
 retention $\to$ degree $\to$ curvature $\to$ internal-frequency ceiling
 $\to$ $\tau_c$ $\to$ $m$, with exactly one disclosed identification
 ($\tau_c = 1/\omega_{\mathrm{int}}$), yielding a curvature-limited mass bound
-$m \le (\hbar/2c^2)\sqrt{(2K/M)(4-F_{\min})}$ whose contrapositive states that
+$m \le (\hbar/2c^2)\sqrt{(K/M)(4-F_{\min})}$ whose contrapositive states that
 sufficiently large mass \emph{forces} negative combinatorial curvature. We then read
 special and general relativity as the economics of retained distinctions ---
 no universal reader, congestion of local update budgets, geometry as ledger --- and
@@ -67,7 +67,14 @@ from theorems throughout; the axiomatic basis is stated explicitly, the assembly
 audited for circularity, and the open remainder is enumerated by name. Nothing in this
 note claims a derivation of the Einstein field equations; what is claimed is a
 theorem-anchored precursor with every non-theorem joint disclosed.
-\end{abstract}
+\end{abstract} A three-channel probe sharpens this reading decisively: extra wiring or
+stiffness alone gives the \emph{wrong} (repulsive) sign; only energy loading ---
+inertia --- slows local update. The attraction sign therefore lives in the
+inertia channel, whose linearized core is kernel-checked
+(\code{InfoCubicLinearization.v}, SHA-256 prefix \code{4df87c1dd7f531e8}, six
+closed checks: a background field shifts the first-order operator by exactly
+$3g\psi^2$ pointwise); time-averaging to an effective medium is the disclosed
+remaining step.
 
 \noindent\textbf{Keywords:} retained distinction; machine-checked proof (Coq);
 discrete gravity; Forman curvature; spectral ceiling; mass; holographic screen;
@@ -123,7 +130,7 @@ the \Dr{} dictionary. Everything below rests on (i)--(vi) and nothing else.
 
 \paragraph{Contributions.} Against that basis, the note's claims to novelty are
 four, stated offensively here and defended in Sections~\ref{sec:circ}--\ref{sec:open}:
-\emph{(C1)}~the epistemic standard --- nineteen Tier-0 files, $151$ kernel-closed
+\emph{(C1)}~the epistemic standard --- twenty Tier-0 files, $155$ kernel-closed
 checks: to our knowledge the first machine-checked kernel in any discrete-gravity
 programme, where competing programmes argue in prose (machine-checked
 \emph{continuum} relativity does exist --- axiomatic Minkowski spacetime in
@@ -195,7 +202,7 @@ this note claims against it, tagged. Full citations in the text of this section.
 \node[th]  (GC) at (5.9,2.1)   {growth $\to$\\curvature\\C47/C55};
 \node[th]  (CB) at (5.9,0.4)   {strain $\rightleftharpoons$\\curvature\\C49};
 \node[th]  (DY) at (5.9,-1.9)  {dynamics\\$\Sigma\mathrm{div}=0$\\C42/C43};
-\node[th]  (CE) at (9.3,2.9)   {$\omega$ ceiling\\C41/C56};
+\node[th]  (CE) at (9.3,2.9)   {$\omega$ ceiling\\C41/C56 + A--M};
 \node[th]  (TF) at (9.3,0.85)  {tensor frame\\C57+bridge};
 \node[th]  (SC) at (9.3,-0.9)  {screen +\\Clausius};
 \node[tone](RO) at (9.3,-2.9)  {readout\\$(au')'$ C51--53};
@@ -426,7 +433,10 @@ $(\lambda,x)$ obeys $\lambda \le 2 d_{\max}$, hence every internal mode frequenc
 $\omega^2 \le (K/M)\,2 d_{\max}$ (\code{rayleigh\_ceiling},
 \code{mode\_product\_ceiling}), with the stability window $a\in[0,4]$
 (\code{step\_ratio\_window}) as corollary --- the
-Courant--Friedrichs--Lewy condition \cite{cfl} in kernel form.
+Courant--Friedrichs--Lewy condition \cite{cfl} in kernel form. The sharp
+Anderson--Morley edge form --- $\lambda \le \deg u + \deg v$ at a witness edge,
+hence $\lambda \le 4 - F_{\min}$ --- is mechanized in
+\code{InfoSpectralCeilingSharp.v}.
 
 \paragraph{Tensor frame (C57).} In every dimension $n$ the axis directions plus the
 face diagonals number exactly $\dim \mathrm{Sym}^2 = n(n+1)/2$
@@ -493,11 +503,14 @@ random graphs.)
 \begin{theorem}[Frequency ceiling, monotone in retention]\label{th:link3}
 \Thq{} Every internal mode obeys $\omega_{\mathrm{int}}^2 \le (K/M)\,2 d_{\max}$;
 under retention the degree data and the attained Rayleigh levels are monotone
-non-decreasing. Combining with \eqref{eq:dmax},
+non-decreasing. The sharp Anderson--Morley form is mechanized directly
+(\code{InfoSpectralCeilingSharp.v}, \code{am\_forman\_ceiling}): every exact
+eigenpair with a nonconstant edge difference obeys
 \begin{equation}
-\omega_{\mathrm{int}}^2 \;\le\; \frac{2K}{M}\,\bigl(4 - F_{\min}\bigr).
+\omega_{\mathrm{int}}^2 \;\le\; \frac{K}{M}\,\bigl(4 - F_{\min}\bigr),
 \label{eq:omceil}
 \end{equation}
+sharpening the $2d_{\max}$ route by the factor two.
 \end{theorem}
 
 \begin{ansatz}[Branch C: the internal clock]\label{an:C}
@@ -541,29 +554,32 @@ graph's edges,
 \begin{equation}
 \boxed{\;
 m \;\le\; \frac{\hbar}{2c^2}\,
-\sqrt{\frac{2K}{M}\,\bigl(4 - F_{\min}\bigr)}\;}
+\sqrt{\frac{K}{M}\,\bigl(4 - F_{\min}\bigr)}\;}
 \label{eq:massceil}
 \end{equation}
 \end{proposition}
 
-Numerically, over $200$ random graphs the bound \eqref{eq:massceil} was never violated
-and the scaling is tight in practice: the correlation between
-$\omega_{\max}^2$ and $4-F_{\min}$ across the ensemble is $+0.98$.
+Numerically, over $300$ random graphs the sharp bound \eqref{eq:massceil} was
+never violated --- nor was the argmax-edge Gershgorin step of its proof --- and the
+scaling is tight in practice: the correlation between $\omega_{\max}^2$ and
+$4-F_{\min}$ across a $200$-graph ensemble is $+0.98$.
 For approximately localized modes, the restriction of the bound to the support
 subgraph is at present a numerical statement (the diagnostic mode carries $99\%$ of
 its weight on the dense cluster), not a kernel theorem; we tag it so.
 We record the equation's owner: the underlying spectral inequality is classical ---
 Anderson and Morley \cite{andersonmorley} prove
 $\lambda_{\max} \le \max_{(u,v)\in E}(\deg u+\deg v)$, which under the Forman
-relabel is exactly $\lambda_{\max} \le 4 - F_{\min}$ and would tighten
-\eqref{eq:massceil} by $\sqrt{2}$. The kernel currently mechanizes the coarser
-$2d_{\max}$ route; mechanizing the Anderson--Morley form is a named upgrade. What is
-ours is the mechanization, the retention-monotone composition, and the mass reading
---- not the inequality.
+relabel is exactly $\lambda_{\max} \le 4 - F_{\min}$. That sharp form is now
+mechanized over exact rationals in witness form
+(\code{InfoSpectralCeilingSharp.v}, SHA-256 prefix \code{1f478ed777172de3},
+six closed checks) by a maximizing-edge argument that needs no edge operator;
+the ceiling used throughout this note is the sharp one. Ownership is unchanged: the inequality is
+Anderson--Morley's; the mechanization over $\mathbb{Q}$, the retention-monotone
+composition, and the mass reading are this programme's.
 
 \begin{corollary}[Mass forces curvature]\label{cor:forces}
 If $m$ exceeds the flat-region cap
-$(\hbar/2c^2)\sqrt{8K/M}$ (obtained at $F_{\min}=0$), then $F_{\min}<0$ somewhere on
+$(\hbar/2c^2)\sqrt{4K/M}$ (obtained at $F_{\min}=0$), then $F_{\min}<0$ somewhere on
 its support: sufficiently heavy excitations \emph{cannot exist} without negative
 combinatorial curvature. Curvature is not sourced by mass here; it is the license
 mass requires.
@@ -893,14 +909,16 @@ File & Tag & Contents (selected) & Checks & SHA-256 prefix (16 hex)\\
 \code{InfoDegreeFromCurvature.v} & --- & endpoint degree cap from $F_{\min}$ & 4 & \code{8f52dc775f13a2c8}\\
 \code{InfoModeRotation.v} & --- & window stepper is the $i$-rotation; periods $4,6,3$ & 8 & \code{624372fe5c2ab73e}\\
 \code{InfoPentagonSpectrum.v} & --- & $C_5$ golden cubic; $C_6$ rational spectrum & 5 & \code{ab4ff5b6b1599994}\\
+\code{InfoSpectralCeilingSharp.v} & --- & Anderson--Morley edge ceiling; sharp mass cap & 6 & \code{1f478ed777172de3}\\
 \midrule
-\multicolumn{3}{@{}l}{Totals: nineteen Tier-0 files, $151$ closed checks; two \Tone{} files, $6$ checks} & $157$ & \\
+\multicolumn{3}{@{}l}{Totals: twenty Tier-0 files, $157$ closed checks; two \Tone{} files, $6$ checks} & $163$ & \\
 \bottomrule
 \end{tabularx}
 \caption{Artifact inventory --- authoritative copies at
 \code{formal/} of \url{https://github.com/morrocwi/causal-quantum-gravity};
 SHA-256 prefixes (first 16 of 64 hex characters) computed on the repository
-files at commit \code{49945bd71b05}. Each file is standalone; each compiled
+files at commit \code{49945bd71b05}; the sharp-ceiling file postdates the pinned
+commit, its hash is of the delivered source, pending synchronization. Each file is standalone; each compiled
 under \code{coqc}~8.18.0 with exit status~0. ``Checks'' counts \code{Print Assumptions}
 blocks; Tier-0 blocks all report \emph{Closed under the global context}; \Tone{}
 blocks report exactly \code{sig\_forall\_dec} and functional extensionality, with no
@@ -959,7 +977,10 @@ author, and every machine-checked claim is independently confirmable by the
 maintained at \url{https://github.com/morrocwi/causal-quantum-gravity}
 (\code{formal/}, commit \code{49945bd71b05}, with \code{Makefile} and reproduction
 commands), constitute the
-artifact and reproduce every machine-checked claim in this note offline.
+artifact and reproduce every machine-checked claim in this note offline. Every
+commit is additionally re-verified end-to-end by continuous integration
+(\code{make verify} on GitHub Actions); the badge, not this table, is the
+authoritative live count.
 
 \begin{thebibliography}{99}\small
 \bibitem{jacobson} T.~Jacobson. Thermodynamics of spacetime: the Einstein equation of

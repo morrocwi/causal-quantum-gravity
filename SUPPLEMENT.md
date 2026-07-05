@@ -1340,6 +1340,23 @@ cylinder exercise, §12.1) that the completeness-audit method itself works
 itself the kind of evidence this project treats as meaningful rather than
 decorative.
 
+## 12.3 Reproducibility status of every numerical probe cited above
+
+Every `finite_diagnostic` numerical claim in §12.2 and in the named
+open-problem ledger (§12 items 7, 8, 11) now has a checked-in, runnable
+script in `research_universal_solver/scripts/`, so a reader can re-run
+these rather than trust the prose. Honest status of each, not glossed:
+
+| Claim | Script | Status |
+|---|---|---|
+| Heat equilibration: `t_half·λ₂=ln2` (tail), and the naive-definition counterexample | `probe_heat_equilibration.py` | **Reproduces exactly** (ratio `1.0000` at `k=1,2,4`; naive definition gives `0.04`-`0.05`, confirming the caveat) |
+| Galileo equal-fall = linearity corollary | `probe_galileo_linearity.py` | **Reproduces exactly** (`a/x` ratio identical to floating-point precision across amplitudes `1, 3, 10`) |
+| Series/parallel = screen-capacity composition | `probe_circuit_screening.py` | **Reproduces exactly** (`R=2.000000`, `R=0.500000`, Kirchhoff residual `5.6e-16`) |
+| Gravity-sign three-channel test (§12 item 11) | `probe_gravity_sign_channels.py` | **Qualitatively confirms** (chords/stiffness wrong-signed, inertia correct-signed, all three reproduce independently) — exact percentages differ from the originally-reported `27%/15%/23%`, expected since this is an independent reconstruction of the method, not the original code |
+| Ramanujan-graph expander quality (§12 item 8) | `probe_ramanujan_expander_quality.py` | **Does NOT reproduce** — this reconstruction found grown graphs are an equal-or-better expander than random in 4/5 seeds tested, the OPPOSITE of the originally-reported `q≈1.63` (grown, worse) vs. `q≈1.23` (random, better). Flagged as an open, unresolved discrepancy — NOT silently tuned to match, and NOT treated as a refutation of the original finding either, since the exact retention-growth rule and random-graph construction used here are an independent guess at the described method, not the original code. Whoever revisits `OB-EXPANDER` should treat this specific sub-claim as unconfirmed until either script is checked against the other's exact parameters. |
+| OB-ENTROPY-BRIDGE cumulative-ratio probe | `probe_entropy_bridge.py` | **Inconclusive by design flaw**, already disclosed at first use: default parameters allow too few retention events (1-5 over 600 steps) for the ratio to be a fair test either way; not yet rerun with corrected parameters |
+| Effective-inertia mode-locking probe (§12 item 11 mechanism demo) | *(no script checked in yet)* | **Not yet reproduced independently** — reported numbers (`+3.4%` linear control, `+32.5%/+47.3%/+69.1%` at increasing mode amplitude) have no corresponding script in this repo as of this entry; add one before citing these numbers as settled |
+
 ---
 
 ## References — every external equation used in this journal, by branch
