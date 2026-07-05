@@ -1332,7 +1332,34 @@ not externally verified.
     push the paired-slope noise floor down) before concluding either a
     genuine null or a genuine power law — this round's run is not long
     enough to distinguish "no signal" from "signal below current
-    sensitivity."
+    sensitivity." **A philosophy-driven follow-up check (worked example
+    of this project's own `philosophy-driven-research-loop` skill) asked
+    a narrower, cheaper question before recommending more raw
+    integration time: is the corridor-energy observable even
+    order-sensitive?** SS12 item 13 TEST 2 (order-memory) established
+    that this kernel's field robustly retains ORDER information even
+    when a coarser readout (curvature) is blind to it — corridor energy
+    (a time-and-node-averaged squared displacement) is exactly that kind
+    of coarse, potentially order-blind summary statistic. Tested directly
+    (`research_universal_solver/scripts/probe_twolump_order_sensitivity.py`,
+    `finite_diagnostic`): for the same seed and separation, corridor
+    energy computed from the original kick sequence versus the identical
+    kicks with TIME ORDER randomly permuted differ by an amount
+    statistically indistinguishable from ordinary seed-to-seed variance
+    (shuffle-std/across-seed-std ratio `1.02–1.14` across `d=6,14,22`,
+    8 seeds, 8 shuffles each — a ratio near 1 means shuffling perturbs
+    the reading by about as much as drawing a fresh independent seed
+    would, i.e. no extra penalty for destroying temporal order).
+    **The hypothesis that an order-sensitive reframing was hiding a
+    cleaner signal is REFUTED, not confirmed** — recorded as a genuine
+    negative result, not discarded: corridor energy is order-INSENSITIVE,
+    consistent with (and a candidate partial explanation for) why its raw
+    signal is dominated by aggregate noise statistics rather than
+    structure. This does not rule out a real long-range channel existing
+    below the noise floor (the concrete next step above still stands),
+    but it does rule out one specific candidate explanation — that a
+    better, order-aware observable would reveal it — narrowing, not
+    widening, the space of remaining hypotheses.
 13. **[named: OB-QUANTUM-GEOMETRY]** Untouched — no file, no probe, not
     even a prior attempt to state it precisely. Named here specifically
     because a gap that has never been named is the one most likely to be
