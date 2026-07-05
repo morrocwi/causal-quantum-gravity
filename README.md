@@ -182,7 +182,7 @@ Removes all `.vo`/`.vok`/`.vos`/`.glob`/`.aux` build artifacts.
 ## Provenance
 
 This repository is an extracted, minimal, standalone subset of a private
-research repository — flattened into 35 independent `formal/*.v` files (each
+research repository, `research_universal_solver` — flattened into 35 independent `formal/*.v` files (each
 carrying only the definitions its own theorems actually use, trimmed from
 larger source modules) plus one Python script, copied verbatim. Nothing was
 renamed or altered beyond: dropping the `_attempt` suffix some source files
@@ -195,6 +195,12 @@ context. Original authorship dates, by file:
 | `InfoLorentz.v`, `InfoLorentzContinuum.v`, `InfoLorentzInvariance.v` | 2026-06-27 |
 | `RDL_GammaSpectral.v`, `InfoCoercivityBoundedClosure.v`, `InfoDiscreteGraphCurvature.v`, `InfoSchrodinger.v`, `InfoAnalysisLift.v`, `InfoQuantumGravityRootBridge.v`, `InfoQuantumRelativityUnification.v`, `scripts/verify_quantum_gravity_root_bridge.py` | 2026-07-04 / 2026-07-05 |
 | `InfoSpectralCeiling.v`, `InfoRecurrenceEnergy.v`, `InfoQuantumFrequencyCeiling.v`, `InfoGraphFluxBalance.v`, `InfoCompanionSkew.v`, `InfoCausalSignature.v`, `InfoGraphNoether.v`, `InfoGraphGrowth.v`, `InfoActionStationarity.v`, `InfoCurvatureBalance.v`, `InfoProductSpectrum.v`, `InfoContinuumLimit_nD.v`, `InfoWeightedReadout.v`, `InfoCrossTermDominance.v`, `InfoDiskBeforeLock.v`, `InfoGrowthFold.v`, `InfoCeilingMonotone.v`, `InfoCurvatureNoether.v`, `InfoModeRotation.v`, `InfoPentagonSpectrum.v`, `InfoAreaLaw.v`, `InfoDegreeFromCurvature.v`, `InfoTensorFrame.v`, `InfoStrainTensorBridge.v`, `InfoOptimizerWindow.v` | 2026-07-05 |
+| `InfoEntropyLicense.v`, `InfoBoundaryScreening.v` | 2026-07-05 |
+
+Every citation to outside literature in this repository (Forman, Bekenstein,
+Jacobson, etc.) should already be registered, with owner and year, in
+`research_universal_solver`'s `docs/root/EQUATION_REGISTRY.md` — that file, not
+memory, is the canonical source if you need to add or verify a citation.
 
 See [SUPPLEMENT.md](SUPPLEMENT.md) for the full narrative, the dependency DAG, the
 numerical validation (Hückel benzene, Forman curvature sanity checks), the

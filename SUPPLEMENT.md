@@ -1077,6 +1077,80 @@ not externally verified.
    step is a numerical probe (grow several seeds, coarse-grain repeatedly,
    compare resulting degree/curvature distributions) before any theorem
    attempt, not a proof attempt directly.
+10. **[named: OB-TIE-MANIFOLD]** Three independent threads, found on
+    different days, all point at the same set without yet being shown to
+    be the same set: the exact-tie boundary of the retention balance
+    (`strain == b`, where the iff `retain(e) ⟺ strain≤b` is undecided) is
+    (i) the sole channel through which the equivariance no-go (queued,
+    Item 3's symmetry-breaking discussion) permits symmetry loss, (ii) the
+    natural candidate for where `clausius_form`'s inequality saturates to
+    an equality (the "reversible" sector of this project's own Clausius
+    relation, structurally the only place `T` could be read off cleanly
+    rather than merely bounded), and (iii) a candidate "lossless conversion
+    channel" in the sense of static friction converting translation to
+    rotation without burning energy (a rolling-without-slipping analogy):
+    inscribing a distinction exactly at the tie costs no *excess*
+    dissipation. Whether these three are one fact or three coincidentally
+    adjacent facts is open and unexamined; the cheap next step is checking
+    whether the tie set from (i)'s no-go counterexample construction is
+    literally the same set as (ii)'s equality-saturation set on a concrete
+    graph, before assuming they coincide.
+
+## 12.1 A method for finding open problems, not just open problems
+
+A worked classical-mechanics exercise (rolling cylinder vs. hollow cylinder
+down an incline, solved by energy conservation, `v=ωR` the rolling-without-
+slipping lock) was used as a test case for extracting a general "what to
+hunt for" checklist, on the theory that the exercise's OWN solution
+structure — a dimensionless ratio (`β:=I/MR²`) deciding the outcome while
+`M`, `R`, `g` all cancel — is a pattern this project's own theorems should
+be re-read for, not just accumulated. Four hunting categories, each with a
+named target already present in this project:
+
+- **Dimensionless invariants hiding inside a free-parameter theorem.**
+  Any Th-tier result stated with free parameters (`K`, `M`, `ħ`, `s0`, ...)
+  should be re-read for the ratio that survives when they're eliminated —
+  this is what "comparative, not absolute" already means for the mass
+  ceiling (§masschain), and the same reading applies to `α/β` (the
+  cosmological-constant ratio, §holo), `λ_max/λ₂` (once a floor exists —
+  a single number that is simultaneously "mass window width," a numerical
+  condition number, and the momentum-optimizer convergence rate, per the
+  composition noted under OB-EXPANDER above), and the ceiling-saturation
+  ratio `ω²M/(2K·dmax)` (the existing `+0.98` correlation in the mass-bound
+  numerics, §mass, is a hint this ratio may itself be structurally close
+  to 1, which would itself be a prediction, not just an observation).
+- **Saturation manifolds — the surface where an inequality becomes an
+  equality is where a named classical theory already lives.** The rolling
+  problem is solved on the surface `dE/dt=0` (no slipping, no heat
+  generated — energy conservation, the equality case of this project's own
+  dissipation inequality). By the same reading: the Clausius relation's
+  equality case is the reversible-thermodynamics sector; ceiling
+  saturation is where extremal (heaviest-supportable) modes actually live;
+  floor saturation (once it exists) is the Fiedler-mode boundary of
+  connectivity itself. A one-page map of "which named classical theory
+  lives on which saturation surface of this project's own inequalities" is
+  a cheap, high-value writeup once OB-EXPANDER's floor exists.
+- **Locks — conditions that collapse two free quantities into one fixed
+  ratio.** `v=ωR` is what makes the rolling problem solvable at all. This
+  project already has several: the CFL condition (`dt`↔`d_max`), the
+  balance-law stationarity itself (`strain`↔`benefit`), the handshake
+  identity (`Σdeg`↔`2·count`), and Ansatz C (`τ_c`↔`ω`, still a posited
+  lock, not a derived one). `InfoCutGrowth.v` (queued, the Jacobson-import
+  joint) is itself a candidate for a NEW lock — a horizon-growth "no-slip
+  condition" tying cut growth to boundary flux.
+- **Testing for hidden debt by translating canonical textbook problems.**
+  The rolling-cylinder translation pointed back at an OPEN problem this
+  project already names (the inertia-cost law) rather than manufacturing a
+  new one — offered as light evidence (one data point, not a proof) that
+  this project's Open-Problems list is not silently incomplete relative to
+  classical mechanics. Suggested as a standing, cheap completeness check:
+  translate one canonical problem at a time (a pendulum; a Kepler/inverse-
+  square orbit — the riskiest one, since no long-range force exists
+  anywhere in this kernel, so it will point either at joint D's weak-field
+  dictionary or expose a genuinely new debt; a Carnot cycle — expected to
+  land exactly on OB-ENTROPY-BRIDGE; a two-slit/two-state setup — expected
+  to land on the separately-developed quantum/URCF layer) and record
+  whether each one points at an existing named gap or forces a new one.
 
 ---
 
