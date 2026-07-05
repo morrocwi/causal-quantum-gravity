@@ -70,9 +70,15 @@ Dynamics and a Discrete Causal Signature}}
     golden-ratio-adjacent pentagon spectrum), a graph-native boundary-energy fact and a
     degree-curvature bound, a general tensor-reconstruction fact with a
     curvature bridge conditional on one stated hypothesis, and a momentum-
-    optimizer/kernel-energy identification. All told: 35 Coq files, 188
-    theorems, every one machine-checked. Every claim below is accompanied by
-    its tier, its exact source theorem, and a reproduction command.
+    optimizer/kernel-energy identification. We further compose several of these
+    theorems --- none individually about mass --- into a curvature-limited
+    mass bound conditional on a single disclosed, non-theorem identification,
+    whose contrapositive states that sufficiently large mass forces negative
+    combinatorial curvature; a companion synthesis note included as a
+    supplement gives the full derivation and literature positioning. All told:
+    35 Coq files, 188 theorems, every one machine-checked. Every claim below
+    is accompanied by its tier, its exact source theorem, and a reproduction
+    command.
     \end{abstract}
 
     \textbf{Keywords:} discrete quantum gravity; graph Laplacian; retained-readout
@@ -709,6 +715,68 @@ no spectral computation or run-time tuning, inside the classical stability
 window. Divergence outside that window, convergence rates, and anything
 about non-quadratic objectives are explicitly not claimed.
 
+\section{A Composed Reading: Curvature-Limited Mass}
+\label{sec:masschain}
+A companion synthesis note (\texttt{paper/mass\_note.tex} in this repository,
+also independently authored by the present author, cross-checked against this
+repository at the exact commit this manuscript itself was built from) composes
+several of the theorems above --- none of them individually about mass --- into
+a mass chain: retention $\to$ degree $\to$ curvature $\to$ an internal-mode
+frequency ceiling $\to$ mass, through exactly one disclosed, non-theorem
+identification. We state the composition here at main-text weight because it
+is a genuine, checkable consequence of results already established above, not
+a new file; the companion note carries the full derivation, literature
+positioning, and a 21-file SHA-256-pinned artifact table.
+
+The degree bound of \S\ref{sec:arealaw} ($d_{\max}\le4-F_{\min}$,
+\texttt{InfoDegreeFromCurvature.v}) composes directly with the spectral
+ceiling of \S\ref{sec:campaign} ($\omega^2\le(K/M)\,2d_{\max}$,
+\texttt{InfoSpectralCeiling.v}) to give
+\begin{equation}
+\omega_{\mathrm{int}}^2 \;\le\; \frac{2K}{M}\,(4-F_{\min}),
+\label{eq:massomega}
+\end{equation}
+a direct algebraic substitution of two already-\texttt{Th\_coqc} facts, itself
+\texttt{Th\_coqc} (no additional Coq file needed: both inputs are theorems,
+and the composition is one inequality chain). Given exactly one imported,
+disclosed identification --- $\tau_c:=1/\omega_{\mathrm{int}}$ together with
+the programme's own mass--clock postulate $m=\hbar/(2\tau_c c^2)$ (a
+programme postulate, not a published result, tagged \texttt{[AX/import]} in
+the companion note, selected over two explicitly rejected sign-analysis
+alternatives there) --- Eq.~\ref{eq:massomega} becomes a curvature-limited
+mass bound,
+\begin{equation}
+m \;\le\; \frac{\hbar}{2c^2}\sqrt{\frac{2K}{M}\,(4-F_{\min})}.
+\label{eq:massceilmain}
+\end{equation}
+This bound is \texttt{Th\_coqc} \emph{conditional on} the one imported
+identification, and holds as stated \emph{for any excitation that is an exact
+mode of the graph carrying it}: the inequality it rearranges is fully
+mechanized, but Eq.~\ref{eq:massceilmain} itself is not a standalone Coq
+theorem (no \texttt{Print Assumptions} block asserts it directly) --- it is
+the companion note's own arithmetic on top of \eqref{eq:massomega}, disclosed
+as such there. A second, independent caveat applies to the physically
+motivating case of an \emph{approximately localized} excitation restricted to
+a support subgraph rather than an exact mode of the whole graph: the
+companion note states plainly that this restriction is, at present, only a
+numerical finding (a diagnostic mode carrying 99\% of its weight on a dense
+cluster across an ensemble of random graphs), \texttt{finite\_diagnostic}, not
+a kernel theorem even granting the ansatz above --- and we repeat that
+distinction here rather than let the theorem-conditional-on-ansatz framing
+imply more than it does for the localized case, which is exactly the case the
+``curvature license'' reading below is really about.
+Its contrapositive is the note's sharper claim: mass exceeding the
+$F_{\min}=0$ cap $(\hbar/2c^2)\sqrt{8K/M}$ forces negative curvature
+somewhere on the excitation's support --- curvature is not sourced by mass
+here, it is a capacity mass requires, the reverse of general relativity's
+habitual direction of explanation, and inherits both caveats above. Both the
+bound and its contrapositive additionally inherit a disclosed dependence on
+whether Forman curvature deserves the name at all --- the same open question
+already carried by this manuscript's Open Problem~3 (\S\ref{sec:open}) and
+named \textsc{ob-forman-ricci} in the companion note --- neither claim is
+stronger than that dependence allows, and the companion note states this
+explicitly rather than eliding it.
+
 \section{Reviewer Attack Response}
 \label{sec:attack}
 This section pre-empts questions an adversarial referee will ask, following an
@@ -781,6 +849,22 @@ the stated affine-cell hypothesis; for a non-affine cell an explicitly disclosed
 defect term must be carried, and this is not an unconditional closure of any
 kind.
 
+\noindent\textit{Is the curvature-limited mass bound (\S\ref{sec:masschain})
+itself a Coq theorem?} No, and this manuscript says so directly. The
+inequality it algebraically rearranges (Eq.~\ref{eq:massomega}) is a direct
+composition of two already-mechanized theorems and is itself \texttt{Th\_coqc};
+the mass bound (Eq.~\ref{eq:massceilmain}) additionally depends on one
+imported, non-theorem identification ($\tau_c:=1/\omega_{\mathrm{int}}$ plus
+the imported mass--clock relation), so it is conditional, not unconditional
+\texttt{Th\_coqc} --- exactly as labeled. No new Coq file mechanizes
+Eq.~\ref{eq:massceilmain} as a single theorem. A second, lower-tier caveat
+applies specifically to localized (particle-like) excitations restricted to a
+support subgraph rather than an exact whole-graph mode: that restriction is
+currently only a numerical (\texttt{finite\_diagnostic}) finding, not a
+theorem, even granting the ansatz above --- stated in \S\ref{sec:masschain}
+and repeated here because it is precisely the case the mass narrative is
+about.
+
 \section{Novelty Audit}
 \label{sec:novelty}
 The individual mathematics throughout --- Gershgorin/Rayleigh bounds, leapfrog
@@ -809,7 +893,13 @@ adjacent to known results (the crystallographic restriction theorem cited as
 prior literature in \S\ref{sec:algebra}; the Bekenstein--Hawking qualitative
 resemblance disclaimed in \S\ref{sec:arealaw}; the polarization identity
 underlying \S\ref{sec:tensorframe}), but no systematic search for close prior
-art was performed for these sections as a whole.
+art was performed for these sections as a whole. \S\ref{sec:masschain}'s
+composed mass reading is a partial exception: the companion synthesis note
+that develops it independently positions each constituent equation against
+ten literature streams by owner and states its own search protocol for the
+narrower claim that no prior discrete-gravity programme possesses a
+machine-checked kernel of any size; that audit is the companion note's own
+and is not re-performed or independently re-verified here.
 
 The claimed contribution is therefore narrower than "new physics" and is stated
 at that level: a single graph operator carrying genuine (not aliased) derivations
@@ -837,8 +927,24 @@ seed-to-ceiling closure (\S\ref{sec:seedchain}), the algebraic bridges
 (\S\ref{sec:algebra}), the boundary-energy fact and degree-curvature bound
 (\S\ref{sec:arealaw}), the tensor-reconstruction and conditional curvature
 bridge (\S\ref{sec:tensorframe}), the momentum-optimizer identification
-(\S\ref{sec:optimizer}), the reviewer attack response
+(\S\ref{sec:optimizer}), the composed curvature-limited mass reading
+(\S\ref{sec:masschain}), the reviewer attack response
 (\S\ref{sec:attack}), and the reproduction commands.
+
+The companion synthesis note (\texttt{paper/mass\_note.tex}, compiling to
+\texttt{paper/mass\_note.pdf}) is a separate, self-contained preprint by the
+same author, included here as a supplement because it is built directly on
+this repository's own theorems at this manuscript's own commit; it carries
+its own abstract, literature review (ten streams, positioned individually),
+circularity audit, and open-problem register, and should be read as a
+companion document, not as part of this manuscript's own claim set. Where the
+two overlap (\S\ref{sec:masschain} above), this manuscript's statement is the
+authoritative one for this repository's own claim set; it is not, on every
+point, strictly narrower than the companion note's --- \S\ref{sec:masschain}
+now carries both of the companion note's caveats on the mass bound (the
+ansatz dependence and the separate localization-to-support-subgraph caveat)
+precisely so this manuscript is not less conservative than the note it
+summarizes.
 
 The companion supplement (\texttt{SUPPLEMENT.md}) is responsible for material
 this manuscript summarizes but does not reproduce in full: the complete
@@ -892,6 +998,10 @@ gap-free only up to this axiom.
 \S\ref{sec:disklock} (which edges count as ``perpendicular'' vs.\ ``parallel''
 and why) from a more primitive graph property, so the disk-before-lock result
 no longer depends on an externally-supplied classification.
+(8) Prove or refute an inertia cost law (cost of re-addressing the internal
+loop of \S\ref{sec:masschain} scales as $\propto m$ under acceleration); the
+companion synthesis note states this is currently unproven, not merely
+uncited, and flags it as its own furthest interpretive claim.
 
 \section{Conclusion}
 One graph-Laplacian root equation genuinely derives, and genuinely unifies, a

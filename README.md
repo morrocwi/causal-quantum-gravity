@@ -25,6 +25,15 @@ theorem-level claims, tiers, and reproduction commands, self-contained.
 eight-attempt GR refutation log, the full novelty audit, and the extended
 reference-verification trail. See the manuscript's "Main-Text vs. Supplement
 Boundary" section for what belongs where.
+**Companion synthesis note:** [paper/mass_note.pdf](paper/mass_note.pdf)
+(compile from `paper/mass_note.tex`) — a separate, self-contained preprint by
+the same author composing several of this repository's theorems (none
+individually about mass) into a curvature-limited mass bound, with its own
+ten-stream literature review, circularity audit, and open-problem register,
+pinned to this repository's own SHA-256 hashes at a specific commit. The
+main manuscript's `\S`"A Composed Reading: Curvature-Limited Mass" states the
+overlapping claim at main-text weight and is the authoritative, narrower
+version where the two differ.
 
 ## Tier legend
 
