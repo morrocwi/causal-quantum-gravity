@@ -1270,6 +1270,25 @@ not externally verified.
     magnitude claim — reproducibility across seeds is necessary but not
     sufficient to rule out a systematic (non-cancelling, nonlinear
     dressing) artifact.
+13. **[named: OB-QUANTUM-GEOMETRY]** Untouched — no file, no probe, not
+    even a prior attempt to state it precisely. Named here specifically
+    because a gap that has never been named is the one most likely to be
+    silently overclaimed later: after §13's completeness scoreboard
+    established that this project unifies quantum mechanics and general
+    relativity only at the level of one equation admitting two exact
+    readings (dispersion and wave), a natural next question is what
+    happens to that equation's own GEOMETRY side under superposition or
+    fluctuation — i.e., is there any sense in which the retention pattern
+    itself (not a field living on top of a fixed pattern) can be treated
+    quantum-mechanically? This project's existing ledger-wave content
+    (item 12's ideas, and the ordinary sense in which a field on a graph
+    fluctuates) is entirely CLASSICAL: a perturbation of a fixed pattern.
+    A genuine quantum-geometry statement would need an amplitude over the
+    CONFIGURATION SPACE of retention patterns themselves (a graviton-like
+    object), and this kernel currently has no vocabulary to even write
+    that statement down, let alone prove or probe it — this is a frontier
+    question, not an engineering backlog item, and should not be
+    confused with one.
 
 ## 12.1 A method for finding open problems, not just open problems
 
@@ -1615,6 +1634,48 @@ incompleteness decomposes into exactly the six items above, not into an
 unbounded fog.* Knowing precisely what is missing, rather than only
 knowing that something is missing, is what distinguishes this document
 from a manifesto.
+
+## 14. The Unification Claim Card — a permanent boundary statement
+
+This card exists so the word "unification" has one fixed, quotable
+meaning in this project, checked against on every future revision rather
+than re-negotiated in conversation each time. It was written the same day
+this project caught itself drifting toward "quantum GR" language twice in
+one exchange — the card is the fix, not a one-off correction.
+
+**Claimed.** One equation, two exact readings: quantum dispersion is
+identically the relativistic wave operator (`Th_coqc`,
+`InfoQuantumRelativityUnification.v`). The Schwarzschild sector is
+supported as a complete four-currency bridge — values (`+reals`),
+causality (`Th_coqc`, `InfoConeInheritance.v`), spectrum
+(`finite_diagnostic`, QNM), shadow (`finite_diagnostic`, Price tail) — a
+bridge, not a derivation, per this project's own razor (§13).
+
+**Explicitly NOT claimed, stated so a reader never has to infer it:**
+
+- Derivation of quantum mechanics' probabilistic structure. No Born rule,
+  no measurement postulate, no entanglement. `InfoModeWeights.v`'s
+  Plancherel identity on the 6-cycle is ONE instance of a quadratic-form
+  shape, not a general theory of anything.
+- Derivation of Einstein's field equations. Jacobson's 1995 conclusion is
+  imported by deliberate razor (this project's own choice, motivated by
+  eight refuted direct-derivation attempts, §5.2), not derived.
+- **Any quantization of geometry itself.** `OB-QUANTUM-GEOMETRY` (§12 item
+  13) is untouched — no file, no probe, not even a precise statement
+  exists yet of what a quantum-superposed retention pattern would mean.
+  This project has never produced, and does not claim to have produced,
+  anything resembling a graviton, a wavefunction over geometries, or a
+  quantized metric.
+- The generative side of gravity. `OB-LONG-RANGE` (§12 item 12): whether
+  the substrate can grow a long-range `~1/r`-shaped mass profile unaided
+  remains open; the Schwarzschild bridge above uses an imported profile.
+
+**Standing falsification invitation, added as its own target in
+`AUDIT_BRIEF.md`:** anyone who can show this project's own prose,
+anywhere in this document, the companion note, or a public statement,
+trading on a claim that belongs in the NOT-claimed list above — treat
+that as a class-C refutation, logged in `LOGBOOK.md` with credit, exactly
+like a refutation of C1-C4.
 
 ---
 
