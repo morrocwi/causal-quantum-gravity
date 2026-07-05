@@ -1356,9 +1356,32 @@ not externally verified.
     this natural scale, THEN a ledger-wave with real frequencies
     exists"), not unconditional; deriving `M_w` from anything else in the
     kernel is itself a new open question this test surfaces rather than
-    closes. Two tests in the same battery (TEST 3, needing redesign per
-    above; a single-flip action quantum `ħ_geom`, and adiabatic
-    breakdown) remain open; per §14's Unification Claim Card, no claim of
+    closes. **TEST 4 (adiabatic breakdown, this project's own "Planck
+    regime" search) was run and gives a precise, richer-than-expected
+    structure** (`scripts/probe_adiabatic_breakdown.py`,
+    `finite_diagnostic`, three executed passing pytest tests): the
+    classicality of a retention decision quietly assumes its evaluation
+    window `W` is much larger than the field's own oscillation period
+    `T_field` — long enough to see a phase-blind, time-averaged strain
+    rather than an instantaneous phase. Measuring the variance, across
+    starting phase, of the window-averaged strain of a driven oscillator,
+    the transition is NOT a single crossover point as naively expected:
+    the variance has EXACT zeros at every half-integer multiple of
+    `T_field` (an analytic property of `sin²`'s own period being half the
+    field's period, verified exactly, not a numerical coincidence),
+    with an envelope between those zeros that decays like `1/W²`
+    (verified: peak variance ratios across `W/T_field=1.25→2.25→3.25`
+    match the `1/W²` prediction to within a few percent). Strongly
+    phase-dependent for `W≲T_field`, negligible (`<10⁻⁶`) by
+    `W≳10·T_field`. **What this does NOT establish:** this locates where
+    the field-sector's own classicality assumption would break down for
+    a driven-oscillator toy model — it says nothing about whether the
+    actual retention dynamics elsewhere in this kernel operates anywhere
+    near this regime in practice, which would need a genuine leapfrog
+    field's own natural frequency compared against its own decision
+    cadence, not asserted from this idealized case. Two items remain in
+    the battery (TEST 3, needing redesign; TEST 5, a single-flip action
+    quantum `ħ_geom`); per §14's Unification Claim Card, no claim of
     quantized geometry is made anywhere in this update.
 
 ## 12.1 A method for finding open problems, not just open problems
