@@ -439,6 +439,18 @@ excitation being described) cannot produce the right family of predictions,
 not just the wrong member of the right family. This ruled out an entire
 class of subsequent attempts that would have fixed `K` the same way.
 
+**Retrospective note added 2026-07-05, after `OB-EFFECTIVE-INERTIA` (§12
+item 11):** a later three-channel gravity-sign probe found that coupling
+retention to stiffness (`K`) gives the WRONG sign of gravitational
+congestion (signals speed up, not slow down, in a `K`-loaded region) — only
+coupling to inertia (`M`) gives the correct sign. This attempt's own
+approach (fixing `K` from lattice-causality) was, in hindsight, reaching
+for the one channel later shown to point the wrong way; this is offered as
+a retroactive, partial explanation for why attempt 2 (above) and this
+attempt both failed on a scaling/sign basis rather than a near-miss basis
+— not a claim that this was understood at the time, and not a claim that
+it fully accounts for either failure.
+
 #### Attempt 5 — Regge-Wheeler as a graph-Laplacian eigenvalue problem, real frequency only
 
 **Hypothesis.** The Regge-Wheeler equation governing black-hole
@@ -1125,6 +1137,51 @@ not externally verified.
     whether the tie set from (i)'s no-go counterexample construction is
     literally the same set as (ii)'s equality-saturation set on a concrete
     graph, before assuming they coincide.
+11. **[named: OB-EFFECTIVE-INERTIA]** A three-channel probe was run to
+    settle which of three ways "retention density" could couple to a
+    passing signal actually gives the physically correct sign (a signal
+    should slow down passing through a dense/well-remembered region, for
+    the congestion reading in Reading 2 to be more than metaphor). The
+    three channels tested separately: retention adding graph CHORDS
+    (topology), retention raising local STIFFNESS (`K`), and retention
+    raising local INERTIA (`M`). **Result: only the inertia channel gives
+    the correct sign.** Adding chords (`+27%` signal speed) and raising
+    stiffness (`+15%` signal speed) both make the region FASTER, not
+    slower — the wrong sign, a repulsive/anti-gravity reading; only
+    loading local inertia (`+23%` slower) gives the correct, attractive-
+    congestion sign.
+    **This is a genuine partial falsification of the existing informal
+    congestion reading and is recorded as such, not softened**: Reading 2
+    (§paper "Congestion") as currently stated does not specify which
+    channel retention acts through, and two of the three plausible
+    readings of it are demonstrably wrong-signed on this substrate. A
+    universe whose retention only ever built wiring density or stiffness,
+    with no coupling to inertia, would have anti-gravity, not gravity, on
+    this kernel's own dynamics. Reading 2 needs a qualifying sentence
+    added at its next revision: the congestion metaphor is licensed only
+    through the inertia channel, not generically through "density."
+    **The same result also strengthens Ansatz C**, not just weakens
+    Reading 2: Ansatz C already reads a densely-retained region's trapped
+    internal-mode energy as mass (`m = ħω_int/2c²`, §mass); this probe
+    shows numerically that mass-loading (raising local `M`) is *also* the
+    one channel that gives gravity the right sign — Ansatz C is now doing
+    double duty (generating mass AND fixing gravity's sign) from the same
+    single identification, which is evidence the identification is doing
+    real work, not merely evidence it explains one thing.
+    **Consequently, this item MERGES with the previously-separate `OPEN`
+    inertia-cost question** (`mass_note.tex`'s "furthest Dr sentence,"
+    cost of re-addressing a busy loop under acceleration ∝ m): both are
+    now read as one theorem viewed from two sides — trapped internal-mode
+    energy acting as effective inertia to a passing signal is exactly the
+    mechanism that would explain both. The concrete closing step: prove
+    that energy trapped in a high-frequency internal mode within a region
+    acts as an effective mass `M_eff` to a low-frequency signal passing
+    through that region (a two-timescale/homogenization argument, or a
+    direct probe: pin a high-`ω` mode in a region, send a low-`ω` packet
+    through, and check whether transit slows WITHOUT `M` being set by
+    hand). Until that closing step, this stays `[Open]`, upgraded from
+    `[Dr]` only in the sense that its two previously-separate open
+    questions are now known to be the same question.
 
 ## 12.1 A method for finding open problems, not just open problems
 
