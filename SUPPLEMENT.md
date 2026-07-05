@@ -1415,6 +1415,33 @@ status this project's own completeness scoreboard (§13) and Unification
 Claim Card (§14) were built to hold. `OB-QUANTUM-GEOMETRY` remains
 `[Open]`.
 
+**Postscript, checked against this project's own information-philosophy
+translator, not asserted from memory:** this battery's five tests were
+written and reported almost entirely in borrowed physics vocabulary
+("quantum," "action," "phase," "amplitude," "oscillation," "adiabatic,"
+"superposition," "graviton," "momentum," "wave") rather than this
+project's own δ_R/information vocabulary. Per the `philosophy-translate`
+skill's own rule ("never paraphrase, always call the function"), each
+term was run through the real `engine.lexicon.translate_to_philosophy`
+function rather than translated by guess. Result, quoted, not
+paraphrased: `action`, `phase`, `amplitude`, `oscillation`, `adiabatic`,
+`superposition`, `graviton`, `momentum`, and `wave` ALL pass through
+**unchanged** — none has an entry in `GLOSSARY`. Only `energy` and
+`geometry` (as substrings) resolve, to definitions this project already
+uses correctly elsewhere: `energy` → `info(x) = ⟨x, L_R x⟩ (R0_ENERGY)`
+(`Th_coqc`), `geometry` → "the shape of the retained-information form
+(⟨x,L_R x⟩ as a metric)" (`Th_coqc`, §space/geometry entry). **This
+sharpens `OB-QUANTUM-GEOMETRY` beyond "no file, no probe" to something
+more precise: this project's own philosophy layer, queried with its own
+real translator, has no word for nine of the eleven concepts a genuine
+quantum-geometry statement would need to be stated in this project's own
+vocabulary at all** — not merely unproven, but unnameable in δ_R terms
+as this repo currently stands. Fixing the prose above to use only
+`GLOSSARY` terms is not attempted here, per the skill's own instruction
+not to invent a translation where none exists; the gap itself, quoted
+from the real function rather than assumed, is the more honest and more
+useful thing to record.
+
 ## 12.1 A method for finding open problems, not just open problems
 
 A worked classical-mechanics exercise (rolling cylinder vs. hollow cylinder
