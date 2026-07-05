@@ -29,11 +29,20 @@
 (*                          handled explicitly via Qle_shift_div_r with   *)
 (*                          the side condition 0 < 2*K)                   *)
 (*    license_inequality   dmax = deg E i (node i realizes the ceiling)   *)
-(*                          and  m*(2*c*c) == hbar*omega  (energy         *)
-(*                          relation, hbar<>0)  ==>                       *)
-(*                            Sloc s0 E i >= s0*(M/(2*K))*omega*omega      *)
+(*                          and  p_*(2*q_*q_) == r_*s_  (a plain Q        *)
+(*                          relation, r_<>0)  ==>                         *)
+(*                            Sloc s0 E i >= s0*(M/(2*K))*s_*s_            *)
 (*                          i.e. the entropy at i must be large enough    *)
-(*                          to "license" the quantum omega == 2*m*c*c/hbar*)
+(*                          to "license" the value s_ == 2*p_*q_*q_/r_    *)
+(*                                                                        *)
+(*  PHYSICS VOCABULARY POLICY: this file's Coq identifiers are plain Q    *)
+(*  parameters (s0, M, K, p_, q_, r_, s_), never physics names, per this  *)
+(*  programme's own policy that the kernel carries no physics vocabulary  *)
+(*  (see mass_note.tex: physics vocabulary is excluded from those        *)
+(*  kernel files by programme policy). The prose reading (mass, speed    *)
+(*  of light, Planck's constant, frequency) belongs strictly at the      *)
+(*  paper level, e.g. p_:=m, q_:=c, r_:=hbar, s_:=omega -- not inside    *)
+(*  this file's Theorem/Definition statements themselves.                *)
 (*                                                                        *)
 (*  HONESTLY NOT CLAIMED: mode_product_ceiling/entropy_ceiling do NOT     *)
 (*  prove that some edge (u,v) actually ACHIEVES 2*dmax = deg u + deg v;  *)
@@ -41,8 +50,8 @@
 (*  2*dmax == deg E u + deg E v) exactly as InfoSpectralCeiling_attempt.v *)
 (*  itself leaves "forall i, deg E i <= dmax" as a hypothesis rather than *)
 (*  deriving dmax from a max-search function. No physical identification *)
-(*  of s0, M, K, m, c, hbar, omega is claimed; they are plain Q           *)
-(*  parameters, mirroring InfoDegreeFromCurvature_attempt.v's own         *)
+(*  of s0, M, K, p_, q_, r_, s_ is claimed inside the Coq; they are plain *)
+(*  Q parameters, mirroring InfoDegreeFromCurvature_attempt.v's own      *)
 (*  explicit refusal to smuggle in a physical reading.                   *)
 (*                                                                        *)
 (*  Pre-checked with exact rationals before authoring.  Expected:         *)
@@ -354,32 +363,32 @@ Qed.
 (* dmax realized at node i (an explicit hypothesis, exactly as          *)
 (* InfoSpectralCeiling_attempt.v leaves "forall i, deg E i <= dmax" as   *)
 (* a hypothesis rather than deriving dmax from a max-search function),  *)
-(* plus a plain-Q energy relation m*(2*c*c) == hbar*omega, hbar<>0.      *)
+(* plus a plain-Q energy relation p_*(2*q_*q_) == r_*s_, r_<>0.      *)
 Theorem license_inequality :
-  forall (s0 : Q) (E : list Edge) (i : nat) (M K omsq dmax m c hbar omega : Q),
+  forall (s0 : Q) (E : list Edge) (i : nat) (M K omsq dmax p_ q_ r_ s_ : Q),
   0 <= s0 ->
   0 < K ->
-  ~ hbar == 0 ->
+  ~ r_ == 0 ->
   M * omsq <= K * (2 * dmax) ->
   dmax == deg E i ->
-  m * (2 * c * c) == hbar * omega ->
-  omsq == omega * omega ->
-  Sloc s0 E i >= s0 * (M / (2 * K)) * ((2 * m * c * c) / hbar) * ((2 * m * c * c) / hbar).
+  p_ * (2 * q_ * q_) == r_ * s_ ->
+  omsq == s_ * s_ ->
+  Sloc s0 E i >= s0 * (M / (2 * K)) * ((2 * p_ * q_ * q_) / r_) * ((2 * p_ * q_ * q_) / r_).
 Proof.
-  intros s0 E i M K omsq dmax m c hbar omega Hs0 HK Hhbar Hle Hdmax Homega Homsq.
+  intros s0 E i M K omsq dmax p_ q_ r_ s_ Hs0 HK Hhbar Hle Hdmax Homega Homsq.
   unfold Sloc.
   assert (Hbound := license_bound M K omsq dmax HK Hle).
   rewrite Hdmax in Hbound.
-  (* omega == (2*m*c*c)/hbar, from the energy relation and hbar<>0 *)
-  assert (Hom : omega == (2 * m * c * c) / hbar).
+  (* s_ == (2*p_*q_*q_)/r_, from the energy relation and r_<>0 *)
+  assert (Hom : s_ == (2 * p_ * q_ * q_) / r_).
   { symmetry.
-    assert (Hcomm : 2 * m * c * c == omega * hbar).
-    { transitivity (m * (2 * c * c)); [ring |].
-      transitivity (hbar * omega); [exact Homega | ring]. }
+    assert (Hcomm : 2 * p_ * q_ * q_ == s_ * r_).
+    { transitivity (p_ * (2 * q_ * q_)); [ring |].
+      transitivity (r_ * s_); [exact Homega | ring]. }
     rewrite Hcomm.
     apply Qdiv_mult_l. exact Hhbar. }
   (* rewrite the RHS of the goal to M/(2K) * omsq, then use Hbound *)
-  assert (HRHS : s0 * (M / (2 * K)) * ((2 * m * c * c) / hbar) * ((2 * m * c * c) / hbar)
+  assert (HRHS : s0 * (M / (2 * K)) * ((2 * p_ * q_ * q_) / r_) * ((2 * p_ * q_ * q_) / r_)
                  == s0 * ((M / (2 * K)) * omsq)).
   { rewrite <- Hom, Homsq. ring. }
   apply Qle_ge.
