@@ -44,7 +44,6 @@
 (* horizon threshold, not the full curved-spacetime field dynamics). All Q.      *)
 (******************************************************************************)
 
-Require URCF_RD_All.
 Require InfoTelegraphCrossover_attempt.
 Require Import Coq.QArith.QArith.
 Require Import Coq.micromega.Lqa.
@@ -53,7 +52,16 @@ Module InfoTelegraphHorizonUnification.
 Import InfoTelegraphCrossover_attempt.InfoTelegraphCrossover.
 Open Scope Q_scope.
 
-Module F := URCF_RD_All.InfoFrontier.
+(* InfoFrontier definitions inlined (standalone; identical to the audited core's
+   InfoFrontier.spine_discr / spine_lambda_c, canon OMEGA_H) *)
+Module F.
+  Open Scope Q_scope.
+  Definition spine_discr (M D K lam : Q) : Q := D*D - (4#1)*M*K*lam.
+  Definition spine_lambda_c (M D K : Q) : Q := (D*D) / ((4#1)*M*K).
+  Theorem spine_lambda_c_char : forall M D K : Q,
+    0 < M -> 0 < K -> (4#1)*M*K*(spine_lambda_c M D K) == D*D.
+  Proof. intros M D K HM HK. unfold spine_lambda_c. field. nra. Qed.
+End F.
 
 (* ------------------------------------------------------------------ *)
 (* (1) the telegraph discriminant IS the spine/horizon discriminant.   *)
