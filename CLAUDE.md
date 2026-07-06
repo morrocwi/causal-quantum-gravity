@@ -14,22 +14,28 @@ left open, documented in full, and the manuscript argues this is the philosophic
 correct outcome, not a numerical shortfall. See `README.md`'s headline paragraphs for
 the actual claims before reading anything else.
 
-## The four documents, and which one to open for what
+## The documents, and which one to open for what
 
-This repo deliberately keeps four documents with non-overlapping roles. Open the
-right one, not all of them:
+This repo deliberately keeps documents with non-overlapping roles (`SUPPLEMENT.md`
+grew large enough to split into four files as of 2026-07-06 — see **[`KGMAP.md`](KGMAP.md)**
+for a one-page document graph and a "which file answers which question" table if
+you want the map before the detail). Open the right one, not all of them:
 
 - **`README.md`** — current state. Start here for "what does this repo claim, what's
   the tier legend, how do I reproduce it." Includes the full file-by-file
   `formal/*.v` inventory and `Print Assumptions` expected output.
-- **`SUPPLEMENT.md`** — narrative, audit trail, and the open-problem ledger. Open
-  this for: the full eight-attempt GR-refutation log (§5.2, written as a proper
-  negative-results account, not a table), the novelty audit (§10) and its
-  external-audit gate (§10.1 — still open, not yet independently reviewed), and
-  every NAMED open problem (`OB-FORMAN-RICCI`, `OB-ENTROPY-BRIDGE`, `OB-EXPANDER`,
-  `OB-RG-FIXED-POINT`, `OB-TIE-MANIFOLD`, plus unnamed items 1-6, §12) — this is
-  where to look before starting new work, so you don't duplicate something already
-  named and scoped.
+- **`SUPPLEMENT.md`** — narrative and audit trail (§0-§11: dependency DAG, all
+  branches, novelty audit §10, its external-audit gate §10.1 — still open, not
+  yet independently reviewed). **Split into four files as of 2026-07-06** (see
+  its own index at the top): the open-problem ledger, every NAMED open problem
+  (`OB-FORMAN-RICCI`, `OB-ENTROPY-BRIDGE`, `OB-EXPANDER`, `OB-RG-FIXED-POINT`,
+  `OB-TIE-MANIFOLD`, `OB-LONG-RANGE`, `OB-QUANTUM-GEOMETRY`, and more) now lives
+  in [`supplement/open-problems-ledger.md`](supplement/open-problems-ledger.md)
+  — this is where to look before starting new work, so you don't duplicate
+  something already named and scoped. The completeness scoreboard and
+  Unification Claim Card are in
+  [`supplement/completeness-and-claims.md`](supplement/completeness-and-claims.md);
+  references are in [`supplement/references.md`](supplement/references.md).
 - **`LOGBOOK.md`** — chronological history, captain's-log style, append-only, never
   rewritten with hindsight. Open this for "how did we get here, and what did we try
   that didn't work" — it records the journey the other three documents don't (a

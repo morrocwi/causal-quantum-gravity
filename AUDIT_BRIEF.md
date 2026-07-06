@@ -91,8 +91,8 @@ proof; `Dr` = interpretive; `Open` = admitted gap.
   quartic channel (mean-field argument + numeric leak ~2e-6 say no).
 - The note's Open list (Section 7) is the programme's own attack map; any item
   there closed *against* the stated expectation is a welcomed refutation.
-- **Unification boundary (C-class):** `SUPPLEMENT.md` SS14 ("The Unification
-  Claim Card") fixes exactly what "unification" does and does not mean here.
+- **Unification boundary (C-class):** `supplement/completeness-and-claims.md`
+  §14 ("The Unification Claim Card") fixes exactly what "unification" does and does not mean here.
   Find one sentence, anywhere in this repo, the companion note, or a public
   statement by its author, that trades on a claim from the card's explicit
   NOT-claimed list (QM's probabilistic structure; Einstein's field equations
