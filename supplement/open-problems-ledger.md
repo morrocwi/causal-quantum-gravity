@@ -428,13 +428,39 @@
     near-tie) rather than straddling zero — meaning these particular
     parameters simply don't put the dynamics near the tie manifold at
     all, and no thickness exponent or near-tie lifetime can be honestly
-    extracted from this run. **The concrete fix, not yet done:** calibrate
-    `α, β` (or use an adaptive/annealed benefit) so the population's
-    median `strain−benefit` sits near zero by construction, then measure
-    the SHAPE of the distribution around that point — not just retry
-    parameter values hoping to land near it by luck, which is the mistake
-    this attempt made and corrected mid-probe rather than reporting a
-    number from it. **TEST 1 (ledger-wave dispersion, "graviton
+    extracted from this run. **Follow-up (2026-07-06 sync from the sibling
+    repo — this paragraph previously named a "concrete fix, not yet done":
+    calibrate `α, β` so the population's median `strain−benefit` sits near
+    zero by construction. That fix was proposed, then REJECTED before ever
+    being executed,** in a two-round cross-model peer debate recorded
+    verbatim in `research_universal_solver/scripts/probe_tie_manifold_drift.py`'s
+    own docstring (Fable 5, quoted: "Calibrating alpha to zero-median mostly
+    guarantees you'll measure alpha=1 [the trivial exponent], because you've
+    parked the *bulk* of a generic distribution on the boundary...
+    Threshold-accept dynamics has no self-tuning mechanism"). It was replaced
+    by a boundary-localized-drift discriminator (drift binned by
+    `|diff_prev|`, early vs. late epochs: monotone-decreasing = repulsion,
+    flat = pure depletion). That probe's own first draft then contained a
+    survivorship-bias error caught by independent review — it read the
+    survivor-only `drift_records` (candidates that persisted past their
+    first window) as if it were the whole population. **The corrected,
+    unbiased population snapshot reverses the natural reading: at window 1,
+    90.0% of the TRUE candidate population (1224/1360 across 8 seeds) is
+    born AT the tie boundary (`|diff| = 0.050 = α` exactly, for uniform
+    initial degree) and retained immediately; only the 10% minority born
+    far from it (`|diff| = 0.940`) survives to be tracked at all. Near-tie
+    occupancy at FIRST CONTACT is thick, not thin.** The original
+    cross-sectional finding (surviving population far from the boundary)
+    remains correct on its own terms — it describes the surviving,
+    unresolved population at later windows, a different quantity from "the
+    population at first contact," and the two must not be conflated. The
+    drift-bin discriminator itself came out inconclusive (survivors occupy
+    too few `|diff|` bins for the shape test to discriminate). Three
+    executed, passing pytest tests
+    (`research_universal_solver/scripts/test_tie_manifold_drift.py`) guard
+    the corrected numbers; both the probe and the tests were re-run and
+    confirmed passing on 2026-07-06 before this paragraph was written, per
+    the standing rule that "verified" means executed here, not read there. **TEST 1 (ledger-wave dispersion, "graviton
     spectroscopy") was run and gives a clean positive, with an explicit
     disclosed caveat** (`scripts/probe_ledger_wave_dispersion.py`,
     `finite_diagnostic`, two executed passing pytest tests): this test
@@ -503,7 +529,11 @@
 
 **Battery summary, all five tests now attempted:** TEST 2 (order-memory)
 positive and robust; TEST 3 (tie-manifold occupancy) inconclusive by a
-caught design confound; TEST 1 (ledger-wave dispersion) positive but
+caught design confound, then sharpened by a peer-debate follow-up (see
+above): first-contact occupancy is thick — 90% of candidates are born at
+the tie boundary and resolve on the spot — while the surviving population
+sits far from it, two distinct quantities that must not be conflated;
+TEST 1 (ledger-wave dispersion) positive but
 conditional on one undisclosed-elsewhere modeling choice (`M_w`); TEST 4
 (adiabatic breakdown) precisely characterized, richer than expected, but
 scoped to an idealized toy model; TEST 5 (single-flip action quantum)
@@ -512,7 +542,8 @@ quantizes anything.** What they collectively establish is a map of where
 the classical structure a quantization would have to consume is present
 (TEST 2's history-connection, TEST 1's conditional oscillation) versus
 where the test design itself is not yet sharp enough to say
-(TESTS 3 and 5) — precisely the kind of honest, incomplete-but-precise
+(TEST 5, and TEST 3's original thickness-exponent question — though its
+follow-up did settle the first-contact occupancy statement) — precisely the kind of honest, incomplete-but-precise
 status this project's own completeness scoreboard and Unification
 Claim Card (`supplement/completeness-and-claims.md` §13, §14) were built
 to hold. `OB-QUANTUM-GEOMETRY` remains `[Open]`.

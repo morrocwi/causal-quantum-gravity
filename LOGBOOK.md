@@ -436,3 +436,40 @@ independently re-run inside it. Every one of T1-T3 reproduced closely but
 not identically to the handoff's own numbers (expected, given independent
 re-implementation) — close enough to trust the physics, different enough
 to be a reminder that "verified" means executed here, not read there.
+
+---
+
+## 2026-07-06 — TEST 3's published "concrete next step" had already been refuted in the sibling repo; ledger corrected before anyone executed a dead plan
+
+**Type:** Correction (documentation lag, caught at sync) ·
+`supplement/open-problems-ledger.md` `OB-QUANTUM-GEOMETRY` TEST 3
+
+This repo's open-problems ledger told the next worker exactly what to do
+about TEST 3's inconclusive tie-manifold run: "calibrate `α, β` so the
+population's median `strain−benefit` sits near zero by construction, then
+measure the SHAPE of the distribution." In the sibling repo
+(`research_universal_solver`, where all new work is developed first), that
+exact fix had already been proposed, debated in a two-round cross-model
+peer exchange, and **rejected without ever being run** — the counter-argument
+(recorded verbatim in `probe_tie_manifold_drift.py`'s docstring) being that
+parking the bulk of a generic distribution on the boundary by construction
+guarantees the trivial exponent, so the calibration would have measured its
+own setup, not the dynamics. The replacement probe (boundary-localized
+drift, early/late epochs) then had its own first draft corrected for
+survivorship bias by independent review, landing on a finding neither
+debate participant predicted: **90.0% of the true window-1 candidate
+population (1224/1360, 8 seeds) is born exactly at the tie boundary and
+retained on the spot; the far-from-boundary population TEST 3 originally
+measured is the surviving minority, a different quantity.** Near-tie
+occupancy at first contact is thick, not thin.
+
+Synced today: the ledger paragraph now records the rejected fix, the
+debate, the corrected finding, and the two-quantities distinction. Probe
+and its three pytest tests re-executed on this machine today (all passing)
+before the numbers entered the document — "verified" means executed here,
+not read there.
+
+**The lesson:** an export repo's "next step" note is a claim with a shelf
+life. When the development repo moves, a stale pointer here actively
+misdirects the next contributor toward work already known to be dead —
+sync discipline is part of honesty discipline, not housekeeping.
