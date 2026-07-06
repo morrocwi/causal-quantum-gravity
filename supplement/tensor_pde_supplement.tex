@@ -54,7 +54,9 @@ as one continuous machine-checked thread over $\mathbb{Q}$}
 
 \paragraph*{Preprint notice.} This supplement is a preprint and has not yet
 undergone formal peer review. Every step below tagged \Thq{} is independently
-confirmable by recompiling the delivered Coq sources under \code{coqc}~8.20.1
+confirmable by recompiling the delivered Coq sources \cite{coq} --- whose
+type theory is the Calculus of Constructions of Coquand and
+Huet \cite{coquandhuet1988} --- under \code{coqc}~8.20.1
 (exit status~0, \code{Print Assumptions} = \emph{Closed under the global
 context}). The reader is invited to audit rather than believe.
 
@@ -94,7 +96,7 @@ distinguished, and from what'' is a finite readout.
 % =====================================================================
 \paragraph{Step 2 --- $\LR=D_W-W$ is forced.}
 \emph{Statement.} The operator that reads ``net retained difference at a node
-relative to its neighbours'' is the graph Laplacian
+relative to its neighbours'' is the graph Laplacian \cite{laplace1799,kirchhoff1847}
 \[
   \LR \;=\; D_W - W,\qquad (\LR\,\phi)_i=\sum_j w_{ij}\,(\phi_i-\phi_j),
 \]
@@ -121,23 +123,29 @@ dissipation and the geometric coupling gives the one master equation
   \;+\; \nabla V(\Phi) \;=\; J-\eta\,}
 \]
 with $M$ inertia, $D$ dissipation, $K$ coupling, $V$ self-interaction, $J$
-source, $\eta$ readout/back-reaction. Setting $V\!\equiv\!0$, $J=\eta$ leaves
+source, and $\eta$ the finite information-cost readout/back-reaction in the
+sense of Landauer \cite{landauer1961} (an it-from-bit lineage \cite{wheeler1990}).
+Setting $V\!\equiv\!0$, $J=\eta$ leaves
 the \emph{spine} $M\partial_{tt}\Phi+D\partial_t\Phi+K\LR\Phi=0$.
 \emph{Coq.} core \code{InfoSchrodinger} / \code{InfoDecoherence} /
 \code{InfoTelegraph}. \emph{Tier.} spine identity \Thq{}; the tensor-PDE
 envelope reading \Dr{}. \emph{Why.} The three named readouts are the three
 pieces of \emph{one} equation: $M\partial_{tt}$ alone $\to$ unitary oscillation
-(wave/quantum), $D\partial_t$ alone $\to$ dissipative decay (diffusion), and
-their sum on $\LR$ $\to$ the telegraph equation of Step~5.
+(wave/quantum, the Schr\"odinger \cite{schrodinger1926} / Klein--Gordon
+\cite{klein1926,gordon1926} channel), $D\partial_t$ alone $\to$ dissipative
+decay (diffusion), and their sum on $\LR$ $\to$ the telegraph equation
+\cite{thomson1855,heaviside1893} of Step~5.
 
 \paragraph{Step 4 --- the actual update (no continuum $\partial$).}
 \emph{Statement.} On an $\LR$-eigenmode $\lambda$, $\partial_{tt}$ and
 $\partial_t$ are finite differences; the field advances by the two-register
-(position/velocity) update
+(position/velocity) update in the St\"ormer--Verlet lineage
+\cite{stormer1907,verlet1967}
 \[
 \begin{aligned}
   X[n+1] &= X[n] + \dth\,V[n],\\
-  V[n+1] &= V[n] + \dth\,\big(K\LR\Phi - D\,V[n] - \nabla V(\Phi) + J-\eta\big)/M,
+  V[n+1] &= V[n] + \dth\big(K\LR\Phi - D\,V[n]\\
+         &\qquad\quad {}- \nabla V(\Phi) + J-\eta\big)/M,
 \end{aligned}
 \]
 with $n$ the tick counter and $\dth$ the retained-distinction phase increment
@@ -149,7 +157,8 @@ readout and no limit is ever taken --- the discrete dynamics is primary, not an
 approximation to a smooth one.
 
 \paragraph{Step 4$'$ --- the same spine as a stationary action.}
-\emph{Statement.} Over one node-window $p\to m\to q$ the discrete window action
+\emph{Statement.} In the Euler--Lagrange first-variation lineage
+\cite{euler1744,lagrange1788}, over one node-window $p\to m\to q$ the discrete window action
 \[
   A_{\mathrm{win}}(m)=M|q-m|^2+M|m-p|^2-h^2K\,\mathrm{gform}(m,m)
 \]
@@ -171,6 +180,8 @@ retained-distinction correlation time $\tau_c$ fixes the mass
 \[
   M=\frac{1}{2\tau_c}.
 \]
+The equation is exactly the telegraph equation of Thomson and Heaviside
+\cite{thomson1855,heaviside1893}.
 \emph{Coq.} core \code{InfoTelegraph}. \emph{Tier.} \Thq{} (mass identity exact
 over $\mathbb{Q}$). \emph{Why.} Mass is not inserted --- it is \emph{read out}
 of the dissipative time-scale of the same equation, closing ``what is inertia''
@@ -230,7 +241,8 @@ Here $K\!\cdot\!\LR$ (Step~2--3) is unfolded into a full discrete curvature
 tensor, still entirely over $\mathbb{Q}$, still division-free where it matters.
 
 \paragraph{Step 7 --- Christoffel = first difference (and $\neq$ curvature).}
-\emph{Statement.} The connection is the first finite difference
+\emph{Statement.} The connection is the discrete Christoffel symbol
+\cite{christoffel1869}, the first finite difference
 $\code{christoffel\_fd}\;w\,j=w(S\,j)-w\,j$. An affine weight gives a
 \emph{nonzero} Christoffel yet \emph{zero} curvature. \emph{Coq.}
 \code{InfoDiscreteRiemannCurvature.v}:
@@ -239,7 +251,8 @@ $\code{christoffel\_fd}\;w\,j=w(S\,j)-w\,j$. An affine weight gives a
 that is still flat proves the first difference alone is gauge, not geometry.
 
 \paragraph{Step 8 --- Riemann = second difference.}
-\emph{Statement.} $\code{riemann\_fd}=w(S(S\,j))-2\,w(S\,j)+w\,j$; affine
+\emph{Statement.} The Riemann curvature tensor \cite{riemann1868} is the second
+finite difference $\code{riemann\_fd}=w(S(S\,j))-2\,w(S\,j)+w\,j$; affine
 $\Rightarrow$ flat, and the non-affine witness $w=q\,n^2$ gives
 $\code{riemann\_fd}\,0=2\neq0$; $\text{flat}\Leftrightarrow$ locally affine
 (arithmetic progression). \emph{Coq.} \code{riemann\_is\_second\_difference},
@@ -249,7 +262,9 @@ the same second difference that defines $\LR$ (Step~2): geometry and the root
 operator are the same object read curvature-first.
 
 \paragraph{Step 9 --- Riemann = group commutator (Heisenberg, division-free).}
-\emph{Statement.} Genuinely two-index curvature is the group commutator on the
+\emph{Statement.} Genuinely two-index curvature is the group commutator --- a matrix-mechanics
+commutator \cite{bornjordan1925,heisenberg1927} and, around a plaquette, a
+discrete Gauss--Bonnet holonomy \cite{gauss1828,bonnet1848} --- on the
 Heisenberg / upper-unipotent group (polynomial inverse, so \emph{no division}):
 $R_{xy}=$ the centre of $[X,Y]=a\cdot b$, with $[Y,X]=-a\cdot b$; abelian,
 scalar, and same-direction plaquettes are all flat. \emph{Coq.}
@@ -264,7 +279,7 @@ kl-antisymmetry exactly, without any limit or inverse.
 (\mathbb{Q}^3,\times)$ the generator $\code{asym}\,u$ is antisymmetric, the
 matrix commutator satisfies $[\code{asym}\,u,\code{asym}\,w]=\code{asym}(u\times
 w)$, curvature is ij-antisymmetric, and the \emph{Jacobi identity is the first
-Bianchi identity}. \emph{Coq.} \code{InfoMetricCompatibleCurvature.v}:
+Bianchi identity} \cite{bianchi1902}. \emph{Coq.} \code{InfoMetricCompatibleCurvature.v}:
 \code{asym\_is\_antisymmetric}, \code{commutator\_is\_asym\_cross},
 \code{curvature\_ij\_antisymmetric}, \code{bianchi\_jacobi}. \emph{Tier.} \Thq{}.
 \emph{Why.} Metric compatibility forces the connection into $\mathfrak{so}(3)$,
@@ -273,7 +288,7 @@ just Jacobi --- proven, division-free.
 
 \paragraph{Step 11 --- rational $SO(2)/SO(3)$ isometry (Cayley).}
 \emph{Statement.} Genuine rotations exist over $\mathbb{Q}$: $SO(2)$ via the
-Cayley / Pythagorean map $N=(I-A)\,\mathrm{adj}(I+A)$ with $N^{\!\top}N=(1+t^2)^2
+Cayley / Pythagorean map \cite{cayley1846} $N=(I-A)\,\mathrm{adj}(I+A)$ with $N^{\!\top}N=(1+t^2)^2
 I$; and a rational $SO(3)$ capstone (two $(3,4,5)$ rotations, holonomy $\neq I$)
 carrying nonzero rational curvature. \emph{Coq.} \code{InfoRationalIsometry.v},
 \code{InfoRationalSO3Curvature.v}. \emph{Tier.} \Thq{}. \emph{Why.} Transport
@@ -281,8 +296,8 @@ must be an isometry; the Cayley map gives exact rational orthogonal transport
 with \emph{no} $\sqrt{\cdot}$, so curved holonomy is a $\mathbb{Q}$-readout.
 
 \paragraph{Step 12 --- metric-derived Levi-Civita (rational, $g^{-1}$ no $\sqrt{g}$).}
-\emph{Statement.} From a metric $g=\mathrm{diag}(1,w)$ the Levi-Civita symbol
-$\Gamma^2_{12}=\tfrac12\,dw/w$ is rational for $w\neq0$ (it needs only $g^{-1}$,
+\emph{Statement.} From a metric $g=\mathrm{diag}(1,w)$ the Levi-Civita /
+Christoffel symbol \cite{christoffel1869} $\Gamma^2_{12}=\tfrac12\,dw/w$ is rational for $w\neq0$ (it needs only $g^{-1}$,
 never $\sqrt{g}$), and $R_{1212}=-\tfrac12\,ddw+(dw)^2/(4w)$: flat on constant
 $w$, curved witness $R_{1212}=-\tfrac14$. \emph{Coq.}
 \code{InfoMetricDerivedCurvature.v}: \code{christoffel\_G212\_rational},
@@ -293,8 +308,8 @@ root that an orthonormal frame would demand is exactly the object refused in
 Step~14.
 
 \paragraph{Step 13 --- second Bianchi $dF=0$; pair symmetry derived.}
-\emph{Statement.} The abelian differential Bianchi identity holds on the $3$D
-lattice, $d_zF_{xy}+d_xF_{yz}+d_yF_{zx}=0$, from mixed-difference commutation
+\emph{Statement.} The abelian differential Bianchi identity \cite{bianchi1902}
+holds on the $3$D lattice, $d_zF_{xy}+d_xF_{yz}+d_yF_{zx}=0$, from mixed-difference commutation
 (nonzero-curvature witness, not vacuous); and the pair symmetry
 $R_{ijkl}=R_{klij}$ is \emph{derived} from A1 (ij-antisym) + A2 (kl-antisym) +
 B1 (first Bianchi), for abstract $R$ over $\mathbb{Q}$. \emph{Coq.}
@@ -421,5 +436,12 @@ offline; each file compiles under \code{coqc}~8.20.1 with exit status~0 and
 \code{Print Assumptions} = \emph{Closed under the global context}. Every commit is additionally
 re-verified end-to-end by continuous integration (\code{make verify} on GitHub Actions); the
 badge is the authoritative live count.
+
+% =====================================================================
+% Bibliography --- same reference list as the main manuscript
+% (paper/references.bib, shared verbatim).
+% =====================================================================
+\bibliographystyle{plain}
+\bibliography{../paper/references}
 
 \end{document}

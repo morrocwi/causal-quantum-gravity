@@ -3,6 +3,7 @@
 % Single-column figure (twocolumn-safe). Author: Yaoharee Lahtee / OCSI.
 \begin{figure}[t]
 \centering
+\resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[
   >={Stealth[length=2mm]},
   font=\scriptsize,
@@ -52,7 +53,8 @@
 \draw[link,dotted] (kg.south) |- (edge.west);
 \draw[link,dotted] (gr.south) |- (edge.east);
 
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \caption{The central claim in one picture. A single discrete tensor-PDE spine (top,
 machine-checked over $\mathbb{Q}$) carries \emph{two} exact readout arms: the temporal
 telegraph arm reads out Klein--Gordon dynamics, the rational mass $M=1/(2\tau_c)$, and the

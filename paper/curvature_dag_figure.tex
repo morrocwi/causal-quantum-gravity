@@ -1,0 +1,87 @@
+% Discrete curvature-chain dependency DAG. Each node is one object in the
+% division-free rational curvature calculus, labelled with the Coq file that closes it.
+% Requires \usepackage{tikz}; \usetikzlibrary{positioning,arrows.meta} (already loaded).
+% Full-width figure* (twocolumn-safe: spans both columns). Author: Yaoharee Lahtee / OCSI.
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+  >={Stealth[length=2mm]},
+  font=\scriptsize,
+  cnode/.style={draw,rounded corners=2pt,align=center,inner sep=3pt,
+                fill=black!4,text width=34mm,minimum height=11mm},
+  link/.style={->,thick},
+  node distance=6mm and 9mm]
+
+% --- the chain, left to right, with two branch merges ---
+\node[cnode] (n1)
+  {\textbf{1. 2nd-difference Riemann}\\
+   $R^{\mathrm{fd}}=w(SSj)-2w(Sj)+w(j)$\\
+   affine $\Rightarrow$ flat; witness $=2$\\
+   {\ttfamily InfoDiscreteRiemann-}\\{\ttfamily Curvature}};
+
+\node[cnode,right=of n1] (n2)
+  {\textbf{2. Gauss--Bonnet holonomy}\\
+   plaquette transport defect\\
+   {\ttfamily InfoDiscreteRiemann-}\\{\ttfamily Commutator}$\cdot$\\{\ttfamily plaquette\_curvature\_z}};
+
+\node[cnode,right=of n2] (n3)
+  {\textbf{3. commutator (Heisenberg)}\\
+   $R_{xy}=$ center of $[X,Y]=a{\cdot}b$\\
+   $kl$-antisym., division-free\\
+   {\ttfamily InfoDiscreteRiemann-}\\{\ttfamily Commutator}};
+
+\node[cnode,right=of n3] (n4)
+  {\textbf{4. metric-compatible}\\
+   $\mathfrak{so}(3)$: $ij$-antisym.\\
+   Jacobi $=$ 1st Bianchi\\
+   {\ttfamily InfoMetricCompatible-}\\{\ttfamily Curvature}$\cdot${\ttfamily bianchi\_jacobi}};
+
+% second row (below), continuing the chain
+\node[cnode,below=13mm of n4] (n5)
+  {\textbf{5. rational $SO(2)/SO(3)$ isometry}\\
+   Cayley $N^{\!\top}N=(1+t^2)^2 I$;\\
+   $SO(3)$ holonomy $\ne I$, no $\sqrt{\ }$\\
+   {\ttfamily InfoRationalIsometry},\\{\ttfamily InfoRationalSO3Curvature}};
+
+\node[cnode,left=of n5] (n6)
+  {\textbf{6. metric-derived Levi-Civita}\\
+   $\Gamma^{2}{}_{12}=\tfrac12\,dw/w$ rational\\
+   needs only $g^{-1}$, no $\sqrt{g}$\\
+   {\ttfamily InfoMetricDerived-}\\{\ttfamily Curvature}$\cdot$\\{\ttfamily christoffel\_G212\_rational}};
+
+\node[cnode,left=of n6] (n7)
+  {\textbf{7. 2nd Bianchi $+$ pair symmetry}\\
+   $dF=0$; $R_{ijkl}=R_{klij}$ \emph{derived}\\
+   from A1$+$A2$+$B1\\
+   {\ttfamily InfoDiscreteSecondBianchi}$\cdot$\\{\ttfamily second\_bianchi};
+   {\ttfamily InfoRiemann-}\\{\ttfamily PairSymmetry}$\cdot${\ttfamily pair\_symmetry}};
+
+% --- dependency arrows ---
+\draw[link] (n1) -- (n2);
+\draw[link] (n2) -- (n3);
+\draw[link] (n3) -- (n4);
+\draw[link] (n4.south) -- (n5.north);   % turn down into second row
+\draw[link] (n5) -- (n6);
+\draw[link] (n6) -- (n7);
+
+\end{tikzpicture}
+\caption{The discrete curvature-tensor chain as a dependency DAG, division-free and exact
+over $\mathbb{Q}$, each node labelled with the Coq file (and where sharp, the theorem) that
+closes it. The chain runs: (1) Riemann as an exact second difference (affine $\Rightarrow$
+flat, with a non-vacuous curved witness $R^{\mathrm{fd}}=2$); (2) the plaquette holonomy /
+discrete Gauss--Bonnet transport defect; (3) the same curvature as a Heisenberg commutator
+$R_{xy}=$ center of $[X,Y]=a{\cdot}b$, giving genuine two-index, $kl$-antisymmetric structure
+in the nilpotent center; (4) metric compatibility on $\mathfrak{so}(3)\cong(\mathbb{Q}^3,\times)$,
+where $ij$-antisymmetry holds and the Jacobi identity \emph{is} the first (algebraic) Bianchi
+identity; (5) a rational $SO(2)/SO(3)$ isometry group via the Cayley transform, with a
+holonomy-$\ne I$ $SO(3)$ capstone and no square roots; (6) the metric-derived Levi-Civita
+connection $\Gamma^{2}{}_{12}=\tfrac12\,dw/w$, needing only $g^{-1}$ and never $\sqrt{g}$; and
+(7) the second (differential) Bianchi identity together with the pair symmetry
+$R_{ijkl}=R_{klij}$ \emph{derived}, not posited, from the two antisymmetries and the first
+Bianchi. All four Riemann symmetries and both Bianchi identities are thus machine-checked;
+the chain is structurally complete over $\mathbb{Q}$. Every node is \textsf{[Th\_coqc]}
+(\code{coqc} 8.20.1, axiom-free); the $\sqrt{g}$ orthonormal frame the chain deliberately
+avoids is \textsf{[Refused]} as a non-readout, never left \textsf{[Open]}
+(\S\ref{sec:refusal}).}
+\label{fig:curvature-dag}
+\end{figure*}
