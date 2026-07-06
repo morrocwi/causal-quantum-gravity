@@ -6,6 +6,9 @@
 # InfoQuantumRelativityUnification. InfoLorentz, InfoLorentzContinuum standalone.
 COQFILES = \
 	formal/RDL_GammaSpectral.v \
+	formal/RDL_MetricReadout.v \
+	formal/InfoMetricIsEnergyReadout.v \
+	formal/InfoMemoryBeforeMass.v \
 	formal/InfoCoercivityBoundedClosure.v \
 	formal/InfoDiscreteGraphCurvature.v \
 	formal/InfoAnalysisLift.v \
