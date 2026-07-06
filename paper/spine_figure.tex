@@ -1,0 +1,68 @@
+% Central-claim schematic: ONE spine tensor-PDE, TWO readout arms, ONE knife-edge.
+% Requires \usepackage{tikz}; \usetikzlibrary{positioning,arrows.meta} (both already loaded).
+% Single-column figure (twocolumn-safe). Author: Yaoharee Lahtee / OCSI.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  >={Stealth[length=2mm]},
+  font=\scriptsize,
+  spine/.style   ={draw,very thick,rounded corners=2pt,align=center,
+                    inner sep=3pt,fill=black!5},
+  arm/.style     ={draw,rounded corners=2pt,align=center,inner sep=3pt},
+  readout/.style ={draw,rounded corners=2pt,align=center,inner sep=3pt,fill=black!3},
+  edge/.style    ={draw,rounded corners=2pt,align=center,inner sep=3pt,
+                    dashed,fill=black!8},
+  link/.style    ={->,thick},
+  node distance  =4mm and 4mm]
+
+% --- central spine PDE ---
+\node[spine] (spine) {\textbf{ONE spine tensor-PDE}\\[1pt]
+  $M\partial_{tt}\Phi + D\partial_{t}\Phi + K\LR\Phi + \nabla V = J-\eta$\\[1pt]
+  \textsf{[Th\_coqc]} over $\mathbb{Q}$, axiom-free};
+
+% --- two arms ---
+\node[arm,below left=6mm and -8mm of spine]  (tarm)
+  {\textbf{temporal / telegraph arm}\\ ($\partial_{tt},\partial_{t}$ finite differences)};
+\node[arm,below right=6mm and -8mm of spine] (sarm)
+  {\textbf{spatial / $\LR$ arm}\\ (root graph-Laplacian, 2nd difference)};
+
+\draw[link] (spine.south) -- (tarm.north);
+\draw[link] (spine.south) -- (sarm.north);
+
+% --- readouts at the ends of the arms ---
+\node[readout,below=of tarm] (kg)
+  {$\to$ Klein--Gordon, mass $M=\tfrac{1}{2\tau_c}$,\\
+   under-damped $=$ \textbf{quantum} branch\\
+   \textsf{[Th\_coqc]}};
+\node[readout,below=of sarm] (gr)
+  {$\to$ discrete curvature tensor\\
+   ($R^{\mathrm{fd}}$, both Bianchi, pair-sym.)\\
+   $\to$ \textbf{GR} geometry \textsf{[Th\_coqc]}};
+
+\draw[link] (tarm.south) -- (kg.north);
+\draw[link] (sarm.south) -- (gr.north);
+
+% --- the single crossover knife-edge where the arms meet ---
+\node[edge,below=9mm of spine] (edge)
+  {\textbf{crossover} $\lambda_c=\dfrac{D^2}{4MK}$
+   \;(\textsf{char\_complete\_square})\\[1pt]
+   $=$ black-hole horizon $=$ agency knife-edge\\
+   $\mathrm{disc}=D^2-4MK\lambda$ crosses $0$ \textsf{[Th\_coqc]}};
+
+\draw[link,dotted] (kg.south) |- (edge.west);
+\draw[link,dotted] (gr.south) |- (edge.east);
+
+\end{tikzpicture}
+\caption{The central claim in one picture. A single discrete tensor-PDE spine (top,
+machine-checked over $\mathbb{Q}$) carries \emph{two} exact readout arms: the temporal
+telegraph arm reads out Klein--Gordon dynamics, the rational mass $M=1/(2\tau_c)$, and the
+under-damped quantum branch; the spatial $\LR$ arm reads out the division-free discrete
+curvature tensor (both Bianchi identities, derived pair symmetry) and the gravitational
+geometry. The two arms meet at one rational knife-edge $\lambda_c=D^2/(4MK)$ where the
+telegraph discriminant crosses zero --- simultaneously the quantum$\leftrightarrow$classical
+transition, the horizon of the audited core, and the agency threshold: one identity, three
+readings. All boxes are \textsf{[Th\_coqc]} readouts (\code{coqc}~8.20.1, axiom-free); the
+continuum limit of any arm is \emph{not} shown because it is \textsf{[Refused]}, not omitted
+(\S\ref{sec:refusal}) --- a machine-checked non-readout, never left \textsf{[Open]}.}
+\label{fig:spine}
+\end{figure}

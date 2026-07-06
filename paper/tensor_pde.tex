@@ -220,7 +220,14 @@ M\,\partial_{tt}\Phi \;+\; D\,\partial_{t}\Phi \;-\; K\,\LR\,\Phi \;+\; \nabla V
 where $M$ is inertia (the retained-distinction mass, $M=1/(2\tau_c)$; \S\ref{sec:crossover}),
 $D$ is dissipation, $K$ is the geometry coupling, $\LR$ is the \textbf{root graph-Laplacian}
 --- the retained-distinction operator, the discrete spatial-geometry axis --- $V$ is a
-self-interaction potential, $J$ a source, and $\eta$ a readout/back-reaction term.
+self-interaction potential, $J$ a source, and $\eta$ a readout/back-reaction term. The
+spatial operator $\LR$ is the graph form of the Laplace operator \cite{laplace1799} --- the
+combinatorial (Kirchhoff) Laplacian of the node graph \cite{kirchhoff1847}, whose spectrum
+carries Fiedler's algebraic connectivity \cite{fiedler1973}. The undamped massive sector
+$M\,\partial_{tt}\Phi + K\,\LR\Phi$ is the discrete analogue of the Klein--Gordon operator
+\cite{klein1926,gordon1926}, and the $\eta$ back-reaction is the finite information-cost
+readout in the sense of Landauer \cite{landauer1961}, an it-from-bit lineage
+\cite{wheeler1990}.
 [\Dr{} envelope over \Thq{} readouts.]
 
 Setting $V\equiv 0$ and $J=\eta$ leaves the \emph{spine}
@@ -230,15 +237,28 @@ M\,\partial_{tt}\Phi \;+\; D\,\partial_{t}\Phi \;+\; K\,\LR\,\Phi \;=\; 0 ,
 whose three named readouts are theorems of the audited core:
 \begin{itemize}\itemsep2pt
 \item[] \textbf{Unitary oscillation.} With $D\to 0$, \eqref{eq:spine} is the wave/quantum
-  channel; the $M\,\partial_{tt}$ term drives oscillation (\code{InfoSchrodinger}). \Thq{}
+  channel \cite{schrodinger1926}; the $M\,\partial_{tt}$ term drives oscillation
+  (\code{InfoSchrodinger}). \Thq{}
 \item[] \textbf{Dissipative decay.} With $M\to 0$, the $D\,\partial_{t}$ term drives
   diffusive decay (\code{InfoDecoherence}). \Thq{}
 \item[] \textbf{Telegraph union.} The full \eqref{eq:spine} \emph{is} the telegraph
-  equation, with the exact rational mass identity $M=1/(2\tau_c)$ (\code{InfoTelegraph}).
-  \Thq{}
+  equation \cite{thomson1855,heaviside1893}, with the exact rational mass identity
+  $M=1/(2\tau_c)$ (\code{InfoTelegraph}). \Thq{}
 \end{itemize}
 The spine identity across these readouts is machine-checked in the core; the tensor-PDE
 envelope \eqref{eq:master} that reads them as one equation is the interpretive frame. \Dr{}
+
+The central claim of the paper --- one spine PDE, two exact readout arms (temporal
+telegraph $\to$ Klein--Gordon/mass/quantum; spatial $\LR$ $\to$ discrete curvature/GR)
+meeting at the single knife-edge $\lambda_c=D^2/(4MK)$ --- is drawn in
+Figure~\ref{fig:spine}, and its headline machine-checked results are collected with their
+tier tags and Coq objects in Table~\ref{tab:keyclaims}.
+
+%% CENTRAL-CLAIM FIGURE
+\input{spine_figure}
+
+%% KEY-CLAIM RESULTS TABLE
+\input{keyclaims_table}
 
 \subsection{Discrete dynamics --- the actual update}\label{sec:spine-dyn}
 
@@ -261,7 +281,9 @@ object (I2) and is \Refu{} (\S\ref{sec:refusal}). \Thq{}
 \subsection{Action and Euler--Lagrange envelope}\label{sec:spine-action}
 
 The update \eqref{eq:updX}--\eqref{eq:updV} is not posited; it is stationary for a discrete
-window action. Over one node-window $p\to m\to q$,
+window action, in the Euler--Lagrange first-variation lineage \cite{euler1744,lagrange1788};
+the resulting two-register recurrence is exactly the St\"ormer--Verlet leapfrog integrator
+\cite{stormer1907,verlet1967}. Over one node-window $p\to m\to q$,
 \begin{equation}\label{eq:action}
 A_{\mathrm{win}}(m) = M\,|q-m|^2 + M\,|m-p|^2 - h^2 K\,\mathrm{gform}(m,m),
 \end{equation}
@@ -432,21 +454,30 @@ looping/quantum above it, settling/classical at or below it. \Dr{}
 % =====================================================================
 
 The geometry operator $\LR$ in \eqref{eq:master} is the entry point to a full discrete
-curvature calculus, division-free and exact over $\mathbb{Q}$. Every step is \Thq{}.
+curvature calculus, division-free and exact over $\mathbb{Q}$. Every object below is the
+discrete analogue of a classical construction of Riemannian geometry --- the Christoffel
+symbols \cite{christoffel1869}, the Riemann curvature tensor \cite{riemann1868}, the Bianchi
+identities \cite{bianchi1902}, and the curvature--holonomy relation of Gauss and Bonnet
+\cite{gauss1828,bonnet1848} --- but each is reproduced here as an exact rational readout.
+Every step is \Thq{}.
 
-\paragraph{1. Christoffel as first difference.} $\mathrm{christoffel\_fd}\,w\,j = w(Sj)-w(j)$.
+\paragraph{1. Christoffel as first difference.} $\mathrm{christoffel\_fd}\,w\,j = w(Sj)-w(j)$
+(the discrete Christoffel symbol \cite{christoffel1869}).
 An affine weight gives a nonzero Christoffel ($=b$) yet zero curvature: Christoffel $\ne$
 curvature, exactly (\code{christoffel\_can\_be\_nonzero\_while\_flat}).
 
-\paragraph{2. Riemann as second difference.}
+\paragraph{2. Riemann as second difference.} (the discrete Riemann tensor
+\cite{riemann1868})
 $\mathrm{riemann\_fd} = w(SSj) - 2w(Sj) + w(j)$; affine $\Rightarrow$ flat; the non-affine
 witness $w=q n^2$ gives $\mathrm{riemann\_fd}\,0 = 2\ne 0$; and flat $\iff$ locally affine
 (arithmetic progression) (\code{riemann\_is\_second\_difference}, \code{affine\_is\_flat},
 \code{curvature\_nonzero\_witness}, \code{flat\_iff\_second\_diff\_zero}).
 
 \paragraph{3. Riemann as commutator (genuinely 2-index).} On the Heisenberg /
-upper-unipotent group with polynomial (division-free) inverse, $R_{xy}$ is the center of
-$[X,Y]=a\cdot b$, with $[Y,X]=-a\cdot b$ ($kl$-antisymmetry, exact in the nilpotent center);
+upper-unipotent group with polynomial (division-free) inverse --- curvature as the
+non-commutation of transport, a matrix-mechanics commutator \cite{bornjordan1925} and, around a
+plaquette, a discrete Gauss--Bonnet holonomy \cite{gauss1828,bonnet1848} --- $R_{xy}$ is the
+center of $[X,Y]=a\cdot b$, with $[Y,X]=-a\cdot b$ ($kl$-antisymmetry, exact in the nilpotent center);
 abelian, scalar, and same-direction cases are all flat, strictly exceeding the scalar brick
 (\code{plaquette\_curvature\_z}, \code{reverse\_antisymmetric}, \code{curvature\_is\_central}).
 
@@ -454,10 +485,12 @@ abelian, scalar, and same-direction cases are all flat, strictly exceeding the s
 $\mathfrak{so}(3)\cong(\mathbb{Q}^3,\times)$: the generator $\mathrm{asym}\,u$ is
 antisymmetric, the matrix commutator is $\mathrm{asym}(u\times w)$ (so $\mathfrak{so}(3)$ is
 closed under bracket), curvature is $ij$-antisymmetric, and the Jacobi identity \emph{is} the
-first Bianchi identity (\code{asym\_is\_antisymmetric}, \code{commutator\_is\_asym\_cross},
+first (algebraic) Bianchi identity \cite{bianchi1902} (\code{asym\_is\_antisymmetric},
+\code{commutator\_is\_asym\_cross},
 \code{curvature\_ij\_antisymmetric}, \code{bianchi\_jacobi}).
 
-\paragraph{5. Second (differential) Bianchi.} On the 3-D lattice, abelian $dF=0$:
+\paragraph{5. Second (differential) Bianchi.} \cite{bianchi1902} On the 3-D lattice,
+abelian $dF=0$:
 $d_z F_{xy} + d_x F_{yz} + d_y F_{zx} = 0$, from mixed-difference commutation, with a
 nonzero-curvature witness so the identity is non-vacuous (\code{second\_bianchi},
 \code{mixed\_differences\_commute}).
@@ -474,7 +507,7 @@ d^2 w + (dw)^2/(4w)$; flat on constant $w$, curved witness $R_{1212}=-\tfrac14$
 \code{curved\_witness}).
 
 \paragraph{8. Rational isometry group.} $SO(2)$ exists over $\mathbb{Q}$ via the
-Cayley/Pythagorean transform $N^{\!\top}N=(1+t^2)^2 I$; a rational $SO(3)$ capstone (two
+Cayley/Pythagorean transform \cite{cayley1846} $N^{\!\top}N=(1+t^2)^2 I$; a rational $SO(3)$ capstone (two
 $(3,4,5)$ rotations, holonomy $\ne I$) gives nonzero rational curvature, division-free
 (\code{InfoRationalIsometry}, \code{InfoRationalSO3Curvature}).
 
@@ -537,8 +570,10 @@ finite symmetric $\LR$ has a \emph{bounded} spectrum: every eigenvalue obeys
 0 \;\le\; \lambda \;\le\; \Lambda,\qquad
 \Lambda \;\le\; 2\,\max_i \deg(i)
 \end{equation}
-by Gershgorin --- the largest $\LR$-eigenvalue is capped by twice the maximum node degree.
-Atomicity is not a decorative postulate here: it is exactly the hypothesis $\lambda\le\Lambda$.
+by Gershgorin's circle theorem \cite{gershgorin1931} --- the largest $\LR$-eigenvalue is
+capped by twice the maximum node degree (sharpened by the Anderson--Morley bound
+\cite{andersonmorley1985}). Atomicity is not a decorative postulate here: it is exactly the
+hypothesis $\lambda\le\Lambda$.
 
 On an $\LR$-eigenmode the spine \eqref{eq:spine} gives an \emph{eigenmode relaxation rate}
 $\Gamma_{\mathrm{rel}}(\lambda)$ obeying $\Gamma_{\mathrm{rel}}\, D = K\lambda$, and a corresponding
@@ -573,7 +608,8 @@ not by the drive.
 \subsection{The continuum has no floor --- the two are mutually exclusive}
 \label{sec:pred-continuum}
 
-The continuum quantum speed limit (Mandelstam--Tamm / Margolus--Levitin) reads
+The continuum quantum speed limit (Mandelstam--Tamm \cite{mandelstamtamm1945} /
+Margolus--Levitin \cite{margolus1998}) reads
 $\tau_{\mathrm{rel}} = \pi\hbar/(2E)$ (equivalently $\tau_{\mathrm{rel}}=\hbar/(2\,\Delta E)$). Its spectrum is
 \emph{unbounded}: there is no largest eigenvalue, so raising $E$ (or $\Delta E$) without
 limit drives $\tau_{\mathrm{rel}} \to 0$. There is \emph{no} positive floor. This too is machine-checked:
@@ -611,7 +647,8 @@ measured on the \emph{same} sample by an independent method:
   place to push the drive until the rate \emph{stops} rising: continuum QSL says it keeps
   rising, the floor says it saturates at the gap-set value. \Dr{}/\Fin{}
 \item \textbf{Solid-state phonon readout --- the Debye ceiling.} A lattice has a maximum
-  phonon frequency $\omega_D\sim 10^{13}$--$10^{14}$~rad\,s$^{-1}$; that is a literal
+  phonon frequency $\omega_D\sim 10^{13}$--$10^{14}$~rad\,s$^{-1}$ (the Debye ceiling
+  \cite{debye1912}); that is a literal
   $\Lambda$ (the top of the acoustic band). Phonon-mediated decoherence/relaxation cannot
   run faster than that band, giving $\tau_{\mathrm{rel}}^{\min}\sim 10^{-13}$--$10^{-14}$~s independent
   of drive strength. $\omega_D$ is measured independently (neutron/X-ray phonon
@@ -625,7 +662,7 @@ measured on the \emph{same} sample by an independent method:
   continuum QSL permits it at high enough photon energy, the discrete floor forbids it for
   a fixed bandwidth. \Dr{}/\Fin{}
 \item \textbf{Margolus--Levitin saturation.} Systems engineered to saturate the ML bound
-  $\tau_\perp=\pi\hbar/2E$ (maximal parallelism) are the sharpest probe: continuum ML
+  \cite{margolus1998} $\tau_\perp=\pi\hbar/2E$ (maximal parallelism) are the sharpest probe: continuum ML
   keeps $\tau_\perp$ falling as $1/E$ without limit, whereas the discrete framework
   predicts the saturated ML curve itself \emph{bends over} to a plateau once $E$ approaches
   $E_\Lambda$. A measured ML curve that plateaus confirms a ceiling; one that keeps
@@ -693,16 +730,18 @@ join they individually leave open (\S\ref{sec:absence}). We map the terrain firs
 
 \paragraph{Discrete and emergent gravity.} A family of programmes takes spacetime, or its
 geometry, to be built from more primitive discrete or relational data. Causal-set theory
-grows a Lorentzian manifold as the continuum approximation of a locally finite partial
-order; Regge calculus and its dynamical-triangulation descendants (Euclidean DT and Causal
-Dynamical Triangulations) discretize the Einstein--Hilbert action on simplicial
-complexes and recover smooth geometry in a scaling limit; loop quantum gravity quantizes
-geometry into discrete spin-network area and volume spectra; quantum graphity and related
+\cite{bombelli1987,surya2019} grows a Lorentzian manifold as the continuum approximation of
+a locally finite partial order; Regge calculus \cite{regge1961} and its
+dynamical-triangulation descendants (Euclidean DT and Causal Dynamical Triangulations
+\cite{cdt2005}) discretize the Einstein--Hilbert action on simplicial
+complexes and recover smooth geometry in a scaling limit; loop quantum gravity
+\cite{rovellismolin1990} quantizes geometry into discrete spin-network
+\cite{penrose1971} area and volume spectra; quantum graphity \cite{graphity2008} and related
 condensed-matter-of-spacetime models let a background graph dynamically order into a
 geometric phase; deterministic cellular-automaton and hypergraph-rewriting programmes
-(the cellular-automaton interpretation of quantum mechanics; the hypergraph rewriting
-approach) reconstruct both quantum amplitudes and gravitational curvature from local
-update rules on a discrete substrate. We share these programmes' starting intuition ---
+(the cellular-automaton interpretation of quantum mechanics \cite{thooftca2016}; the
+hypergraph rewriting approach \cite{wolfram2020}) reconstruct both quantum amplitudes and
+gravitational curvature from local update rules on a discrete substrate. We share these programmes' starting intuition ---
 geometry and dynamics as readouts of a discrete relational structure --- and we share, in
 particular, the hypergraph/automaton instinct that \emph{one local update rule} should
 carry both quantum behaviour and curvature. \emph{They go deeper than we do} on their own
@@ -713,9 +752,11 @@ delete that gate and refuse the limit as a non-readout (\S\ref{sec:refusal}). \D
 
 \paragraph{Machine-checked mathematics and physics.} A second literature supplies our
 method rather than our subject. Large formalization efforts --- the machine-checked
-four-colour and Feit--Thompson (odd-order) theorems, the formal proof of the Kepler
-conjecture, and the formalization of relativistic kinematics and Minkowski spacetime in
-Isabelle/HOL, alongside verified numerical-analysis and PDE developments --- have
+four-colour \cite{gonthier2008} and Feit--Thompson (odd-order) \cite{feitthompson2013}
+theorems, the formal proof of the Kepler conjecture \cite{hales2017}, and the formalization
+of relativistic kinematics and Minkowski spacetime \cite{minkowski1909} in
+Isabelle/HOL \cite{stannett2014,schutzformal2022}, alongside verified numerical-analysis and
+PDE developments \cite{boldo2013} --- have
 established that deep mathematical and physical content can be carried end-to-end by a
 proof kernel with no trusted human step. We adopt exactly this standard, and adopt its
 discipline literally: axiom-free over $\mathbb{Q}$, \code{Print Assumptions} \emph{Closed
@@ -726,11 +767,12 @@ non-negotiable bar --- and we apply that bar to a physics-shaped object (a discr
 PDE and its curvature calculus) rather than to a pure-mathematics theorem. \Dr{}
 
 \paragraph{Emergent and thermodynamic gravity.} A third literature reads the gravitational
-field equations as an equation of state rather than a fundamental law: the
-Bekenstein--Hawking horizon entropy; the derivation of the Einstein equations from the
-Clausius relation across local horizons; the entropic-force account of gravity; and the
+field equations \cite{einstein1915} as an equation of state rather than a fundamental law:
+the Bekenstein--Hawking horizon entropy \cite{bekenstein1973,hawking1975}; the derivation of
+the Einstein equations from the Clausius relation \cite{clausius1865} across local horizons
+\cite{jacobson1995}; the entropic-force account of gravity \cite{verlinde2011}; and the
 programme reading gravitational dynamics off horizon thermodynamics and holographic
-degrees of freedom. Our horizon knife-edge $\lambda_c$ (\S\ref{sec:crossover}) is
+degrees of freedom \cite{padmanabhan2010}. Our horizon knife-edge $\lambda_c$ (\S\ref{sec:crossover}) is
 thesis-adjacent to this literature: it makes a single rational threshold do the work of a
 horizon, a quantum/classical divide, and an agency boundary, in the spirit of ``geometry
 is a coarse readout of something informational.'' \emph{This literature goes much deeper}
@@ -741,11 +783,11 @@ gap plainly (\S\ref{sec:absence}, \S\ref{sec:elevation}). \Dr{}
 
 \paragraph{Informational reconstructions of quantum theory.} A fourth literature derives
 the quantum formalism from operational or informational axioms: the reconstruction of
-quantum theory from five reasonable axioms; the derivation of finite-dimensional quantum
-theory from informational principles (purification and companions); the characterization
-of quantum mechanics through no-signalling and no-broadcasting in a
-$C^{*}$-algebraic setting; and the relational reading in which quantum states encode an
-observer's information about a system. Our spine shares the conviction that the quantum
+quantum theory from five reasonable axioms \cite{hardy2001}; the derivation of
+finite-dimensional quantum theory from informational principles (purification and companions)
+\cite{cdp2011}; the characterization of quantum mechanics through no-signalling and
+no-broadcasting in a $C^{*}$-algebraic setting \cite{cbh2003}; and the relational reading in
+which quantum states encode an observer's information about a system \cite{rovellirqm1996}. Our spine shares the conviction that the quantum
 branch is a \emph{readout} of an information-bearing structure rather than a fundamental
 ontology, and our under-damped/oscillatory regime plays the role their reconstructed
 quantum kinematics plays. \emph{These reconstructions go deeper than we do} on the quantum
@@ -783,14 +825,18 @@ the claim is testable rather than rhetorical.
 \paragraph{Search protocol (stated so it can be repeated).} We looked for a counterexample
 along three axes and report the boundary in each.
 \begin{itemize}\itemsep2pt
-\item \textbf{Discrete-gravity programmes} (causal sets, Regge/CDT, loop quantum gravity,
-  quantum graphity, cellular-automaton and hypergraph rewriting): several \emph{do} join a
+\item \textbf{Discrete-gravity programmes} (causal sets \cite{bombelli1987,surya2019},
+  Regge/CDT \cite{regge1961,cdt2005}, loop quantum gravity \cite{rovellismolin1990},
+  quantum graphity \cite{graphity2008}, cellular-automaton \cite{thooftca2016} and hypergraph
+  rewriting \cite{wolfram2020}): several \emph{do} join a
   quantum branch to a curvature/geometry branch conceptually, but we found no case in which
   that join is delivered as a recompilable, axiom-free proof-kernel artifact rather than as
   analytic or numerical mathematics.
 \item \textbf{Machine-checked physics/mathematics} (Isabelle/HOL Minkowski and relativistic
-  kinematics; verified PDE and numerical analysis; the four-colour, odd-order, and Kepler
-  formalizations): these deliver verified kernels, but on objects that are either
+  kinematics \cite{stannett2014,schutzformal2022,minkowski1909}; verified PDE and numerical
+  analysis \cite{boldo2013}; the four-colour \cite{gonthier2008}, odd-order
+  \cite{feitthompson2013}, and Kepler \cite{hales2017} formalizations): these deliver
+  verified kernels, but on objects that are either
   pure-mathematics theorems or the special-relativistic/kinematic layer --- not a single
   equation whose readouts include \emph{dynamical curvature} alongside the quantum branch.
 \item \textbf{Lattice QFT}: delivers exact discrete quantum-plus-special-relativity
@@ -922,8 +968,9 @@ tensorial spine and the curvature chain are closed \Thq{}. The absolute constant
 % =====================================================================
 
 The reader is invited to audit rather than believe. Every \Thq{} claim above is a theorem of
-a Coq~8.20.1 kernel over exact rationals, compiled with exit status~0 and \emph{Closed under
-the global context} at every \code{Print Assumptions}; the \Fin{} witnesses are exact
+a Coq~8.20.1 kernel \cite{coq} --- whose type theory is the Calculus of Constructions of
+Coquand and Huet \cite{coquandhuet1988} --- over exact rationals, compiled with exit
+status~0 and \emph{Closed under the global context} at every \code{Print Assumptions}; the \Fin{} witnesses are exact
 rationals reproduced by \code{Compute}/\code{vm\_compute}. The artifact inventory is
 Table~\ref{tab:artifacts}. The sources live in the public repository
 \url{https://github.com/morrocwi/causal-quantum-gravity} under \code{formal/}, with a
@@ -971,5 +1018,14 @@ badge is the authoritative live count.
 % =====================================================================
 %% ARTIFACT TABLE
 \input{artifact_table}
+
+% =====================================================================
+% BIBLIOGRAPHY
+% Run:  pdflatex tensor_pde ; bibtex tensor_pde ; pdflatex x2
+% Every external equation / result is attributed to its owner+year in
+% references.bib; cross-checked against the canonical EQUATION_REGISTRY.md.
+% =====================================================================
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}

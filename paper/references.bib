@@ -1,0 +1,583 @@
+% =====================================================================
+% references.bib  --  bibliography for tensor_pde.tex
+% "The Retained-Distinction Tensor Field Theory"
+%
+% Every external equation / result the manuscript uses is attributed here
+% to its real owner + year.  Bibliographic data for the entries that also
+% appear in paper/mass_note.tex is copied verbatim from that (author-vetted)
+% thebibliography; the classical equation-owner entries (Klein--Gordon,
+% telegraph, Laplace/Kirchhoff, Christoffel, Riemann, Bianchi,
+% Gauss/Bonnet, Cayley, Gershgorin, Mandelstam--Tamm/Margolus--Levitin,
+% Debye, Feit--Thompson formalization) are added here.
+%
+% All author+year fields below are believed correct.  Where an exact
+% volume/page/venue is less certain it is flagged with "%% VERIFY".
+% Cross-check against
+%   research_universal_solver/docs/root/EQUATION_REGISTRY.md  (canonical).
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% Spine components: telegraph, Klein--Gordon, Laplacian/graph-Laplacian
+% ---------------------------------------------------------------------
+
+%% VERIFY thomson1855 page range 382--399 (author W. Thomson / Lord Kelvin, year 1855 solid)
+@article{thomson1855,
+  author  = {Thomson, William},
+  title   = {On the Theory of the Electric Telegraph},
+  journal = {Proceedings of the Royal Society of London},
+  volume  = {7},
+  pages   = {382--399},
+  year    = {1855}
+}
+
+@book{heaviside1893,
+  author    = {Heaviside, Oliver},
+  title     = {Electromagnetic Theory, Vol.~1},
+  publisher = {The Electrician Printing and Publishing Co.},
+  address   = {London},
+  year      = {1893}
+}
+
+@article{klein1926,
+  author  = {Klein, Oskar},
+  title   = {Quantentheorie und f\"unfdimensionale Relativit\"atstheorie},
+  journal = {Zeitschrift f\"ur Physik},
+  volume  = {37},
+  pages   = {895--906},
+  year    = {1926}
+}
+
+@article{gordon1926,
+  author  = {Gordon, Walter},
+  title   = {Der Comptoneffekt nach der Schr\"odingerschen Theorie},
+  journal = {Zeitschrift f\"ur Physik},
+  volume  = {40},
+  pages   = {117--133},
+  year    = {1926}
+}
+
+@article{schrodinger1926,
+  author  = {Schr\"odinger, Erwin},
+  title   = {Quantisierung als Eigenwertproblem},
+  journal = {Annalen der Physik},
+  volume  = {79},
+  pages   = {361--376},
+  year    = {1926}
+}
+
+@book{laplace1799,
+  author    = {Laplace, Pierre-Simon},
+  title     = {Trait\'e de m\'ecanique c\'eleste, Tome~1},
+  publisher = {Duprat},
+  address   = {Paris},
+  year      = {1799}
+}
+
+@article{kirchhoff1847,
+  author  = {Kirchhoff, Gustav},
+  title   = {\"Uber die Aufl\"osung der Gleichungen, auf welche man bei der
+             Untersuchung der linearen Vertheilung galvanischer Str\"ome
+             gef\"uhrt wird},
+  journal = {Annalen der Physik und Chemie},
+  volume  = {72},
+  pages   = {497--508},
+  year    = {1847}
+}
+
+@article{fiedler1973,
+  author  = {Fiedler, Miroslav},
+  title   = {Algebraic connectivity of graphs},
+  journal = {Czechoslovak Mathematical Journal},
+  volume  = {23},
+  pages   = {298--305},
+  year    = {1973}
+}
+
+% ---------------------------------------------------------------------
+% Variational structure / discrete dynamics
+% ---------------------------------------------------------------------
+
+@book{euler1744,
+  author    = {Euler, Leonhard},
+  title     = {Methodus inveniendi lineas curvas maximi minimive
+               proprietate gaudentes},
+  publisher = {Marcum-Michaelem Bousquet},
+  address   = {Lausanne \& Geneva},
+  year      = {1744}
+}
+
+@book{lagrange1788,
+  author    = {Lagrange, Joseph-Louis},
+  title     = {M\'ecanique analytique},
+  publisher = {La Veuve Desaint},
+  address   = {Paris},
+  year      = {1788}
+}
+
+%% VERIFY stormer1907 volume/pages of the Stormer series (author + 1907 solid)
+@article{stormer1907,
+  author  = {St\"ormer, Carl},
+  title   = {Sur les trajectoires des corpuscules \'electris\'es dans
+             l'espace sous l'action du magn\'etisme terrestre},
+  journal = {Archives des Sciences Physiques et Naturelles},
+  volume  = {24},
+  pages   = {5--18},
+  year    = {1907}
+}
+
+@article{verlet1967,
+  author  = {Verlet, Loup},
+  title   = {Computer ``Experiments'' on Classical Fluids.~I},
+  journal = {Physical Review},
+  volume  = {159},
+  pages   = {98--103},
+  year    = {1967}
+}
+
+% ---------------------------------------------------------------------
+% Discrete curvature chain: Christoffel, Riemann, Bianchi,
+% Heisenberg commutator, Gauss--Bonnet, Cayley
+% ---------------------------------------------------------------------
+
+@article{christoffel1869,
+  author  = {Christoffel, Elwin Bruno},
+  title   = {\"Uber die Transformation der homogenen Differentialausdr\"ucke
+             zweiten Grades},
+  journal = {Journal f\"ur die reine und angewandte Mathematik},
+  volume  = {70},
+  pages   = {46--70},
+  year    = {1869}
+}
+
+@article{riemann1868,
+  author  = {Riemann, Bernhard},
+  title   = {\"Uber die Hypothesen, welche der Geometrie zu Grunde liegen},
+  journal = {Abhandlungen der K\"oniglichen Gesellschaft der
+             Wissenschaften zu G\"ottingen},
+  volume  = {13},
+  pages   = {133--150},
+  year    = {1868}
+}
+
+%% VERIFY bianchi1902 exact series/volume/pages of the Bianchi note (author + 1902 solid)
+@article{bianchi1902,
+  author  = {Bianchi, Luigi},
+  title   = {Sui simboli a quattro indici e sulla curvatura di Riemann},
+  journal = {Rendiconti della Reale Accademia Nazionale dei Lincei},
+  volume  = {11},
+  pages   = {3--7},
+  year    = {1902}
+}
+
+@article{heisenberg1927,
+  author  = {Heisenberg, Werner},
+  title   = {\"Uber den anschaulichen Inhalt der quantentheoretischen
+             Kinematik und Mechanik},
+  journal = {Zeitschrift f\"ur Physik},
+  volume  = {43},
+  pages   = {172--198},
+  year    = {1927}
+}
+
+@article{bornjordan1925,
+  author  = {Born, Max and Jordan, Pascual},
+  title   = {Zur Quantenmechanik},
+  journal = {Zeitschrift f\"ur Physik},
+  volume  = {34},
+  pages   = {858--888},
+  year    = {1925}
+}
+
+@article{gauss1828,
+  author  = {Gauss, Carl Friedrich},
+  title   = {Disquisitiones generales circa superficies curvas},
+  journal = {Commentationes Societatis Regiae Scientiarum Gottingensis
+             Recentiores},
+  volume  = {6},
+  pages   = {99--146},
+  year    = {1828}
+}
+
+%% VERIFY bonnet1848 volume/pages of Bonnet's surfaces memoir (author + 1848 solid)
+@article{bonnet1848,
+  author  = {Bonnet, Pierre Ossian},
+  title   = {M\'emoire sur la th\'eorie g\'en\'erale des surfaces},
+  journal = {Journal de l'\'Ecole Polytechnique},
+  volume  = {19},
+  pages   = {1--146},
+  year    = {1848}
+}
+
+@article{cayley1846,
+  author  = {Cayley, Arthur},
+  title   = {Sur quelques propri\'et\'es des d\'eterminants gauches},
+  journal = {Journal f\"ur die reine und angewandte Mathematik},
+  volume  = {32},
+  pages   = {119--123},
+  year    = {1846}
+}
+
+% ---------------------------------------------------------------------
+% Bounded spectrum / quantum speed limit / phonon ceiling (prediction)
+% ---------------------------------------------------------------------
+
+@article{gershgorin1931,
+  author  = {Gershgorin, Semyon Aranovich},
+  title   = {\"Uber die Abgrenzung der Eigenwerte einer Matrix},
+  journal = {Izvestiya Akademii Nauk SSSR, Seriya Matematicheskaya},
+  volume  = {6},
+  pages   = {749--754},
+  year    = {1931}
+}
+
+@article{andersonmorley1985,
+  author  = {Anderson, William N. and Morley, Thomas D.},
+  title   = {Eigenvalues of the Laplacian of a graph},
+  journal = {Linear and Multilinear Algebra},
+  volume  = {18},
+  pages   = {141--145},
+  year    = {1985}
+}
+
+@article{mandelstamtamm1945,
+  author  = {Mandelstam, Leonid and Tamm, Igor},
+  title   = {The uncertainty relation between energy and time in
+             non-relativistic quantum mechanics},
+  journal = {Journal of Physics (USSR)},
+  volume  = {9},
+  pages   = {249--254},
+  year    = {1945}
+}
+
+@article{margolus1998,
+  author  = {Margolus, Norman and Levitin, Lev B.},
+  title   = {The maximum speed of dynamical evolution},
+  journal = {Physica D},
+  volume  = {120},
+  pages   = {188--195},
+  year    = {1998}
+}
+
+@article{debye1912,
+  author  = {Debye, Peter},
+  title   = {Zur Theorie der spezifischen W\"armen},
+  journal = {Annalen der Physik},
+  volume  = {39},
+  pages   = {789--839},
+  year    = {1912}
+}
+
+% ---------------------------------------------------------------------
+% Emergent / thermodynamic gravity
+% ---------------------------------------------------------------------
+
+@article{clausius1865,
+  author  = {Clausius, Rudolf},
+  title   = {\"Uber verschiedene f\"ur die Anwendung bequeme Formen der
+             Hauptgleichungen der mechanischen W\"armetheorie},
+  journal = {Annalen der Physik},
+  volume  = {125},
+  pages   = {353--400},
+  year    = {1865}
+}
+
+@article{jacobson1995,
+  author  = {Jacobson, Ted},
+  title   = {Thermodynamics of spacetime: the Einstein equation of state},
+  journal = {Physical Review Letters},
+  volume  = {75},
+  pages   = {1260--1263},
+  year    = {1995},
+  note    = {gr-qc/9504004}
+}
+
+@article{bekenstein1973,
+  author  = {Bekenstein, Jacob D.},
+  title   = {Black holes and entropy},
+  journal = {Physical Review D},
+  volume  = {7},
+  pages   = {2333--2346},
+  year    = {1973}
+}
+
+@article{hawking1975,
+  author  = {Hawking, Stephen W.},
+  title   = {Particle creation by black holes},
+  journal = {Communications in Mathematical Physics},
+  volume  = {43},
+  pages   = {199--220},
+  year    = {1975}
+}
+
+@article{verlinde2011,
+  author  = {Verlinde, Erik},
+  title   = {On the origin of gravity and the laws of Newton},
+  journal = {Journal of High Energy Physics},
+  volume  = {2011},
+  number  = {4},
+  pages   = {29},
+  year    = {2011},
+  note    = {arXiv:1001.0785}
+}
+
+@article{padmanabhan2010,
+  author  = {Padmanabhan, Thanu},
+  title   = {Thermodynamical aspects of gravity: new insights},
+  journal = {Reports on Progress in Physics},
+  volume  = {73},
+  pages   = {046901},
+  year    = {2010}
+}
+
+@article{einstein1915,
+  author  = {Einstein, Albert},
+  title   = {Die Feldgleichungen der Gravitation},
+  journal = {Sitzungsberichte der Preussischen Akademie der Wissenschaften},
+  pages   = {844--847},
+  year    = {1915}
+}
+
+% ---------------------------------------------------------------------
+% Discrete / emergent gravity (positioning)
+% ---------------------------------------------------------------------
+
+@article{bombelli1987,
+  author  = {Bombelli, Luca and Lee, Joohan and Meyer, David and Sorkin,
+             Rafael D.},
+  title   = {Space-time as a causal set},
+  journal = {Physical Review Letters},
+  volume  = {59},
+  pages   = {521--524},
+  year    = {1987}
+}
+
+@article{surya2019,
+  author  = {Surya, Sumati},
+  title   = {The causal set approach to quantum gravity},
+  journal = {Living Reviews in Relativity},
+  volume  = {22},
+  pages   = {5},
+  year    = {2019},
+  note    = {arXiv:1903.11544}
+}
+
+@article{regge1961,
+  author  = {Regge, Tullio},
+  title   = {General relativity without coordinates},
+  journal = {Il Nuovo Cimento},
+  volume  = {19},
+  pages   = {558--571},
+  year    = {1961}
+}
+
+@article{cdt2005,
+  author  = {Ambj{\o}rn, Jan and Jurkiewicz, Jerzy and Loll, Renate},
+  title   = {Reconstructing the universe},
+  journal = {Physical Review D},
+  volume  = {72},
+  pages   = {064014},
+  year    = {2005},
+  note    = {hep-th/0505154}
+}
+
+@article{rovellismolin1990,
+  author  = {Rovelli, Carlo and Smolin, Lee},
+  title   = {Loop space representation of quantum general relativity},
+  journal = {Nuclear Physics B},
+  volume  = {331},
+  pages   = {80--152},
+  year    = {1990}
+}
+
+@incollection{penrose1971,
+  author    = {Penrose, Roger},
+  title     = {Angular momentum: an approach to combinatorial space-time},
+  booktitle = {Quantum Theory and Beyond},
+  publisher = {Cambridge University Press},
+  year      = {1971}
+}
+
+@article{graphity2008,
+  author  = {Konopka, Tomasz and Markopoulou, Fotini and Smolin, Lee},
+  title   = {Quantum graphity},
+  journal = {Physical Review D},
+  volume  = {77},
+  pages   = {104029},
+  year    = {2008}
+}
+
+@book{thooftca2016,
+  author    = {'t~Hooft, Gerard},
+  title     = {The Cellular Automaton Interpretation of Quantum Mechanics},
+  publisher = {Springer},
+  year      = {2016}
+}
+
+@book{wolfram2020,
+  author    = {Wolfram, Stephen},
+  title     = {A Project to Find the Fundamental Theory of Physics},
+  publisher = {Wolfram Media},
+  year      = {2020}
+}
+
+% ---------------------------------------------------------------------
+% Machine-checked mathematics / physics (positioning + method)
+% ---------------------------------------------------------------------
+
+@article{gonthier2008,
+  author  = {Gonthier, Georges},
+  title   = {Formal proof --- the four-color theorem},
+  journal = {Notices of the American Mathematical Society},
+  volume  = {55},
+  pages   = {1382--1393},
+  year    = {2008}
+}
+
+@inproceedings{feitthompson2013,
+  author    = {Gonthier, Georges and Asperti, Andrea and Avigad, Jeremy and
+               Bertot, Yves and Cohen, Cyril and Garillot, Fran\c{c}ois and
+               {Le Roux}, St\'ephane and Mahboubi, Assia and O'Connor, Russell
+               and {Ould Biha}, Sidi and Pasca, Ioana and Rideau, Laurence and
+               Solovyev, Alexey and Tassi, Enrico and Th\'ery, Laurent},
+  title     = {A machine-checked proof of the odd order theorem},
+  booktitle = {Interactive Theorem Proving (ITP 2013)},
+  series    = {LNCS},
+  volume    = {7998},
+  pages     = {163--179},
+  publisher = {Springer},
+  year      = {2013}
+}
+
+@article{hales2017,
+  author  = {Hales, Thomas and others},
+  title   = {A formal proof of the Kepler conjecture},
+  journal = {Forum of Mathematics, Pi},
+  volume  = {5},
+  pages   = {e2},
+  year    = {2017},
+  note    = {arXiv:1501.02155}
+}
+
+@article{schutzformal2022,
+  author  = {Schmoetten, Richard and Palmer, Jake and Fleuriot, Jacques},
+  title   = {Towards formalising Schutz' axioms for Minkowski spacetime in
+             Isabelle/HOL},
+  journal = {Journal of Automated Reasoning},
+  volume  = {66},
+  pages   = {953--988},
+  year    = {2022},
+  note    = {arXiv:2108.10868}
+}
+
+@article{stannett2014,
+  author  = {Stannett, Mike and N\'emeti, Istv\'an},
+  title   = {Using Isabelle/HOL to verify first-order relativity theory},
+  journal = {Journal of Automated Reasoning},
+  volume  = {52},
+  pages   = {361--378},
+  year    = {2014},
+  note    = {arXiv:1211.6468}
+}
+
+@article{minkowski1909,
+  author  = {Minkowski, Hermann},
+  title   = {Raum und Zeit},
+  journal = {Physikalische Zeitschrift},
+  volume  = {10},
+  pages   = {104--111},
+  year    = {1909}
+}
+
+@article{boldo2013,
+  author  = {Boldo, Sylvie and Cl\'ement, Fran\c{c}ois and Filli\^atre,
+             Jean-Christophe and Mayero, Micaela and Melquiond, Guillaume and
+             Weis, Pierre},
+  title   = {Wave equation numerical resolution: a comprehensive mechanized
+             proof of a C program},
+  journal = {Journal of Automated Reasoning},
+  volume  = {50},
+  pages   = {423--456},
+  year    = {2013}
+}
+
+@article{coquandhuet1988,
+  author  = {Coquand, Thierry and Huet, G\'erard},
+  title   = {The calculus of constructions},
+  journal = {Information and Computation},
+  volume  = {76},
+  pages   = {95--120},
+  year    = {1988}
+}
+
+@manual{coq,
+  author       = {{The Coq Development Team}},
+  title        = {The Coq Proof Assistant Reference Manual},
+  organization = {INRIA},
+  note         = {\url{https://coq.inria.fr}},
+  year         = {2023}
+}
+
+% ---------------------------------------------------------------------
+% Informational reconstructions of quantum theory (positioning)
+% ---------------------------------------------------------------------
+
+@article{hardy2001,
+  author  = {Hardy, Lucien},
+  title   = {Quantum theory from five reasonable axioms},
+  journal = {arXiv preprint},
+  note    = {quant-ph/0101012},
+  year    = {2001}
+}
+
+@article{cdp2011,
+  author  = {Chiribella, Giulio and D'Ariano, Giacomo Mauro and Perinotti,
+             Paolo},
+  title   = {Informational derivation of quantum theory},
+  journal = {Physical Review A},
+  volume  = {84},
+  pages   = {012311},
+  year    = {2011},
+  note    = {arXiv:1011.6451}
+}
+
+@article{cbh2003,
+  author  = {Clifton, Rob and Bub, Jeffrey and Halvorson, Hans},
+  title   = {Characterizing quantum theory in terms of information-theoretic
+             constraints},
+  journal = {Foundations of Physics},
+  volume  = {33},
+  pages   = {1561--1591},
+  year    = {2003},
+  note    = {quant-ph/0211089}
+}
+
+@article{rovellirqm1996,
+  author  = {Rovelli, Carlo},
+  title   = {Relational quantum mechanics},
+  journal = {International Journal of Theoretical Physics},
+  volume  = {35},
+  pages   = {1637--1678},
+  year    = {1996}
+}
+
+% ---------------------------------------------------------------------
+% Information theory / it-from-bit lineage
+% ---------------------------------------------------------------------
+
+@article{landauer1961,
+  author  = {Landauer, Rolf},
+  title   = {Irreversibility and heat generation in the computing process},
+  journal = {IBM Journal of Research and Development},
+  volume  = {5},
+  pages   = {183--191},
+  year    = {1961}
+}
+
+@incollection{wheeler1990,
+  author    = {Wheeler, John Archibald},
+  title     = {Information, physics, quantum: the search for links},
+  booktitle = {Complexity, Entropy and the Physics of Information},
+  publisher = {Addison--Wesley},
+  year      = {1990}
+}
+
