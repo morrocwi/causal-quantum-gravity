@@ -267,7 +267,111 @@
     alongside the interaction signal, in the same run, before any sign or
     magnitude claim — reproducibility across seeds is necessary but not
     sufficient to rule out a systematic (non-cancelling, nonlinear
-    dressing) artifact.
+    dressing) artifact. **Round four, the twin-field common-noise
+    estimator (`research_universal_solver/scripts/probe_twolump_twinfield.py`,
+    `finite_diagnostic`), ran as the broadband-bath rerun round three
+    called for, with one further design change beyond "broadband": rather
+    than evolving each of the compared configurations (two-lump at
+    separation `d`, single-lump-A reference) under an independent random
+    draw and relying on averaging over many seeds to cancel bath noise,
+    the exact same kick sequence is generated once per seed and replayed
+    bit-identically across every configuration compared for that seed
+    ("twin-field"), and the `d`-dependence is read off as a WITHIN-seed
+    paired slope `dU/dd` (comparing `U` at neighbouring `d` under the
+    SAME seed's noise) rather than as a difference of across-seed means.
+    **This mechanism works exactly as designed and is directly checked**
+    (`scripts/test_twolump_twinfield.py::test_paired_slope_cancels_per_seed_offset_better_than_raw_mean`,
+    passing): the raw common-noise-differenced `U(d)` (two-lump minus
+    single-lump-A, corridor-averaged) carries an enormous per-seed
+    offset — one order of magnitude of spread seed-to-seed (from
+    `-0.0001` to `-0.07` across 20 seeds at the same `d`) that is almost
+    exactly constant across all six scanned separations `d=6..26` within
+    a given seed (e.g. seed 15: `-0.0664, -0.0700, -0.0724, -0.0734,
+    -0.0720, -0.0699` — a ~10% spread across the whole `d` range, against
+    a ~700× spread across seeds) — confirming the offset is a per-seed
+    bath-resonance artifact near lump A's own position, not a genuine
+    `d`-dependent two-body effect, and confirming the paired-slope design
+    removes it as intended. **After that cancellation, the honest result
+    is null, not positive:** every adjacent-pair mean slope across 20
+    seeds has `|signal/noise| < 0.25` (six pairs, `d=6→10` through
+    `d=22→26`; the largest is `0.23`), i.e. no adjacent-pair slope is
+    even a quarter of one standard error from zero, and the across-seed
+    mean of `U(d)` itself is flat-to-noisy rather than monotone
+    (`-0.01424, -0.01427, -0.01398, -0.01358, -0.01386, -0.01386` for
+    `d=6,10,14,18,22,26` — not monotone in either direction). **Verdict,
+    stated plainly: the twin-field/paired-slope fix successfully solved
+    the problem it targeted (cancelling per-seed additive bath offset,
+    which round three's drift audit correctly identified as the dominant
+    contaminant) but the resulting cleaned signal is consistent with
+    zero, not with a genuine long-range monotone channel, at this probe's
+    noise level (`kick_sigma=0.05`), ring size (`n=60`), and integration
+    time (`6000` leapfrog steps after `1000`-step burn-in).** This is a
+    DIFFERENT failure mode than round three's: round three had a real,
+    non-monotone (optical-binding) signal well above the noise floor;
+    round four, with the estimator fixed, finds the residual `d`-signal
+    is now BELOW the achievable noise floor of this configuration — no
+    exponent can honestly be fit (a power-law fit routine is included in
+    the probe script and was exercised only on synthetic data to confirm
+    it recovers a known exponent correctly; it was deliberately NOT run
+    on this round's real, non-monotone `U(d)`, per the script's own
+    verdict gate, because fitting a power law to a signal indistinguishable
+    from zero would be exactly the kind of overclaim this project's tier
+    discipline exists to prevent). **What is NOT yet established:**
+    whether a genuine long-range channel exists below this noise floor
+    (would need lower kick variance, longer integration, and/or a larger
+    ring to average down further before concluding a true null), and
+    whether the corridor-energy readout itself is even the right
+    observable for a `d`-dependent binding energy on a ring (a direct
+    force/gradient readout on the lumps themselves, rather than a
+    bath-energy proxy in the corridor between them, is the natural next
+    refinement). The concrete next step, if this channel is still worth
+    pursuing: repeat this exact twin-field/paired-slope design with
+    substantially longer integration (more steps and/or more seeds, to
+    push the paired-slope noise floor down) before concluding either a
+    genuine null or a genuine power law — this round's run is not long
+    enough to distinguish "no signal" from "signal below current
+    sensitivity." **A philosophy-driven follow-up check (worked example
+    of this project's own `philosophy-driven-research-loop` skill) asked
+    a narrower, cheaper question before recommending more raw
+    integration time: is the corridor-energy observable even
+    order-sensitive?** SS12 item 13 TEST 2 (order-memory) established
+    that this kernel's field robustly retains ORDER information even
+    when a coarser readout (curvature) is blind to it — corridor energy
+    (a time-and-node-averaged squared displacement) is exactly that kind
+    of coarse, potentially order-blind summary statistic. Tested directly
+    (`research_universal_solver/scripts/probe_twolump_order_sensitivity.py`,
+    `finite_diagnostic`): for the same seed and separation, corridor
+    energy computed from the original kick sequence versus the identical
+    kicks with TIME ORDER randomly permuted differ by an amount
+    statistically indistinguishable from ordinary seed-to-seed variance
+    (shuffle-std/across-seed-std ratio `1.02–1.14` across `d=6,14,22`,
+    8 seeds, 8 shuffles each — a ratio near 1 means shuffling perturbs
+    the reading by about as much as drawing a fresh independent seed
+    would, i.e. no extra penalty for destroying temporal order).
+    **The hypothesis that an order-sensitive reframing was hiding a
+    cleaner signal is REFUTED, not confirmed** — recorded as a genuine
+    negative result, not discarded: corridor energy is order-INSENSITIVE,
+    consistent with (and a candidate partial explanation for) why its raw
+    signal is dominated by aggregate noise statistics rather than
+    structure. This does not rule out a real long-range channel existing
+    below the noise floor (the concrete next step above still stands),
+    but it does rule out one specific candidate explanation — that a
+    better, order-aware observable would reveal it — narrowing, not
+    widening, the space of remaining hypotheses. **Methodological caveat,
+    found by independent review and disclosed rather than buried:** the
+    kicks driving this probe are i.i.d. Gaussian draws, so the input
+    already carries no temporal correlation before shuffling, and a
+    LINEAR system (this probe's own conservative sector) driven by i.i.d.
+    noise is generically expected to give shuffle-invariant time-averaged
+    energy regardless of whether genuine lump-lump coupling exists. The
+    literal conclusion (this specific observable does not distinguish
+    shuffled from unshuffled kicks) stands, but the analogy to TEST 2 is
+    weaker than first presented: TEST 2's order-memory effect came from
+    retention DECISIONS, a genuinely path-dependent nonlinear process,
+    not from a linear system driven by white noise, which has no
+    comparable mechanism to be path-dependent at all. Read this result as
+    ruling out one specific, cheap explanation, not as a faithful re-run
+    of TEST 2's mechanism in a new setting.
 13. **[named: OB-QUANTUM-GEOMETRY]** Untouched — no file, no probe, not
     even a prior attempt to state it precisely. Named here specifically
     because a gap that has never been named is the one most likely to be
