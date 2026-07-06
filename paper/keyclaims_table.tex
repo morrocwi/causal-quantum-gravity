@@ -1,0 +1,65 @@
+% Headline key-claim table. Requires \usepackage{tabularx,booktabs} (already loaded).
+% twocolumn-safe (table*, full \textwidth). Column Y = ragged-right flexible X.
+% Every row carries exactly one tier tag + the Coq object that closes it.
+% Author: Yaoharee Lahtee / OCSI.
+\begin{table*}[t]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{3.05cm}Y c p{5.1cm}@{}}
+\toprule
+Key claim & Machine-checked readout (headline) & Tier & Coq object (file $\cdot$ module) \\
+\midrule
+Spine $=$ telegraph $\to$ KG / mass
+  & $M\partial_{tt}\Phi+D\partial_{t}\Phi+K\LR\Phi=0$ \emph{is} the telegraph equation;
+    exact rational mass $M=1/(2\tau_c)$; $D\to0$ oscillatory (KG/quantum), $M\to0$ diffusive.
+  & \Thq{}
+  & \code{InfoSchrodinger.v} $\cdot$ core \code{InfoTelegraph} \\
+Quantum $\leftrightarrow$ classical crossover $=$ horizon
+  & $\mathrm{disc}=D^2-4MK\lambda$ crosses $0$ at $\lambda_c=D^2/(4MK)$
+    (\code{char\_complete\_square}); this crossover \emph{is} the core horizon disc.\ and the
+    agency knife-edge --- one $\lambda_c$, three readings.
+  & \Thq{}
+  & \code{InfoTelegraphCrossover\_attempt.v};\newline
+    \code{InfoTelegraphHorizonUnification\_attempt.v} \\
+Curvature chain: Riemann
+  & Riemann $=$ finite second difference $=$ Heisenberg commutator; affine $\Rightarrow$ flat,
+    non-affine witness $R^{\mathrm{fd}}=2\ne0$, plaquette $[X,Y]$ central.
+  & \Thq{}
+  & \code{InfoDiscreteRiemannCurvature\_attempt.v};\newline
+    \code{InfoDiscreteRiemannCommutator\_attempt.v} \\
+Curvature chain: both Bianchi
+  & First (algebraic) Bianchi $=$ Jacobi identity, $ij$-antisym.; second (differential)
+    $dF=0$ abelian, non-vacuous nonzero-curvature witness.
+  & \Thq{}
+  & \code{InfoMetricCompatibleCurvature\_attempt.v};\newline
+    \code{InfoDiscreteSecondBianchi\_attempt.v} \\
+Curvature chain: pair symmetry (derived)
+  & $R_{ijkl}=R_{klij}$ \emph{derived}, not posited, from A1 ($ij$) $+$ A2 ($kl$) $+$ B1
+    (first Bianchi); all four Riemann symmetries thus machine-checked.
+  & \Thq{}
+  & \code{InfoRiemannPairSymmetry\_attempt.v} $\cdot$ \code{pair\_symmetry} \\
+Curvature chain: metric-derived
+  & Levi-Civita $\Gamma^{2}{}_{12}=\tfrac12\,dw/w$ and $R_{1212}=-\tfrac14$ rational; needs
+    only $g^{-1}$, no $\sqrt{g}$ (frame $\sqrt{g}$ proven a non-readout).
+  & \Thq{}
+  & \code{InfoMetricDerivedCurvature\_attempt.v};\newline
+    \code{InfoMetricFrameNonReadout\_attempt.v} ($\to$\Refu{}) \\
+Falsifiable $\tau_{\mathrm{rel}}$ floor
+  & Bounded $\LR$-spectrum $\lambda\le\Lambda$ forces $\Gamma_{\mathrm{rel}}D\le K\Lambda$, i.e.\
+    a hard floor $\tau_{\mathrm{rel}}\ge D/(K\Lambda)>0$; the unbounded continuum has \emph{none} ---
+    one clean $\tau_{\mathrm{rel}}(E)$ curve decides (\S\ref{sec:prediction}).
+  & \Thq{}
+  & \code{InfoTauFloor} $\cdot$ \code{discrete\_rate\_ceiling}\newline
+    / \code{continuum\_no\_floor} \\
+\bottomrule
+\end{tabularx}
+\caption{The headline results in one ledger. Each row is a central claim of this paper, its
+machine-checked readout, its single tier tag, and the Coq object that closes it (file names
+are the \code{formal/*.v} sources of Table~\ref{tab:artifacts}; \code{InfoTelegraph} and
+\code{InfoTauFloor} name the core modules that carry the mass identity and the rate-ceiling /
+no-floor pair). Every headline is \Thq{} --- axiom-free over $\mathbb{Q}$, \code{coqc}~8.20.1
+exit~0, \code{Print Assumptions} \emph{Closed under the global context}. The continuum limit of
+any readout is \Refu{} (\S\ref{sec:refusal}), never \Open{}; the sole world-facing prediction
+is the $\tau_{\mathrm{rel}}$ floor, whose falsifying datum and retraction are pre-committed
+(\S\ref{sec:pred-retract}).}
+\label{tab:keyclaims}
+\end{table*}
