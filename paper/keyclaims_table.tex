@@ -4,6 +4,7 @@
 % Author: Yaoharee Lahtee / OCSI.
 \begin{table*}[t]
 \centering\footnotesize
+{\renewcommand{\code}[1]{\texttt{\seqsplit{#1}}}%
 \begin{tabularx}{\textwidth}{@{}p{3.05cm}Y c p{5.1cm}@{}}
 \toprule
 Key claim & Machine-checked readout (headline) & Tier & Coq object (file $\cdot$ module) \\
@@ -51,7 +52,7 @@ Falsifiable $\tau_{\mathrm{rel}}$ floor
   & \code{InfoTauFloor} $\cdot$ \code{discrete\_rate\_ceiling}\newline
     / \code{continuum\_no\_floor} \\
 \bottomrule
-\end{tabularx}
+\end{tabularx}}
 \caption{The headline results in one ledger. Each row is a central claim of this paper, its
 machine-checked readout, its single tier tag, and the Coq object that closes it (file names
 are the \code{formal/*.v} sources of Table~\ref{tab:artifacts}; \code{InfoTelegraph} and

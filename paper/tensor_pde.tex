@@ -15,6 +15,7 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{tabularx,booktabs}
+\usepackage{seqsplit}
 \usepackage{microtype}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta}
@@ -176,7 +177,7 @@ programme and a continuum-seeking discrete-gravity programme, and it is delibera
 
 \begin{table}[t]
 \centering\footnotesize
-\begin{tabularx}{\columnwidth}{@{}Ylc@{}}
+\begin{tabularx}{\columnwidth}{@{}lYc@{}}
 \toprule
 Gate & Asks & Status \\
 \midrule
@@ -268,7 +269,8 @@ $\partial_{t}$ are finite differences and the field is advanced by an exact two-
 (position/velocity) update:
 \begin{align}
 X[n+1] &= X[n] + \Delta\theta_R\,V[n], \label{eq:updX}\\
-V[n+1] &= V[n] + \frac{\Delta\theta_R}{M}\Bigl(K\,\LR\Phi - D\,V[n] - \nabla V(\Phi)
+V[n+1] &= V[n] + \frac{\Delta\theta_R}{M}\Bigl(K\,\LR\Phi - D\,V[n] \notag\\
+  &\hphantom{{}= V[n] + \frac{\Delta\theta_R}{M}\Bigl(}{} - \nabla V(\Phi)
   + J - \eta\Bigr). \label{eq:updV}
 \end{align}
 Here $n\in\mathbb{N}$ is the tick counter and $\Delta\theta_R$ is the retained-distinction
@@ -350,7 +352,8 @@ curvature $\to$ Bianchi}. Every node but the last-listed frame refusal is \Thq{}
 
 \begin{table*}[t]
 \centering\footnotesize
-\begin{tabularx}{\textwidth}{@{}llYlY@{}}
+{\renewcommand{\code}[1]{\texttt{\seqsplit{#1}}}%
+\begin{tabularx}{\textwidth}{@{}lYYlY@{}}
 \toprule
 Node & Object / equation & File $\cdot$ theorem & Tier & Gate \\
 \midrule
@@ -398,7 +401,7 @@ N15 non-abelian defect & naive covariant Bianchi fails by $\times(dA,dB)$ &
   \code{InfoDiscreteLeibnizObstruction} & \Thq{} &
   exact Leibniz defect (honest negative) \\
 \bottomrule
-\end{tabularx}
+\end{tabularx}}
 \caption{Node Registry. Each row is one object in the chain with the theorem that closes it
 and the gate it passes. N1--N13 and N15 are \Thq{} positive/negative results over
 $\mathbb{Q}$; N14 is a \Thq{} theorem \emph{that} the $\sqrt{g}$ frame is a non-readout,
@@ -419,9 +422,17 @@ The temporal characteristic of the spine \eqref{eq:spine} on an $\LR$-eigenmode 
 with crossover $\lambda_c = D^2/(4MK)$. The entire crossover is carried by one algebraic
 identity, the completion of the square:
 \begin{equation}\label{eq:complete}
-4M\cdot\mathrm{pchar}(\omega) = (2M\omega + D)^2 - \mathrm{disc}
-\quad(\code{char\_complete\_square},\ \Thq{}).
+\begin{aligned}
+4M\cdot\mathrm{pchar}(\omega) &= (2M\omega + D)^2 - \mathrm{disc}\\
+&\quad(\code{char\_complete\_square},\ \Thq{}).
+\end{aligned}
 \end{equation}
+The crossover, its two regimes, and the knife-edge $\lambda_c$ are drawn in
+Figure~\ref{fig:crossover}.
+
+%% CROSSOVER SCHEMATIC
+\input{crossover_figure}
+
 From \eqref{eq:complete} the two regimes and the edge follow exactly over $\mathbb{Q}$:
 \begin{itemize}\itemsep2pt
 \item \textbf{Under-damped $=$ quantum} ($\mathrm{disc}<0$): $\mathrm{pchar}(\omega)>0$ for
@@ -459,7 +470,11 @@ discrete analogue of a classical construction of Riemannian geometry --- the Chr
 symbols \cite{christoffel1869}, the Riemann curvature tensor \cite{riemann1868}, the Bianchi
 identities \cite{bianchi1902}, and the curvature--holonomy relation of Gauss and Bonnet
 \cite{gauss1828,bonnet1848} --- but each is reproduced here as an exact rational readout.
-Every step is \Thq{}.
+Every step is \Thq{}. The chain and its inter-node dependencies, each labelled with the
+Coq file that closes it, are drawn as a DAG in Figure~\ref{fig:curvature-dag}.
+
+%% CURVATURE-CHAIN DEPENDENCY DAG
+\input{curvature_dag_figure}
 
 \paragraph{1. Christoffel as first difference.} $\mathrm{christoffel\_fd}\,w\,j = w(Sj)-w(j)$
 (the discrete Christoffel symbol \cite{christoffel1869}).
@@ -586,7 +601,7 @@ over $\mathbb{Q}$, a \emph{ceiling} on the relaxation rate and therefore a \emph
 on the eigenmode relaxation time:
 \begin{equation}\label{eq:floor}
 \boxed{\;\Gamma_{\mathrm{rel}} \;\le\; \frac{K\Lambda}{D}
-\qquad\Longleftrightarrow\qquad
+\quad\Longleftrightarrow\quad
 \tau_{\mathrm{rel}} \;=\; \frac{D}{K\lambda}\;\ge\;\frac{D}{K\Lambda}\;>\;0\;}
 \end{equation}
 The ceiling half is machine-checked with no axioms:

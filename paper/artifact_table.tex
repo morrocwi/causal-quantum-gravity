@@ -5,6 +5,7 @@
 % each printing "Closed under the global context" (axiom-free) on compilation.
 \begin{table*}[t]
 \centering\footnotesize
+{\renewcommand{\code}[1]{\texttt{\seqsplit{#1}}}%
 \begin{tabularx}{\textwidth}{@{}p{3.15cm}l Y c l@{}}
 \toprule
 File & Tag & Contents (selected) & Checks & SHA-256 prefix (16 hex)\\
@@ -26,7 +27,7 @@ File & Tag & Contents (selected) & Checks & SHA-256 prefix (16 hex)\\
 \midrule
 \textbf{Totals: 14 files} & \Thq{} & Discrete-curvature $\to$ telegraph-horizon Coq stream, all $\mathbb{Q}$-only axiom-free. & \textbf{48} & 14 files \\
 \bottomrule
-\end{tabularx}
+\end{tabularx}}
 \caption{Artifact inventory --- authoritative copies at \code{formal/} of
 \url{https://github.com/morrocwi/causal-quantum-gravity}; SHA-256 prefixes (first 16 of 64 hex
 characters) of \code{sha256sum} on each \code{\_attempt.v} source. Each file is standalone and

@@ -1,0 +1,77 @@
+% Telegraph discriminant crossover schematic: disc(lambda)=D^2-4MK lambda vs the
+% L_R eigenvalue lambda, splitting under-damped/oscillatory (quantum) from
+% over-damped/decay (classical) at the single knife-edge lambda_c = D^2/(4MK).
+% Requires \usepackage{tikz}; \usetikzlibrary{positioning,arrows.meta} (already loaded).
+% Single-column figure (twocolumn-safe). Author: Yaoharee Lahtee / OCSI.
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[
+  >={Stealth[length=2mm]},
+  font=\scriptsize,
+  axisline/.style={draw,thick,->},
+  discline/.style={draw,very thick},
+  crit/.style={draw,dashed,thick},
+  reg/.style={align=center,inner sep=1pt},
+  inset/.style={draw,rounded corners=2pt,inner sep=2pt,fill=black!3}]
+
+% --- axes: horizontal lambda, vertical disc ---
+\def\W{6.4}   % lambda-axis length
+\def\LC{3.2}  % lambda_c position on the axis
+\coordinate (O) at (0,0);
+\draw[axisline] (O) -- (\W,0) node[below left=0pt and 1pt]{$\lambda$};
+\draw[axisline] (0,-1.35) -- (0,1.55) node[left]{$\mathrm{disc}(\lambda)=D^2-4MK\lambda$};
+
+% --- the descending discriminant line: disc = D^2 - 4MK lambda, zero at lambda_c ---
+% slope chosen so the line spans +1.3 at lambda=0 down to -1.2 at lambda=W.
+\coordinate (L0) at (0,1.3);      % disc(0)=D^2 > 0
+\coordinate (Lend) at (\W,-1.2);  % disc large lambda < 0
+\draw[discline] (L0) -- (Lend);
+\node[above right=1pt and 0pt of L0,inner sep=1pt] {$D^2$};
+
+% --- critical eigenvalue: vertical knife-edge at lambda_c ---
+\draw[crit] (\LC,-1.35) -- (\LC,1.55);
+\filldraw (\LC,0) circle (1.3pt);
+\node[align=center,anchor=north] at (\LC,-1.5)
+  {$\lambda_c=\dfrac{D^2}{4MK}$\\[1pt]
+   \textbf{$=$ horizon $=$ agency knife-edge}};
+
+% --- regime labels ---
+\node[reg] at (1.55,0.9)  {over-damped $=$ \textbf{classical}\\ $\mathrm{disc}>0$, $\lambda<\lambda_c$\\ real decay root: pure \emph{decay}};
+\node[reg] at (4.9,-0.72) {under-damped $=$ \textbf{quantum}\\ $\mathrm{disc}<0$, $\lambda>\lambda_c$\\ no real root: \emph{oscillatory}};
+
+% --- inset A: over-damped parabola pchar(omega) dips below axis (real roots) ---
+\begin{scope}[shift={(1.35,-0.55)},scale=0.5]
+  \draw[->] (-0.9,0) -- (0.9,0) node[right,inner sep=0pt,scale=0.8]{$\omega$};
+  \draw[very thick] plot[domain=-0.8:0.8,samples=25] (\x,{2*\x*\x-0.55});
+  \node[scale=0.8] at (0,0.75) {$\mathrm{pchar}$};
+\end{scope}
+
+% --- inset B: under-damped parabola floats above axis (no real root) ---
+\begin{scope}[shift={(5.05,0.62)},scale=0.5]
+  \draw[->] (-0.9,0) -- (0.9,0) node[right,inner sep=0pt,scale=0.8]{$\omega$};
+  \draw[very thick] plot[domain=-0.8:0.8,samples=25] (\x,{2*\x*\x+0.35});
+\end{scope}
+
+\end{tikzpicture}%
+}
+\caption{The telegraph discriminant crossover, drawn from the completion-of-square
+identity $4M\,\mathrm{pchar}(\omega)=(2M\omega+D)^2-\mathrm{disc}$ (\code{char\_complete\_square}).
+The discriminant $\mathrm{disc}(\lambda)=D^2-4MK\lambda$ (heavy line) falls monotonically
+in the $\LR$-eigenvalue $\lambda$ and crosses zero at the single critical value
+$\lambda_c=D^2/(4MK)$ (\code{critical\_disc\_zero}). Left of the knife-edge
+($\lambda<\lambda_c$, $\mathrm{disc}>0$) the characteristic $\mathrm{pchar}(\omega)=M\omega^2+D\omega+K\lambda$
+dips to a non-positive minimum (inset, lower left), so a real decay root exists and the
+mode purely \emph{decays} --- the over-damped, diffusive, \textbf{classical} branch
+(\code{overdamped\_min\_nonpositive}). Right of it ($\lambda>\lambda_c$, $\mathrm{disc}<0$)
+$\mathrm{pchar}$ stays strictly positive (inset, upper right), so there is no real
+frequency root and the mode is \emph{oscillatory} --- the under-damped, wave,
+\textbf{quantum} branch (\code{underdamped\_positive}, \code{underdamped\_iff\_above\_crit}).
+The same rational $\lambda_c$ is simultaneously the quantum$\leftrightarrow$classical
+transition, the horizon of the audited core (\code{disc\_is\_spine\_discr},
+\code{InfoTelegraphHorizonUnification}), and the agency threshold: one identity, three
+readings. Both regimes and the edge are \textsf{[Th\_coqc]} over $\mathbb{Q}$ (\code{coqc}
+8.20.1, axiom-free); the crossover curve is a schematic of those exact readouts, not a
+fitted plot.}
+\label{fig:crossover}
+\end{figure}
