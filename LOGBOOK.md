@@ -473,3 +473,35 @@ not read there.
 life. When the development repo moves, a stale pointer here actively
 misdirects the next contributor toward work already known to be dead —
 sync discipline is part of honesty discipline, not housekeeping.
+
+## 2026-07-06 — Elevation: metric-readout cluster promoted from the sibling repo
+
+Promoted three axiom-free theorems from `research_universal_solver` (they had passed
+its `ci_attempts_audit` — ALL PASS, compile + axiom-free) into this repo, per the
+standard sibling-export discipline:
+
+- `RDL_MetricReadout.v` — the directional 2nd difference reads the Hessian/metric
+  form off exactly; metric readout is window-, location-, and graph-gauge invariant.
+- `InfoMetricIsEnergyReadout.v` — the graph metric IS an energy readout: the same
+  `L_R` data, read as metric/curvature, equals the mother-equation energy form.
+  (Strengthens the "curvature as native readout" replacement narrative for the
+  honestly-refuted GR.)
+- `InfoMemoryBeforeMass.v` — discrete core of "memory before mass": inertia as
+  retained memory, exact over ℚ, with no continuum and no `1/(2m)` division.
+  (Supports the curvature-limited mass reading in `mass_note`.)
+
+Necessary side change: `RDL_GammaSpectral.v` was RESTORED from its earlier trimmed
+extract (Edge + u_of/v_of/w_of only) to the full source, because
+`InfoMetricIsEnergyReadout` uses `term`/`energy` and their supporting lemmas. The
+full file is a superset of the trim, so every earlier downstream file still compiles.
+
+Verification (re-run by hand in this repo, not trusted from the sibling audit):
+`make verify` PASS on the whole suite; `Print Assumptions` = "Closed under the global
+context" on `metric_form_readout`, `metric_readout_graph_gauge`,
+`metric_form_is_energy_readout`, `memory_before_mass`, `mass_inferred`. All new files
+free of Axiom/Admitted/Hypothesis/Section/Parameter.
+
+Tier: all three `Th_coqc`. NOT promoted: `InfoReaderWindowTauC` (its own headline is
+self-labeled a structural shadow / Dr, so it would violate this repo's tier
+discipline and retraction pledge). Elevation scope decided by human_pi; export
+prepared as maker, pending human_pi approval before the public push.

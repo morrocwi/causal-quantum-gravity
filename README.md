@@ -63,7 +63,10 @@ you are trying to break something, not just read about it.
 
 ```
 formal/
-  RDL_GammaSpectral.v                 Edge/w_of/u_of/v_of primitive (Q). Th_coqc.
+  RDL_GammaSpectral.v                 Edge/w_of/u_of/v_of + Dirichlet energy/term + Laplacian stencil (Q). Th_coqc.
+  RDL_MetricReadout.v                 Directional 2nd difference reads the Hessian/metric form off exactly; window-, location-, graph-gauge-invariant. Th_coqc.
+  InfoMetricIsEnergyReadout.v         The graph metric IS an energy readout: the same L_R data read as metric/curvature equals the mother-equation energy form. Th_coqc.
+  InfoMemoryBeforeMass.v              Discrete core of "memory before mass": inertia as retained memory, exact over Q (no continuum, no 1/(2m) division). Th_coqc.
   InfoCoercivityBoundedClosure.v      Csafe/wshare/wdeg definitions. Th_coqc.
   InfoDiscreteGraphCurvature.v        Forman-Ricci curvature, flat-cycle fact, wdeg=w*deg link to coercivity. Th_coqc.
   InfoAnalysisLift.v                  Schwarzschild metric factor + real radial derivative. +reals.
@@ -142,6 +145,9 @@ and prints a `PASS`/`FAIL` summary. Expected per-file result:
 | File | Expected `Print Assumptions` output |
 |---|---|
 | `RDL_GammaSpectral.v` | `Closed under the global context` |
+| `RDL_MetricReadout.v` (`metric_form_readout`, `metric_readout_graph_gauge`) | `Closed under the global context` |
+| `InfoMetricIsEnergyReadout.v` (`metric_form_is_energy_readout`) | `Closed under the global context` |
+| `InfoMemoryBeforeMass.v` (`memory_before_mass`, `mass_inferred`) | `Closed under the global context` |
 | `InfoCoercivityBoundedClosure.v` | `Closed under the global context` |
 | `InfoDiscreteGraphCurvature.v` | `Closed under the global context` |
 | `InfoSchrodinger.v` | `Closed under the global context` |
