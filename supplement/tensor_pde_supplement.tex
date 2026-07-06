@@ -1,0 +1,425 @@
+% =====================================================================
+% SUPPLEMENT --- THE FULL DERIVATION, START -> END
+% The Retained-Distinction Tensor Field Theory: a machine-checked
+% discrete spine PDE (Supplementary Material).
+%
+% House style reused VERBATIM from paper/mass_note.tex (STYLE reference
+% only; all physics content below is the author's machine-checked work).
+% Overrides applied: Coq 8.20.1 everywhere; NO model names; author block
+% fixed (Yaoharee Lahtee); five-tier claim vocabulary of the content spec.
+% Author / ORCID / affiliation / AI-disclosure / acknowledgements /
+% author-declarations blocks are byte-identical with FINAL_main.tex.
+% =====================================================================
+\documentclass[10pt,twocolumn]{article}
+\usepackage[a4paper,margin=1.8cm,columnsep=0.55cm]{geometry}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{tabularx,booktabs}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\fancypagestyle{preprintfirst}{\fancyhf{}%
+  \fancyhead[L]{\small\itshape The Retained-Distinction Tensor Field Theory (supplement) -- preprint, not peer reviewed}%
+  \renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\thepage}}
+\usepackage[hidelinks]{hyperref}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{ansatz}{Ansatz}
+\newtheorem{reading}{Reading}
+% Five-tier claim vocabulary (content spec). Every derivation step carries one.
+\newcommand{\Thq}{\textsf{[Th\_coqc]}}   % machine-checked, axiom-free over Q
+\newcommand{\Fin}{\textsf{[finite\_diagnostic]}} % measured/computed finite readout
+\newcommand{\Dr}{\textsf{[Dr]}}          % author narrative / interpretive reading
+\newcommand{\Open}{\textsf{[Open]}}      % genuine positive extension (honest gap)
+\newcommand{\Refu}{\textsf{[Refused]}}    % non-readout declined on thesis grounds
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\LR}{L_{\mathrm R}}
+\newcommand{\dth}{\Delta\theta_{\mathrm R}}
+
+\title{\bfseries The Retained-Distinction Tensor Field Theory\\
+\large Supplementary Material: the full derivation, root to curvature,\\
+as one continuous machine-checked thread over $\mathbb{Q}$}
+\author{Yaoharee Lahtee\\[2pt]
+\small ORCID: 0009-0005-3861-0626\\
+\small Open Civil Science Initiative, Bangkok, Thailand}
+\date{\small Companion to the main manuscript \;\textbullet\; \today}
+
+\begin{document}
+\maketitle
+\thispagestyle{preprintfirst}
+
+\paragraph*{Preprint notice.} This supplement is a preprint and has not yet
+undergone formal peer review. Every step below tagged \Thq{} is independently
+confirmable by recompiling the delivered Coq sources under \code{coqc}~8.20.1
+(exit status~0, \code{Print Assumptions} = \emph{Closed under the global
+context}). The reader is invited to audit rather than believe.
+
+\paragraph*{How to read this supplement.} This is one continuous logical
+thread. It starts from a single root --- the retained difference (RD), i.e.\
+distinguishability --- and never leaves the rationals $\mathbb{Q}$. Each step
+gives (i) the \emph{statement}, (ii) the \emph{Coq theorem / file} that closes
+it, (iii) its \emph{tier tag}, and (iv) one line of \emph{why} it follows from
+the step before. The framing invariant is fixed throughout: \textbf{the
+discrete tensor PDE over $\mathbb{Q}$ IS the theory}; the continuum is never a
+target, gate, or aspiration --- it is a \Refu{} non-readout (\S\ref{sec:refusal}).
+
+% =====================================================================
+\section{The root: retained difference}\label{sec:root}
+% =====================================================================
+\paragraph{Step 0 --- RD is the only primitive.}
+\emph{Statement.} The single primitive is the \emph{retained difference}
+$\delta_{\mathrm R}$: whether two states are distinguished \emph{and} that
+distinction is kept. Everything downstream is a readout of retained
+differences; no continuum, no real number, and no dimensionful constant is
+assumed prior to a readout.
+\emph{Tier.} \Dr{} (the programme postulate; every object it generates is then
+tiered on its own). \emph{Why.} A theory that only ever reads finite retained
+distinctions can be carried entirely in $\mathbb{Q}$, which is what makes every
+later step machine-checkable and axiom-free.
+
+\paragraph{Step 1 --- distinctions become graph weights.}
+\emph{Statement.} Retained differences between nodes $i,j$ are recorded as
+non-negative weights $w_{ij}$ on the edges of a graph $G$; a node's total
+retained distinction is its weighted degree $d_i=\sum_j w_{ij}$.
+\emph{Tier.} \Dr{} over \Thq{} objects. \emph{Why.} A weight is just a kept
+difference given a name; the graph is the minimal object on which ``how much is
+distinguished, and from what'' is a finite readout.
+
+% =====================================================================
+\section{The root operator: the retained-distinction Laplacian}\label{sec:LR}
+% =====================================================================
+\paragraph{Step 2 --- $\LR=D_W-W$ is forced.}
+\emph{Statement.} The operator that reads ``net retained difference at a node
+relative to its neighbours'' is the graph Laplacian
+\[
+  \LR \;=\; D_W - W,\qquad (\LR\,\phi)_i=\sum_j w_{ij}\,(\phi_i-\phi_j),
+\]
+with $D_W=\mathrm{diag}(d_i)$. On a $1$D chain of unit weights this is exactly
+the \emph{second finite difference}
+$(\LR\phi)_j=-\big(\phi_{j+1}-2\phi_j+\phi_{j-1}\big)$.
+\emph{Coq.} core \code{URCF\_RD\_All}; second-difference identity
+\code{riemann\_fd}$=w(S(S\,j))-2\,w(S\,j)+w\,j$ in
+\code{InfoDiscreteRiemannCurvature.v}. \emph{Tier.} \Thq{}. \emph{Why.}
+$\LR=D_W-W$ is the unique symmetric, difference-only operator that annihilates
+constants (no distinction $\Rightarrow$ no readout) --- it is the discrete
+spatial-geometry axis, taken as an exact difference, never as $\partial_{xx}$
+in a limit.
+
+% =====================================================================
+\section{The spine PDE}\label{sec:spine}
+% =====================================================================
+\paragraph{Step 3 --- the master equation.}
+\emph{Statement.} Let $\Phi$ be the retained-distinction field over the nodes
+(tensor-valued once an internal index space is attached). Balancing inertia,
+dissipation and the geometric coupling gives the one master equation
+\[
+  \boxed{\,M\,\partial_{tt}\Phi \;+\; D\,\partial_t\Phi \;-\; K\!\cdot\!\LR\!\cdot\!\Phi
+  \;+\; \nabla V(\Phi) \;=\; J-\eta\,}
+\]
+with $M$ inertia, $D$ dissipation, $K$ coupling, $V$ self-interaction, $J$
+source, $\eta$ readout/back-reaction. Setting $V\!\equiv\!0$, $J=\eta$ leaves
+the \emph{spine} $M\partial_{tt}\Phi+D\partial_t\Phi+K\LR\Phi=0$.
+\emph{Coq.} core \code{InfoSchrodinger} / \code{InfoDecoherence} /
+\code{InfoTelegraph}. \emph{Tier.} spine identity \Thq{}; the tensor-PDE
+envelope reading \Dr{}. \emph{Why.} The three named readouts are the three
+pieces of \emph{one} equation: $M\partial_{tt}$ alone $\to$ unitary oscillation
+(wave/quantum), $D\partial_t$ alone $\to$ dissipative decay (diffusion), and
+their sum on $\LR$ $\to$ the telegraph equation of Step~5.
+
+\paragraph{Step 4 --- the actual update (no continuum $\partial$).}
+\emph{Statement.} On an $\LR$-eigenmode $\lambda$, $\partial_{tt}$ and
+$\partial_t$ are finite differences; the field advances by the two-register
+(position/velocity) update
+\[
+\begin{aligned}
+  X[n+1] &= X[n] + \dth\,V[n],\\
+  V[n+1] &= V[n] + \dth\,\big(K\LR\Phi - D\,V[n] - \nabla V(\Phi) + J-\eta\big)/M,
+\end{aligned}
+\]
+with $n$ the tick counter and $\dth$ the retained-distinction phase increment
+(\emph{not} physical $dt$; Clock Registry, main text). \emph{Coq.} decay-ratio /
+backward-Euler brick \code{InfoDecayRatioFromTauC.v}. \emph{Tier.} \Thq{}
+(the continuum $\exp(-\Gamma_{\mathrm{damp}} t)$, with damping rate $\Gamma_{\mathrm{damp}}=D/(2M)$, is I2, \Refu{}). \emph{Why.} The update is the
+spine \emph{as arithmetic over $\mathbb{Q}$}: every quantity is a finite
+readout and no limit is ever taken --- the discrete dynamics is primary, not an
+approximation to a smooth one.
+
+\paragraph{Step 4$'$ --- the same spine as a stationary action.}
+\emph{Statement.} Over one node-window $p\to m\to q$ the discrete window action
+\[
+  A_{\mathrm{win}}(m)=M|q-m|^2+M|m-p|^2-h^2K\,\mathrm{gform}(m,m)
+\]
+is stationary, $\partial A_{\mathrm{win}}/\partial m=0$, exactly on the update
+of Step~4. \emph{Coq.} \code{InfoActionStationarity.v}
+(with \code{InfoGeodesicActionStationarity} giving $M\,\mathrm{acc}=\tfrac12\gamma
+\,\mathrm{vel}^2$, the exact discretisation of $M\ddot x=-\tfrac12 M'\dot x^2$).
+\emph{Tier.} \Thq{}. \emph{Why.} Stationarity is proved as an exact ring
+identity, not a variation-in-the-limit, so the Euler--Lagrange envelope is a
+$\mathbb{Q}$-readout on equal footing with the update.
+
+% =====================================================================
+\section{Telegraph form and mass}\label{sec:telegraph}
+% =====================================================================
+\paragraph{Step 5 --- the spine IS the telegraph equation; $M=1/2\tau_c$.}
+\emph{Statement.} The spine $M\partial_{tt}\Phi+D\partial_t\Phi+K\LR\Phi=0$ is
+\emph{literally} the telegraph equation, and matching the damping to the
+retained-distinction correlation time $\tau_c$ fixes the mass
+\[
+  M=\frac{1}{2\tau_c}.
+\]
+\emph{Coq.} core \code{InfoTelegraph}. \emph{Tier.} \Thq{} (mass identity exact
+over $\mathbb{Q}$). \emph{Why.} Mass is not inserted --- it is \emph{read out}
+of the dissipative time-scale of the same equation, closing ``what is inertia''
+in terms of the RD root alone.
+
+% =====================================================================
+\section{The discriminant crossover}\label{sec:crossover}
+% =====================================================================
+\paragraph{Step 6 --- one algebraic knife-edge splits the regimes.}
+\emph{Statement.} The temporal characteristic on an $\LR$-eigenmode $\lambda$ is
+$p_{\mathrm{char}}=M\omega^2+D\omega+K\lambda$, with discriminant and crossover
+\[
+  \mathrm{disc}=D^2-4MK\lambda,\qquad \lambda_c=\frac{D^2}{4MK},
+\]
+and the exact completion of the square $4M\,p_{\mathrm{char}}=(2M\omega+D)^2-\mathrm{disc}$.
+\emph{Coq.} \code{InfoTelegraphCrossover.v}: \code{char\_complete\_square},
+\code{critical\_disc\_zero}, \code{underdamped\_iff\_above\_crit}. \emph{Tier.}
+\Thq{}. \emph{Why.} The single sign of $\mathrm{disc}$ decides everything below,
+and it is fixed by an exact algebraic identity, not a numerical threshold.
+
+\paragraph{Step 6a --- under-damped = quantum.}
+\emph{Statement.} For $\mathrm{disc}<0$, $p_{\mathrm{char}}>0$ for every real
+$\omega$: no real frequency root, hence oscillatory (wave/quantum, the
+\code{InfoSchrodinger} side). \emph{Coq.} \code{underdamped\_positive}.
+\emph{Tier.} \Thq{}. \emph{Why.} A strictly positive characteristic has only
+complex roots --- looping, not settling.
+
+\paragraph{Step 6b --- over-damped = classical.}
+\emph{Statement.} For $\mathrm{disc}\ge 0$, $p_{\mathrm{char}}\le 0$ at
+$\omega=-D/2M$: a real decay root exists, hence pure decay (diffusion/classical,
+the \code{InfoDecoherence} side). \emph{Coq.}
+\code{overdamped\_min\_nonpositive}. \emph{Tier.} \Thq{}. \emph{Why.} A real
+root is a settling mode --- the classical branch is where distinction relaxes.
+
+\paragraph{Step 6c --- witnesses.}
+\emph{Statement.} $(M,D,K,\lambda)=(1,1,1,1)\Rightarrow\mathrm{disc}=-3<0$
+(under-damped/quantum); $(1,4,1,1)\Rightarrow\mathrm{disc}=12>0$
+(over-damped/classical). \emph{Tier.} \Fin{}. \emph{Why.} Both regimes are
+actually realised over $\mathbb{Q}$, so the crossover is non-vacuous.
+
+\paragraph{Step 6d --- the crossover IS the horizon = agency knife-edge.}
+\emph{Statement.} The telegraph $\mathrm{disc}$ \emph{is} the core
+\code{InfoFrontier.spine\_discr}, and $\lambda_c$ \emph{is}
+\code{spine\_lambda\_c}; the oscillatory (quantum) regime is exactly
+\emph{above} the horizon. \emph{Coq.}
+\code{InfoTelegraphHorizonUnification.v}: \code{disc\_is\_spine\_discr},
+\code{lam\_c\_is\_spine\_lambda\_c}, \code{quantum\_iff\_above\_horizon},
+\code{oscillatory\_above\_horizon}. \emph{Tier.} \Thq{}; reading \Dr{}.
+\emph{Why.} One knife-edge unifies quantum$\leftrightarrow$classical (dynamics),
+the black-hole horizon (GR), and the agency threshold: looping above, settling
+at or below.
+
+% =====================================================================
+\section{The discrete curvature tensor}\label{sec:curvature}
+% =====================================================================
+Here $K\!\cdot\!\LR$ (Step~2--3) is unfolded into a full discrete curvature
+tensor, still entirely over $\mathbb{Q}$, still division-free where it matters.
+
+\paragraph{Step 7 --- Christoffel = first difference (and $\neq$ curvature).}
+\emph{Statement.} The connection is the first finite difference
+$\code{christoffel\_fd}\;w\,j=w(S\,j)-w\,j$. An affine weight gives a
+\emph{nonzero} Christoffel yet \emph{zero} curvature. \emph{Coq.}
+\code{InfoDiscreteRiemannCurvature.v}:
+\code{christoffel\_can\_be\_nonzero\_while\_flat}. \emph{Tier.} \Thq{}.
+\emph{Why.} Curvature must be a \emph{second}-order object; a nonzero connection
+that is still flat proves the first difference alone is gauge, not geometry.
+
+\paragraph{Step 8 --- Riemann = second difference.}
+\emph{Statement.} $\code{riemann\_fd}=w(S(S\,j))-2\,w(S\,j)+w\,j$; affine
+$\Rightarrow$ flat, and the non-affine witness $w=q\,n^2$ gives
+$\code{riemann\_fd}\,0=2\neq0$; $\text{flat}\Leftrightarrow$ locally affine
+(arithmetic progression). \emph{Coq.} \code{riemann\_is\_second\_difference},
+\code{affine\_is\_flat}, \code{curvature\_nonzero\_witness},
+\code{flat\_iff\_second\_diff\_zero}. \emph{Tier.} \Thq{}. \emph{Why.} This is
+the same second difference that defines $\LR$ (Step~2): geometry and the root
+operator are the same object read curvature-first.
+
+\paragraph{Step 9 --- Riemann = group commutator (Heisenberg, division-free).}
+\emph{Statement.} Genuinely two-index curvature is the group commutator on the
+Heisenberg / upper-unipotent group (polynomial inverse, so \emph{no division}):
+$R_{xy}=$ the centre of $[X,Y]=a\cdot b$, with $[Y,X]=-a\cdot b$; abelian,
+scalar, and same-direction plaquettes are all flat. \emph{Coq.}
+\code{InfoDiscreteRiemannCommutator.v}: \code{plaquette\_curvature\_z},
+\code{reverse\_antisymmetric}, \code{curvature\_is\_central}. \emph{Tier.}
+\Thq{}. \emph{Why.} Holonomy around a plaquette is a commutator; realising it in
+a nilpotent \emph{group} keeps everything in $\mathbb{Q}$ and delivers
+kl-antisymmetry exactly, without any limit or inverse.
+
+\paragraph{Step 10 --- ij-antisymmetry + Jacobi = first Bianchi ($\mathfrak{so}(3)$).}
+\emph{Statement.} On the metric-compatible algebra $\mathfrak{so}(3)\cong
+(\mathbb{Q}^3,\times)$ the generator $\code{asym}\,u$ is antisymmetric, the
+matrix commutator satisfies $[\code{asym}\,u,\code{asym}\,w]=\code{asym}(u\times
+w)$, curvature is ij-antisymmetric, and the \emph{Jacobi identity is the first
+Bianchi identity}. \emph{Coq.} \code{InfoMetricCompatibleCurvature.v}:
+\code{asym\_is\_antisymmetric}, \code{commutator\_is\_asym\_cross},
+\code{curvature\_ij\_antisymmetric}, \code{bianchi\_jacobi}. \emph{Tier.} \Thq{}.
+\emph{Why.} Metric compatibility forces the connection into $\mathfrak{so}(3)$,
+where the cross product closes the bracket and the algebraic Bianchi identity is
+just Jacobi --- proven, division-free.
+
+\paragraph{Step 11 --- rational $SO(2)/SO(3)$ isometry (Cayley).}
+\emph{Statement.} Genuine rotations exist over $\mathbb{Q}$: $SO(2)$ via the
+Cayley / Pythagorean map $N=(I-A)\,\mathrm{adj}(I+A)$ with $N^{\!\top}N=(1+t^2)^2
+I$; and a rational $SO(3)$ capstone (two $(3,4,5)$ rotations, holonomy $\neq I$)
+carrying nonzero rational curvature. \emph{Coq.} \code{InfoRationalIsometry.v},
+\code{InfoRationalSO3Curvature.v}. \emph{Tier.} \Thq{}. \emph{Why.} Transport
+must be an isometry; the Cayley map gives exact rational orthogonal transport
+with \emph{no} $\sqrt{\cdot}$, so curved holonomy is a $\mathbb{Q}$-readout.
+
+\paragraph{Step 12 --- metric-derived Levi-Civita (rational, $g^{-1}$ no $\sqrt{g}$).}
+\emph{Statement.} From a metric $g=\mathrm{diag}(1,w)$ the Levi-Civita symbol
+$\Gamma^2_{12}=\tfrac12\,dw/w$ is rational for $w\neq0$ (it needs only $g^{-1}$,
+never $\sqrt{g}$), and $R_{1212}=-\tfrac12\,ddw+(dw)^2/(4w)$: flat on constant
+$w$, curved witness $R_{1212}=-\tfrac14$. \emph{Coq.}
+\code{InfoMetricDerivedCurvature.v}: \code{christoffel\_G212\_rational},
+\code{flat\_constant\_zero\_curvature}, \code{curved\_witness}. \emph{Tier.}
+\Thq{}. \emph{Why.} The connection is \emph{derived from the metric} (not
+posited) and remains rational because only the inverse metric enters; the square
+root that an orthonormal frame would demand is exactly the object refused in
+Step~14.
+
+\paragraph{Step 13 --- second Bianchi $dF=0$; pair symmetry derived.}
+\emph{Statement.} The abelian differential Bianchi identity holds on the $3$D
+lattice, $d_zF_{xy}+d_xF_{yz}+d_yF_{zx}=0$, from mixed-difference commutation
+(nonzero-curvature witness, not vacuous); and the pair symmetry
+$R_{ijkl}=R_{klij}$ is \emph{derived} from A1 (ij-antisym) + A2 (kl-antisym) +
+B1 (first Bianchi), for abstract $R$ over $\mathbb{Q}$. \emph{Coq.}
+\code{InfoDiscreteSecondBianchi.v}: \code{second\_bianchi},
+\code{mixed\_differences\_commute}; \code{InfoRiemannPairSymmetry.v}:
+\code{pair\_symmetry}. \emph{Tier.} \Thq{}. \emph{Why.} With all four Riemann
+symmetries (kl-antisym, ij-antisym, first Bianchi, pair symmetry) and both
+Bianchi identities machine-checked, the discrete curvature tensor is
+\emph{structurally complete} (cpg \code{DEC-curvature-chain-complete}).
+
+% =====================================================================
+\section{The $\sqrt{g}$ frame refused (I1 non-readout)}\label{sec:refusal}
+% =====================================================================
+\paragraph{Step 14 --- where the thread stops, on purpose.}
+\emph{Statement.} An orthonormal frame requires $\sqrt{g}$. For a non-perfect-square
+metric such as $\mathrm{diag}(1,2)$ there is \emph{no rational frame}: the frame
+is an I1 injected infinity ($\mathbb{R}$-completeness), while the connection and
+curvature of Step~12 stay rational. \emph{Coq.}
+\code{InfoMetricFrameNonReadout.v}: \code{metric\_frame\_diag12\_no\_rational}.
+\emph{Tier.} \Thq{}$\to$\Refu{}. \emph{Why.} The theory reads the geometry
+through $g^{-1}$ (rational), and \emph{declines} the frame: $\sqrt{g}$ is a
+non-readout no agency ever reads, so it is refused as a \emph{position, verified
+where refused} --- not a gap. This is the local face of the Continuum Refusal
+that replaces any ``graph-to-continuum'' gate: the discrete tensor PDE over
+$\mathbb{Q}$ is complete on its own terms.
+
+% =====================================================================
+\section{The naive non-abelian Bianchi defect}\label{sec:defect}
+% =====================================================================
+\paragraph{Step 15 --- an honest negative, exactly measured.}
+\emph{Statement.} Extending the differential Bianchi identity to the non-abelian
+(group) case by the \emph{naive} covariant difference fails, and it fails by an
+exact amount: the Leibniz defect
+\[
+  \text{(naive covariant Bianchi defect)}=\mathrm{cross}(dA,\,dB).
+\]
+\emph{Coq.} \code{InfoDiscreteLeibnizObstruction.v}. \emph{Tier.} \Thq{}
+(an exact identity for the \emph{defect}). \emph{Why.} The finite Leibniz rule
+carries a cross-term that a genuine non-abelian Bianchi identity must absorb
+through transport; measuring the defect exactly is what turns the correct
+non-abelian statement into a well-posed \emph{positive} target (Step~O2), rather
+than a vague ``does it work'' question.
+
+% =====================================================================
+\section{The honest ledger}\label{sec:ledger}
+% =====================================================================
+Nothing in \S\S\ref{sec:root}--\ref{sec:defect} tagged \Thq{} is open: the RD
+root, $\LR$, the spine PDE, the telegraph mass, the discriminant crossover, and
+the entire curvature tensor (Steps~7--13, all four symmetries and both Bianchi
+identities) are closed, axiom-free results over $\mathbb{Q}$. What remains is
+cleanly split into \emph{genuine positive extensions} and \emph{refused
+non-readouts}. The two must not be confused.
+
+\paragraph{[Open] --- genuine positive research targets (not gaps in the closed
+results).}
+\begin{itemize}\setlength\itemsep{2pt}
+\item[\Open] \textbf{O1 --- full $R^i{}_{jkl}$ in $n\ge3$.} The complete
+metric-derived Riemann array satisfying all symmetries, from a general
+(non-diagonal, non-affine) metric $g$ --- beyond the $\mathrm{diag}(1,w)$ single
+component $R_{1212}$ of Step~12.
+\item[\Open] \textbf{O2 --- exact non-abelian (group) second Bianchi.} In
+transport / holonomy-cube form; the naive covariant form provably fails by the
+exact defect $\mathrm{cross}(dA,dB)$ of Step~15, so the correct statement needs
+the transport-corrected cube.
+\item[\Open] \textbf{O3 --- general parametrised $SO(n)$ family.} Tied to a
+metric $g$; $n=2$ ($SO(2)$) and a witnessed rational $SO(3)$ are closed
+(Step~11), the general family is open.
+\item[\Open] \textbf{O4 --- Schr\"odinger reduction and absolute constants.} The
+non-relativistic Schr\"odinger reduction, and the numeric values of the absolute
+constants $M,D,K,\tau_c$ --- \code{OPEN\_CONSTANTS}: there is no external anchor
+for these absolute values, and none is claimed. The complex/real \emph{root
+magnitudes} of the telegraph characteristic are \emph{not} listed here: their
+\emph{sign/regime} over $\mathbb{Q}$ is already \Thq{} (Step~6), and their
+transcendental \emph{values} are \Refu{} (below), not an unfinished target.
+\end{itemize}
+
+\paragraph{[Refused] --- non-readouts declined on thesis grounds (not gaps;
+\S\ref{sec:refusal}).}
+\begin{itemize}\setlength\itemsep{2pt}
+\item[\Refu] The \textbf{continuum} Riemann tensor / smooth $d^2g$, $d\Gamma$, and
+any continuum limit of the spine PDE (I2, $h\to0$).
+\item[\Refu] The \textbf{orthonormal frame $\sqrt{g}$} (I1) --- proven
+non-readout for non-perfect-square $g$ (Step~14).
+\item[\Refu] \textbf{Born-rule uniqueness} (I1).
+\item[\Refu] The \textbf{real/complex root magnitudes} of the telegraph
+characteristic --- the transcendental phase/rate \emph{values} in $+$reals (I1
+non-readout). The \emph{sign/regime} over $\mathbb{Q}$ is \Thq{} (Step~6); the
+magnitude \emph{values} are declined, not left \Open{}.
+\item[\Refu] Full continuum GR / Einstein dynamical closure \emph{as a target};
+the GR content enters only through the discrete $K\!\cdot\!\LR$ geometry readout
+and the horizon knife-edge (Step~6d), both \Thq{}.
+\end{itemize}
+
+\begin{quote}\small
+Do not tag any of Steps~2--13 \Open{}: the discrete tensorial spine and the
+curvature chain are closed \Thq{}. The absolute constant values are \Open{} (no
+anchor, none claimed); the continuum and $\sqrt{g}$ are \Refu{}. The continuum is
+the map, not the territory.
+\end{quote}
+
+% =====================================================================
+\section*{Acknowledgements}
+% =====================================================================
+This work was developed through Open-Civil Science, within a polycentric epistemology of
+Human--AI co-thinking. The author gratefully acknowledges Walancha Supantarika for her
+support and encouragement in the broader development of this project. Any remaining errors are
+solely the author's own.
+
+% =====================================================================
+\section*{Author Declarations}
+% =====================================================================
+\textbf{Funding.} No specific grant from any funding agency in the public, commercial, or
+not-for-profit sectors was received.\\[0.25em]
+\textbf{Competing Interests.} The author declares no competing interests.\\[0.25em]
+\textbf{AI Assistance Disclosure.} Artificial-intelligence tools were used in an assistive
+capacity for the mechanized proof development, numerical pre-verification, language support,
+and editorial refinement. All substantive constructions, proof strategies, interpretive
+judgments, and final decisions were made and verified by the author, and every machine-checked
+claim is independently confirmable by the \code{coqc} kernel.\\[0.25em]
+\textbf{Code Availability.} The Coq sources of every machine-checked claim, maintained at
+\url{https://github.com/morrocwi/causal-quantum-gravity} (\code{formal/}, with a \code{Makefile}
+and reproduction commands), constitute the artifact and reproduce every machine-checked claim
+offline; each file compiles under \code{coqc}~8.20.1 with exit status~0 and
+\code{Print Assumptions} = \emph{Closed under the global context}. Every commit is additionally
+re-verified end-to-end by continuous integration (\code{make verify} on GitHub Actions); the
+badge is the authoritative live count.
+
+\end{document}
