@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spine-pde"
+version = "0.1.0"
+description = "Discrete tensor-PDE spine field theory: retained-difference graph, master spine solver, telegraph regime analysis, and discrete curvature (exact + fast modes)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ANSE.ASIA research" }]
+keywords = [
+    "discrete-pde",
+    "graph-laplacian",
+    "telegraph-equation",
+    "discrete-curvature",
+    "symplectic-integrator",
+    "mathematical-physics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+]
+
+[project.optional-dependencies]
+exact = ["sympy>=1.11"]
+test = ["pytest>=7.0"]
+dev = ["pytest>=7.0", "sympy>=1.11"]
+
+[project.scripts]
+spine-pde = "spine_pde.cli:main"
+
+[project.urls]
+Homepage = "https://example.org/spine-pde"
+Source = "https://example.org/spine-pde"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["spine_pde*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

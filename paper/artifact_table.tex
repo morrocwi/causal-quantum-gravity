@@ -1,0 +1,38 @@
+% Artifact inventory -- discrete-curvature / telegraph-horizon Coq stream.
+% Requires: \usepackage{tabularx,booktabs}. Column Y = ragged-right flexible X.
+% All artifacts TIER = Th_coqc (Q-only, axiom-free), coqc 8.20.1 exit 0.
+% "Checks" = number of `Print Assumptions` commands in each _attempt.v source,
+% each printing "Closed under the global context" (axiom-free) on compilation.
+\begin{table*}[t]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{3.15cm}l Y c l@{}}
+\toprule
+File & Tag & Contents (selected) & Checks & SHA-256 prefix (16 hex)\\
+\midrule
+\code{InfoDiscreteRiemannCurvature\_attempt.v} & \Thq{} & Discrete Riemann curvature as the metric's finite second difference of the Christoffel; exposes the smuggled continuum gradient. & 5 & \code{33af18de36085e02} \\
+\code{InfoDiscreteGaussBonnet\_attempt.v} & \Thq{} & Total curvature telescopes to a boundary Christoffel term; closed loop $\Rightarrow$ zero total curvature (finite Gauss--Bonnet). & 3 & \code{1620b0177ccd0fb0} \\
+\code{InfoDiscreteRiemannCommutator\_attempt.v} & \Thq{} & Genuine 2-index curvature $=$ parallel-transport holonomy / Heisenberg group commutator (matrix non-commutativity). & 5 & \code{19af721b717a05a8} \\
+\code{InfoConnectionFromFrame\_attempt.v} & \Thq{} & Ties the curvature-commutator to a group-valued frame field; pure-gauge connection is provably flat. & 3 & \code{4d9986de7bf2b126} \\
+\code{InfoMetricCompatibleCurvature\_attempt.v} & \Thq{} & Metric-compatible curvature: $ij$-antisymmetry and algebraic (first) Bianchi at the Lie-algebra level, division-free. & 4 & \code{a4ded27578566594} \\
+\code{InfoRationalIsometry\_attempt.v} & \Thq{} & A rational isometry ($M^{\top}M=I$) exists over $\mathbb{Q}$ division-free via the Cayley transform ($SO(2)$ gap closed). & 4 & \code{a4d868858d190100} \\
+\code{InfoRationalSO3Curvature\_attempt.v} & \Thq{} & Capstone: two rational $SO(3)$ rotations whose holonomy is a nonzero rational metric-compatible curvature, division-free. & 4 & \code{55c5d53ccdaf8c24} \\
+\code{InfoMetricDerivedCurvature\_attempt.v} & \Thq{} & Levi-Civita Christoffel/curvature is a rational readout ($g^{-1}$ only, no frame square root, no I1). & 3 & \code{0dd29cb5f7f4f1fc} \\
+\code{InfoDiscreteSecondBianchi\_attempt.v} & \Thq{} & Differential (second) Bianchi $dF=0$ for the abelian case, exact finite-difference commuting identity ($ddA=0$). & 3 & \code{6ab41c92d8ef89e9} \\
+\code{InfoRiemannPairSymmetry\_attempt.v} & \Thq{} & Pair symmetry $R_{ijkl}=R_{klij}$ derived (not posited) from the two antisymmetries $+$ first Bianchi. & 1 & \code{713c46c8d44c361a} \\
+\code{InfoMetricFrameNonReadout\_attempt.v} & \Thq{} & The orthonormal frame $\sqrt{g}$ is an I1 non-readout (irrational) for a rational metric --- refused, not fillable. & 3 & \code{cdade9e6a33910b2} \\
+\code{InfoDiscreteLeibnizObstruction\_attempt.v} & \Thq{} & The discrete Leibniz defect obstructing non-abelian covariant Bianchi is exactly $\mathrm{cross}(dA,dB)$. & 2 & \code{5823bdcef3dc81aa} \\
+\code{InfoTelegraphCrossover\_attempt.v} & \Thq{} & Dynamical quantum$\leftrightarrow$classical crossover $=$ the telegraph discriminant; its critical point is the spine knife-edge. & 4 & \code{9339a60c7c319b9e} \\
+\code{InfoTelegraphHorizonUnification\_attempt.v} & \Thq{} & The telegraph crossover \emph{is} the black-hole horizon $=$ agency knife-edge: one $\lambda_c$ on the one spine. & 4 & \code{8c1f783b858c6880} \\
+\midrule
+\textbf{Totals: 14 files} & \Thq{} & Discrete-curvature $\to$ telegraph-horizon Coq stream, all $\mathbb{Q}$-only axiom-free. & \textbf{48} & 14 files \\
+\bottomrule
+\end{tabularx}
+\caption{Artifact inventory --- authoritative copies at \code{formal/} of
+\url{https://github.com/morrocwi/causal-quantum-gravity}; SHA-256 prefixes (first 16 of 64 hex
+characters) of \code{sha256sum} on each \code{\_attempt.v} source. Each file is standalone and
+compiles under \code{coqc}~8.20.1 with exit status~0. ``Checks'' counts \code{Print Assumptions}
+commands; every one reports \emph{Closed under the global context} (axiom-free over $\mathbb{Q}$).
+Every file was numerically pre-verified with exact rational arithmetic (typically $200$--$400$
+random draws) before authoring.}
+\label{tab:artifacts}
+\end{table*}

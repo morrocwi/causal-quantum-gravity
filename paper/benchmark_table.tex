@@ -1,0 +1,48 @@
+% Requires \usepackage{tabularx,booktabs}. Column Y = ragged-right flexible X.
+% Flagship physics benchmarks for the discrete spine field theory (spine_pde).
+% Everything finite / discrete / sparse -- the continuum is REFUSED.
+% Numbers produced by re-running benchmarks/physics/{cosmology,quantum,matter,curvature}.py
+% Author: Yaoharee Lahtee / OCSI.
+\begin{table*}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabularx}{\textwidth}{@{}l l Y l l Y@{}}
+    \toprule
+    Domain & Problem size & Key result & Sparse:dense mem. & Wall-clock & Exact Coq cross-check (tier) \\
+    \midrule
+    Cosmology
+      & $103{,}823$ nodes ($47^3$ web)
+      & horizon $\lambda_c=1$; split $40/40$ OSC/DECAY
+      & $8.6$\,MB\,:\,$80.3$\,GB $=\mathbf{9606\times}$
+      & $96.9$\,s
+      & $\mathrm{disc}(\lambda_c)=0$, $\mathrm{disc}(1,1,1,1)=-3$ \textbf{[Th\_coqc]} \\
+    Quantum
+      & ring $n=400$ ($398$ modes)
+      & crossover $\lambda_c=1$: $\mathbf{265}$ OSC / $\mathbf{133}$ DECAY
+      & sparse $L_R$ (nnz $800$)
+      & $0.4$\,s
+      & $\mathrm{disc}(1,1,1,1)=-3$, $\mathrm{disc}(1,4,1,1)=+12$ \textbf{[Th\_coqc]} \\
+    Matter
+      & path $n=201$; ring $n=12$
+      & mass $=D/2M$; kink $w=2.888\;(\!\sim\!\sqrt{2K})$, $100\%$ loc.
+      & dense-free ($n\!\le\!201$)
+      & $0.3$\,s
+      & $\mathrm{mass}(1,1)=1/2$ \textbf{[Th\_coqc]}; $7/7$ pass \\
+    Curvature
+      & nodes $0\ldots7$, exact $\mathbb{Q}$
+      & $R^{\mathrm{fd}}(n^2)=2$, $R_{1212}=-\tfrac14$, $[X,Y]{=}15$
+      & division-free exact
+      & $0.2$\,s
+      & $5$ Coq witnesses, $15/15$ pass \textbf{[Th\_coqc]} \\
+    \bottomrule
+  \end{tabularx}
+
+  \vspace{2pt}
+  \footnotesize
+  \textbf{[Th\_coqc]} $=$ value matches a Coq~8.20.1 theorem bit-for-bit (exact rational);
+  \textbf{[finite\_diagnostic]} $=$ finite numeric readout. No dense $N^2$ array is ever formed;
+  the continuum is never a target.
+  \caption{Flagship physics benchmarks (finite / discrete / sparse; the continuum is refused).}
+  \label{tab:benchmark}
+\end{table*}
