@@ -20,7 +20,16 @@ quantum dispersion (`M·ω²=K·λ`) and into the wave/box operator
 (`Box_quad`), and `InfoQuantumRelativityUnification.v` proves
 these are literally the same statement, not an analogy. This is the level
 at which this project's actual, checkable unification claim lives, and it
-is done.
+is done. **Tier-honesty pointer (added 2026-07-08 — see `SUPPLEMENT.md`
+§1.1/§8 for the full statement, and `research_universal_solver`'s
+2026-07-07 borrow-audit that first raised this):** "closed... done" is
+accurate for the algebraic identity itself (a genuine, non-vacuous `ring`
+proof) — it is NOT accurate as "QM and SR are derived from one root."
+`Box_quad`'s Minkowski signature/boost constraint and `spine_residual`'s
+`M,D,K` are each POSITED, not forced by the graph root (`SUPPLEMENT.md`
+§1.1 traces exactly which link — `L_R` alone — is genuinely forced). Read
+this level as "one real identity between two posited-but-independently-
+characterized constructions," not as "QM and SR both derived, matching."
 
 **A precise addendum on Schwarzschild specifically, because "connected to
 GR" is ambiguous and this project has exactly one half of it.** The word

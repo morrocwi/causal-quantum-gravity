@@ -12,7 +12,11 @@
 >
 > 1. **TENSOR-PDE TRACK — the current, most-advanced state → [`paper/tensor_pde.tex`](paper/tensor_pde.tex) / [`.pdf`](paper/tensor_pde.pdf).**
 >    The master spine as a tensor field PDE `M∂ₜₜΦ + D∂ₜΦ − K·L_R·Φ + ∇V = J−η`. Proven over ℚ (`Th_coqc`):
->    - QM and SR are **the same equation** (`box_quad = spine_residual`, boost-invariant);
+>    - QM and SR are **the same equation** (`box_quad = spine_residual`, boost-invariant) — **tier-honest
+>      reading (SUPPLEMENT.md §1.1/§8):** this is a real, non-vacuous `ring` identity relating two POSITED
+>      constructions (the spine's free `M,D,K` slots; the boost's posited Minkowski signature/hyperbola
+>      constraint) under a *chosen* reparametrization — a relabeling of two posits, not a derivation that
+>      forces the two forms to coincide from something prior to both;
 >    - the **quantum↔classical crossover = the black-hole horizon = the agency knife-edge**, as ONE
 >      *internal* algebraic discriminant `disc = D²−4MKλ`, critical at `λ_c = D²/4MK`
 >      (`InfoTelegraphCrossover`, `InfoTelegraphHorizonUnification`). **This horizon is derived on the
@@ -26,12 +30,17 @@
 >    was reading this track, not the tensor-PDE track.)
 >
 > **The level, stated plainly (tier-honest):**
-> - **Proven `Th_coqc` (ℚ):** one spine · QM↔SR identity · quantum↔classical crossover = horizon = agency
->   as an *internal* discriminant · the full discrete curvature tensor + both Bianchi + pair-symmetry.
+> - **Proven `Th_coqc` (ℚ):** one spine (with exactly ONE term — `L_R` — forced from the root; `M` and `D`
+>   are independent structural primitives `[Dr]` — a tagged interpretive verdict resting on `Th_coqc`
+>   witnesses, not itself machine-proved, not derived, see SUPPLEMENT.md §1.1) · QM↔SR identity (a real
+>   relabeling of two posited objects, see §8 amendment, not a from-the-root derivation) · quantum↔classical
+>   crossover = horizon = agency as an *internal* discriminant · the full discrete curvature tensor + both
+>   Bianchi + pair-symmetry.
 > - **`[Open]` (honest, not faked):** absolute constants (M,D,K,τ_c) · metric-derived full `R^i_jkl` in n≥3 ·
 >   the non-abelian *group* Bianchi.
 > - **`[Refused]` (thesis, not gaps):** continuum GR / Einstein field equations · the `√g` frame · irrational
->   values — non-readouts declined by design.
+>   values — non-readouts declined by design, on **both** ends of every non-readout pair (injected exact-zero
+>   AND injected infinity are one reciprocal diagnostic, `1/0=∞` — see SUPPLEMENT.md §1.2, "the Guard").
 > - **Net:** *very high as an equation-level formal kernel; partial as a full physical theory — and that
 >   boundary is drawn on purpose, machine-verified, not hidden.*
 >
@@ -43,9 +52,20 @@
 ## Foundational track (the layer the tensor-PDE track builds on)
 
 **One mother equation — `M∂²Φ + D∂Φ + K·L_R·Φ + ∇V(Φ) = J−η` on a graph Laplacian
-`L_R` — genuinely derives quantum mechanics and special relativity at the equation
-level (machine-checked in Coq, axiom-free over ℚ), and proves the two are literally
-*the same equation* under an exact algebraic reparametrization. A six-result
+`L_R` — machine-checked in Coq, axiom-free over ℚ, proves the QM dispersion and SR
+wave operator are literally *the same equation* under an exact algebraic
+reparametrization.** Tier-honest scope (see SUPPLEMENT.md §1.1, added 2026-07-08
+after a full borrow-audit of the sibling repo this project shares its formal core
+with): genuine derivation from the graph root `δ_R` is earned at exactly one link —
+`L_R` itself (`InfoRetainedDistinctionForcesLaplacian_attempt.v`, unique-operator
+argument). `M` and `D` are independent structural primitives the equation needs on
+top of that (each backed by its own brick, `InfoStrictConeBothOrders_attempt.v` /
+`InfoDissipationIsIndependent_attempt.v`), not derived from the root; the QM/SR
+identity itself relates constructions built from those posited slots plus a posited
+Minkowski signature, so "derives quantum mechanics and special relativity" is best
+read as *derives `L_R`, and proves a real relabeling identity among the remaining
+posited-but-independently-characterized ingredients* — not a from-one-root
+derivation of either branch whole. A six-result
 strengthening campaign then upgrades four previously-informal claims to theorems: a
 frequency/UV ceiling forced by the graph's own maximum degree, an exact "no local
 creation" energy-balance law, a Schrödinger-shaped skew-adjoint first-order skeleton,
@@ -148,11 +168,20 @@ formal/
   InfoCubicLinearization.v            First file to give the mother equation's nabla-V(Phi) slot a concrete nonzero instance; exact one-step polarization of an on-site cubic force term. Th_coqc.
   InfoReadabilityBoundary.v           No rational stepper parameter gives the 5th-iterate period-5 case; one further instance in the crystallographic-restriction family, explicitly not the general theorem. Th_coqc.
   InfoSpectralCeilingSharp.v          The Anderson-Morley eigenvalue ceiling, mechanized in witness form: lambda <= 4-F_min directly, a factor sqrt(2) tighter than the earlier 2*dmax route. Th_coqc.
+  InfoRetainedDistinctionForcesLaplacian_attempt.v   L_R = D_W-W is the UNIQUE vertex operator with {symmetric, zero-row-sum, off-diagonal<=0}; adjacency/signless/random-walk/normalized alternatives refuted by witness. The one FORCED link in the root->spine chain (SUPPLEMENT.md §1.1). Th_coqc.
+  InfoStrictConeBothOrders_attempt.v   Six forcing readings for why the spine needs a 2nd-order (M) term are each shown insufficient on a 5-node witness; M is an independent structural primitive, not forced by the root (SUPPLEMENT.md §1.1). Th_coqc + [Dr] interpretation (tagged in-file).
+  InfoDissipationIsIndependent_attempt.v   A 2-node toy isolates D: the M-branch preserves a quadratic energy exactly (reversible), the D-branch strictly decreases it every step -- neither derivable from the other (SUPPLEMENT.md §1.1). Th_coqc + [Dr] interpretation (tagged in-file).
+  InfoZeroInfinityReciprocal_attempt.v   The reciprocal 0<->infinity blow-up over Q; the singularity paradigm (Z1 point + I4 density, together) as one non-readout, not two (SUPPLEMENT.md §1.2). Th_coqc + [Dr].
+  InfoOperatorLosesPropertyAtEndpoints_attempt.v   Multiplication over Q provably loses cancellation/invertibility exactly at 0 and has no element to close at infinity -- every operator pays a price at either refused endpoint (SUPPLEMENT.md §1.2). Th_coqc + [Dr].
+  InfoErasureArrowOfTime_attempt.v   x0 erasure and /0 non-readout, machine-checked; zero-as-redistribution not zero-as-destruction (SUPPLEMENT.md §1.2). Th_coqc + [Dr].
 scripts/
   verify_quantum_gravity_root_bridge.py   Finite-graph (PML) quasinormal-mode eigenvalue solver; converges to the literature Schwarzschild QNM. finite_diagnostic.
 ```
 
-40 Coq files, 186 theorems, every one Tier-0 axiom-free or +reals as marked.
+40+ Coq files (this count predates the 2026-07-08 six-file addition above and was
+already not re-verified against `ls formal/*.v` at time of writing -- run
+`ls formal/*.v | wc -l` for the current number rather than trusting this line),
+186+ theorems, every one Tier-0 axiom-free or +reals as marked.
 
 ## How to reproduce
 

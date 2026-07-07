@@ -505,3 +505,80 @@ Tier: all three `Th_coqc`. NOT promoted: `InfoReaderWindowTauC` (its own headlin
 self-labeled a structural shadow / Dr, so it would violate this repo's tier
 discipline and retraction pledge). Elevation scope decided by human_pi; export
 prepared as maker, pending human_pi approval before the public push.
+
+## 2026-07-08 — Elevation + honesty sync: the "three roots" finding, and a headline correction
+
+Context: `research_universal_solver` ran a 4-way adversarial borrow-audit
+(2026-07-07) of its own root→graph→L_R→spine→QM/SR chain (`docs/root/
+BORROWED_VS_DERIVED_LEDGER.md`, merged main after two independent-checker review
+rounds — the first round caught the maker presenting a `[Dr]` verdict as
+machine-settled inside the honesty document itself). Cross-checking this repo
+against that ledger found it had not been synced since the underlying private-repo
+bricks (`InfoStrictConeBothOrders_attempt.v`, `InfoDissipationIsIndependent_attempt.v`,
+`InfoRetainedDistinctionForcesLaplacian_attempt.v` — 2026-07-07) landed, and — more
+importantly — that this repo's own README/CLAUDE.md/SUPPLEMENT.md headline language
+("genuinely derives quantum mechanics and special relativity at the equation
+level," "QM and SR are the same equation," §4's "not an imported Minkowski metric")
+overclaimed relative to what the cited `.v` files actually support, independently
+re-checked here:
+
+- Elevated three bricks (standalone, no `Require` of any other file; re-verified
+  standalone in THIS repo's own namespace, `coqc -q -R . DQG`, before promotion —
+  all `Print Assumptions` "Closed under the global context", axiom-free):
+  `InfoRetainedDistinctionForcesLaplacian_attempt.v` (L_R is the unique operator
+  satisfying the root's own axioms — the one FORCED link), `InfoStrictConeBothOrders_attempt.v`
+  (M is not forced by finitude/cone — independent, `[Dr]`-tagged in-file),
+  `InfoDissipationIsIndependent_attempt.v` (D is independent of M on a 2-node toy,
+  `[Dr]`-tagged in-file). Added to `Makefile`'s `COQFILES`.
+- New `SUPPLEMENT.md` §1.1: states the three-roots finding as a table with explicit
+  tier separation (`Th_coqc` bricks vs. the `[Dr]` independence verdicts they
+  support, exactly as tagged in the source files — not smoothed to "proven").
+- **Correction, not rewrite** (per this log's own "never rewritten with hindsight"
+  rule — old sections kept verbatim, dated amendments appended): §4 now flags that
+  `sgn : Edge -> Q` is a free input parameter in every `InfoLorentz` theorem, not a
+  value derived from `≺` by any theorem there — the causal-form machinery
+  (self-adjoint/permutation-invariant/Euclidean-reduction) is genuinely native; the
+  *specific* timelike-minus signature is posited, matching the sibling repo's
+  independent finding on the identical construction. §8 now flags that
+  `box_quad_is_spine_residual` is a real, non-vacuous `ring` identity (the
+  2026-07-05 adversarial review's finding stands) relating two POSITED
+  constructions (spine's free `M,D,K`; box_quad's posited signature/boost
+  constraint) under a chosen reparametrization — a relabeling of two posits, not a
+  from-the-root derivation.
+- README.md and CLAUDE.md headline bullets corrected to match: "QM and SR are the
+  same equation" now carries the tier-honest gloss inline; the opening "genuinely
+  derives quantum mechanics and special relativity" sentence rewritten to say
+  precisely what's forced (`L_R` only) vs. what's a real-but-posited-ingredient
+  identity (the QM/SR weld).
+
+Verification (re-run by hand in this repo): all three new files compile standalone
+under this repo's own `-R . DQG` namespace, axiom-free, before being added to
+`make verify`'s file list. No existing file's proof term was touched — only
+comments/docs/Makefile changed for files not already in this repo; the three new
+`.v` files are additions, not edits.
+
+Scope decision: this sync does NOT port the full private-repo ledger (20 rows,
+covering complex-i/Born/unitarity/c/ℏ — those constructions, e.g. `InfoComplex`,
+`InfoMeasurementBorn`, do not exist in this repo's exported subset at all, so
+there is nothing here to correct on those specific points yet). It corrects only
+the claims THIS repo actually makes, checked against files THIS repo actually
+ships. A fuller port of the private ledger's remaining findings (if those
+underlying modules are ever elevated here too) is a separate, later task.
+
+**Same-day follow-up: the Zero–Infinity dual (the Guard) was also missing here.**
+This repo has used an injected-**infinity** diagnostic (`I1`–`I4`) repeatedly and
+correctly (§5.2/§5.3's GR-refusal, §6's PML bridge) but never named its reciprocal
+half: injected exact-**zero** (`Z1`–`Z4`, `1/0=∞`), nor the standing pre-benchmark
+check (the Guard) that `research_universal_solver`'s `ZERO_INFINITY_DUAL_DIAGNOSIS.md`
+records after repeatedly catching itself judging the framework against a
+non-readout. Added `SUPPLEMENT.md` §1.2 with the duality, the Guard checklist, and
+a worked example of where this repo already (unnamed) got it right (§6's
+readout-vs-readout QNM comparison) vs. where it originally had to self-correct
+(§5.3). Elevated three of the sibling repo's four machine-checked anchors —
+`InfoZeroInfinityReciprocal_attempt.v`, `InfoOperatorLosesPropertyAtEndpoints_attempt.v`,
+`InfoErasureArrowOfTime_attempt.v` (all standalone, re-verified `coqc -q -R . DQG`,
+axiom-free, added to `Makefile`) — upgrading §1.2 from pure `[Dr]` methodology to
+`Th_coqc`-backed. The fourth anchor (`InfoDistinctionConserved_attempt.v`) needs a
+one-line `Require` rename (`InfoGraphNoether_attempt` → this repo's
+`InfoGraphNoether`, otherwise byte-identical) — named as an explicit open item,
+not silently skipped.

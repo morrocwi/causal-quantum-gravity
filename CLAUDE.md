@@ -7,12 +7,17 @@
 ## What this repo is
 
 A machine-checked (Coq, axiom-free over ℚ) research programme: one graph-Laplacian
-"mother equation" genuinely derives quantum mechanics and special relativity at the
-equation level, and proves they are literally the same equation. General relativity
-is honestly **not** derived — eight independent attempts were tried and refuted or
-left open, documented in full, and the manuscript argues this is the philosophically
-correct outcome, not a numerical shortfall. See `README.md`'s headline paragraphs for
-the actual claims before reading anything else.
+"mother equation" whose spatial coupling term (`L_R`) is genuinely FORCED from the
+graph root, and whose quantum-dispersion and special-relativistic wave-operator
+readouts are proven literally the same equation under an exact algebraic
+reparametrization — a real, non-vacuous `ring` identity, though one relating
+posited (not root-forced) ingredients on both sides; see `SUPPLEMENT.md` §1.1/§4/§8
+(added 2026-07-08) for the tier-honest scope before citing "derives QM and SR" as
+an unqualified claim. General relativity is honestly **not** derived — eight
+independent attempts were tried and refuted or left open, documented in full, and
+the manuscript argues this is the philosophically correct outcome, not a numerical
+shortfall. See `README.md`'s headline paragraphs for the actual claims before
+reading anything else.
 
 ## The documents, and which one to open for what
 
