@@ -75,6 +75,24 @@
 (*   primitive, and does NOT identify DiagPart/SkewOff with the master                *)
 (*   equation's actual M, D coefficients. Candidate upgrade path, not a                *)
 (*   completed unification.                                                          *)
+(*                                                                                    *)
+(* UPDATE (Part 7, appended -- the paragraphs above are the ORIGINAL scope,            *)
+(* kept verbatim, not rewritten with hindsight; this block records what changed):      *)
+(*   Item (b) above is now PARTIALLY closed for a NEW, extended axiom (Part 7):         *)
+(*   {offdiag_le0, rowsum0} imposed on the seed's WHOLE row (diagonal included,          *)
+(*   not just its symmetric part) forces DiagPart (D) to be an exact function of         *)
+(*   SymOff and SkewOff -- D is no longer free once this extended axiom is granted.       *)
+(*   Only a nonnegative weight (Wt) and one scalar (lam) remain posited -- the same        *)
+(*   level of freedom L_R's own edge weights already carry. This does NOT retract          *)
+(*   InfoDissipationIsIndependent_attempt.v's Th_coqc content (its 2-node toy still,        *)
+(*   as literally stated, has an energy-preserving M-branch and a strictly-decreasing        *)
+(*   D-branch with no premise linking them on THAT toy) -- it realizes a possibility          *)
+(*   that file's own SCOPE block explicitly left open: 'not a proof that no larger             *)
+(*   construction could ever recover a D-like term from M and L_R combined.' Part 7 is           *)
+(*   exactly such a larger construction. See Part 7's own header comment for the full             *)
+(*   statement, including what remains posited (Wt, lam) and what is still open (whether           *)
+(*   {offdiag_le0_full, rowsum0_full} are themselves the UNIQUE forced axioms, as opposed            *)
+(*   to a natural-but-chosen extension of L_R's own axioms to the full seed).                        *)
 (******************************************************************************)
 
 Require Import Coq.QArith.QArith.
@@ -633,6 +651,335 @@ Example diag_witness_values_not_uniform_minus_half :
   ~ (DiagPart R0 0%nat 0%nat == -1#2).
 Proof. unfold DiagPart, R0. simpl. intro H. lra. Qed.
 
+(* ========================================================================= *)
+(* PART 7 -- SEED ASYMMETRY AS THE SINGLE ROOT: D itself is now FORCED, not   *)
+(* posited. Parts 1-6 kept D (DiagPart) as a free, independently-chosen         *)
+(* per-node value (Dg), matching InfoDissipationIsIndependent_attempt.v's own    *)
+(* Dr-tier reading that D is a structurally INDEPENDENT ingredient. That          *)
+(* file's own SCOPE block already hedges this exact possibility: 'not a proof     *)
+(* that no larger construction could ever recover a D-like term from M and       *)
+(* L_R combined.' Part 7 is precisely that larger construction -- it does NOT    *)
+(* contradict InfoDissipationIsIndependent's Th_coqc content (its 2-node toy      *)
+(* still, as literally stated, has an M-branch that preserves energy and a        *)
+(* D-branch that strictly decreases it, with no premise relating one to the       *)
+(* other ON THAT TOY); it shows that a DIFFERENT, larger construction (the        *)
+(* asymmetric seed of this file, with rowsum0 imposed on the WHOLE seed, not      *)
+(* just its symmetric part) forces D to be a DERIVED quantity: the symmetric      *)
+(* coupling degree corrected by the seed's own net directional circulation.       *)
+(*                                                                            *)
+(* THE MOVE: extend rowsum0 (originally a property forcing L_R alone, in            *)
+(* InfoRetainedDistinctionForcesLaplacian_attempt.v) from 'the symmetric part      *)
+(* of the seed has zero row-sum' to 'the WHOLE seed, diagonal included, has        *)
+(* zero row-sum' -- the same meaning ('a uniform state retains no distinction,     *)
+(* directed or not') applied to the FULL seed rather than just its symmetric       *)
+(* residue. This one extension is what forces D away from being free.             *)
+(*                                                                            *)
+(* WHAT IS PROVEN (Th_coqc): given rowsum0_full alone (no sign hypothesis          *)
+(* needed for this specific identity), DiagPart(R,i,i) is an EXACT function of      *)
+(* SymOff(R) and SkewOff(R) at node i -- D_i = degree_i(SymOff) - kappa_i(SkewOff), *)
+(* i.e. the pure symmetric-coupling degree MINUS the seed's own net directed        *)
+(* circulation at that node. A concrete construction (R0_forced) realizes this      *)
+(* from exactly TWO free primitives (a nonnegative weight Wt and one scalar lam,    *)
+(* under one joint small-skew sign hypothesis) -- down from the THREE free           *)
+(* primitives (Wt, lam, Dg) Part 5's R0construct needed, because Dg is now GONE,     *)
+(* forced instead of posited. The circulation pattern itself (kappa_0,kappa_1,      *)
+(* kappa_2) = (2,0,-2) on this 3-vertex nat-ordered carrier is a FIXED,              *)
+(* computable combinatorial fact, not a free choice.                                *)
+(*                                                                            *)
+(* WHAT REMAINS OPEN (Dr, not proven): whether {offdiag_le0_full, rowsum0_full}      *)
+(* THEMSELVES are the unique/forced axioms for 'directed retained distinction' --    *)
+(* they are POSITED here as the natural full-seed analogue of L_R's own axioms,      *)
+(* by the same 'meaning of the primitive' argument, not derived from something       *)
+(* prior. The concrete weight Wt and the scalar lam remain free, exactly as L_R's    *)
+(* own edge weights remain free in the original forcing theorem. Whether kappa's     *)
+(* SPECIFIC values (2,0,-2) generalize meaningfully beyond this one 3-vertex          *)
+(* nat-ordered carrier is not addressed.                                             *)
+(* ========================================================================= *)
+
+Definition rowsum0_full (R : nat -> nat -> Q) : Prop :=
+  R 0%nat 0%nat + R 0%nat 1%nat + R 0%nat 2%nat == 0 /\
+  R 1%nat 0%nat + R 1%nat 1%nat + R 1%nat 2%nat == 0 /\
+  R 2%nat 0%nat + R 2%nat 1%nat + R 2%nat 2%nat == 0.
+
+Definition offdiag_le0_full (R : nat -> nat -> Q) : Prop :=
+  R 0%nat 1%nat <= 0 /\ R 0%nat 2%nat <= 0 /\ R 1%nat 2%nat <= 0 /\
+  R 1%nat 0%nat <= 0 /\ R 2%nat 0%nat <= 0 /\ R 2%nat 1%nat <= 0.
+
+(* [Th_coqc] Positivity corollary: the two full-seed axioms together force        *)
+(* every diagonal entry to be NONNEGATIVE -- a genuine 'degree' reading, exactly   *)
+(* the same positivity forced_into_DW_minus_W gives L_R, now for the WHOLE seed. *)
+Theorem rowsum0_full_offdiag_le0_full_diag_nonneg :
+  forall R : nat -> nat -> Q,
+    rowsum0_full R -> offdiag_le0_full R ->
+    R 0%nat 0%nat >= 0 /\ R 1%nat 1%nat >= 0 /\ R 2%nat 2%nat >= 0.
+Proof.
+  intros R [Hr0 [Hr1 Hr2]] [H01 [H02 [H12 [H10 [H20 H21]]]]].
+  repeat split; lra.
+Qed.
+
+(* [Th_coqc] THE KEY THEOREM: D is forced to be exactly the symmetric-coupling    *)
+(* degree at node i, minus the seed's own net directed circulation at i --        *)
+(* an exact identity from rowsum0_full alone (offdiag_le0_full is not even         *)
+(* needed for this specific algebraic fact; it is what makes the two summands       *)
+(* individually meaningful as 'degree' and 'circulation').                          *)
+Theorem diagpart_forced_by_rowsum0_full :
+  forall R : nat -> nat -> Q, rowsum0_full R ->
+    DiagPart R 0%nat 0%nat
+      == -(SymOff R 0%nat 0%nat + SymOff R 0%nat 1%nat + SymOff R 0%nat 2%nat)
+         -(SkewOff R 0%nat 0%nat + SkewOff R 0%nat 1%nat + SkewOff R 0%nat 2%nat)
+    /\
+    DiagPart R 1%nat 1%nat
+      == -(SymOff R 1%nat 0%nat + SymOff R 1%nat 1%nat + SymOff R 1%nat 2%nat)
+         -(SkewOff R 1%nat 0%nat + SkewOff R 1%nat 1%nat + SkewOff R 1%nat 2%nat)
+    /\
+    DiagPart R 2%nat 2%nat
+      == -(SymOff R 2%nat 0%nat + SymOff R 2%nat 1%nat + SymOff R 2%nat 2%nat)
+         -(SkewOff R 2%nat 0%nat + SkewOff R 2%nat 1%nat + SkewOff R 2%nat 2%nat).
+Proof.
+  intros R [Hr0 [Hr1 Hr2]].
+  unfold DiagPart, SymOff, SkewOff. simpl.
+  unfold Qdiv, Qinv. simpl.
+  repeat split; lra.
+Qed.
+
+(* --------------------------------------------------------------------- *)
+(* R0_forced: the seed with D ELIMINATED, not posited -- built from just   *)
+(* TWO free primitives (Wt >= 0, lam), down from Part 5's three (Wt, lam,   *)
+(* Dg). Off-diagonal shape mirrors L_R's own sign convention directly       *)
+(* (-Wt + lam*ord, already offdiag-shaped, not a raw weight needing a        *)
+(* second negation as in Part 5); the diagonal is DEFINED as the negative    *)
+(* row-sum of the off-diagonal, so rowsum0_full holds BY CONSTRUCTION.       *)
+(* --------------------------------------------------------------------- *)
+
+Definition OffVal (Wt : nat -> nat -> Q) (lam : Q) (i j : nat) : Q :=
+  if Nat.eqb i j then 0 else - Wt i j + lam * ord i j.
+
+Definition R0_forced (Wt : nat -> nat -> Q) (lam : Q) (i j : nat) : Q :=
+  if Nat.eqb i j
+  then - (OffVal Wt lam i 0%nat + OffVal Wt lam i 1%nat + OffVal Wt lam i 2%nat)
+  else OffVal Wt lam i j.
+
+(* [Th_coqc] rowsum0_full holds UNCONDITIONALLY, by construction -- no          *)
+(* hypothesis on Wt or lam needed at all. *)
+Theorem R0_forced_rowsum0_full :
+  forall Wt lam, rowsum0_full (R0_forced Wt lam).
+Proof.
+  intros Wt lam.
+  unfold rowsum0_full, R0_forced, OffVal. simpl.
+  repeat split; ring.
+Qed.
+
+(* [CONDITIONAL] offdiag_le0_full needs the small-skew hypothesis: the          *)
+(* directional perturbation lam*ord(i,j) must not overshoot the weight           *)
+(* Wt(i,j) -- the exact discrete analogue of Axiom 12's 'small parameter          *)
+(* skew' epsilon_skew regime (a phenomenological, continuum construction,         *)
+(* NOT ported here; noted only as a resonance in the header). *)
+Theorem R0_forced_offdiag_le0_full_conditional :
+  forall (Wt : nat -> nat -> Q) (lam : Q),
+    lam * ord 0%nat 1%nat <= Wt 0%nat 1%nat ->
+    lam * ord 0%nat 2%nat <= Wt 0%nat 2%nat ->
+    lam * ord 1%nat 2%nat <= Wt 1%nat 2%nat ->
+    lam * ord 1%nat 0%nat <= Wt 1%nat 0%nat ->
+    lam * ord 2%nat 0%nat <= Wt 2%nat 0%nat ->
+    lam * ord 2%nat 1%nat <= Wt 2%nat 1%nat ->
+    offdiag_le0_full (R0_forced Wt lam).
+Proof.
+  intros Wt lam H01 H02 H12 H10 H20 H21.
+  unfold offdiag_le0_full, R0_forced, OffVal. simpl.
+  repeat split; lra.
+Qed.
+
+(* [Th_coqc] SymOff(R0_forced) == -Wt EXACTLY (sign-flipped from Part 5's        *)
+(* SymOff(R0construct)==Wt, since R0_forced's off-diagonal is already L_R-        *)
+(* shaped directly, not a raw weight needing a later negation). *)
+Theorem symoff_R0_forced_is_negWt :
+  forall (Wt : nat -> nat -> Q), (forall i j, Wt i j == Wt j i) ->
+  forall (lam : Q) (i j : nat), i <> j ->
+    SymOff (R0_forced Wt lam) i j == - Wt i j.
+Proof.
+  intros Wt Wt_symmetric lam i j Hij.
+  unfold SymOff, R0_forced, OffVal.
+  apply Nat.eqb_neq in Hij as Hij'.
+  assert (Hji' : Nat.eqb j i = false) by (rewrite Nat.eqb_sym; exact Hij').
+  rewrite Hij', Hji'.
+  assert (Hnum : (- Wt i j + lam * ord i j) + (- Wt j i + lam * ord j i)
+                 == (2#1) * (- Wt i j)).
+  { rewrite (ord_antisymmetric_forced j i), (Wt_symmetric j i). ring. }
+  rewrite Hnum.
+  unfold Qdiv, Qinv. simpl. lra.
+Qed.
+
+(* [Th_coqc] SkewOff(R0_forced) == lam * ord EXACTLY, unchanged from Part 5's    *)
+(* pattern (the Wt contribution cancels via Wt's own symmetry regardless of        *)
+(* the sign convention on Wt). *)
+Theorem skewoff_R0_forced_is_lam_ord :
+  forall (Wt : nat -> nat -> Q), (forall i j, Wt i j == Wt j i) ->
+  forall (lam : Q) (i j : nat), i <> j ->
+    SkewOff (R0_forced Wt lam) i j == lam * ord i j.
+Proof.
+  intros Wt Wt_symmetric lam i j Hij.
+  unfold SkewOff, R0_forced, OffVal.
+  apply Nat.eqb_neq in Hij as Hij'.
+  assert (Hji' : Nat.eqb j i = false) by (rewrite Nat.eqb_sym; exact Hij').
+  rewrite Hij', Hji'.
+  assert (Hnum : (- Wt i j + lam * ord i j) - (- Wt j i + lam * ord j i)
+                 == (2#1) * (lam * ord i j)).
+  { rewrite (ord_antisymmetric_forced j i), (Wt_symmetric j i). ring. }
+  rewrite Hnum.
+  unfold Qdiv, Qinv. simpl. lra.
+Qed.
+
+(* --------------------------------------------------------------------- *)
+(* The circulation pattern kappa_i is a FIXED, computable combinatorial       *)
+(* fact on this 3-vertex nat-ordered carrier -- not a free choice. The          *)
+(* middle index (1) has balanced circulation (0); the extreme indices (0,2)     *)
+(* have net circulation +2/-2, mirroring their position in nat's own order.     *)
+(* --------------------------------------------------------------------- *)
+
+Theorem circulation_values :
+     ord 0%nat 1%nat + ord 0%nat 2%nat == 2
+  /\ ord 1%nat 0%nat + ord 1%nat 2%nat == 0
+  /\ ord 2%nat 0%nat + ord 2%nat 1%nat == -2.
+Proof. unfold ord. simpl. repeat split; reflexivity. Qed.
+
+(* [Th_coqc] THE PAYOFF: D is forced to be exactly degree(Wt) minus lam times    *)
+(* the FIXED circulation constant -- a fully concrete, closed-form consequence     *)
+(* of rowsum0_full applied to R0_forced (unconditional: R0_forced_rowsum0_full     *)
+(* already holds with no hypothesis on Wt/lam at all). *)
+Theorem diagpart_R0_forced_is_degree_minus_circulation :
+  forall (Wt : nat -> nat -> Q), (forall i j, Wt i j == Wt j i) ->
+  forall lam : Q,
+    DiagPart (R0_forced Wt lam) 0%nat 0%nat
+      == (Wt 0%nat 1%nat + Wt 0%nat 2%nat) - lam * (2#1)
+    /\
+    DiagPart (R0_forced Wt lam) 1%nat 1%nat
+      == (Wt 1%nat 0%nat + Wt 1%nat 2%nat) - lam * 0
+    /\
+    DiagPart (R0_forced Wt lam) 2%nat 2%nat
+      == (Wt 2%nat 0%nat + Wt 2%nat 1%nat) - lam * (-2#1).
+Proof.
+  intros Wt Wt_symmetric lam.
+  pose proof (diagpart_forced_by_rowsum0_full (R0_forced Wt lam)
+                (R0_forced_rowsum0_full Wt lam)) as [D0 [D1 D2]].
+  pose proof (symoff_R0_forced_is_negWt Wt Wt_symmetric lam 0%nat 1%nat
+                (ltac:(discriminate))) as S01.
+  pose proof (symoff_R0_forced_is_negWt Wt Wt_symmetric lam 0%nat 2%nat
+                (ltac:(discriminate))) as S02.
+  pose proof (symoff_R0_forced_is_negWt Wt Wt_symmetric lam 1%nat 0%nat
+                (ltac:(discriminate))) as S10.
+  pose proof (symoff_R0_forced_is_negWt Wt Wt_symmetric lam 1%nat 2%nat
+                (ltac:(discriminate))) as S12.
+  pose proof (symoff_R0_forced_is_negWt Wt Wt_symmetric lam 2%nat 0%nat
+                (ltac:(discriminate))) as S20.
+  pose proof (symoff_R0_forced_is_negWt Wt Wt_symmetric lam 2%nat 1%nat
+                (ltac:(discriminate))) as S21.
+  pose proof (skewoff_R0_forced_is_lam_ord Wt Wt_symmetric lam 0%nat 1%nat
+                (ltac:(discriminate))) as K01.
+  pose proof (skewoff_R0_forced_is_lam_ord Wt Wt_symmetric lam 0%nat 2%nat
+                (ltac:(discriminate))) as K02.
+  pose proof (skewoff_R0_forced_is_lam_ord Wt Wt_symmetric lam 1%nat 0%nat
+                (ltac:(discriminate))) as K10.
+  pose proof (skewoff_R0_forced_is_lam_ord Wt Wt_symmetric lam 1%nat 2%nat
+                (ltac:(discriminate))) as K12.
+  pose proof (skewoff_R0_forced_is_lam_ord Wt Wt_symmetric lam 2%nat 0%nat
+                (ltac:(discriminate))) as K20.
+  pose proof (skewoff_R0_forced_is_lam_ord Wt Wt_symmetric lam 2%nat 1%nat
+                (ltac:(discriminate))) as K21.
+  assert (Hs00 : SymOff (R0_forced Wt lam) 0%nat 0%nat == 0)
+    by (unfold SymOff; simpl; reflexivity).
+  assert (Hs11 : SymOff (R0_forced Wt lam) 1%nat 1%nat == 0)
+    by (unfold SymOff; simpl; reflexivity).
+  assert (Hs22 : SymOff (R0_forced Wt lam) 2%nat 2%nat == 0)
+    by (unfold SymOff; simpl; reflexivity).
+  assert (Hk00 : SkewOff (R0_forced Wt lam) 0%nat 0%nat == 0)
+    by (unfold SkewOff; simpl; reflexivity).
+  assert (Hk11 : SkewOff (R0_forced Wt lam) 1%nat 1%nat == 0)
+    by (unfold SkewOff; simpl; reflexivity).
+  assert (Hk22 : SkewOff (R0_forced Wt lam) 2%nat 2%nat == 0)
+    by (unfold SkewOff; simpl; reflexivity).
+  repeat split.
+  - rewrite D0, Hs00, S01, S02, Hk00, K01, K02. unfold ord. simpl. ring.
+  - rewrite D1, S10, Hs11, S12, K10, Hk11, K12. unfold ord. simpl. ring.
+  - rewrite D2, S20, S21, Hs22, K20, K21, Hk22. unfold ord. simpl. ring.
+Qed.
+
+(* --------------------------------------------------------------------- *)
+(* Non-vacuous witness: a concrete Wt/lam instantiation where BOTH             *)
+(* offdiag_le0_full's hypothesis (the small-skew bound) and every downstream     *)
+(* consequence hold together simultaneously on real numbers, with D's forced      *)
+(* value differing at all three nodes (2, 5, -8 below) -- a genuine, non-          *)
+(* degenerate directed seed, not an edge case where the circulation term            *)
+(* vanishes everywhere. *)
+(* --------------------------------------------------------------------- *)
+
+Section SingleRootWitness.
+
+  Definition WtRoot (i j : nat) : Q :=
+    match i, j with
+    | 0%nat,1%nat | 1%nat,0%nat => 4#1
+    | 0%nat,2%nat | 2%nat,0%nat => 3#1
+    | 1%nat,2%nat | 2%nat,1%nat => 5#1
+    | _,_ => 0
+    end.
+
+  Theorem WtRoot_symmetric : forall i j, WtRoot i j == WtRoot j i.
+  Proof.
+    intros i j.
+    destruct i as [|[|[|i]]]; destruct j as [|[|[|j]]]; unfold WtRoot; try reflexivity.
+  Qed.
+
+  Definition lamRoot : Q := 1#1.
+
+  (* lamRoot = 1 satisfies the small-skew bound against WtRoot's weights          *)
+  (* (4, 3, 5 all >= 1 = |lamRoot|), so offdiag_le0_full holds concretely, on        *)
+  (* the 6 index pairs that actually matter for this 3-vertex carrier. *)
+  Theorem lamRoot_satisfies_small_skew :
+    lamRoot * ord 0%nat 1%nat <= WtRoot 0%nat 1%nat /\
+    lamRoot * ord 0%nat 2%nat <= WtRoot 0%nat 2%nat /\
+    lamRoot * ord 1%nat 2%nat <= WtRoot 1%nat 2%nat /\
+    lamRoot * ord 1%nat 0%nat <= WtRoot 1%nat 0%nat /\
+    lamRoot * ord 2%nat 0%nat <= WtRoot 2%nat 0%nat /\
+    lamRoot * ord 2%nat 1%nat <= WtRoot 2%nat 1%nat.
+  Proof. unfold lamRoot, WtRoot, ord. simpl. repeat split; lra. Qed.
+
+  Theorem R0_forced_root_offdiag_le0_full :
+    offdiag_le0_full (R0_forced WtRoot lamRoot).
+  Proof.
+    destruct lamRoot_satisfies_small_skew as [H01 [H02 [H12 [H10 [H20 H21]]]]].
+    exact (R0_forced_offdiag_le0_full_conditional
+             WtRoot lamRoot H01 H02 H12 H10 H20 H21).
+  Qed.
+
+  Theorem R0_forced_root_diag_values :
+    DiagPart (R0_forced WtRoot lamRoot) 0%nat 0%nat == 5#1 /\
+    DiagPart (R0_forced WtRoot lamRoot) 1%nat 1%nat == 9#1 /\
+    DiagPart (R0_forced WtRoot lamRoot) 2%nat 2%nat == 10#1.
+  Proof.
+    pose proof (diagpart_R0_forced_is_degree_minus_circulation
+                  WtRoot WtRoot_symmetric lamRoot) as [E0 [E1 E2]].
+    unfold WtRoot, lamRoot in E0, E1, E2. simpl in E0, E1, E2.
+    split. { rewrite E0. lra. }
+    split. { rewrite E1. lra. }
+    rewrite E2. lra.
+  Qed.
+
+  (* D is genuinely NOT uniform across nodes (5, 9, 10 all differ) -- the           *)
+  (* directional circulation term is doing real, node-distinguishing work here,      *)
+  (* not just adding a constant offset that a free Dg could have supplied anyway.     *)
+  Theorem R0_forced_root_D_is_nonuniform :
+    ~ (DiagPart (R0_forced WtRoot lamRoot) 0%nat 0%nat
+       == DiagPart (R0_forced WtRoot lamRoot) 1%nat 1%nat).
+  Proof.
+    destruct R0_forced_root_diag_values as [E0 [E1 _]].
+    rewrite E0, E1. intro H. lra.
+  Qed.
+
+  Theorem R0_forced_root_rowsum0_full :
+    rowsum0_full (R0_forced WtRoot lamRoot).
+  Proof. apply R0_forced_rowsum0_full. Qed.
+
+End SingleRootWitness.
+
 (* ================== AXIOM-FREEDOM CHECK ================== *)
 Print Assumptions trifurcation_exact.
 Print Assumptions symoff_symmetric.
@@ -662,3 +1009,17 @@ Print Assumptions step_M_copy_preserves_energy2.
 Print Assumptions diag_uniform_recovers_step_D.
 Print Assumptions step_Diag3_uniform_strictly_decreases_energy.
 Print Assumptions diag_witness_values_not_uniform_minus_half.
+Print Assumptions rowsum0_full_offdiag_le0_full_diag_nonneg.
+Print Assumptions diagpart_forced_by_rowsum0_full.
+Print Assumptions R0_forced_rowsum0_full.
+Print Assumptions R0_forced_offdiag_le0_full_conditional.
+Print Assumptions symoff_R0_forced_is_negWt.
+Print Assumptions skewoff_R0_forced_is_lam_ord.
+Print Assumptions circulation_values.
+Print Assumptions diagpart_R0_forced_is_degree_minus_circulation.
+Print Assumptions WtRoot_symmetric.
+Print Assumptions lamRoot_satisfies_small_skew.
+Print Assumptions R0_forced_root_offdiag_le0_full.
+Print Assumptions R0_forced_root_diag_values.
+Print Assumptions R0_forced_root_D_is_nonuniform.
+Print Assumptions R0_forced_root_rowsum0_full.
