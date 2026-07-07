@@ -59,7 +59,8 @@ COQFILES = \
 	formal/InfoDissipationIsIndependent_attempt.v \
 	formal/InfoZeroInfinityReciprocal_attempt.v \
 	formal/InfoOperatorLosesPropertyAtEndpoints_attempt.v \
-	formal/InfoErasureArrowOfTime_attempt.v
+	formal/InfoErasureArrowOfTime_attempt.v \
+	formal/InfoAsymmetricSeedTrifurcation.v
 
 verify:
 	@set -e; \

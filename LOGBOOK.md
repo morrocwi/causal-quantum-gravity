@@ -582,3 +582,88 @@ axiom-free, added to `Makefile`) — upgrading §1.2 from pure `[Dr]` methodolog
 one-line `Require` rename (`InfoGraphNoether_attempt` → this repo's
 `InfoGraphNoether`, otherwise byte-identical) — named as an explicit open item,
 not silently skipped.
+
+## 2026-07-08 — New candidate: an asymmetric seed R0 as a single source for {L_R, M, D}-shaped readouts, not a proof the three-roots picture was wrong
+
+Human founder proposed a hypothesis (in the house language of this repo, unprompted
+by any existing file): instead of `L_R`, `M`, `D` being three independently-posited
+structural primitives, could a single ASYMMETRIC (directed) seed operator `R0`
+decompose exactly into a symmetric piece (`L_R`-shaped), an antisymmetric piece
+(`M`-shaped, "reversible"), and a diagonal piece (`D`-shaped, "arrow of time")? The
+founder was explicit up front that this must be flagged as a candidate hypothesis,
+not something already proved — so the file's own header carries that framing
+verbatim, not smoothed after the fact.
+
+Built and verified (sibling repo first, standard 3-stage discipline, then elevated
+here dropping `_attempt`; standalone `coqc -q -R . DQG`, every `Print Assumptions`
+"Closed under the global context", axiom-free over Q; `make verify` still green
+with the new file added to `Makefile`'s `COQFILES`):
+`InfoAsymmetricSeedTrifurcation.v` (28 theorems). What it actually shows:
+1. `R0 = DiagPart(R0) + SymOff(R0) + SkewOff(R0)` exactly, for every vertex pair —
+   pure algebra, unconditional.
+2. `SkewOff(R0)`'s quadratic form vanishes identically (the exact discrete fact
+   behind "an antisymmetric part alone cannot move a quadratic energy functional").
+3. IF `SymOff(R0)`'s off-diagonal is additionally `<=0` (an extra hypothesis, not
+   automatic), the closure built from it satisfies the same three properties
+   `InfoRetainedDistinctionForcesLaplacian_attempt.v` proves uniquely force the
+   `L_R` shape.
+
+Founder pushed back on the first draft, correctly, on three specific points before
+accepting it as closed for now — recorded here so a later session does not have to
+rediscover the same gaps:
+
+- **Shape vs. identity.** The static "quadratic form is zero" fact does not, by
+  itself, show `SkewOff`/`DiagPart` behave like the sibling repo's actual
+  `step_M`/`step_D` toy maps. Fixed by building the real discrete step: a naive
+  Euler increment along a skew generator does NOT conserve energy exactly (an
+  honest new finding — it can only ADD energy, a sum-of-squares term, since only
+  the first-order term is killed by antisymmetry); the PURE linear map (not an
+  Euler increment), at the concrete parameter value `lam = -1`, is then shown
+  LITERALLY identical to `step_M`'s formula by direct computation, and `DiagPart`
+  at the uniform rate `-1/2` is LITERALLY `step_D`'s formula. Genuine reduction at
+  specific parameter values, not a general claim that `R0`'s pieces always behave
+  like the toy maps.
+- **`R0` was an unforced posit.** `L_R` is forced from `{sym, offdiag<=0, rowsum0}`
+  as the meaning of "retained distinction"; `R0` had no analogous forcing. Fixed by
+  defining a directionality indicator `ord(i,j)` directly from `nat`'s own `<`, and
+  proving its antisymmetry as a THEOREM from trichotomy (`ord_antisymmetric_forced`)
+  — not assumed. `R0 := Wt + lam*ord` (`Wt` a symmetric nonnegative weight, `lam` one
+  free scalar) then has its `SymOff`/`SkewOff` split forced-by-construction, closing
+  most of the gap; the concrete weights and the one scalar `lam` remain free, the
+  same honesty level `L_R`'s own forcing theorem already carries for its edge
+  weights.
+- **The `SymOff >= 0` hypothesis was a fresh, unexplained assumption.** Fixed by
+  relocating it to `Wt`'s own nonnegativity premise (the same "magnitude of a
+  distinction is nonnegative" move the sibling `LR` construction already makes via
+  its own positive concrete weights) — so it is now a corollary
+  (`symoff_R0construct_nonneg`), not an extra assumption bolted onto the composite.
+
+Tier-honest net reading (in the file's own header, restated here so this log and
+the file cannot drift apart): this is a real tightening of HOW `L_R`/`M`/`D`-shaped
+pieces can arise from one seed, at the level of an exact algebraic decomposition
+plus two genuine dynamical-step recoveries at concrete parameter values. It is NOT
+a proof that the three-independent-roots picture in
+`InfoRetainedDistinctionForcesLaplacian_attempt.v` /
+`InfoDissipationIsIndependent_attempt.v` was wrong, does NOT derive `R0` from
+anything more primitive than "directed distinction = symmetric distinction plus a
+trichotomy-forced orientation," and does NOT identify `DiagPart`/`SkewOff` with the
+master equation's actual `M`, `D` coefficients in general — only at the specific
+parameter instances checked. `README.md`'s file-inventory table carries the same
+`Th_coqc + [Dr]` tier and the same "candidate, not proven equivalent" framing.
+
+Separately: the founder also brought an independent preprint of theirs, *Axiom 12 —
+Informational CP-Asymmetry* (Zenodo, UIFT/Information Field Theory, a continuum/
+stochastic-PDE two-mode telegraph model of parameter-skew-driven CP-asymmetry,
+DOI:10.5281/zenodo.17581909), asking whether it connects to the asymmetric-seed
+idea above. Assessed and NOT ported into this repo or the sibling repo yet: it is a
+different mathematical object (two separately-evolving fields with a parameter
+mismatch, not a decomposition of one static operator), it is fully continuum/ℝ/
+stochastic (an `I1` non-readout by this repo's own diagnostic, at best `Dr`/
+`+reals`/`finite_diagnostic`, never `Th_coqc`), and its own well-posedness proof is
+a "Sketch," not machine-checked. Also flagged a naming collision worth remembering:
+that paper's `D` is a diffusion coefficient (would map to this repo's `K*L_R` role
+after discretization), NOT this repo's `D` (arrow-of-time/dissipation) — the
+paper's `σ` is the closer analogue of this repo's `D`. Left as a phenomenological
+cross-reference only; discretizing it into a genuine Q-exact toy (the way
+`step_M`/`step_D` are toys) is explicitly named as separate, larger, future work,
+not attempted in this pass.
