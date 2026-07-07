@@ -730,3 +730,55 @@ concrete weight `Wt` and the scalar `lam` remain free, at the same honesty level
 `L_R`'s own edge weights already carry.
 
 README.md's file-inventory entry updated to describe Part 7 in the same terms.
+
+## 2026-07-08 (later same day) — Wiring the seed into the proven QM/SR identity, not just sitting alongside it
+
+Founder asked directly whether the asymmetric-seed work still connects to GR/QM
+"ลงตัวเหมือนเดิม" (coherently, as before). Honest answer given first: yes, nothing
+broke, because Part 7 never touched `InfoQuantumRelativityUnification.v` or its
+dependencies at all — but that also meant the seed construction was NOT actually
+wired into the QM/SR chain, just sitting next to it structurally. Founder's
+one-word follow-up: "ผูก" (tie it in).
+
+Added `InfoSeedFeedsQuantumRelativity_attempt.v` — a genuine composition, not a
+restatement: it literally `Require`s both `InfoAsymmetricSeedTrifurcation.v` and
+`InfoQuantumRelativityUnification.v` (plus its own dependencies
+`InfoLorentzInvariance.v`/`InfoSchrodinger.v`) and applies the EXISTING,
+unmodified theorem `box_quad_is_spine_residual` with a seed-derived value, rather
+than re-deriving anything. Built directly in this repo, not elevated from the
+sibling — flagged explicitly as a one-off deviation from the usual pipeline,
+because the QM/SR content only exists as clean, separately-`Require`-able files
+HERE (in the sibling repo it is a `Module` buried inside a large monolithic
+`URCF_RD_All.v`, nothing to `Require` from a standalone attempt file there).
+
+What it proves (8 theorems, all `Print Assumptions` Closed; `make verify` green
+with the file added to `Makefile`):
+
+- A uniform-weight instantiation of the Part 7 seed (`R0_forced` with weight `w`
+  on all three edges) induces exactly the standard K3 combinatorial Laplacian
+  (diagonal `2w`, off-diagonal `-w`) — proved to MATCH the seed's own `SymOff`
+  via the existing theorem, not assumed independently.
+- That Laplacian has eigenvalue `3*w`, EXHIBITED via the explicit rational
+  eigenvector `(1,-1,0)` (a direct `ring` check of the eigen-equation, not a
+  characteristic-polynomial argument) — a real, non-vacuous, Q-exact spectral
+  fact about the seed-induced object, not posited.
+- That eigenvalue is fed DIRECTLY into `box_quad_is_spine_residual` and
+  `spine_dispersion_iff_box_quad_vanishes` — the file's own already-proven
+  theorems, applied here exactly as they stand, not re-proved or weakened.
+- The SAME seed instantiation, at the same time, gives Part 7's forced D values
+  (concrete witness: weight `w=1`, directional scalar `lam=1` gives D = 0, 2, 4
+  across the three nodes) — one seed realizing both a verified L_R input to the
+  proven QM/SR identity and a non-arbitrary D for the master equation's
+  dissipative term, together.
+
+**What this is NOT** (the file's own header states it, restated here per this
+log's discipline): `M` — the inertial coefficient in the master equation — is
+STILL a free parameter in `InfoQuantumRelativityUnification.v`, completely
+unchanged by this file. Part 6's finding (that `SkewOff` at a concrete parameter
+literally recovers `step_M`'s rotation GENERATOR) related the SHAPE of a
+dynamical map to `step_M`, not a scalar `M` coefficient — no bridge for `M` is
+attempted here. The bridge realized is specifically at the L_R/eigenvalue level:
+real, checked, and now literally composed with the existing proof, not a
+parallel construction that merely resembles it.
+
+README.md's file-inventory table updated with this entry.

@@ -60,7 +60,8 @@ COQFILES = \
 	formal/InfoZeroInfinityReciprocal_attempt.v \
 	formal/InfoOperatorLosesPropertyAtEndpoints_attempt.v \
 	formal/InfoErasureArrowOfTime_attempt.v \
-	formal/InfoAsymmetricSeedTrifurcation.v
+	formal/InfoAsymmetricSeedTrifurcation.v \
+	formal/InfoSeedFeedsQuantumRelativity_attempt.v
 
 verify:
 	@set -e; \
