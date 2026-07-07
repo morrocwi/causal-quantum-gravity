@@ -782,3 +782,46 @@ real, checked, and now literally composed with the existing proof, not a
 parallel construction that merely resembles it.
 
 README.md's file-inventory table updated with this entry.
+
+## 2026-07-08 (later same day) — Was symmetry hiding the discriminator? Tested, not just reasoned about
+
+Founder pointed out a real gap in the previous "why M is still free" answer:
+`InfoStrictConeBothOrders_attempt.v`'s finding (strict-finite-cone locality does
+NOT force 2nd-order/M dynamics) was tested on a SYMMETRIC `L_R` (an undirected
+path graph). Did symmetry secretly do some of the work? Founder's own framing,
+offered as a candidate explanation for M's freedom: "memory has its own local
+structure that runs separately on the graph" — i.e. M's freedom might not be a
+gap at all, but the correct signature of memory living on a genuinely different
+layer than spatial coupling.
+
+Rather than answer by reasoning, tested it directly. Added
+`InfoStrictConeSymmetryIrrelevant_attempt.v` (8 theorems, all `Print Assumptions`
+Closed; `make verify` green with the file added to `Makefile`):
+
+- Generalized the original file's node-2-zero-after-one-step findings to ANY
+  operator `R` satisfying `banded1` (entries vanish beyond graph-distance 1) --
+  no symmetry hypothesis anywhere in either proof. The argument only ever
+  touches `R 2 0` (the single entry a delta-at-node-0 state can reach in one
+  step), which vanishes from bandedness alone, regardless of whether `R 0 2`
+  equals it.
+- Confirmed concretely on an EXPLICIT asymmetric witness (`R 0 1 = -2 <> R 1 0
+  = -1`, same path-graph sparsity pattern): node 2 is still exactly 0 after one
+  step, for both 1st- and 2nd-order updates.
+
+**The answer: symmetry was never doing the work.** Cone-locality is a pure
+sparsity-pattern fact (which entries are nonzero at all), completely
+insensitive to whether nonzero entries come in symmetric pairs. This is not a
+new proof technique — it makes explicit an invariance the original proof
+already implied (only `R_i_0 == 0` was ever used) and checks it on a
+non-symmetric witness rather than asserting it transfers.
+
+This converges with a separate, independent finding: `InfoAsymmetricSeedTrifurcation.v`'s
+`skewoff_quadratic_form_vanishes` already showed an antisymmetric part
+contributes exactly zero to any quadratic form, regardless of the underlying
+graph. So neither symmetric nor asymmetric spatial data can force M via EITHER
+of the two angles tried so far (locality/cone, or conservation) — a converging
+pattern across two independent tests, not a proof that no spatial construction
+could ever force M. The founder's "memory runs on its own layer" reading is
+consistent with, not merely asserted alongside, this now-doubly-tested finding.
+
+README.md's file-inventory table updated with this entry.
