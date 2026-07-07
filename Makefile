@@ -1,4 +1,4 @@
-.PHONY: verify clean
+.PHONY: verify test-lib clean
 
 # Dependency order matters: RDL_GammaSpectral -> InfoCoercivityBoundedClosure ->
 # InfoDiscreteGraphCurvature, and InfoAnalysisLift -> InfoQuantumGravityRootBridge.
@@ -68,6 +68,10 @@ verify:
 	set -e; \
 	if [ $$code -ne 0 ] && [ $$code -ne 124 ]; then echo "FAIL: verify_quantum_gravity_root_bridge.py exited $$code"; exit 1; fi; \
 	echo "=== PASS: all formal/*.v compiled, QNM bridge script ran ==="
+
+test-lib:  ## install + test the spine_pde reference library (the canonical computational lib)
+	pip install -e "spine_pde[dev]"
+	cd spine_pde && python -m pytest -q tests/
 
 clean:
 	rm -f formal/*.vo formal/*.vok formal/*.vos formal/*.glob formal/.*.aux formal/.nra.cache
