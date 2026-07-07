@@ -53,7 +53,13 @@ COQFILES = \
 	formal/InfoModeWeights.v \
 	formal/InfoBackReaction.v \
 	formal/InfoShiftAverage.v \
-	formal/InfoConeInheritance.v
+	formal/InfoConeInheritance.v \
+	formal/InfoRetainedDistinctionForcesLaplacian_attempt.v \
+	formal/InfoStrictConeBothOrders_attempt.v \
+	formal/InfoDissipationIsIndependent_attempt.v \
+	formal/InfoZeroInfinityReciprocal_attempt.v \
+	formal/InfoOperatorLosesPropertyAtEndpoints_attempt.v \
+	formal/InfoErasureArrowOfTime_attempt.v
 
 verify:
 	@set -e; \

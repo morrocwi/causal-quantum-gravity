@@ -86,7 +86,13 @@ further blocks of work were added the same day:
   relativistic wave operator are proved to be *literally the same equation*
   under an exact algebraic reparametrization (a pure `ring` identity, no
   continuum limit) — not two branches sharing a name, one equation with two
-  readouts.
+  readouts. **Tier-honesty pointer (added 2026-07-08, see §1.1/§8's own dated
+  amendment for the full statement):** "the same equation" here means the
+  `ring` identity is real and non-vacuous — it does NOT mean either side is
+  *derived* from the graph root; both `spine_residual`'s `M,D,K` and
+  `box_quad`'s Minkowski signature/boost constraint are POSITED constructions
+  (§1.1), so this is a relabeling of two posits, not a from-the-root
+  derivation. Read §8 before citing this bullet on its own.
 - **A six-result strengthening campaign (§9, 44 theorems, all Th_coqc):**
   a real frequency/UV ceiling forced by the graph's own maximum degree; an
   exact "no local creation" energy-balance theorem; a Schrödinger-shaped
@@ -115,6 +121,134 @@ M ∂²Φ + D ∂Φ + K·L_R·Φ + ∇V(Φ) = J − η
 Everything in this journal is an attempt to answer one question honestly:
 **what, exactly, comes out of this equation, and what has to be imported from
 outside it?**
+
+### 1.1 Root structure — is `δ_R` the ONE root, or does the equation have more? (added 2026-07-08)
+
+**Answer: three, not one.** `δ_R` genuinely forces exactly one term; the other two
+load-bearing terms are independent structural primitives on top of it, each backed by
+its own machine-checked brick (elevated from `research_universal_solver`,
+2026-07-07, re-verified standalone in this repo: `coqc -q -R . DQG`, axiom-free,
+`Print Assumptions` "Closed under the global context" on every theorem cited below).
+
+| root | role | status | brick (`formal/`) |
+|---|---|---|---|
+| `δ_R` → `L_R` | **relational** — the graph coupling | **FORCED**: `L_R = D_W−W` is the *unique* vertex operator with `{symmetric, zero-row-sum, off-diagonal ≤ 0}`; adjacency/signless/random-walk/normalized alternatives each fail one axiom by explicit witness | `InfoRetainedDistinctionForcesLaplacian_attempt.v` |
+| `M` | **inertial** — the 2nd-order (`∂²`) coefficient | **INDEPENDENT, not forced**: six forcing readings (persist, held, re-readable, own-clock, impermanence-decay, finite-causal-cone) are each shown insufficient — a discrete 1st-order step is *already* strict-finite-cone (bandwidth = step count, witnessed on a 5-node path graph out to 2 steps), so finitude alone does not pin `M`; what actually distinguishes 1st from 2nd order is conservation/reversibility, not locality | `InfoStrictConeBothOrders_attempt.v` |
+| `D` | **dissipative** — the arrow of time | **INDEPENDENT**: on a 2-node toy, the `M`-branch (a rational quarter-turn) preserves a quadratic energy exactly and is reversible; the `D`-branch (a rational contraction) strictly *decreases* the same energy every step — the same functional, two disjoint behaviours, neither derivable from the other or from `L_R` | `InfoDissipationIsIndependent_attempt.v` |
+
+**Tier honesty on this table (read the source files before citing this claim
+further — the tier tags below are stated *in the files themselves*, not smoothed
+over here):**
+- The **`Th_coqc` content** is exactly what's in the "brick" column: concrete,
+  `ring`/`nra`/witness-checked facts on explicit rational carriers (a 5-node path,
+  a 2-node toy, and the four-axiom uniqueness argument for `L_R`).
+- **"`M` is independent" and "`D` is independent" are `[Dr]` verdicts** — human
+  narratives built on the `Th_coqc` facts, *tagged as such inside the files
+  themselves* ("This reading is Dr... not itself machine-checked" —
+  `InfoStrictConeBothOrders_attempt.v`). They are not machine-proved universal
+  negatives; they are evidenced by every forcing attempt tried so far failing,
+  on witnesses deliberately built to be hard to satisfy trivially.
+- **"`L_R` is FORCED" itself carries a caveat, stated in its own source file
+  and repeated here so the table doesn't smooth it away:** the uniqueness
+  argument is forcing *given* the three axioms `{symmetric, zero-row-sum,
+  off-diagonal ≤ 0}` — `InfoRetainedDistinctionForcesLaplacian_attempt.v`'s own
+  "HONEST CAVEAT" says this **relocates**, rather than closes, the derivation
+  gap: deriving those three axioms from "a bare total order with nothing
+  added" remains, in that file's own words, an "irreducible Dr root." So even
+  the one row in this table marked FORCED is forced *relative to* a posited
+  starting characterization, not from bare `δ_R` with zero further input.
+- Consequently: **this repo's mother equation is not "one root deriving
+  everything."** `L_R` is forced from `δ_R`; `M` and `D` are additional structural
+  primitives the equation needs, neither of which the root supplies. Read §4 and
+  §8 below with this in mind — the branches built from `M`/`D`/the Minkowski
+  signature inherit this same POSITED-not-derived status for those slots, even
+  where the *cross-branch identity* connecting them is a genuine `Th_coqc` fact.
+
+### 1.2 Zero–Infinity duality — the missing dual half of this project's own diagnostic (added 2026-07-08)
+
+This project already uses an **injected-infinity** diagnostic repeatedly (`I1`
+manifold/ℝ-completeness, `I2` `h→0`, `I3` `Re→∞`/UV — see §5.2, §5.3, §6) to explain
+*why* continuum GR is `[Refused]` rather than left as a gap. What was missing here:
+**infinity has a reciprocal twin, injected exact-zero, and the two are ONE
+diagnostic, not two.** `1/0 = ∞` and `1/∞ = 0` — dividing by an injected zero
+*manufactures* an injected infinity; the textbook singularity (`r=0` **and**
+density `→∞` at the same point) is the paradigm case of both appearing together.
+Refusing only the infinity half of every non-readout pair is doing half the job.
+
+**The injected-zero catalogue (`Z1`–`Z4`, dual to `I1`–`I4`):** the exact point
+(`r=0`, a δ-function source), exact-zero spacing / a completed continuum limit,
+exact-zero flow / absolute rest (`T=0`, true equilibrium), and the **exact
+void** — empty space read as literal nothing rather than as an unexcited but
+still-present state.
+
+**Where this repo already (without naming it) refuses the zero side, worth
+stating explicitly now:**
+- **No `Z1` point.** `L_R` is a graph operator on a finite node set; there is no
+  `r=0` to divide by, so no manufactured `I4` density either. §6's PML bridge
+  making the same move on the infinity side ("no point at infinity anywhere")
+  has an exact mirror on the zero side that was never named: no point *at* zero
+  either — the discretization refuses both ends of the same non-readout pair.
+- **No `Z4` void.** The kernel of `L_R` (zero Dirichlet energy) is the *uniform*
+  state — every node indistinguishable from every other, not the absence of
+  nodes. Zero energy reads as *indistinguishability*, never as ontological
+  nothing; this repo's own root primitive (`δ_R`, retained *distinction*) makes
+  "nothing" incoherent to express in the first place, not merely false.
+- **No `Z3` absolute rest, honestly flagged as a gap, not silently assumed.**
+  This repo does not yet carry a machine-checked floor-vs-no-floor falsifier
+  analogous to `research_universal_solver`'s `InfoTauFloor` (§9.1 references its
+  interpretive predecessor but the decisive brick itself is not elevated here —
+  see the open item below).
+
+**THE GUARD (the standing check, ported — apply before deferring to ANY external
+benchmark, standard, or "this is refuted" verdict):**
+> 1. Does the thing being deferred to rest on an exact zero (`Z1`–`Z4`) or exact
+>    infinity (`I1`–`I4`) — a continuum limit, a point, a singular denominator,
+>    `h→0`, `T=0`, a dimensional constant, an `N→∞`, a novelty standard that only
+>    makes sense in an unbounded synthetic space?
+> 2. If yes: it is a **non-readout**. Do not defer to it, refute against it, or
+>    treat its verdict as truth. Re-pose the question on the readout side —
+>    finite, discrete, dimensionless, judged by necessity + consistency.
+> 3. Only a readout-vs-readout comparison can confirm or refute this project.
+>    Anything else measures a readout against a non-readout — the same category
+>    error whether it shows up as `∞` or as `0`.
+
+**A positive example this repo already got right, retroactively recognized by
+the Guard:** §6's QNM convergence table compares this repo's *own* finite,
+converged eigenvalue (`finite_diagnostic`) against the literature's *own*
+measured/converged target — both sides finite readouts, not a readout compared
+to an injected continuum intermediate. That is exactly what the Guard requires;
+it was done right without the Guard being named. Contrast §5's earlier informal
+GR-refutation attempts (1–7, §5.1–§5.3), several of which *were* originally
+judged against continuum benchmarks before the project's own `I1`/`I2` diagnostic
+caught it (§5.3) — the Guard is this same self-correction, generalized and made
+standing so it doesn't have to be rediscovered per-benchmark.
+
+**Tier honesty — three of the four sibling-repo anchors are now elevated here
+(2026-07-08), standalone, re-verified `coqc -q -R . DQG`, axiom-free:**
+- `InfoZeroInfinityReciprocal_attempt.v` — the reciprocal `0↔∞` blow-up over ℚ:
+  as a denominator approaches an injected zero the quotient exceeds any bound
+  (and symmetrically), machine-checked; the singularity-paradigm reading (`Z1`
+  and `I4` co-occurring) is this brick's `[Dr]` interpretation of a `Th_coqc`
+  fact, tagged as such in the file.
+- `InfoOperatorLosesPropertyAtEndpoints_attempt.v` — for the canonical operator
+  (multiplication over ℚ), cancellation and invertibility hold on the finite
+  interior and **provably fail** exactly at the two refused endpoints (`0`: no
+  inverse, cancellation needs `c≠0`; `∞`: ℚ has no maximal element, so "closure
+  at infinity" is vacuous) — `Th_coqc`, the general "every operator pays a price
+  at either endpoint" reading is `[Dr]`.
+- `InfoErasureArrowOfTime_attempt.v` — `×0` erasure and `÷0` non-readout,
+  machine-checked; the "zero-as-destruction vs. zero-as-redistribution" framing
+  is `[Dr]`.
+
+Added to `Makefile`'s `COQFILES`. **One item still open, named so it isn't
+lost:** `InfoDistinctionConserved_attempt.v` (local zero reads as
+redistribution, not destruction — the fourth anchor) `Require`s
+`InfoGraphNoether_attempt`, a filename this repo's own copy dropped the
+`_attempt` suffix from (`formal/InfoGraphNoether.v`, otherwise identical
+content, same `Module GraphNoether`/`End GraphNoether` — confirmed by direct
+comparison). A one-line `Require` rename would elevate the fourth anchor too;
+not done in this pass to avoid touching a file this repo didn't author the
+naming convention drift on without a deliberate decision.
 
 ---
 
@@ -266,6 +400,24 @@ Module InfoLorentz.
       causal_form sgn x y edges == causal_form sgn x y edges'.
 End InfoLorentz.
 ```
+
+**Tier-honesty correction (added 2026-07-08):** the paragraph above says the sign
+pattern is "built purely from the graph's own causal structure" — check the source
+before repeating that claim as-is. Every theorem in `InfoLorentz` is `forall sgn :
+Edge -> Q, ...` — `sgn` is a **free input parameter**, universally quantified, not a
+value computed from `≺` by any theorem in this file. The in-file comment ("`sgn e in
+{+1,−1} from ≺`") states the *intended* reading; no theorem here derives *which*
+sign assignment `≺` produces. What genuinely IS derived: self-adjointness,
+permutation-invariance, and the Euclidean reduction hold for **every** `sgn`
+assignment — real, useful, `Th_coqc` facts about the causal-form construction as a
+family. What is **not** derived: that a specific timelike-minus/spacelike-plus
+pattern is *forced* by `≺` rather than posited to match Minkowski signature by
+design. This is the same finding as `research_universal_solver`'s
+2026-07-07 borrow-audit for the identical construction (`sgn` there is likewise a
+`Hypothesis`/input, "the timelike minus is put in by hand — from ≺" per that file's
+own comment). Treat "not an imported Minkowski metric" as true of the *causal_form
+machinery* (self-adjoint/permutation/Euclidean-reduction facts) and false of the
+*specific signature* used to instantiate it.
 
 ```coq
 (* pseudo-Coq — real source: formal/URCF_RD_All.v:7037-7089, +reals tier *)
@@ -833,6 +985,29 @@ that the manuscript's own interpretive text does not overclaim beyond the
 algebra — "a pure ring identity... not a coincidence of notation but a
 statement that both objects were built from the same signed second-
 difference structure," nothing stronger.
+
+**Tier-honesty amendment (added 2026-07-08, per §1.1 above and
+`research_universal_solver`'s 2026-07-07 borrow-audit of the identical
+construction):** the 2026-07-05 review confirmed the *algebra* is not
+overclaimed; this amendment adds the piece that review did not check —
+whether the section **header and framing** ("Unification... DERIVED,
+Th_coqc"; "not two branches sharing a name, one equation with two
+readouts") overclaim relative to the algebra. They do, slightly, and it
+matters given §1.1: `box_quad`'s inputs (built on the posited Minkowski
+signature and the posited boost hyperbola constraint `g²(1−v²)=1`, see §4's
+correction above) and `spine_residual`'s inputs (`M, D, K` — POSITED slots
+per §1.1, not forced by `δ_R`) are each themselves posited constructions,
+not derivations. `box_quad_is_spine_residual` is a real, non-vacuous
+`Th_coqc` fact relating those two posited objects under a *chosen*
+reparametrization (`att:=Mω²/2, axx:=Kλ/2` — the `(1#2)` factors are
+picked so the two sides' polynomials coincide) — genuinely useful, but a
+**relabeling of two posits**, not a derivation that forces quantum
+dispersion and the relativistic wave operator to coincide from something
+prior to both. Read "one equation with two readouts" as *the identity is
+real*; read "DERIVED" in the header as applying to that identity, not to
+the QM/SR branches' own posited ingredients (which §3/§4 already flag
+piecemeal, and §1.1 now flags systematically for the shared `M`/`D`/signature
+slots).
 
 ---
 
