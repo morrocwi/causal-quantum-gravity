@@ -667,3 +667,66 @@ paper's `σ` is the closer analogue of this repo's `D`. Left as a phenomenologic
 cross-reference only; discretizing it into a genuine Q-exact toy (the way
 `step_M`/`step_D` are toys) is explicitly named as separate, larger, future work,
 not attempted in this pass.
+
+## 2026-07-08 (later same day) — Seed asymmetry pushed to "the single root": D itself forced, not posited (Part 7)
+
+Founder's directive, verbatim in intent: "Seed asymmetry คือรากเดียว" (seed
+asymmetry IS the single root) — elevate the asymmetric-seed candidate from the
+previous entry into the actual axiom, not just a shape-matching decomposition
+sitting alongside the three-roots picture.
+
+Before writing any Coq, a real fork was surfaced and put to the founder rather
+than silently picked: `L_R` is forced from `{sym, offdiag<=0, rowsum0}`, where
+`rowsum0` only ever applied to the symmetric residue. Extending `rowsum0` to the
+WHOLE seed (diagonal included) is the one move that would force `D` too — but it
+directly conflicts with `InfoDissipationIsIndependent_attempt.v`'s claim that `D`
+is a structurally independent primitive. Founder chose: force the whole seed,
+accept that `D` is no longer independent, and revisit the older finding rather
+than avoid the conflict.
+
+Added Part 7 to `InfoAsymmetricSeedTrifurcation.v` (14 new theorems, 42 total,
+every `Print Assumptions` "Closed under the global context"; `make verify` green
+with the extended file). What it proves:
+
+- `rowsum0_full`/`offdiag_le0_full`: the same two-axiom forcing shape as `L_R`'s
+  own theorem, now stated on the WHOLE seed row (not just the symmetric part).
+  Forces every diagonal entry nonnegative, exactly as `L_R`'s own diagonal is
+  forced nonnegative (a genuine "degree" reading for the whole seed, not just
+  its symmetric residue).
+- **The key identity**: `DiagPart(R,i,i) == -(sym-row-sum at i) - (skew-row-sum
+  at i)` -- an unconditional consequence of `rowsum0_full` alone. In words: `D`
+  at a node is forced to equal the symmetric-coupling degree there MINUS the
+  seed's own net directed circulation there. `D` stops being a free per-node
+  input the moment the full-seed axiom is granted.
+- `R0_forced(Wt, lam)`: a concrete construction realizing this with only TWO
+  free primitives (a nonnegative weight `Wt`, one scalar `lam`) instead of the
+  previous entry's three (`Wt`, `lam`, `Dg`) — `Dg` is gone, derived not posited.
+  `rowsum0_full` holds by construction, unconditionally; `offdiag_le0_full` needs
+  one small-skew inequality (the discrete analogue of the founder's own *Axiom
+  12* preprint's `epsilon_skew` regime, noted only as a resonance, not ported).
+- The seed's own directional "circulation" at each node is a FIXED, computable
+  combinatorial fact on this 3-vertex nat-ordered carrier (2, 0, -2 at nodes
+  0, 1, 2 respectively) — not a free choice; the middle index is exactly
+  balanced, the two extreme indices have equal and opposite net circulation.
+- A concrete, non-degenerate witness (`WtRoot`, `lamRoot = 1`) instantiates
+  everything together: `offdiag_le0_full` holds, `rowsum0_full` holds, and `D`'s
+  forced values (5, 9, 10) genuinely differ across all three nodes — not an
+  edge case where the new circulation term happens to vanish everywhere.
+
+**What this is NOT, stated as carefully as the previous entry's caution (per
+founder's own repeated instruction not to overclaim):** it does NOT retract
+`InfoDissipationIsIndependent_attempt.v`'s `Th_coqc` content — that file's 2-node
+toy, exactly as written, still has an energy-preserving M-branch and a strictly-
+decreasing D-branch with no shared premise, ON THAT TOY. It realizes a
+possibility that file's own SCOPE block already named as open: "not a proof that
+no larger construction could ever recover a D-like term from M and L_R combined."
+This IS that larger construction. What remains genuinely open, stated in Part 7's
+own header and restated in an appended UPDATE block on the ORIGINAL header
+(kept verbatim, not rewritten — this log's own discipline applied inside the `.v`
+file itself): whether `{offdiag_le0_full, rowsum0_full}` are themselves the
+uniquely forced axioms for "directed retained distinction," or merely a natural
+— but still chosen — extension of `L_R`'s own axioms to the full seed. The
+concrete weight `Wt` and the scalar `lam` remain free, at the same honesty level
+`L_R`'s own edge weights already carry.
+
+README.md's file-inventory entry updated to describe Part 7 in the same terms.
