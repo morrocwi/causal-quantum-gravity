@@ -174,6 +174,7 @@ formal/
   InfoZeroInfinityReciprocal_attempt.v   The reciprocal 0<->infinity blow-up over Q; the singularity paradigm (Z1 point + I4 density, together) as one non-readout, not two (SUPPLEMENT.md §1.2). Th_coqc + [Dr].
   InfoOperatorLosesPropertyAtEndpoints_attempt.v   Multiplication over Q provably loses cancellation/invertibility exactly at 0 and has no element to close at infinity -- every operator pays a price at either refused endpoint (SUPPLEMENT.md §1.2). Th_coqc + [Dr].
   InfoErasureArrowOfTime_attempt.v   x0 erasure and /0 non-readout, machine-checked; zero-as-redistribution not zero-as-destruction (SUPPLEMENT.md §1.2). Th_coqc + [Dr].
+  InfoAsymmetricSeedTrifurcation.v   CANDIDATE upgrade (not proven equivalent to the above): any asymmetric R0 exactly decomposes into DiagPart+SymOff+SkewOff; the antisymmetric shape is FORCED by nat's own trichotomy (not posited); SkewOff/DiagPart genuinely recover step_M/step_D by direct computation at concrete parameter values, not shape resemblance. Th_coqc + [Dr] (header SCOPE block states what remains open: not a proof R0 is itself forced from anything more primitive).
 scripts/
   verify_quantum_gravity_root_bridge.py   Finite-graph (PML) quasinormal-mode eigenvalue solver; converges to the literature Schwarzschild QNM. finite_diagnostic.
 ```
