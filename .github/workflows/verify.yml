@@ -25,3 +25,6 @@ jobs:
 
       - name: make verify
         run: make verify
+
+      - name: spine_pde library tests
+        run: make test-lib
