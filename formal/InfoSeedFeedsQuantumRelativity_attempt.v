@@ -54,6 +54,7 @@ Require InfoSchrodinger.
 Require InfoQuantumRelativityUnification.
 Require Import Coq.QArith.QArith.
 Require Import Coq.micromega.Lqa.
+Require Import Coq.micromega.Lia.
 Open Scope Q_scope.
 
 Import InfoLorentzInvariance.InfoLorentzInvariance.
@@ -203,6 +204,79 @@ Proof.
   rewrite E2. lra.
 Qed.
 
+(* ========================================================================= *)
+(* PART 5 -- tying in a causal-speed bound: does the wave equation's own          *)
+(* phase speed have to respect the SAME causality bound already proven for          *)
+(* Lorentz boosts elsewhere in this repo?                                            *)
+(*                                                                            *)
+(* HONEST PRECEDENT, READ FIRST (SUPPLEMENT.md, 'Attempt 4 -- Fixing K from          *)
+(* lattice-causality'): a similar-sounding move was tried and REFUTED. That            *)
+(* attempt fixed K/M to a SINGLE UNIVERSAL ratio (K/M = c^2/l_Planck^2) and              *)
+(* predicted a black-hole decay rate -- the prediction came out mass-INDEPENDENT,          *)
+(* refuted against the literature's mass-dependent (1/M) quasinormal-mode data.             *)
+(*                                                                            *)
+(* WHY THIS IS A DIFFERENT MOVE, NOT A RETRY OF THE SAME ONE: this file derives an           *)
+(* INEQUALITY (K < M), not a fixed numerical ratio -- M and K both remain FREE,               *)
+(* only constrained relative to each other. No universal external constant                     *)
+(* (Planck length or otherwise) is introduced; the bound comes entirely from an                  *)
+(* algebraic fact ALREADY proven in this repo (InfoLorentzInvariance: a boost (g,v)                *)
+(* satisfying g^2(1-v^2)=1 forces v^2<1, since g^2>=0 and the product must equal 1).                 *)
+(* An inequality between two still-free parameters cannot reproduce Attempt 4's                       *)
+(* specific failure mode (an absolute, mass-independent prediction), because nothing                    *)
+(* here fixes M to a concrete number -- but this does NOT mean the bound is trivially                     *)
+(* safe or automatically physically correct; it is a conditional necessity claim, not                       *)
+(* a verified prediction against any external dataset. That check is not attempted here.                       *)
+(*                                                                            *)
+(* WHAT IS PROVED: identifying the wave equation's phase-speed-squared (K/M, from             *)
+(* the dispersion relation M*omsq = K*lam, which is manifestly INDEPENDENT of the                 *)
+(* specific eigenvalue lam -- omsq/lam = K/M for every mode, a genuine, honest fact                 *)
+(* about this LINEAR dispersion relation, not hidden) with a boost parameter v^2 via                  *)
+(* K == M*(v*v), and requiring (g,v) to be a valid Lorentz boost, FORCES K < M -- for                  *)
+(* EVERY mode of this seed uniformly, since the bound never referenced lam.                             *)
+(* ========================================================================= *)
+
+Theorem lorentz_boost_forces_v2_lt_1 :
+  forall g v : Q, g*g*(1 - v*v) == 1 -> v*v < 1.
+Proof.
+  intros g v Hg.
+  destruct (Qlt_le_dec (v*v) 1) as [Hlt | Hge]; [exact Hlt |].
+  exfalso.
+  assert (Hle0 : 1 - v*v <= 0) by lra.
+  assert (Hgsq : 0 <= g*g) by nra.
+  nra.
+Qed.
+
+(* [Th_coqc] THE BOUND: if the seed's wave equation phase-speed-squared K/M is           *)
+(* identified with a valid Lorentz boost's v^2 (K == M*(v*v)), causality (v^2<1)          *)
+(* forces K < M -- for ANY M>0, K, independent of which L_R eigenvalue mode. *)
+Theorem seed_causal_speed_forces_K_lt_M :
+  forall M K g v : Q,
+    0 < M ->
+    g*g*(1 - v*v) == 1 ->
+    K == M*(v*v) ->
+    K < M.
+Proof.
+  intros M K g v HM Hg HK.
+  pose proof (lorentz_boost_forces_v2_lt_1 g v Hg) as Hv2.
+  rewrite HK.
+  assert (Hstep : M*(v*v) < M*1) by (apply Qmult_lt_l; [exact HM | exact Hv2]).
+  lra.
+Qed.
+
+(* Non-vacuous concrete instantiation: the seed's own dispersion (Part 3, at         *)
+(* w=1) combined with a genuine Pythagorean boost (v=3/5, g=5/4, matching             *)
+(* InfoLorentzInvariance's own style of rational boost witness) gives a concrete        *)
+(* K < M pair -- and Part 7's forced D values (0, 2, 4 at w=1, lam=1) coexist            *)
+(* with THIS SAME M, K choice: one seed, one concrete (M, D, K, lam_eig) tuple,           *)
+(* satisfying dispersion, causality, and the forced-D formula together. *)
+Example concrete_causal_witness :
+  (5#4)*(5#4)*(1 - (3#5)*(3#5)) == 1 /\
+  (9#16) == (25#16)*((3#5)*(3#5)) /\
+  (9#16) < (25#16).
+Proof.
+  repeat split; try reflexivity.
+Qed.
+
 (* ================== AXIOM-FREEDOM CHECK ================== *)
 Print Assumptions WtUniform_symmetric.
 Print Assumptions symoff_seed_uniform.
@@ -212,3 +286,6 @@ Print Assumptions seed_eigenvalue_satisfies_qm_sr_identity.
 Print Assumptions seed_eigenvalue_dispersion_iff.
 Print Assumptions seed_uniform_forces_D.
 Print Assumptions concrete_bridge_witness.
+Print Assumptions lorentz_boost_forces_v2_lt_1.
+Print Assumptions seed_causal_speed_forces_K_lt_M.
+Print Assumptions concrete_causal_witness.
