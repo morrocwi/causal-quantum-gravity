@@ -825,3 +825,55 @@ could ever force M. The founder's "memory runs on its own layer" reading is
 consistent with, not merely asserted alongside, this now-doubly-tested finding.
 
 README.md's file-inventory table updated with this entry.
+
+## 2026-07-08 (later same day) — Tying in causal speed (c), carefully, next to a known refutation
+
+Founder's next move on "why M stays free": tie M to a causal-speed / propagation
+constraint via `c` directly, rather than distance/locality (already tested and
+found insufficient, previous entry). Before writing anything, checked whether
+this specific move had already been tried — it had, and it FAILED, documented
+in `SUPPLEMENT.md` as "Attempt 4 — Fixing K from lattice-causality": fixing
+`K/M` to a single universal ratio (`K/M = c²/l_Planck²`) predicted a
+mass-INDEPENDENT black-hole decay rate, refuted against the literature's
+mass-dependent (`1/M`) quasinormal-mode data across ten orders of magnitude.
+
+Also found, already existing and Th_coqc-proven, two closely related results
+not previously surfaced in this repo's own conversation: `InfoRetentionForcesSecondOrder_attempt.v`
+(M>0's EXISTENCE, not value, is forced by requiring retention to mean
+"re-readable/oscillatory" rather than pure decay — the 1st-order characteristic's
+discriminant is always the perfect square `D²`, never negative, so oscillation is
+algebraically unreachable at 1st order) and `InfoTelegraphCrossover_attempt.v`
+(the `disc = D² - 4MKλ` crossover, `λ_c = D²/(4MK)`, already ties M, D, K, and an
+L_R eigenvalue together in the existing arc).
+
+Given the Attempt-4 precedent, designed a DIFFERENT move rather than retrying
+the same one: derive an INEQUALITY (`K < M`), not a fixed numerical ratio, so
+both `M` and `K` stay free — this cannot reproduce Attempt 4's specific failure
+(an absolute, mass-independent prediction), because nothing here fixes `M` to a
+concrete number. Added Part 5 to `InfoSeedFeedsQuantumRelativity_attempt.v` (3
+new theorems, 11 total in the file; `make verify` green):
+
+- `lorentz_boost_forces_v2_lt_1`: a boost `(g,v)` satisfying `g²(1-v²)=1` forces
+  `v² < 1` — derived here (not previously stated as a standalone lemma in
+  `InfoLorentzInvariance.v`), from `g²>=0` and the product needing to equal 1.
+- `seed_causal_speed_forces_K_lt_M`: identifying the dispersion relation's
+  phase-speed-squared `K/M` (which is manifestly `λ`-INDEPENDENT — `Mω²=Kλ`
+  gives `ω²/λ=K/M` for EVERY mode, an honest fact about linear dispersion,
+  stated not hidden) with a boost's `v²` (`K == M*(v*v)`) forces `K < M`,
+  uniformly across every mode of the seed.
+- A concrete witness (`g=5/4, v=3/5`, the same rational-boost style
+  `InfoLorentzInvariance.v` itself already uses) gives `K=9/16 < M=25/16`,
+  coexisting with Part 7's forced `D` values (`0, 2, 4` at `w=1, lam=1`) from
+  the SAME seed — one concrete `(M, D, K, λ)` tuple satisfying dispersion,
+  causality, and the forced-D formula together.
+
+**What this is NOT, stated as carefully as every other entry in this log**:
+a verified physical prediction — the bound is a conditional necessity claim
+(IF the phase speed is identified with a boost parameter, THEN K<M), not
+checked against any external dataset the way Attempt 4 was (and failed). It
+does not derive `M`'s VALUE, only a relation between `M` and `K`, both of
+which remain free. Whether this bound is even the right one to check against
+data (rather than repeating Attempt 4's mistake in a subtler form) is
+explicitly not addressed here.
+
+README.md's file-inventory entry updated with this addition.
