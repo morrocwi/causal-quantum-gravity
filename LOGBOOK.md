@@ -877,3 +877,47 @@ data (rather than repeating Attempt 4's mistake in a subtler form) is
 explicitly not addressed here.
 
 README.md's file-inventory entry updated with this addition.
+
+## 2026-07-08 (later same day) — Adversarial self-audit catches two overclaims; corrected, not hidden
+
+Founder asked, explicitly invoking this repo's own standing rule that same-model self-checking is
+NOT independent review (`DEC-same-model-checking-not-independent`): run a genuine adversarial audit
+of the entire "seed asymmetry" session's output (10 files across both repos) before trusting it
+further, and answer two direct questions honestly — does the QM/SR connection actually IMPROVE on
+the old three-roots picture, and is overall explanatory power for physical phenomena greater now
+than before the session?
+
+The audit (a fresh pass, told explicitly to be blunt and not soften findings) found:
+
+- **`seed_causal_speed_forces_K_lt_M` (this file) was a misleading name.** Neither it nor its lemma
+  `lorentz_boost_forces_v2_lt_1` reference ANY seed machinery — no `R0_forced`, `SymOff`, or
+  eigenvalue appears in either statement or proof. Both are fully generic facts about `M, K, g, v`.
+  The "seed_" prefix implied a seed-specific result that does not exist. **Renamed to
+  `causal_speed_forces_K_lt_M`**, with the header and local comments corrected to state plainly that
+  the seed's own `K, M` are merely SUBSTITUTED into this generic bound, not derived from it.
+- **The QM/SR "wiring" claim overstated what happens.** `seed_eigenvalue_satisfies_qm_sr_identity` is
+  a one-line application of `box_quad_is_spine_residual`, which is already universally quantified
+  over ALL `M, K, omsq, lam` — supplying `lam := 3*w` adds zero new logical content; that theorem was
+  already true for every `lam` before this file existed. The genuinely new content is EXCLUSIVELY the
+  eigenvalue fact (`LFromSeed_eigenvalue_3w`, a real, non-vacuous linear-algebra fact, verified via an
+  explicit eigenvector) — not any strengthening, tightening, or generalization of the QM/SR theorem
+  itself. Header and Part 3's local comment corrected to say this directly, not just imply it.
+
+Both fixes: renamed a theorem, corrected header/comment framing. NO proof term was touched — the
+audit found no sign errors, no circularity (checked directly: `R0_forced_rowsum0_full` needs zero
+hypotheses on `Wt`/`lam`; `diagpart_forced_by_rowsum0_full` genuinely does not invoke
+`offdiag_le0_full`), and no cross-file sign-convention mixing (the `SymOff==+Wt` vs `SymOff==-Wt`
+split between `R0construct` and `R0_forced`, flagged as a risk in the frontier doc, did not
+materialize anywhere it was checked).
+
+**Direct answers to the founder's two questions, per the audit, recorded here so they cannot drift**:
+the QM/SR connection is LITERAL (an exact instance, not an analogy) but NOT STRONGER — the underlying
+theorem gains no generality from today's work. Overall explanatory power for physical phenomena is
+UNCHANGED, not increased — no file from this session predicts anything the old track didn't already
+predict. What genuinely changed: free-parameter count for `{L_R, M, D}` dropped from three unrelated
+posits to two (`Wt`, `lam`) plus one relational constraint (`K<M`), and directionality gained a real
+geometric reading (torsion, a separate result — see the frontier doc) that the old track never had at
+all. That is real progress (parsimony + one new structural fact), honestly distinct from "explains
+more" or "connects better," and should be described that way going forward.
+
+README.md's file-inventory entry updated to match.

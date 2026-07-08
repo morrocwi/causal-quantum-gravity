@@ -46,6 +46,24 @@
 (*   own theorems (which, as this file's own header records, do not mention D at all -- that                  *)
 (*   file works with the CONSERVATIVE part of the spine, M and K*L_R only). The bridge is real                  *)
 (*   at the L_R/lam_eig level; a corresponding bridge for M is not attempted here.                                *)
+(*                                                                            *)
+(* UPDATE (post-session adversarial audit, 2026-07-08) -- two overclaims corrected, flagged      *)
+(* here rather than silently edited away (this repo's own correction-not-rewrite discipline):     *)
+(*   (i) Step 3's framing ('feed... into the file's ALREADY-PROVEN theorem') is mechanically        *)
+(*   accurate but easy to misread as the QM/SR theorem itself becoming stronger, tighter, or          *)
+(*   more constrained. IT DOES NOT: box_quad_is_spine_residual is universally quantified over           *)
+(*   ALL M,K,omsq,lam already; supplying lam := 3*w is a one-line application, not a strengthening --    *)
+(*   that theorem was already true for lam=3*w (and every other lam) before this file existed. The        *)
+(*   ONLY genuinely new content here is the eigenvalue fact itself (LFromSeed_eigenvalue_3w, a real,        *)
+(*   non-vacuous linear-algebra fact about the seed's induced Laplacian, verified via an explicit             *)
+(*   eigenvector) -- not any change to the QM/SR theorem's generality or strength.                              *)
+(*   (ii) Part 5's theorem was renamed from 'seed_causal_speed_forces_K_lt_M' to                                 *)
+(*   'causal_speed_forces_K_lt_M': neither it nor 'lorentz_boost_forces_v2_lt_1' reference ANY seed                *)
+(*   machinery (no R0_forced, SymOff, or eigenvalue appears in either statement or proof) -- both are               *)
+(*   fully GENERIC facts about M, K, g, v. The seed's own K, M can be SUBSTITUTED into this generic                  *)
+(*   bound if one chooses to identify K/M with a boost's v^2, but the theorem itself is not, and was                  *)
+(*   never, specifically about the seed. The old name implied a seed-specific result that does not                    *)
+(*   exist; this is a naming correction, not a change to any proof.                                                       *)
 (******************************************************************************)
 
 Require InfoAsymmetricSeedTrifurcation.
@@ -133,11 +151,13 @@ Proof.
 Qed.
 
 (* ========================================================================= *)
-(* PART 3 -- feed lam_eig = 3*w directly into the ALREADY-PROVEN QM/SR           *)
-(* identity theorem, unmodified: for ANY M and omsq with M*omsq = K*(3*w), the    *)
-(* boost-invariant wave operator and the spine residual are literally the SAME     *)
-(* equation, on THIS seed-derived eigenvalue. box_quad_is_spine_residual itself      *)
-(* is APPLIED here, not re-proved. *)
+(* PART 3 -- apply the ALREADY-PROVEN, ALREADY-UNIVERSAL QM/SR identity theorem    *)
+(* at lam_eig = 3*w: box_quad_is_spine_residual/spine_dispersion_iff_box_quad_       *)
+(* vanishes are quantified over ALL M,K,omsq,lam already, so this is a one-line       *)
+(* application, NOT a strengthening of that theorem -- it was already true at          *)
+(* lam=3*w before this file existed. The ONLY new content in this Part is the            *)
+(* eigenvalue fact from Part 2 (LFromSeed_eigenvalue_3w) being a real value to           *)
+(* plug in; the theorem itself gains no generality, tightness, or new content.             *)
 (* ========================================================================= *)
 
 Theorem seed_eigenvalue_satisfies_qm_sr_identity :
@@ -205,9 +225,13 @@ Proof.
 Qed.
 
 (* ========================================================================= *)
-(* PART 5 -- tying in a causal-speed bound: does the wave equation's own          *)
-(* phase speed have to respect the SAME causality bound already proven for          *)
-(* Lorentz boosts elsewhere in this repo?                                            *)
+(* PART 5 -- a GENERIC causal-speed bound (NOT itself seed machinery -- neither      *)
+(* theorem below references R0_forced, SymOff, or an eigenvalue; both are facts       *)
+(* about M,K,g,v alone). Asks: if the wave equation's phase speed is IDENTIFIED         *)
+(* with a Lorentz boost's v, does the SAME causality bound already proven for            *)
+(* Lorentz boosts elsewhere in this repo apply? The seed's own K,M can be SUBSTITUTED     *)
+(* into this generic bound (see the concrete witness below), but the bound itself is       *)
+(* not derived from, or specific to, the seed construction.                                  *)
 (*                                                                            *)
 (* HONEST PRECEDENT, READ FIRST (SUPPLEMENT.md, 'Attempt 4 -- Fixing K from          *)
 (* lattice-causality'): a similar-sounding move was tried and REFUTED. That            *)
@@ -246,10 +270,12 @@ Proof.
   nra.
 Qed.
 
-(* [Th_coqc] THE BOUND: if the seed's wave equation phase-speed-squared K/M is           *)
-(* identified with a valid Lorentz boost's v^2 (K == M*(v*v)), causality (v^2<1)          *)
-(* forces K < M -- for ANY M>0, K, independent of which L_R eigenvalue mode. *)
-Theorem seed_causal_speed_forces_K_lt_M :
+(* [Th_coqc] THE BOUND (GENERIC -- no seed reference in statement or proof): if a           *)
+(* wave equation's phase-speed-squared K/M is identified with a valid Lorentz boost's         *)
+(* v^2 (K == M*(v*v)), causality (v^2<1) forces K < M, for ANY M>0, K. This is a stand-          *)
+(* alone fact about M,K,g,v; applying it to the seed's own K,M (as the witness below does)        *)
+(* is a CHOICE to substitute, not something the theorem itself establishes about the seed. *)
+Theorem causal_speed_forces_K_lt_M :
   forall M K g v : Q,
     0 < M ->
     g*g*(1 - v*v) == 1 ->
@@ -263,12 +289,14 @@ Proof.
   lra.
 Qed.
 
-(* Non-vacuous concrete instantiation: the seed's own dispersion (Part 3, at         *)
-(* w=1) combined with a genuine Pythagorean boost (v=3/5, g=5/4, matching             *)
-(* InfoLorentzInvariance's own style of rational boost witness) gives a concrete        *)
-(* K < M pair -- and Part 7's forced D values (0, 2, 4 at w=1, lam=1) coexist            *)
-(* with THIS SAME M, K choice: one seed, one concrete (M, D, K, lam_eig) tuple,           *)
-(* satisfying dispersion, causality, and the forced-D formula together. *)
+(* Non-vacuous concrete instantiation: applying the GENERIC bound above (not itself     *)
+(* seed-specific) to K,M values matching Part 3's dispersion at w=1, combined with a       *)
+(* genuine Pythagorean boost (v=3/5, g=5/4, matching InfoLorentzInvariance's own style       *)
+(* of rational boost witness), gives a concrete K < M pair -- and Part 7's forced D values     *)
+(* (0, 2, 4 at w=1, lam=1) coexist with THIS SAME M, K choice: one seed, one concrete            *)
+(* (M, D, K, lam_eig) tuple, satisfying dispersion, causality, and the forced-D formula             *)
+(* together (the causality bound itself remains a generic fact merely evaluated here on               *)
+(* seed-matching numbers, not a seed-derived result). *)
 Example concrete_causal_witness :
   (5#4)*(5#4)*(1 - (3#5)*(3#5)) == 1 /\
   (9#16) == (25#16)*((3#5)*(3#5)) /\
@@ -287,5 +315,5 @@ Print Assumptions seed_eigenvalue_dispersion_iff.
 Print Assumptions seed_uniform_forces_D.
 Print Assumptions concrete_bridge_witness.
 Print Assumptions lorentz_boost_forces_v2_lt_1.
-Print Assumptions seed_causal_speed_forces_K_lt_M.
+Print Assumptions causal_speed_forces_K_lt_M.
 Print Assumptions concrete_causal_witness.
