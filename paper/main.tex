@@ -140,6 +140,7 @@ from this one equation, and what must be imported?
 \end{table}
 
 \section{The Mother Equation}
+\label{sec:mother}
 \begin{equation}
 M\partial^2\Phi + D\partial\Phi + K L_R\Phi + \nabla V(\Phi) = J - \eta
 \label{eq:mother}
@@ -148,6 +149,30 @@ where $L_R$ is a weighted graph Laplacian built from edge data
 $(u_e, v_e, w_e)$, $M,D,K$ are inertia/dissipation/coupling scalars, and $J-\eta$ is a
 drive-minus-loss source term. All results below concern the \emph{conservative}
 sector ($D=0$, $\nabla V=0$, $J=\eta$) unless stated otherwise.
+
+\textbf{Where $L_R$'s shape and $D$ come from, together.} \texttt{InfoAsymmetricSeedTrifurcation.v}
+(\texttt{Th\_coqc}, axiom-free) shows $L_R$ and $D$ need not be specified independently. An
+asymmetric directed seed $R_0$ decomposes \emph{exactly} into a diagonal part, a symmetric
+off-diagonal part, and an antisymmetric off-diagonal part; the antisymmetric part's sign is
+forced by \texttt{nat}'s own trichotomy, not posited. Imposing on the \emph{whole} seed the same
+two axioms that already force $L_R$'s own shape (zero row-sum, non-positive off-diagonal) --
+rather than only on its symmetric part -- forces
+$D_i = \deg_i(W) - \lambda\cdot\mathrm{circ}_i(\mathrm{ord})$: the symmetric-coupling degree at
+node $i$ minus the seed's own net directed circulation, down to two free primitives ($W\geq0$,
+$\lambda$) instead of the three ($W$, $\lambda$, $D$) a reader might otherwise assume Eq.~\ref{eq:mother}
+needs. This identity, and the row-sum axiom it rests on, hold not only for the fixed 3-node witness
+used in the exploratory arc but for an \emph{arbitrary} finite vertex set
+(\texttt{InfoSeedArbitraryNForcing.v}, \texttt{Th\_coqc}) -- proved once by induction on an arbitrary
+\texttt{NoDup} vertex list via one reusable lemma, not re-checked size by size. A companion result
+(\texttt{InfoSeedCirculationArbitraryN.v}, \texttt{Th\_coqc}) closes the remaining gap: the seed's net
+circulation $\sum_i\mathrm{circ}_i(\mathrm{ord})$ also sums to exactly zero for an arbitrary vertex
+set, via a discrete Fubini lemma (swapping the outer and inner sum of a double sum, with the summand's
+two arguments swapped to match, leaves the total unchanged) applied to the antisymmetric part directly
+-- for any antisymmetric function on any finite vertex set, the double sum over all ordered pairs
+equals its own negation, hence is exactly zero. \emph{This is a statement about how many vertices $R_0$
+is built on, not about the spatial dimension of Eq.~\ref{eq:mother}'s Laplacian}; it is unrelated to the
+$n$-dimensional convergence question of \S\ref{sec:nd}. $M$ and $K$ remain exactly as free as before;
+this result concerns only $L_R$'s shape and $D$.
 
 \section{Branch 1: Quantum Readout}
 \label{sec:quantum}
@@ -289,6 +314,18 @@ by exact substitution, the dissipation a node requires for the spine to remain
 coercive. We note, following adversarial review, that this link is exact but shallow:
 any monotone function of degree would exhibit the same shared dependence
 (\S\ref{sec:attack}).
+
+\textbf{The same curvature, now tied to the seed of \S\ref{sec:mother}.}
+\texttt{InfoSeedCurvatureIntegration.v} (\texttt{Th\_coqc}) builds Eq.~\ref{eq:forman}'s
+curvature from a uniform-weight instantiation of the \S\ref{sec:mother} seed, rather than a
+separately-posited weighted graph. Every node of this instantiation has degree $2$, so every
+edge is Forman-flat ($F=0$) -- an honest, unglamorous consequence of a $2$-regular graph, not a
+numerically striking one, following the same pattern already noted for the $C_6$/benzene case
+elsewhere in this paper. The weighted degree $\mathrm{wdeg}$ is computed, not assumed, to equal
+exactly the degree term appearing in the seed's forced-$D$ identity of \S\ref{sec:mother} -- a
+check on two independently-defined quantities, not a coincidence built in by construction. As
+with Eq.~\ref{eq:curvlink}, no underlying theorem becomes tighter or more general; what is new is
+this concrete tie between curvature and the forced-$D$ construction, on the same seed.
 
 \section{Bridge: Quasinormal-Mode Numerics}
 \label{sec:qnm}
@@ -611,6 +648,18 @@ pre-existing, direction-undecidable axiom relating an internal oscillation
 period to mass --- neither of which is discharged by this section, and
 neither of which is claimed to be.
 
+\textbf{A third gap closed: the seed of \S\ref{sec:mother} feeds an existing spectral
+ceiling.} \texttt{InfoSeedTauRelFloor.v} (\texttt{Th\_coqc}) applies the Anderson--Morley
+bound $\lambda\le 4-F_{\min}$ (machine-checked elsewhere in this repository) to a concrete
+eigenpair of the \S\ref{sec:mother} seed's own unweighted carrier: eigenvector $(1,-1,0)$ is
+verified, not assumed, to satisfy the node identity with eigenvalue $3$. The genuinely new
+content is a reciprocal-monotonicity lemma turning the curvature ceiling on $\lambda$ into a
+genuine \emph{lower bound} on a relaxation time $1/\lambda$ -- the actual falsifiable content
+(relaxation faster than this floor would violate the cited bound itself). Stated openly: not
+numerically dramatic on this small, flat carrier (the floor is unsaturated, $1/4$ against an
+actual value of $1/3$); this closes a third gap in the chain described above, not a
+strengthening of the ceiling itself.
+
 \section{Algebraic Bridges: Curvature Symmetry, Rotation, and a Pentagon Spectrum}
 \label{sec:algebra}
 Three results connect the curvature/growth track to a separately-developed
@@ -641,6 +690,27 @@ eigenvalues of the 6-cycle (the same graph used as the automorphism witness
 above) via explicit rational eigenvectors --- the 6-cycle is, in this
 precise sense, the last cycle whose full spectrum stays rational; the
 5-cycle is the first whose spectrum leaves $\mathbb{Q}$.
+
+\textbf{A fourth bridge: the seed's antisymmetry IS discrete torsion, literally.}
+\texttt{InfoSeedTorsionIsSkewOff.v} (6~theorems, \texttt{Th\_coqc}) specializes the standard
+differential-geometry torsion definition (the antisymmetric part of a connection's
+coefficients) to the rank-1/scalar-bundle case, where the \S\ref{sec:mother} seed $R_0$ itself
+IS the connection matrix: torsion equals exactly twice the seed's own antisymmetric part, a
+genuine instantiation of the textbook definition, not an analogy. A symmetric connection is
+torsion-free; for the forced seed of \S\ref{sec:mother}, torsion is exactly the directional
+scalar $\lambda$ times the sign forced by \texttt{nat}'s trichotomy -- the seed's own
+directionality \emph{is}, literally, its torsion. \texttt{InfoSeedTorsionGroupAndRankN.v}
+(5~theorems, \texttt{Th\_coqc}) checks a coboundary connection (already proven elsewhere in this
+repository to carry genuine holonomy curvature) is separately group-torsion-free -- holonomy
+curvature and torsion are two independent kinds of connection non-triviality, confirmed rather
+than assumed -- and extends the rank-1 identity to $n$ independent decoupled seeds sharing one
+$\lambda$, explicitly flagged as the decoupled special case. \texttt{InfoSeedTorsionGenuineMixing.v}
+(4~theorems, \texttt{Th\_coqc}) closes the harder general case: a genuinely mixed connection
+$\Gamma(k,i,j) := T(k,i)R(i,j)$, where output component $k$ and base pair $(i,j)$ entangle
+through a shared table $T$, not $n$ independent copies. A concrete non-separable $T$ (the
+Kronecker delta) gives a computed witness where the zero/nonzero pattern of the resulting torsion
+itself changes with $k$; the key theorem rigorously proves no single scalar reduces one $k$'s
+torsion to another's -- a genuine impossibility result, not an illustration.
 
 \section{A Graph-Native Boundary-Energy Fact and a Degree-Curvature Bound}
 \label{sec:arealaw}
