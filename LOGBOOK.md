@@ -960,3 +960,14 @@ phrasing would), infinity/zero (`I1`-`I4`/`Z1`-`Z4`, already well-developed in `
 pointed to here rather than re-derived), and discrete time (theorems quantify over `nat`, never continuum
 `t:R`). No Coq file changed; this repo's own `InfoMemoryBeforeMass.v` was checked and found already
 well-scoped, nothing to fix there.
+
+## 2026-07-08 (later still) — Elevating the arbitrary-n forcing pair, ahead of a paper update
+
+Two more files elevated from `research_universal_solver`: `InfoSeedArbitraryNForcing.v` and
+`InfoSeedCirculationArbitraryN.v` -- these close the founder's own flagged gap that the six earlier-elevated
+seed files (torsion x3, curvature, tau_rel floor, lambda_c crossover) only checked their forcing pattern at
+fixed n=3/n=4. Both compile cleanly (`coqc -q -R . DQG`, matching this repo's own convention), 14 theorems
+total, all `Print Assumptions` Closed. `make verify`: full repo green. This elevation is a direct
+prerequisite for the founder's request to update `paper/main.tex`'s "$n$-Dimensional Spectral Convergence
+Ladder" section with this arbitrary-n result -- citing Coq content in the paper that isn't actually in this
+repo yet would be dishonest, so elevation had to come first.
