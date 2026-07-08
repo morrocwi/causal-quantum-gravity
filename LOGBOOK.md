@@ -921,3 +921,28 @@ all. That is real progress (parsimony + one new structural fact), honestly disti
 more" or "connects better," and should be described that way going forward.
 
 README.md's file-inventory entry updated to match.
+
+## 2026-07-08 (later) — Elevating six seed-thread files from the private sibling
+
+Six files, all developed and verified in `research_universal_solver` first (per the standard 3-stage
+discipline there), elevated here now that they are stable and the founder asked to elevate before
+continuing further work: `InfoSeedTorsionIsSkewOff.v`, `InfoSeedTorsionGroupAndRankN.v`,
+`InfoSeedTorsionGenuineMixing.v`, `InfoSeedCurvatureIntegration.v`, `InfoSeedTauRelFloor.v`,
+`InfoSeedLambdaCCrossover.v` (all dropping the `_attempt` suffix, per this repo's naming convention for
+elevated files).
+
+Two dependencies (`InfoConnectionFromFrame_attempt.v`, `InfoDiscreteRiemannCommutator_attempt.v`,
+`InfoTelegraphCrossover_attempt.v`) already existed here in `_attempt`-suffixed form (added earlier, not
+yet themselves renamed) — the newly-elevated files' `Require` lines were adjusted to match whichever name
+actually exists in THIS repo for each dependency (some already renamed without the suffix, e.g.
+`InfoAsymmetricSeedTrifurcation`, `InfoDiscreteGraphCurvature`, `InfoCoercivityBoundedClosure`,
+`InfoSpectralCeilingSharp`; some still carry it here, e.g. the three above) — checked file-by-file, not
+assumed uniform. All six compile standalone from repo root (`coqc -q -R . DQG formal/<file>.v`, matching
+this repo's actual `-R` convention, which binds the full `formal/` subdirectory into the logical path —
+compiling from inside `formal/` directly, as the sibling repo's convention does, produces a logical-path
+mismatch error here and must not be used). `make verify`: full repo green, all `Print Assumptions` output
+Closed under the global context.
+
+README.md's file-inventory entries added for all six, each preserving the same honest scope caveats
+already established in the sibling repo's own headers (no underlying theorem strengthened by any of these
+files; K3 is flat; the tau_rel floor is unsaturated; the seed forces the M*K threshold not the regime).
