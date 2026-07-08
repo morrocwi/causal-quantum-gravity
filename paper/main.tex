@@ -82,7 +82,8 @@ Dynamics and a Discrete Causal Signature}}
     (information confined to a region's strict interior cannot reach a fixed
     exterior weighting), each explicitly scoped against holographic or
     general-relativistic over-reading. All told:
-    40 Coq files, 186 theorems, every one machine-checked. Every claim below
+    58 Coq files, 376 theorems (365 axiom-free \texttt{Th\_coqc}, 11 \texttt{+reals}),
+    every one machine-checked. Every claim below
     is accompanied by its tier, its exact source theorem, and a reproduction
     command.
     \end{abstract}
@@ -650,7 +651,7 @@ neither of which is claimed to be.
 
 \textbf{A third gap closed: the seed of \S\ref{sec:mother} feeds an existing spectral
 ceiling.} \texttt{InfoSeedTauRelFloor.v} (\texttt{Th\_coqc}) applies the Anderson--Morley
-bound $\lambda\le 4-F_{\min}$ (machine-checked elsewhere in this repository) to a concrete
+bound \cite{andersonmorley1985} $\lambda\le 4-F_{\min}$ (machine-checked elsewhere in this repository) to a concrete
 eigenpair of the \S\ref{sec:mother} seed's own unweighted carrier: eigenvector $(1,-1,0)$ is
 verified, not assumed, to satisfy the node identity with eigenvalue $3$. The genuinely new
 content is a reciprocal-monotonicity lemma turning the curvature ceiling on $\lambda$ into a
@@ -804,7 +805,7 @@ is a genuine, checkable consequence of results already established above, not
 a new file; the companion note carries the full derivation, literature
 positioning, and a 21-file SHA-256-pinned artifact table.
 
-The Anderson--Morley eigenvalue ceiling (Anderson \& Morley, 1985) is now
+The Anderson--Morley eigenvalue ceiling \cite{andersonmorley1985} is now
 mechanized directly, in witness form over $\mathbb{Q}$
 (\texttt{InfoSpectralCeilingSharp.v}, 2~theorems plus 4~supporting lemmas,
 all \texttt{Th\_coqc}; \texttt{anderson\_morley\_witness}):
@@ -1098,6 +1099,18 @@ narrower claim that no prior discrete-gravity programme possesses a
 machine-checked kernel of any size; that audit is the companion note's own
 and is not re-performed or independently re-verified here.
 
+The seed-asymmetry additions to \S\ref{sec:mother}, \S\ref{sec:curvature}, \S\ref{sec:seedchain},
+and \S\ref{sec:algebra} (the $R_0$ decomposition, its arbitrary-$n$ generalization, the seed-tied
+curvature and relaxation-time-floor results, and the torsion identification) are, likewise,
+\emph{unaudited} for novelty against the discrete-torsion/discrete-differential-geometry
+literature specifically -- no dedicated search was performed for prior graph-native torsion
+constructions comparable to \S\ref{sec:algebra}'s fourth bridge. Individual mathematical
+ingredients (Forman--Ricci curvature, the Anderson--Morley bound \cite{andersonmorley1985}) are
+already cited to their own literature elsewhere in this manuscript; what has not been checked is
+whether the specific \emph{combination} -- an asymmetric seed forcing both a coupling operator and
+its dissipation together, with its antisymmetric part identified as literal torsion -- has close
+prior art. This is stated here rather than left for a reader to discover.
+
 The claimed contribution is therefore narrower than "new physics" and is stated
 at that level: a single graph operator carrying genuine (not aliased) derivations
 --- not results sharing a vocabulary, but a shared equation --- across dispersion,
@@ -1161,10 +1174,10 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles all 37 \texttt{formal/*.v} files via
+\item \texttt{make verify} --- compiles all 58 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (199 total), printing a tier report (\texttt{Th\_coqc} / \texttt{+reals} per
-file).
+theorem (376 total: 365 \texttt{Th\_coqc}, 11 \texttt{+reals}), printing a tier report
+(\texttt{Th\_coqc} / \texttt{+reals} per file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).
 \item Expected result: all Coq files compile with exit code 0; the tier report
@@ -1272,6 +1285,8 @@ Benzolproblem, \textit{Zeitschrift f\"ur Physik}, 1931.
 combinatorial Ricci curvature, \textit{Discrete \& Computational Geometry}, 2003.
 \bibitem{ollivier2009} Y. Ollivier, Ricci curvature of Markov chains on metric
 spaces, \textit{Journal of Functional Analysis}, 2009.
+\bibitem{andersonmorley1985} W. N. Anderson, T. D. Morley, Eigenvalues of the
+Laplacian of a graph, \textit{Linear and Multilinear Algebra} 18:141--145, 1985.
 \bibitem{regge1957} T. Regge, J. A. Wheeler, Stability of a Schwarzschild
 singularity, \textit{Phys. Rev.}, 1957.
 \bibitem{leaver1985} E. Leaver, An analytic representation for the quasi-normal
