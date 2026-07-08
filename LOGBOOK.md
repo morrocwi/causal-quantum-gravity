@@ -946,3 +946,17 @@ Closed under the global context.
 README.md's file-inventory entries added for all six, each preserving the same honest scope caveats
 already established in the sibling repo's own headers (no underlying theorem strengthened by any of these
 files; K3 is flat; the tau_rel floor is unsaturated; the seed forces the M*K threshold not the regime).
+
+## 2026-07-08 (later still) — Common-misreadings guardrail added to CLAUDE.md
+
+The sibling private repo caught a real tier-collapse overclaim in its own `InfoPotential` module header
+("nabla V DERIVED FROM THE ROOT" when only its Z2 symmetry is forced, the quartic shape + parameters are
+posited) and, at the founder's request, added a "common misreadings" checklist to its own
+`readout-not-truth` skill so a fresh AI catches this class of mistake before repeating it. Ported an
+adapted version here (`CLAUDE.md`), covering the same four terms that carry a meaning here different from
+the everyday sense: mass (memory-before-mass — pointing to this repo's own carefully-scoped
+`InfoMemoryBeforeMass.v`, which already hedges the ontological claim correctly, unlike a looser "mass=D/M"
+phrasing would), infinity/zero (`I1`-`I4`/`Z1`-`Z4`, already well-developed in `SUPPLEMENT.md` §1.2, just
+pointed to here rather than re-derived), and discrete time (theorems quantify over `nat`, never continuum
+`t:R`). No Coq file changed; this repo's own `InfoMemoryBeforeMass.v` was checked and found already
+well-scoped, nothing to fix there.

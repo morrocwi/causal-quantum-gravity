@@ -52,6 +52,31 @@ you want the map before the detail). Open the right one, not all of them:
   `mass_note.tex` without asking — it's a standalone preprint this repo hosts as a
   supplement, not this repo's own document).
 
+## Common misreadings — check before citing (a fresh AI's checklist)
+
+Four terms carry a meaning here that differs from the everyday/textbook sense. Check each before
+repeating a claim that uses one — misreading any produces a confident, wrong summary.
+
+1. **"Mass" (memory-before-mass).** `InfoMemoryBeforeMass.v` is the careful, well-scoped result: the
+   recovery timescale `tau_c = M/D` (memory) is treated as primary, and `M` is INFERRED from it
+   (`M = tau_c * D`), not the reverse — the file proves this ONLY as a discrete structural fact (two
+   systems sharing `tau_c` are dynamically indistinguishable regardless of separate `M`,`D`); the
+   ONTOLOGICAL claim that mass IS derived from memory stays explicitly `Dr`/`Open` in the file's own
+   scope section, not proved. If you see "mass" used elsewhere as a name for a memory-derived quantity
+   (e.g. a frequency `D/(2M)`), check whether that sentence means the raw parameter `M` or a
+   reciprocal-of-memory reading — they are not the same thing.
+2. **Infinity / zero (`I1`–`I4` / `Z1`–`Z4`, `SUPPLEMENT.md` §1.2).** The continuum/ℝ/∞ (`I1`-`I4`) and an
+   injected EXACT zero (`Z1`-`Z4`, dual to the `I` catalogue) are both refused NON-readouts here —
+   approached, never reached. Never read a `Print Assumptions` Closed theorem as having "solved" a
+   continuum question it merely refused to pose, and never read an exact-zero claim (e.g. "X can never
+   be exactly zero") as an ordinary computed `0`-value fact — check which of the two it means.
+3. **Discrete time.** Every "for all time" / "global" / "persists forever" theorem here quantifies over a
+   discrete step index (`nat` or an explicit finite structure) — NEVER over continuum `t : ℝ`. The jump
+   to continuum time (`h→0`) is itself an `I2` injection (see above); this repo does not smuggle it in
+   silently. Check whether a "global in time" claim is `forall n : nat` (Th_coqc, the common case here)
+   or genuinely needs `Coq.Reals` (`+reals`, a different, much rarer tier in this repo) before citing it
+   as a continuum ODE/PDE stability result.
+
 ## Tier discipline (non-negotiable, see README's "Tier legend" for the full table)
 
 Every claim carries `Th_coqc` (axiom-free, machine-checked) / `+reals` (depends on
