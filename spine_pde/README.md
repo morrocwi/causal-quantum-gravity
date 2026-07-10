@@ -15,9 +15,11 @@ Two numeric modes run throughout:
   mat-vec, so it scales to `10**4`–`10**5` nodes.
 
 ```bash
+git clone https://github.com/morrocwi/causal-quantum-gravity.git && cd causal-quantum-gravity/spine_pde
 pip install -e .          # editable install
 pip install -e '.[dev]'   # + pytest + sympy
 pytest                    # 43 tests, exact-mode values checked against theorems
+python examples/quickstart.py   # runnable end-to-end example, see examples/
 ```
 
 ## The theory in four modules

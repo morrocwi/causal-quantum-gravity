@@ -40,8 +40,8 @@ dev = ["pytest>=7.0", "sympy>=1.11"]
 spine-pde = "spine_pde.cli:main"
 
 [project.urls]
-Homepage = "https://example.org/spine-pde"
-Source = "https://example.org/spine-pde"
+Homepage = "https://github.com/morrocwi/causal-quantum-gravity"
+Source = "https://github.com/morrocwi/causal-quantum-gravity"
 
 [tool.setuptools.packages.find]
 where = ["."]
