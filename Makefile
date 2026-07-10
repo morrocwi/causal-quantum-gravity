@@ -62,7 +62,18 @@ COQFILES = \
 	formal/InfoOperatorLosesPropertyAtEndpoints_attempt.v \
 	formal/InfoErasureArrowOfTime_attempt.v \
 	formal/InfoAsymmetricSeedTrifurcation.v \
-	formal/InfoSeedFeedsQuantumRelativity_attempt.v
+	formal/InfoSeedFeedsQuantumRelativity_attempt.v \
+	formal/InfoDiscreteRiemannCommutator_attempt.v \
+	formal/InfoConnectionFromFrame_attempt.v \
+	formal/InfoTelegraphCrossover_attempt.v \
+	formal/InfoSeedTorsionIsSkewOff.v \
+	formal/InfoSeedTorsionGroupAndRankN.v \
+	formal/InfoSeedTorsionGenuineMixing.v \
+	formal/InfoSeedCurvatureIntegration.v \
+	formal/InfoSeedTauRelFloor.v \
+	formal/InfoSeedLambdaCCrossover.v \
+	formal/InfoSeedArbitraryNForcing.v \
+	formal/InfoSeedCirculationArbitraryN.v
 
 verify:
 	@set -e; \

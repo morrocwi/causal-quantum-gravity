@@ -1,3 +1,14 @@
+(*
+   InfoSeedLambdaCCrossover.v -- PROMOTED EXTRACT
+   Provenance: elevated 2026-07-08/10 from research_universal_solver/formal/InfoSeedLambdaCCrossover_attempt.v
+   (renamed, "_attempt" dropped; Require targets adjusted to this repo's file names).
+   Verified standalone at elevation (coqc -q -R . DQG; all Print Assumptions "Closed under
+   the global context") and wired into COQFILES/make verify + CI on 2026-07-10, closing a
+   review finding that elevation alone had left these outside the CI-guarded build.
+   The original header below is kept verbatim from the audited source (including its
+   "EXPLORATORY, single-attempt" self-description, which refers to its role in the source
+   repo's exploratory arc, not to its verification status here).
+*)
 (******************************************************************************)
 (* InfoSeedLambdaCCrossover.v -- EXPLORATORY, single-attempt.           *)
 (*   Requires InfoTelegraphCrossover_attempt, InfoAsymmetricSeedTrifurcation_     *)

@@ -8,9 +8,11 @@
 > theory, and by its own stance it does not try to be: continuum GR is **`[Refused]`** as a
 > non-readout, *not* left as a gap to chase.
 >
-> **Verification, in one line:** `make verify` compiles **58 Coq files / 376 machine-checked
-> theorems** (365 axiom-free over ℚ, 11 on the disclosed `+reals` tier), every one
-> `Print Assumptions`-checked; CI has been green on every commit. One command reproduces all of it.
+> **Verification, in one line:** `make verify` compiles **69 Coq files / 439 machine-checked
+> theorem certificates** (428 axiom-free over ℚ, 11 on the disclosed `+reals` tier), every one a
+> live `Print Assumptions` check in the build; CI has been green on every commit. One command
+> reproduces all of it. (Counts measured 2026-07-10, after wiring the seed-asymmetry files and
+> their dependencies into the CI-guarded build — a review finding caught them outside it.)
 >
 > **⚠️ Two tracks — do NOT conflate them (this is the #1 cause of under-rating this repo):**
 >
@@ -83,9 +85,13 @@ reparametrization.** Tier-honest scope (see SUPPLEMENT.md §1.1, added 2026-07-0
 after a full borrow-audit of the sibling repo this project shares its formal core
 with): genuine derivation from the graph root `δ_R` is earned at exactly one link —
 `L_R` itself (`InfoRetainedDistinctionForcesLaplacian_attempt.v`, unique-operator
-argument). `M` and `D` are independent structural primitives the equation needs on
-top of that (each backed by its own brick, `InfoStrictConeBothOrders_attempt.v` /
-`InfoDissipationIsIndependent_attempt.v`), not derived from the root; the QM/SR
+argument). `M` remains an independent structural primitive the equation needs on
+top of that (`InfoStrictConeBothOrders_attempt.v`, a settled negative); `D` was in the
+same position when this paragraph was first written, but is **forced as of 2026-07-08**
+by the seed-asymmetry results (see the banner above and `InfoAsymmetricSeedTrifurcation.v`
+Part 7 — `InfoDissipationIsIndependent_attempt.v`'s independence-of-`M` verdict still
+stands; what changed is that `D`'s structural form now follows from the whole-seed
+axioms); the QM/SR
 identity itself relates constructions built from those posited slots plus a posited
 Minkowski signature, so "derives quantum mechanics and special relativity" is best
 read as *derives `L_R`, and proves a real relabeling identity among the remaining
