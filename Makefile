@@ -4,6 +4,12 @@
 # InfoDiscreteGraphCurvature, and InfoAnalysisLift -> InfoQuantumGravityRootBridge.
 # InfoSchrodinger and InfoLorentzInvariance are standalone but both required by
 # InfoQuantumRelativityUnification. InfoLorentz, InfoLorentzContinuum standalone.
+# Curvature-tensor chain: InfoDiscreteRiemannCurvature -> InfoDiscreteGaussBonnet;
+# InfoMetricCompatibleCurvature -> InfoDiscreteLeibnizObstruction,
+# InfoRationalSO3Curvature; InfoIrrationalNonReadout -> InfoMetricFrameNonReadout;
+# InfoMetricDerivedCurvature, InfoRationalIsometry, InfoRiemannPairSymmetry,
+# InfoDiscreteSecondBianchi standalone. InfoTelegraphHorizonUnification requires
+# InfoTelegraphCrossover (already wired above).
 COQFILES = \
 	formal/RDL_GammaSpectral.v \
 	formal/RDL_MetricReadout.v \
@@ -73,7 +79,19 @@ COQFILES = \
 	formal/InfoSeedTauRelFloor.v \
 	formal/InfoSeedLambdaCCrossover.v \
 	formal/InfoSeedArbitraryNForcing.v \
-	formal/InfoSeedCirculationArbitraryN.v
+	formal/InfoSeedCirculationArbitraryN.v \
+	formal/InfoDiscreteRiemannCurvature_attempt.v \
+	formal/InfoDiscreteGaussBonnet_attempt.v \
+	formal/InfoMetricCompatibleCurvature_attempt.v \
+	formal/InfoDiscreteLeibnizObstruction_attempt.v \
+	formal/InfoRationalSO3Curvature_attempt.v \
+	formal/InfoMetricDerivedCurvature_attempt.v \
+	formal/InfoIrrationalNonReadout_attempt.v \
+	formal/InfoMetricFrameNonReadout_attempt.v \
+	formal/InfoRationalIsometry_attempt.v \
+	formal/InfoRiemannPairSymmetry_attempt.v \
+	formal/InfoDiscreteSecondBianchi_attempt.v \
+	formal/InfoTelegraphHorizonUnification_attempt.v
 
 verify:
 	@set -e; \
