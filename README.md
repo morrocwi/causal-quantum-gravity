@@ -1,5 +1,13 @@
 # Causal Quantum Gravity
 
+[![verify](https://github.com/morrocwi/causal-quantum-gravity/actions/workflows/verify.yml/badge.svg)](https://github.com/morrocwi/causal-quantum-gravity/actions/workflows/verify.yml)
+
+> **Positioning.** This repo is the **stable anchor** of the physics/engineering line of this
+> research: a fixed, independently reproducible resting point (Coq certificates + `spine_pde`), not
+> a moving target. A private, sibling universal-solver engine is planned to expand into further
+> domains (chemistry, biology, social sciences, …) over time; that is a direction, not a capability
+> claimed here — this repo states only what exists and is checkable today.
+
 > **AI assistance disclosure (read before crediting or reviewing).** The research direction, the
 > core ideas (the mother equation, the readout-not-truth stance, the tier discipline, every
 > substantive claim), and all final decisions are the work of the human author, **Yaoharee
@@ -9,6 +17,131 @@
 > model produced this work and none is named as a contributor; tier assignments and claims were
 > set and are owned by the human author. If you cite or review this repository, the author of
 > record is the human author.
+
+## Test this yourself — 5 minutes
+
+This section exists so nothing below has to be taken on trust — every sentence has a command next
+to it. Full file-by-file `Print Assumptions` table: see "How to reproduce" below. Guided
+evaluation, misreading checklist, and where to file a falsification: see "For evaluators" below.
+
+### 1. Clone + `make verify` — the headline check
+
+```bash
+# install Coq once (Ubuntu/Debian; or `opam init -y && opam install -y coq` anywhere)
+sudo apt-get update && sudo apt-get install -y coq
+
+git clone https://github.com/morrocwi/causal-quantum-gravity.git
+cd causal-quantum-gravity
+make verify
+```
+
+`make verify` compiles all **69** `formal/*.v` files (`coqc -q -R . DQG <file>`, fixed dependency
+order in `Makefile`), with a live `Print Assumptions` check on every theorem in the build, then
+runs the QNM bridge script. Verified against Coq 8.20.1. **Not re-run for this document** — a
+different heavy `coqc` job was already running on this machine at write time (checked via
+`pgrep -af coqc` first, per this project's own one-heavy-job-at-a-time discipline). The exact
+counts below are taken from this repo's own build system and PR #29 (2026-07-10), which
+independently re-ran `make verify` in full and counted the `Print Assumptions` output directly
+(not copied from a prior claim):
+
+```
+428 lines of "Closed under the global context"    (axiom-free, Th_coqc, over ℚ only)
+ 11 theorems on the disclosed +reals tier           (2 named Reals axioms each, 22 axiom-name lines)
+---------------------------------------------------------------------------------------
+428 + 11 = 439 machine-checked certificates, across the 69 files that `make verify` compiles
+```
+
+Live status: the badge at the top of this file is GitHub's own CI badge for this exact `make
+verify` command, re-run on every push — check it (or the repo's Actions tab) instead of trusting a
+number frozen at commit time.
+
+### 2. `spine_pde` quickstart — install, run its test suite, one real usage snippet
+
+`spine_pde` is a separate, self-contained Python package: a computational, readable reference
+implementation of the same theory, checked in EXACT mode against the Coq theorems above bit-for-bit
+(see `spine_pde/README.md`'s "Audit, don't believe" table).
+
+```bash
+cd spine_pde
+pip install -e '.[dev]'   # editable install + pytest + sympy
+pytest -q                 # 43 tests, exact-mode values checked against theorems
+```
+
+Real output, this exact command, this worktree, 2026-07-10 (a light job — actually run for this
+document, unlike `make verify` above):
+
+```
+...........................................                              [100%]
+```
+(43 dots, `pytest -q` prints one dot per passing test and no summary line when every test passes
+and none are skipped — 43 dots = 43 passed, 0 failed.)
+
+One real usage snippet — `python examples/quickstart.py` — and its actual output, this run:
+
+```bash
+python examples/quickstart.py
+```
+```
+graph: 2500 nodes, nnz(L_R)=12300
+energy: 661.6855 -> 162.5219 (damped relaxation)
+crossover lam_c = 0.0100
+oscillatory (quantum) modes: 20 / 20
+decay (classical) modes:     0 / 20
+```
+
+### What we claim / what we don't
+
+Strongest verified facts, tier-tagged, one command or file per row (tier legend below):
+
+| We claim (verified, tier-tagged) | We do NOT claim |
+|---|---|
+| **69** axiom-free-or-`+reals`-disclosed Coq files, **439** machine-checked theorem certificates (428 `Th_coqc` over ℚ + 11 `+reals`), checkable by anyone in one command — `make verify` (counts independently re-confirmed PR #29, 2026-07-10; CI badge above) | That every `.v` file physically present under `formal/` is in this count — the directory holds more files than the CI-guarded `make verify` target compiles; only the ones listed in `Makefile`'s `COQFILES` are certified by the one-command check (compare `ls formal/*.v \| wc -l` against `grep -c '^\tformal/' Makefile` to see the difference yourself) |
+| The graph Laplacian `L_R = D_W − W` is **FORCED** — proven the *unique* operator with `{symmetric, zero-row-sum, off-diagonal ≤ 0}`; adjacency/signless/random-walk/normalized alternatives refuted by explicit witness (`Th_coqc`, `formal/InfoRetainedDistinctionForcesLaplacian_attempt.v`) | That the whole spine equation is forced from the root — the 2nd-order scalar `M` remains an independently posited structural primitive; six forcing readings for it were each shown insufficient on an explicit witness, a settled negative, not an unexamined gap (`Th_coqc` + `[Dr]`, `formal/InfoStrictConeBothOrders_attempt.v`) |
+| The dissipation term `D` is **also FORCED** (2026-07-08 result) — `D_i = deg_i(W) − λ·circ_i(ord)`, proven for an **arbitrary vertex count** by genuine induction, cutting the spine's free structural primitives from three to two (`Th_coqc`, `formal/InfoAsymmetricSeedTrifurcation.v` Part 7 + `formal/InfoSeedArbitraryNForcing.v` + `formal/InfoSeedCirculationArbitraryN.v`) | That the whole-seed extension of `L_R`'s two forcing axioms to the full asymmetric seed is *itself* proven the unique such extension — flagged honestly in-file as natural, not proven-unique |
+| The quantum dispersion relation and the special-relativistic wave operator are the same equation — a real, non-vacuous `ring` identity (`Th_coqc`, `formal/InfoQuantumRelativityUnification.v`), **bounded exactly per the 2026-07-08 §4/§8 amendments** (`SUPPLEMENT.md` §4, §8 — headers now say "bounded restatement", PR #29) | That this identity is a **from-the-root derivation** — it relates two *posited* constructions (the spine's free `M,D,K` slots; the boost's posited Minkowski signature/hyperbola constraint) under a *chosen* reparametrization; "derives QM and SR" is not the accurate reading (`SUPPLEMENT.md` §4/§8 amendment bodies, unchanged by PR #29 — only the section titles were tightened) |
+| A complete discrete curvature-tensor chain — Riemann = 2nd finite difference = group commutator, both Bianchi identities, pair-symmetry, metric-derived Levi-Civita, all division-free over ℚ (`Th_coqc`; e.g. `formal/InfoDiscreteRiemannCurvature_attempt.v`, `InfoDiscreteSecondBianchi_attempt.v`, `InfoRiemannPairSymmetry_attempt.v`, `InfoMetricDerivedCurvature_attempt.v` — **compiled and independently spot-checked `Closed under the global context` for this document, 2026-07-10; these are among the files in the "not every file" caveat above, not yet wired into the CI-guarded `make verify` target**) | That this tensor chain constitutes a derivation of the Einstein field equations, or of the metric-derived Riemann tensor `R^i_jkl` in dimension `n ≥ 3` — the latter is explicitly `[Open]` |
+| The quantum↔classical crossover, the black-hole horizon, and the "agency knife-edge" are proven to be **one internal algebraic discriminant** `disc = D² − 4MKλ`, derived on the spine itself (`Th_coqc`, `formal/InfoTelegraphCrossover_attempt.v` + `InfoTelegraphHorizonUnification_attempt.v` — the latter also spot-checked `Closed`, same caveat as above) | That this horizon is an imported Schwarzschild profile — it is explicitly not; and that *full nonlinear* GR (the field equations, Schwarzschild as their solution) is derived anywhere in this repo — it is `[Refused]`/`[Open]`, by design, not a numerical shortfall (eight independent recovery attempts tried and refuted or left open, `SUPPLEMENT.md`) |
+| **Linearized** GR — gravitational waves — is genuinely derived from the same root box operator (`box h = 0` exactly at `v=±1`, null iff lightspeed, boost-invariant in every frame), and the Schwarzschild quasinormal-mode frequency is reproduced numerically to **0.1% (real) / 1.2% (imaginary)** from a finite-graph discretization with no point at infinity (`finite_diagnostic`, `scripts/verify_quantum_gravity_root_bridge.py`) | That the gravitational-wave derivation (`InfoGR2.GW`) lives in *this* repo — it does not; it is in the sibling private repo only (see `CLAUDE.md`'s "Common misreadings" #4 in this repo for the exact citation and why conflating the two tracks is the single most common way this repo gets mis-rated) |
+
+**Not claimed, stated plainly:** full nonlinear GR derivation (`[Refused]`/`[Open]`, not attempted-and-failed silently — the eight-attempt refutation log is in `SUPPLEMENT.md`) · that `M` is forced by the root (`[Dr]`, settled negative) · the physical truth of any readout — every number here is a *readout* of a declared finite computation, never an assertion of physical truth (`readout-not-truth`, see `CLAUDE.md`) · novelty adjudication against the wider literature — this repo states what it proves, not where it ranks against unpublished or unreviewed prior art.
+
+### For evaluators
+
+How a physicist or an AI attacks this repo, in order of effort:
+
+1. **Re-run `make verify`** yourself (see step 1 above) and diff the `Print Assumptions` output
+   against the counts claimed here — a single mismatched axiom or a non-`Closed` line on a file
+   claimed `Th_coqc` is an immediate, reportable falsification.
+2. **Run the `Print Assumptions` audit directly** on any individual file you want to scrutinize:
+   `coqc -q -R . DQG formal/<file>.v` prints its own assumptions at the bottom — check it against
+   the tier that file (and this README) claims for it.
+3. **Use the misreading-guardrail checklist this repo already ships.** `CLAUDE.md`'s "Common
+   misreadings — check before citing" section lists four specific traps (the memory-before-mass
+   scope, the `I1`–`I4`/`Z1`–`Z4` non-readout catalogue, discrete-vs-continuum time, and the two
+   senses of "GR" — including which module lives in this repo vs. the private sibling only) that
+   have each caused a real, documented mis-citation at least once — check your reading against it
+   before repeating a claim.
+4. **Attack the forcing chain directly.** The "forced" claims above (`L_R`, `D`) are the deepest
+   and most contestable — the repo's own bar for "forced" is an explicit witness ruling out every
+   named alternative (see `InfoRetainedDistinctionForcesLaplacian_attempt.v`). A genuine
+   falsification looks like a step called "forced" that you can show admits a second, equally
+   natural alternative satisfying the same stated axioms.
+5. **Found a genuine falsification?** Open a GitHub issue in this repository titled
+   `[<track>-track] <one-line finding>` with the exact command you ran, the output you got, and the
+   output this document said you should get. This project's own discipline is to report a finding
+   that flips a prior claim plainly, not to soften it — it holds external evaluators to the same
+   bar.
+
+### The private research repo this is drawn from
+
+This repo is a curated, standalone export of a subset of theorems from a private research
+repository, `research_universal_solver` (role: the calculation engine this line of work is
+developed in — available on request; not itself public). New theorems are proven and verified
+there first; only afterward are a subset copied here as a separate, later sync step. See
+"Provenance" below for the exact file-by-file authorship trail — nothing beyond what that section
+already discloses is stated here.
+
+---
 
 > ## ⭐ READ THIS FIRST — what this is, and its level (so an AI/human rates it correctly)
 >
@@ -261,7 +394,10 @@ pip install -r requirements.txt
 make verify
 ```
 
-This compiles all 17 `formal/*.v` files in dependency order with
+This compiles all 69 `formal/*.v` files in dependency order (see `Makefile`'s `COQFILES` for the
+current authoritative list — this number was stale at "17" before this pass; the file-by-file
+table above is a legacy inventory and may itself lag the current file count, per its own
+"40+ Coq files" caveat two paragraphs up) with
 `coqc -q -R . DQG <file>`, then runs `scripts/verify_quantum_gravity_root_bridge.py`,
 and prints a `PASS`/`FAIL` summary. Expected per-file result:
 
