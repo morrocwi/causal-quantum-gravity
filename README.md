@@ -8,6 +8,10 @@
 > theory, and by its own stance it does not try to be: continuum GR is **`[Refused]`** as a
 > non-readout, *not* left as a gap to chase.
 >
+> **Verification, in one line:** `make verify` compiles **58 Coq files / 376 machine-checked
+> theorems** (365 axiom-free over ℚ, 11 on the disclosed `+reals` tier), every one
+> `Print Assumptions`-checked; CI has been green on every commit. One command reproduces all of it.
+>
 > **⚠️ Two tracks — do NOT conflate them (this is the #1 cause of under-rating this repo):**
 >
 > 1. **TENSOR-PDE TRACK — the current, most-advanced state → [`paper/tensor_pde.tex`](paper/tensor_pde.tex) / [`.pdf`](paper/tensor_pde.pdf).**
@@ -23,24 +27,45 @@
 >      spine itself — it is NOT an imported Schwarzschild profile.**
 >    - a **complete discrete curvature-tensor chain** (Riemann = 2nd finite difference = group commutator;
 >      both Bianchi; pair-symmetry; metric-derived Levi-Civita), all machine-checked over ℚ, division-free;
->    - a **decisive falsifiable prediction** (a `τ_rel` floor forced by the bounded L_R spectrum).
+>    - a **decisive falsifiable prediction** (a `τ_rel` floor forced by the bounded L_R spectrum);
+>    - **the seed-asymmetry results (2026-07-08, all `Th_coqc`, elevated here):** a single asymmetric
+>      directed seed `R0` decomposes exactly into the spine's D-shape / L_R-shape / M-shape, and imposing
+>      L_R's own two forcing axioms on the *whole* seed **forces the dissipation coefficient itself** —
+>      `D_i = deg_i(W) − λ·circ_i(ord)` — proven for an **arbitrary vertex count** by genuine induction
+>      (`InfoAsymmetricSeedTrifurcation.v`, `InfoSeedArbitraryNForcing.v`, `InfoSeedCirculationArbitraryN.v`),
+>      cutting the spine's free structural primitives from three to two; and the seed's antisymmetric part
+>      **is, literally, discrete torsion** — the textbook definition instantiated at rank 1, with a genuinely
+>      *mixed* (non-decoupled) rank-n torsion proven irreducible to any per-component rescaling
+>      (`InfoSeedTorsionIsSkewOff.v`, `InfoSeedTorsionGenuineMixing.v`).
 > 2. **FOUNDATIONAL TRACK → [`paper/main.tex`](paper/main.tex).** The original mother-equation→QM+SR
 >    derivation and the Forman-Ricci native-gravity object. Its **Schwarzschild/QNM piece is a `+reals`
 >    DIAGNOSTIC only — NOT the horizon claim above.** (An earlier reading that called "the horizon imported"
 >    was reading this track, not the tensor-PDE track.)
 >
 > **The level, stated plainly (tier-honest):**
-> - **Proven `Th_coqc` (ℚ):** one spine (with exactly ONE term — `L_R` — forced from the root; `M` and `D`
->   are independent structural primitives `[Dr]` — a tagged interpretive verdict resting on `Th_coqc`
->   witnesses, not itself machine-proved, not derived, see SUPPLEMENT.md §1.1) · QM↔SR identity (a real
+> - **Proven `Th_coqc` (ℚ):** one spine with **TWO of its three structural terms now forced from the
+>   root's own axioms** — `L_R` (the unique operator with {symmetric, zero-row-sum, off-diagonal ≤ 0}) **and,
+>   since 2026-07-08, `D`** (forced to `deg−λ·circ` by imposing those same two axioms on the whole
+>   asymmetric seed, proven for arbitrary vertex count; the extension-to-the-whole-seed step is itself
+>   flagged, honestly, as natural-but-not-proven-unique). `M` remains the one posited scalar — and that is a
+>   *settled machine-checked negative* (six forcing readings each refuted on explicit witnesses,
+>   SUPPLEMENT.md §1.1), not an unexamined gap · QM↔SR identity (a real
 >   relabeling of two posited objects, see §8 amendment, not a from-the-root derivation) · quantum↔classical
 >   crossover = horizon = agency as an *internal* discriminant · the full discrete curvature tensor + both
->   Bianchi + pair-symmetry.
+>   Bianchi + pair-symmetry · the seed's antisymmetry = literal rank-1 discrete torsion, with genuine
+>   (non-decoupled) rank-n mixing.
 > - **`[Open]` (honest, not faked):** absolute constants (M,D,K,τ_c) · metric-derived full `R^i_jkl` in n≥3 ·
 >   the non-abelian *group* Bianchi.
 > - **`[Refused]` (thesis, not gaps):** continuum GR / Einstein field equations · the `√g` frame · irrational
 >   values — non-readouts declined by design, on **both** ends of every non-readout pair (injected exact-zero
 >   AND injected infinity are one reciprocal diagnostic, `1/0=∞` — see SUPPLEMENT.md §1.2, "the Guard").
+> - **"GR", said precisely (see CLAUDE.md's misreading #4 — this distinction has been missed once):**
+>   *linearized* GR — gravitational waves — **is genuinely derived from the same root box operator**
+>   (`box h = 0` exactly at `v=±1`, null iff lightspeed, boost-invariant in every frame; sibling private
+>   repo, `InfoGR2.GW`, its own single-root gate passed), and the Schwarzschild quasinormal-mode frequency
+>   is reproduced numerically to **0.1% (real) / 1.2% (imaginary)** from a finite-graph discretization with
+>   no point at infinity (`finite_diagnostic`). What is refused/open is *full nonlinear* GR — the field
+>   equations and Schwarzschild **as their solution**.
 > - **Net:** *very high as an equation-level formal kernel; partial as a full physical theory — and that
 >   boundary is drawn on purpose, machine-verified, not hidden.*
 >
