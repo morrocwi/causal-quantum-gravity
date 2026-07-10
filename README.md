@@ -324,6 +324,29 @@ minutes; `make verify` allows a 90s timeout and treats a partial (but
 monotonically converging) run as a pass — a timeout exit code alone is not a
 failure.
 
+### 5. Install and test `spine_pde` (the computational reference library)
+
+`spine_pde` is a separate, self-contained Python package — a computational,
+readable reference implementation of the same theory, checked in EXACT mode
+against the Coq theorems above bit-for-bit (see `spine_pde/README.md`'s
+"Audit, don't believe" table).
+
+```bash
+make test-lib
+# equivalent to:
+#   pip install -e "spine_pde[dev]"
+#   cd spine_pde && python -m pytest -q tests/
+```
+
+or, from a fresh clone:
+
+```bash
+git clone https://github.com/morrocwi/causal-quantum-gravity.git && cd causal-quantum-gravity/spine_pde
+pip install -e '.[dev]'         # editable install + pytest + sympy
+pytest -q                       # exact-mode values checked against theorems
+python examples/quickstart.py   # runnable end-to-end example
+```
+
 ### `make clean`
 
 Removes all `.vo`/`.vok`/`.vos`/`.glob`/`.aux` build artifacts.
