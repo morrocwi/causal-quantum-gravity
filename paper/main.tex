@@ -82,7 +82,7 @@ Dynamics and a Discrete Causal Signature}}
     (information confined to a region's strict interior cannot reach a fixed
     exterior weighting), each explicitly scoped against holographic or
     general-relativistic over-reading. All told:
-    58 Coq files, 376 theorems (365 axiom-free \texttt{Th\_coqc}, 11 \texttt{+reals}),
+    69 Coq files, 439 theorem certificates (428 axiom-free \texttt{Th\_coqc}, 11 \texttt{+reals}),
     every one machine-checked. Every claim below
     is accompanied by its tier, its exact source theorem, and a reproduction
     command.
@@ -1174,9 +1174,9 @@ argument trail, including dead ends, needs the supplement as well.
 \label{sec:repro}
 \begin{enumerate}[nosep,leftmargin=1.2em]
 \item \texttt{git clone} this repository.
-\item \texttt{make verify} --- compiles all 58 \texttt{formal/*.v} files via
+\item \texttt{make verify} --- compiles all 69 \texttt{formal/*.v} files via
 \texttt{coqc} in dependency order and runs \texttt{Print Assumptions} on every named
-theorem (376 total: 365 \texttt{Th\_coqc}, 11 \texttt{+reals}), printing a tier report
+theorem (439 total: 428 \texttt{Th\_coqc}, 11 \texttt{+reals}), printing a tier report
 (\texttt{Th\_coqc} / \texttt{+reals} per file).
 \item \texttt{python3 scripts/verify\_quantum\_gravity\_root\_bridge.py} ---
 reproduces the quasinormal-mode convergence table (Eq.~\ref{eq:qnmresult}).

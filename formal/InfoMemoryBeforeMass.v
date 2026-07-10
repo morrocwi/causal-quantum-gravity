@@ -125,6 +125,14 @@ Module InfoMemoryBeforeMass.
 
 End InfoMemoryBeforeMass.
 
+(* ================== AXIOM-FREEDOM CHECK (added 2026-07-10, review Finding 3: this file
+   was the one COQFILES member with zero Print Assumptions calls; comment-only elsewhere) ================== *)
+Print Assumptions InfoMemoryBeforeMass.mass_inferred.
+Print Assumptions InfoMemoryBeforeMass.rate_times_tau.
+Print Assumptions InfoMemoryBeforeMass.tau_c_nonzero.
+Print Assumptions InfoMemoryBeforeMass.rate_eq_of_tau_eq.
+Print Assumptions InfoMemoryBeforeMass.memory_before_mass.
+
 (* PRIMARY TARGETS: InfoMemoryBeforeMass.memory_before_mass (equal memory tau_c =   *)
 (* M/D => identical discrete dynamics, whatever the separate M and D -- mass is not  *)
 (* observable from the dynamics apart from memory), resting on .mass_inferred        *)
