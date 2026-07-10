@@ -990,3 +990,16 @@ exists ONLY in the private repo's aggregate, not here; (3) Branch 3's headline i
 reads, to a fast reader, as "no GR at all." A "two senses of GR" item was added to both repos'
 misreading checklists (this repo's `CLAUDE.md`; the sibling's `readout-not-truth` skill) with the
 rule: answer "is X derived?" only after searching BOTH repos by module vocabulary.
+
+## 2026-07-10 — v1.0.0: the release entry
+
+Founder-confirmed closure release. Positioning per the founder's directive: a CALCULATION TOOL
+first (one equation computes textbook-to-research physics to the same answers as the standard
+formulas, verified case by case, laptop-scale/numpy-only resources), machine-checked proofs
+backing it — 69 Coq files / 439 Print Assumptions certificates (428 axiom-free Q + 11 +reals),
+CI green, spine_pde 0.1.0 test suite 43/43. Release-week hardening, all via reviewed PRs:
+seed files + dependencies wired into CI (#24, closing a review finding), eigsh test hang fixed
+(#25), README/paper counts corrected to measured values, SUPPLEMENT 1.1 D-row reconciled with
+the D-forcing result. External speedup claims are explicitly NOT part of this release; local
+re-tests of external claims (Q3D unitarity, QEC burst mechanism) are recorded in the sibling
+repo's CHANGELOG at their honest reproduced-qualitatively level.
