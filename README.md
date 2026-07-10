@@ -35,20 +35,21 @@ cd causal-quantum-gravity
 make verify
 ```
 
-`make verify` compiles all **69** `formal/*.v` files (`coqc -q -R . DQG <file>`, fixed dependency
-order in `Makefile`), with a live `Print Assumptions` check on every theorem in the build, then
-runs the QNM bridge script. Verified against Coq 8.20.1. **Not re-run for this document** — a
-different heavy `coqc` job was already running on this machine at write time (checked via
-`pgrep -af coqc` first, per this project's own one-heavy-job-at-a-time discipline). The exact
-counts below are taken from this repo's own build system and PR #29 (2026-07-10), which
-independently re-ran `make verify` in full and counted the `Print Assumptions` output directly
-(not copied from a prior claim):
+`make verify` compiles all **81** `formal/*.v` files — every `.v` file physically present under
+`formal/`, none excluded (`coqc -q -R . DQG <file>`, fixed dependency order in `Makefile`), with a
+live `Print Assumptions` check on every theorem in the build, then runs the QNM bridge script.
+Verified against Coq 8.20.1. **Not re-run locally for this document** — a different heavy `coqc`
+job was already running on this machine at write time (checked via `pgrep -af coqc` first, per
+this project's own one-heavy-job-at-a-time discipline). The exact counts below are grepped
+directly from the green CI log of PR #31 (2026-07-10), which ran this exact `make verify` in full
+on GitHub's runners and counted the `Print Assumptions` output directly (not copied from a prior
+claim):
 
 ```
-428 lines of "Closed under the global context"    (axiom-free, Th_coqc, over ℚ only)
+469 lines of "Closed under the global context"    (axiom-free, Th_coqc, over ℚ only)
  11 theorems on the disclosed +reals tier           (2 named Reals axioms each, 22 axiom-name lines)
 ---------------------------------------------------------------------------------------
-428 + 11 = 439 machine-checked certificates, across the 69 files that `make verify` compiles
+469 + 11 = 480 machine-checked certificates, across the 81 files that `make verify` compiles
 ```
 
 Live status: the badge at the top of this file is GitHub's own CI badge for this exact `make
@@ -95,12 +96,12 @@ Strongest verified facts, tier-tagged, one command or file per row (tier legend 
 
 | We claim (verified, tier-tagged) | We do NOT claim |
 |---|---|
-| **69** axiom-free-or-`+reals`-disclosed Coq files, **439** machine-checked theorem certificates (428 `Th_coqc` over ℚ + 11 `+reals`), checkable by anyone in one command — `make verify` (counts independently re-confirmed PR #29, 2026-07-10; CI badge above) | That every `.v` file physically present under `formal/` is in this count — the directory holds more files than the CI-guarded `make verify` target compiles; only the ones listed in `Makefile`'s `COQFILES` are certified by the one-command check (compare `ls formal/*.v \| wc -l` against `grep -c '^\tformal/' Makefile` to see the difference yourself) |
+| **81** axiom-free-or-`+reals`-disclosed Coq files, **480** machine-checked theorem certificates (469 `Th_coqc` over ℚ + 11 `+reals`), checkable by anyone in one command — `make verify` — and this count now covers **every** `.v` file physically present under `formal/`, with `Makefile`'s `COQFILES` equal to `ls formal/*.v` exactly (the 12-file gap PR #30 disclosed was closed by PR #31, 2026-07-10; counts grepped from that PR's green CI log; CI badge above — compare `ls formal/*.v \| wc -l` against `grep -c '^\tformal/' Makefile` to confirm the two match yourself) | That certificate count = theorem count in any deeper sense — a certificate here is one `Print Assumptions` check on one named result; some files certify several small lemmas, others one large theorem |
 | The graph Laplacian `L_R = D_W − W` is **FORCED** — proven the *unique* operator with `{symmetric, zero-row-sum, off-diagonal ≤ 0}`; adjacency/signless/random-walk/normalized alternatives refuted by explicit witness (`Th_coqc`, `formal/InfoRetainedDistinctionForcesLaplacian_attempt.v`) | That the whole spine equation is forced from the root — the 2nd-order scalar `M` remains an independently posited structural primitive; six forcing readings for it were each shown insufficient on an explicit witness, a settled negative, not an unexamined gap (`Th_coqc` + `[Dr]`, `formal/InfoStrictConeBothOrders_attempt.v`) |
 | The dissipation term `D` is **also FORCED** (2026-07-08 result) — `D_i = deg_i(W) − λ·circ_i(ord)`, proven for an **arbitrary vertex count** by genuine induction, cutting the spine's free structural primitives from three to two (`Th_coqc`, `formal/InfoAsymmetricSeedTrifurcation.v` Part 7 + `formal/InfoSeedArbitraryNForcing.v` + `formal/InfoSeedCirculationArbitraryN.v`) | That the whole-seed extension of `L_R`'s two forcing axioms to the full asymmetric seed is *itself* proven the unique such extension — flagged honestly in-file as natural, not proven-unique |
 | The quantum dispersion relation and the special-relativistic wave operator are the same equation — a real, non-vacuous `ring` identity (`Th_coqc`, `formal/InfoQuantumRelativityUnification.v`), **bounded exactly per the 2026-07-08 §4/§8 amendments** (`SUPPLEMENT.md` §4, §8 — headers now say "bounded restatement", PR #29) | That this identity is a **from-the-root derivation** — it relates two *posited* constructions (the spine's free `M,D,K` slots; the boost's posited Minkowski signature/hyperbola constraint) under a *chosen* reparametrization; "derives QM and SR" is not the accurate reading (`SUPPLEMENT.md` §4/§8 amendment bodies, unchanged by PR #29 — only the section titles were tightened) |
-| A complete discrete curvature-tensor chain — Riemann = 2nd finite difference = group commutator, both Bianchi identities, pair-symmetry, metric-derived Levi-Civita, all division-free over ℚ (`Th_coqc`; e.g. `formal/InfoDiscreteRiemannCurvature_attempt.v`, `InfoDiscreteSecondBianchi_attempt.v`, `InfoRiemannPairSymmetry_attempt.v`, `InfoMetricDerivedCurvature_attempt.v` — **compiled and independently spot-checked `Closed under the global context` for this document, 2026-07-10; these are among the files in the "not every file" caveat above, not yet wired into the CI-guarded `make verify` target**) | That this tensor chain constitutes a derivation of the Einstein field equations, or of the metric-derived Riemann tensor `R^i_jkl` in dimension `n ≥ 3` — the latter is explicitly `[Open]` |
-| The quantum↔classical crossover, the black-hole horizon, and the "agency knife-edge" are proven to be **one internal algebraic discriminant** `disc = D² − 4MKλ`, derived on the spine itself (`Th_coqc`, `formal/InfoTelegraphCrossover_attempt.v` + `InfoTelegraphHorizonUnification_attempt.v` — the latter also spot-checked `Closed`, same caveat as above) | That this horizon is an imported Schwarzschild profile — it is explicitly not; and that *full nonlinear* GR (the field equations, Schwarzschild as their solution) is derived anywhere in this repo — it is `[Refused]`/`[Open]`, by design, not a numerical shortfall (eight independent recovery attempts tried and refuted or left open, `SUPPLEMENT.md`) |
+| A complete discrete curvature-tensor chain — Riemann = 2nd finite difference = group commutator, both Bianchi identities, pair-symmetry, metric-derived Levi-Civita, all division-free over ℚ (`Th_coqc`; e.g. `formal/InfoDiscreteRiemannCurvature_attempt.v`, `InfoDiscreteSecondBianchi_attempt.v`, `InfoRiemannPairSymmetry_attempt.v`, `InfoMetricDerivedCurvature_attempt.v` — **wired into the CI-guarded `make verify` target as of PR #31, 2026-07-10, every one `Closed under the global context` in that PR's green CI run**) | That this tensor chain constitutes a derivation of the Einstein field equations, or of the metric-derived Riemann tensor `R^i_jkl` in dimension `n ≥ 3` — the latter is explicitly `[Open]` |
+| The quantum↔classical crossover, the black-hole horizon, and the "agency knife-edge" are proven to be **one internal algebraic discriminant** `disc = D² − 4MKλ`, derived on the spine itself (`Th_coqc`, `formal/InfoTelegraphCrossover_attempt.v` + `InfoTelegraphHorizonUnification_attempt.v` — both in the CI-guarded `make verify` target as of PR #31, `Closed` in its green CI run) | That this horizon is an imported Schwarzschild profile — it is explicitly not; and that *full nonlinear* GR (the field equations, Schwarzschild as their solution) is derived anywhere in this repo — it is `[Refused]`/`[Open]`, by design, not a numerical shortfall (eight independent recovery attempts tried and refuted or left open, `SUPPLEMENT.md`) |
 | **Linearized** GR — gravitational waves — is genuinely derived from the same root box operator (`box h = 0` exactly at `v=±1`, null iff lightspeed, boost-invariant in every frame), and the Schwarzschild quasinormal-mode frequency is reproduced numerically to **0.1% (real) / 1.2% (imaginary)** from a finite-graph discretization with no point at infinity (`finite_diagnostic`, `scripts/verify_quantum_gravity_root_bridge.py`) | That the gravitational-wave derivation (`InfoGR2.GW`) lives in *this* repo — it does not; it is in the sibling private repo only (see `CLAUDE.md`'s "Common misreadings" #4 in this repo for the exact citation and why conflating the two tracks is the single most common way this repo gets mis-rated) |
 
 **Not claimed, stated plainly:** full nonlinear GR derivation (`[Refused]`/`[Open]`, not attempted-and-failed silently — the eight-attempt refutation log is in `SUPPLEMENT.md`) · that `M` is forced by the root (`[Dr]`, settled negative) · the physical truth of any readout — every number here is a *readout* of a declared finite computation, never an assertion of physical truth (`readout-not-truth`, see `CLAUDE.md`) · novelty adjudication against the wider literature — this repo states what it proves, not where it ranks against unpublished or unreviewed prior art.
@@ -151,11 +152,13 @@ already discloses is stated here.
 > theory, and by its own stance it does not try to be: continuum GR is **`[Refused]`** as a
 > non-readout, *not* left as a gap to chase.
 >
-> **Verification, in one line:** `make verify` compiles **69 Coq files / 439 machine-checked
-> theorem certificates** (428 axiom-free over ℚ, 11 on the disclosed `+reals` tier), every one a
+> **Verification, in one line:** `make verify` compiles **81 Coq files / 480 machine-checked
+> theorem certificates** (469 axiom-free over ℚ, 11 on the disclosed `+reals` tier), every one a
 > live `Print Assumptions` check in the build; CI has been green on every commit. One command
-> reproduces all of it. (Counts measured 2026-07-10, after wiring the seed-asymmetry files and
-> their dependencies into the CI-guarded build — a review finding caught them outside it.)
+> reproduces all of it. (Counts measured 2026-07-10 from PR #31's green CI log, after wiring the
+> last 12 files — the curvature-tensor and horizon-unification chain — into the CI-guarded build;
+> `COQFILES` now equals `ls formal/*.v` exactly. An earlier review finding had caught the
+> seed-asymmetry files outside it the same way.)
 >
 > **⚠️ Two tracks — do NOT conflate them (this is the #1 cause of under-rating this repo):**
 >
@@ -394,8 +397,8 @@ pip install -r requirements.txt
 make verify
 ```
 
-This compiles all 69 `formal/*.v` files in dependency order (see `Makefile`'s `COQFILES` for the
-current authoritative list — this number was stale at "17" before this pass; the file-by-file
+This compiles all 81 `formal/*.v` files in dependency order (see `Makefile`'s `COQFILES` for the
+current authoritative list — as of PR #31 it equals `ls formal/*.v` exactly; the file-by-file
 table above is a legacy inventory and may itself lag the current file count, per its own
 "40+ Coq files" caveat two paragraphs up) with
 `coqc -q -R . DQG <file>`, then runs `scripts/verify_quantum_gravity_root_bridge.py`,
