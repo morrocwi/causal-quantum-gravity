@@ -74,8 +74,14 @@ def test_stays_sparse_and_scales():
     assert L.shape == (n, n)
     # 4-neighbour lattice: nnz per row bounded -> O(n), nowhere near n^2
     assert L.nnz < 6 * n
-    # a sparse eigen-solve for the smallest modes must succeed
-    vals = spla.eigsh(L, k=3, which="SM", return_eigenvectors=False, maxiter=5000)
+    # a sparse eigen-solve for the smallest modes must succeed.
+    # shift-invert (sigma=0, which="LM") instead of which="SM": plain "SM" on a
+    # singular Laplacian is a documented ARPACK pathology that can iterate forever
+    # on some scipy/ARPACK builds (reproduced hanging locally 2026-07-10 during the
+    # release-closure audit; CI's build happened to converge). sigma is set just
+    # below zero so the shifted matrix stays definite despite the exact zero mode.
+    vals = spla.eigsh(L, k=3, sigma=-1e-9, which="LM",
+                      return_eigenvectors=False, maxiter=5000)
     assert vals.min() < 1e-6   # zero mode present
 
 
