@@ -54,7 +54,7 @@ you want the map before the detail). Open the right one, not all of them:
 
 ## Common misreadings — check before citing (a fresh AI's checklist)
 
-Four terms carry a meaning here that differs from the everyday/textbook sense. Check each before
+Five terms carry a meaning here that differs from the everyday/textbook sense. Check each before
 repeating a claim that uses one — misreading any produces a confident, wrong summary.
 
 1. **"Mass" (memory-before-mass).** `InfoMemoryBeforeMass.v` is the careful, well-scoped result: the
@@ -76,6 +76,17 @@ repeating a claim that uses one — misreading any produces a confident, wrong s
    silently. Check whether a "global in time" claim is `forall n : nat` (Th_coqc, the common case here)
    or genuinely needs `Coq.Reals` (`+reals`, a different, much rarer tier in this repo) before citing it
    as a continuum ODE/PDE stability result.
+4. **"GR" (two senses — a real search trap, caught 2026-07-10).** This paper's Branch-3 headline
+   ("General Relativity — Honestly Not Derived") refers to FULL nonlinear GR: Einstein's field
+   equations, the Schwarzschild metric AS A SOLUTION, Friedmann — all imported/`[Open]`, exactly as
+   stated. But **linearized GR (gravitational waves) IS genuinely derived from the root** — in the
+   sibling private repo's `URCF_RD_All.v`, `Module InfoGR2.GW` ("Only GW passed the FULL single-root
+   gate — derived from our box operator, non-circular, no-tautology": `box h = 0` exactly at `v=±1`,
+   null-iff-lightspeed, boost-invariant in all frames) plus `InfoGraviton` (graviton dispersion
+   `Mω²=Kλ`, perturbative). That module does NOT exist in this public repo — so grepping here for
+   "Schwarzschild" (or reading Branch 3 alone) and concluding "no GR content is derived anywhere" is
+   wrong; an AI did exactly that once. Before answering "is GR derived?", check BOTH repos and search
+   by module vocabulary (`InfoGR2`/`GW`/`graviton`/`box_quad`), not only the textbook keyword.
 
 ## Tier discipline (non-negotiable, see README's "Tier legend" for the full table)
 

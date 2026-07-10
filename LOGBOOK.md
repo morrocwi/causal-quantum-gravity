@@ -971,3 +971,22 @@ total, all `Print Assumptions` Closed. `make verify`: full repo green. This elev
 prerequisite for the founder's request to update `paper/main.tex`'s "$n$-Dimensional Spectral Convergence
 Ladder" section with this arbitrary-n result -- citing Coq content in the paper that isn't actually in this
 repo yet would be dishonest, so elevation had to come first.
+
+## 2026-07-10 — The "GR two senses" search trap, caught and recorded
+
+Asked "is Schwarzschild/GR derived from the mother equation?", an AI grepped this repo (and the
+sibling) for "Schwarzschild", found only the imported/`[Open]` side, and answered "no GR content is
+derived at all." The founder pushed back — correctly. Re-checking the sibling private repo's
+`URCF_RD_All.v` by MODULE vocabulary instead of textbook keyword found `Module InfoGR2.GW`
+("Only GW passed the FULL single-root gate — derived from our box operator, non-circular,
+no-tautology": `box h = 0` exactly at `v=±1`, null iff lightspeed, boost-invariant in all frames)
+and `InfoGraviton` (graviton dispersion `Mω²=Kλ`, perturbative quantization) — linearized GR
+genuinely derived from the root. Full nonlinear GR (EFE, Schwarzschild-as-solution, Friedmann)
+remains TAKEN/`[Open]`, exactly as Branch 3 of the paper states.
+
+Why the search failed, recorded so it is not repeated: (1) the derived-GR content carries no
+"Schwarzschild" in its names — it lives under `InfoGR2`/`GW`/`box_quad`/`graviton`; (2) that module
+exists ONLY in the private repo's aggregate, not here; (3) Branch 3's headline is about FULL GR and
+reads, to a fast reader, as "no GR at all." A "two senses of GR" item was added to both repos'
+misreading checklists (this repo's `CLAUDE.md`; the sibling's `readout-not-truth` skill) with the
+rule: answer "is X derived?" only after searching BOTH repos by module vocabulary.
