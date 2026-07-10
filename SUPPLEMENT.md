@@ -366,7 +366,7 @@ the numeric match to Hückel/benzene is a measured, reproducible cross-check.
 
 ---
 
-## 4. Branch 2 — Special relativity (DERIVED, Th_coqc + one +reals lift)
+## 4. Branch 2 — Special relativity (bounded restatement: causal-form machinery Th_coqc, signature posited — see 2026-07-08 correction below)
 
 **Source:** `formal/URCF_RD_All.v`, `Module InfoLorentz` (~line 6985, authored
 and committed 2026-06-27, **Tier-0, axiom-free** — `Print Assumptions`
@@ -943,7 +943,7 @@ exact `Th_coqc`.
 
 ---
 
-## 8. Unification — quantum and relativity are one equation (DERIVED, Th_coqc)
+## 8. Unification — quantum and relativity relabeled under one equation (bounded restatement: Th_coqc ring identity of two posited objects — see 2026-07-08 amendment below)
 
 **Source:** `formal/InfoQuantumRelativityUnification.v` (axiom-free,
 `Print Assumptions` confirmed "Closed under the global context" on all
