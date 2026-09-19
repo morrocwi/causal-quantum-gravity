@@ -18,7 +18,7 @@
 **Type:** Positive · commit `85e5711`
 
 First public cut of the standalone repository, extracted from the private
-`research_universal_solver` programme. 24 Coq files, 123 theorems, all
+`the private parent project` programme. 24 Coq files, 123 theorems, all
 machine-checked. Headline result at launch: one graph-Laplacian mother
 equation `M∂²Φ + D∂Φ + K·L_R·Φ + ∇V(Φ) = J−η` genuinely derives a quantum
 energy-dispersion relation and a discrete causal/Lorentzian bilinear form
@@ -108,7 +108,7 @@ named, literature-cited gap.
 ## 2026-07-05 11:46 — Sync C54–C64 + the optimizer window from the private repo
 **Type:** Mixed (Positive + Decision) · commit `83d7888` (11 files, 73 theorems)
 
-Eleven more self-contained files synced from `research_universal_solver`: a
+Eleven more self-contained files synced from `the private parent project`: a
 discrete disk-before-lock analog; a closed seed-to-spectral-ceiling chain; an
 algebraic bridge to a separately-developed roots-of-unity/golden-ratio track
 (curvature-Noether invariance, a literal `i`-rotation-matrix identity, a
@@ -448,7 +448,7 @@ This repo's open-problems ledger told the next worker exactly what to do
 about TEST 3's inconclusive tie-manifold run: "calibrate `α, β` so the
 population's median `strain−benefit` sits near zero by construction, then
 measure the SHAPE of the distribution." In the sibling repo
-(`research_universal_solver`, where all new work is developed first), that
+(`the private parent project`, where all new work is developed first), that
 exact fix had already been proposed, debated in a two-round cross-model
 peer exchange, and **rejected without ever being run** — the counter-argument
 (recorded verbatim in `probe_tie_manifold_drift.py`'s docstring) being that
@@ -476,7 +476,7 @@ sync discipline is part of honesty discipline, not housekeeping.
 
 ## 2026-07-06 — Elevation: metric-readout cluster promoted from the sibling repo
 
-Promoted three axiom-free theorems from `research_universal_solver` (they had passed
+Promoted three axiom-free theorems from `the private parent project` (they had passed
 its `ci_attempts_audit` — ALL PASS, compile + axiom-free) into this repo, per the
 standard sibling-export discipline:
 
@@ -508,7 +508,7 @@ prepared as maker, pending human_pi approval before the public push.
 
 ## 2026-07-08 — Elevation + honesty sync: the "three roots" finding, and a headline correction
 
-Context: `research_universal_solver` ran a 4-way adversarial borrow-audit
+Context: `the private parent project` ran a 4-way adversarial borrow-audit
 (2026-07-07) of its own root→graph→L_R→spine→QM/SR chain (`docs/root/
 BORROWED_VS_DERIVED_LEDGER.md`, merged main after two independent-checker review
 rounds — the first round caught the maker presenting a `[Dr]` verdict as
@@ -569,7 +569,7 @@ underlying modules are ever elevated here too) is a separate, later task.
 This repo has used an injected-**infinity** diagnostic (`I1`–`I4`) repeatedly and
 correctly (§5.2/§5.3's GR-refusal, §6's PML bridge) but never named its reciprocal
 half: injected exact-**zero** (`Z1`–`Z4`, `1/0=∞`), nor the standing pre-benchmark
-check (the Guard) that `research_universal_solver`'s `ZERO_INFINITY_DUAL_DIAGNOSIS.md`
+check (the Guard) that the private parent project's `ZERO_INFINITY_DUAL_DIAGNOSIS.md`
 records after repeatedly catching itself judging the framework against a
 non-readout. Added `SUPPLEMENT.md` §1.2 with the duality, the Guard checklist, and
 a worked example of where this repo already (unnamed) got it right (§6's
@@ -881,7 +881,7 @@ README.md's file-inventory entry updated with this addition.
 ## 2026-07-08 (later same day) — Adversarial self-audit catches two overclaims; corrected, not hidden
 
 Founder asked, explicitly invoking this repo's own standing rule that same-model self-checking is
-NOT independent review (`DEC-same-model-checking-not-independent`): run a genuine adversarial audit
+NOT independent review (an internal governance ruling on same-model self-checking): run a genuine adversarial audit
 of the entire "seed asymmetry" session's output (10 files across both repos) before trusting it
 further, and answer two direct questions honestly — does the QM/SR connection actually IMPROVE on
 the old three-roots picture, and is overall explanatory power for physical phenomena greater now
@@ -924,7 +924,7 @@ README.md's file-inventory entry updated to match.
 
 ## 2026-07-08 (later) — Elevating six seed-thread files from the private sibling
 
-Six files, all developed and verified in `research_universal_solver` first (per the standard 3-stage
+Six files, all developed and verified in `the private parent project` first (per the standard 3-stage
 discipline there), elevated here now that they are stable and the founder asked to elevate before
 continuing further work: `InfoSeedTorsionIsSkewOff.v`, `InfoSeedTorsionGroupAndRankN.v`,
 `InfoSeedTorsionGenuineMixing.v`, `InfoSeedCurvatureIntegration.v`, `InfoSeedTauRelFloor.v`,
@@ -963,7 +963,7 @@ well-scoped, nothing to fix there.
 
 ## 2026-07-08 (later still) — Elevating the arbitrary-n forcing pair, ahead of a paper update
 
-Two more files elevated from `research_universal_solver`: `InfoSeedArbitraryNForcing.v` and
+Two more files elevated from `the private parent project`: `InfoSeedArbitraryNForcing.v` and
 `InfoSeedCirculationArbitraryN.v` -- these close the founder's own flagged gap that the six earlier-elevated
 seed files (torsion x3, curvature, tau_rel floor, lambda_c crossover) only checked their forcing pattern at
 fixed n=3/n=4. Both compile cleanly (`coqc -q -R . DQG`, matching this repo's own convention), 14 theorems

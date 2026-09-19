@@ -18,7 +18,7 @@ graph TD
     REFS["supplement/references.md<br/>every external equation cited"]
     MAIN["paper/main.tex<br/>the manuscript"]
     MASSNOTE["paper/mass_note.tex<br/>companion note, separately authored"]
-    EQREG["research_universal_solver/docs/root/EQUATION_REGISTRY.md<br/>canonical citation source"]
+    EQREG["docs/root/EQUATION_REGISTRY.md (in the private parent project)<br/>canonical citation source"]
 
     CLAUDE -->|"points every agent to"| README
     README -->|"links to"| SUPP
@@ -65,7 +65,7 @@ frequently updated document in the whole repo — check there first before start
 | "I want to try to break a specific claim" | `AUDIT_BRIEF.md` |
 | "What's the actual theorem-level manuscript?" | `paper/main.tex` |
 | "What's the mass-derivation companion argument?" | `paper/mass_note.tex` (do not edit without asking its author) |
-| "How do I mechanize a new result and get it into this repo?" | `research_universal_solver`'s own `CLAUDE.md` (sibling private repo — new theorems are born there, synced here after) |
+| "How do I mechanize a new result and get it into this repo?" | the private parent project's own `CLAUDE.md` (sibling private repo — new theorems are born there, synced here after) |
 
 ## Standing discipline this map does not override
 

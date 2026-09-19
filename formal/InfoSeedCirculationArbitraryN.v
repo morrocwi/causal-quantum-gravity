@@ -1,6 +1,6 @@
 (*
    InfoSeedCirculationArbitraryN.v -- PROMOTED EXTRACT
-   Provenance: elevated 2026-07-08/10 from research_universal_solver/formal/InfoSeedCirculationArbitraryN_attempt.v
+   Provenance: elevated 2026-07-08/10 from formal/InfoSeedCirculationArbitraryN_attempt.v (in the private parent project)
    (renamed, "_attempt" dropped; Require targets adjusted to this repo's file names).
    Verified standalone at elevation (coqc -q -R . DQG; all Print Assumptions "Closed under
    the global context") and wired into COQFILES/make verify + CI on 2026-07-10, closing a

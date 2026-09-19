@@ -34,7 +34,7 @@
 (*                                                                         *)
 (*  PROVENANCE                                                             *)
 (*  Extracted verbatim (module body unmodified) from:                     *)
-(*    research_universal_solver/formal/URCF_RD_All.v                      *)
+(*    formal/URCF_RD_All.v (in the private parent project)                      *)
 (*      Module ContLimit             lines 6105-6182                      *)
 (*      Module Capstone              lines 6600-6681 (TIER 1 slice only)  *)
 (*      Module InfoLorentzContinuum  lines 7037-7078                      *)

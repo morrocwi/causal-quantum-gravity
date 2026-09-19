@@ -136,7 +136,7 @@ How a physicist or an AI attacks this repo, in order of effort:
 ### The private research repo this is drawn from
 
 This repo is a curated, standalone export of a subset of theorems from a private research
-repository, `research_universal_solver` (role: the calculation engine this line of work is
+repository, `the private parent project` (role: the calculation engine this line of work is
 developed in — available on request; not itself public). New theorems are proven and verified
 there first; only afterward are a subset copied here as a separate, later sync step. See
 "Provenance" below for the exact file-by-file authorship trail — nothing beyond what that section
@@ -493,7 +493,7 @@ Removes all `.vo`/`.vok`/`.vos`/`.glob`/`.aux` build artifacts.
 ## Provenance
 
 This repository is an extracted, minimal, standalone subset of a private
-research repository, `research_universal_solver` — flattened into 35 independent `formal/*.v` files (each
+research repository, `the private parent project` — flattened into 35 independent `formal/*.v` files (each
 carrying only the definitions its own theorems actually use, trimmed from
 larger source modules) plus one Python script, copied verbatim. Nothing was
 renamed or altered beyond: dropping the `_attempt` suffix some source files
@@ -510,7 +510,7 @@ context. Original authorship dates, by file:
 
 Every citation to outside literature in this repository (Forman, Bekenstein,
 Jacobson, etc.) should already be registered, with owner and year, in
-`research_universal_solver`'s `docs/root/EQUATION_REGISTRY.md` — that file, not
+the private parent project's `docs/root/EQUATION_REGISTRY.md` — that file, not
 memory, is the canonical source if you need to add or verify a citation.
 
 See [SUPPLEMENT.md](SUPPLEMENT.md) for the full narrative, the dependency DAG, the

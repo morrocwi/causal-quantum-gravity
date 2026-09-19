@@ -1,6 +1,6 @@
 (*
    RDL_GammaSpectral.v -- FULL EXTRACT (un-trimmed on 2026-07-06)
-   Provenance: extracted from research_universal_solver/formal/RDL_GammaSpectral.v
+   Provenance: extracted from formal/RDL_GammaSpectral.v (in the private parent project)
    (axiom-free Th_coqc). Previously a trimmed extract (Edge + u_of/v_of/w_of
    only); RESTORED to full because the promoted InfoMetricIsEnergyReadout.v
    uses term/energy and their supporting lemmas. Superset of the prior trim,

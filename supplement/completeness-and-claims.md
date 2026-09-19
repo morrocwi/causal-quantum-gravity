@@ -21,7 +21,7 @@ quantum dispersion (`M·ω²=K·λ`) and into the wave/box operator
 these are literally the same statement, not an analogy. This is the level
 at which this project's actual, checkable unification claim lives, and it
 is done. **Tier-honesty pointer (added 2026-07-08 — see `SUPPLEMENT.md`
-§1.1/§8 for the full statement, and `research_universal_solver`'s
+§1.1/§8 for the full statement, and the private parent project's
 2026-07-07 borrow-audit that first raised this):** "closed... done" is
 accurate for the algebraic identity itself (a genuine, non-vacuous `ring`
 proof) — it is NOT accurate as "QM and SR are derived from one root."

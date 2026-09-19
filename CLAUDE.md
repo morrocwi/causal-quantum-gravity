@@ -110,7 +110,7 @@ assuming.
 ## The sibling private repo
 
 This repo is a curated, standalone export of a subset of theorems from
-`research_universal_solver` (private). New theorems are developed and verified
+`the private parent project` (private). New theorems are developed and verified
 THERE first, as `formal/Info*_attempt.v` files, via a 3-stage discipline (standalone
 `coqc` → repo-namespace `coqc` → full `make verify-attempts`). Only after that do
 they get copied here (dropping the `_attempt` suffix) as a separate, later sync

@@ -1,6 +1,6 @@
 (*
    RDL_MetricReadout.v -- PROMOTED EXTRACT
-   Provenance: extracted 2026-07-06 from research_universal_solver/formal/RDL_MetricReadout.v
+   Provenance: extracted 2026-07-06 from formal/RDL_MetricReadout.v (in the private parent project)
    axiom-free Th_coqc arc; passed the sibling ci_attempts_audit (ALL PASS:
    compile + axiom-free) and re-verified here by make verify + Print
    Assumptions = "Closed under the global context".

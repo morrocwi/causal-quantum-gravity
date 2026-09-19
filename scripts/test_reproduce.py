@@ -3,7 +3,7 @@ test_reproduce.py -- pytest suite that independently re-derives the
 finite_diagnostic numerical claims that have a script in THIS repo
 (causal-quantum-gravity). The probe_*.py scripts referenced elsewhere in
 SUPPLEMENT.md SS12.3 live in the sibling private repo
-(research_universal_solver/scripts/), which has its own test_reproduce.py
+(scripts/ (in the private parent project)), which has its own test_reproduce.py
 covering those.
 
 Standing rule (this project, as of this file): no numerical claim enters
