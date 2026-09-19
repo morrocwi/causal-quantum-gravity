@@ -10,7 +10,7 @@ that matches the Coq theorems bit-for-bit.
 Mirrors of the formal (Coq) definitions
 ---------------------------------------
 Each routine below reproduces, bit-for-bit in exact mode, a checked Coq theorem
-from ``research_universal_solver/formal``.  The source module and theorem name
+from the ``formal`` directory of the private parent project.  The source module and theorem name
 are cited in every docstring so the Python and Coq layers stay in lock-step.
 
 * ``christoffel_fd(w, j) = w(j+1) - w(j)``  (forward diff)

@@ -126,7 +126,7 @@ outside it?**
 
 **Answer: three, not one.** `δ_R` genuinely forces exactly one term; the other two
 load-bearing terms are independent structural primitives on top of it, each backed by
-its own machine-checked brick (elevated from `research_universal_solver`,
+its own machine-checked brick (elevated from `the private parent project`,
 2026-07-07, re-verified standalone in this repo: `coqc -q -R . DQG`, axiom-free,
 `Print Assumptions` "Closed under the global context" on every theorem cited below).
 
@@ -195,7 +195,7 @@ stating explicitly now:**
   "nothing" incoherent to express in the first place, not merely false.
 - **No `Z3` absolute rest, honestly flagged as a gap, not silently assumed.**
   This repo does not yet carry a machine-checked floor-vs-no-floor falsifier
-  analogous to `research_universal_solver`'s `InfoTauFloor` (§9.1 references its
+  analogous to the private parent project's `InfoTauFloor` (§9.1 references its
   interpretive predecessor but the decisive brick itself is not elevated here —
   see the open item below).
 
@@ -412,7 +412,7 @@ permutation-invariance, and the Euclidean reduction hold for **every** `sgn`
 assignment — real, useful, `Th_coqc` facts about the causal-form construction as a
 family. What is **not** derived: that a specific timelike-minus/spacelike-plus
 pattern is *forced* by `≺` rather than posited to match Minkowski signature by
-design. This is the same finding as `research_universal_solver`'s
+design. This is the same finding as the private parent project's
 2026-07-07 borrow-audit for the identical construction (`sgn` there is likewise a
 `Hypothesis`/input, "the timelike minus is put in by hand — from ≺" per that file's
 own comment). Treat "not an imported Minkowski metric" as true of the *causal_form
@@ -987,7 +987,7 @@ statement that both objects were built from the same signed second-
 difference structure," nothing stronger.
 
 **Tier-honesty amendment (added 2026-07-08, per §1.1 above and
-`research_universal_solver`'s 2026-07-07 borrow-audit of the identical
+the private parent project's 2026-07-07 borrow-audit of the identical
 construction):** the 2026-07-05 review confirmed the *algebra* is not
 overclaimed; this amendment adds the piece that review did not check —
 whether the section **header and framing** ("Unification... DERIVED,

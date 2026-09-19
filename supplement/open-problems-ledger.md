@@ -34,7 +34,7 @@
    objects, not a naming accident to be merged — but the theorem connecting
    them along a trajectory is missing. **Field entropy** ("descent"): the
    private repo's own official philosophy lexicon
-   (`research_universal_solver/engine/lexicon.py`, the "conservation law"
+   (`engine/lexicon.py` (in the private parent project), the "conservation law"
    glossary entry, `Th_coqc`) reads the second law as the monotone
    energy-descent fact `dE/dt≤0`, unified with the arrow of time — this is
    about the FIELD dissipating. **Record entropy** ("count"): the
@@ -268,7 +268,7 @@
     magnitude claim — reproducibility across seeds is necessary but not
     sufficient to rule out a systematic (non-cancelling, nonlinear
     dressing) artifact. **Round four, the twin-field common-noise
-    estimator (`research_universal_solver/scripts/probe_twolump_twinfield.py`,
+    estimator (`scripts/probe_twolump_twinfield.py` (in the private parent project),
     `finite_diagnostic`), ran as the broadband-bath rerun round three
     called for, with one further design change beyond "broadband": rather
     than evolving each of the compared configurations (two-lump at
@@ -339,7 +339,7 @@
     when a coarser readout (curvature) is blind to it — corridor energy
     (a time-and-node-averaged squared displacement) is exactly that kind
     of coarse, potentially order-blind summary statistic. Tested directly
-    (`research_universal_solver/scripts/probe_twolump_order_sensitivity.py`,
+    (`scripts/probe_twolump_order_sensitivity.py` (in the private parent project),
     `finite_diagnostic`): for the same seed and separation, corridor
     energy computed from the original kick sequence versus the identical
     kicks with TIME ORDER randomly permuted differ by an amount
@@ -433,7 +433,7 @@
     calibrate `α, β` so the population's median `strain−benefit` sits near
     zero by construction. That fix was proposed, then REJECTED before ever
     being executed,** in a two-round cross-model peer debate recorded
-    verbatim in `research_universal_solver/scripts/probe_tie_manifold_drift.py`'s
+    verbatim in `scripts/probe_tie_manifold_drift.py` (in the private parent project)'s
     own docstring (Fable 5, quoted: "Calibrating alpha to zero-median mostly
     guarantees you'll measure alpha=1 [the trivial exponent], because you've
     parked the *bulk* of a generic distribution on the boundary...
@@ -457,7 +457,7 @@
     drift-bin discriminator itself came out inconclusive (survivors occupy
     too few `|diff|` bins for the shape test to discriminate). Three
     executed, passing pytest tests
-    (`research_universal_solver/scripts/test_tie_manifold_drift.py`) guard
+    (`scripts/test_tie_manifold_drift.py` (in the private parent project)) guard
     the corrected numbers; both the probe and the tests were re-run and
     confirmed passing on 2026-07-06 before this paragraph was written, per
     the standing rule that "verified" means executed here, not read there. **TEST 1 (ledger-wave dispersion, "graviton
@@ -803,10 +803,10 @@ decorative.
 
 Every `finite_diagnostic` numerical claim in §12.2 and in the named
 open-problem ledger (§12 items 7, 8, 11) now has a checked-in, runnable
-script in `research_universal_solver/scripts/`, so a reader can re-run
+script in `scripts/` (in the private parent project), so a reader can re-run
 these rather than trust the prose. **As of this entry, every claim below
 also has a pytest assertion**, not just a runnable script — `pytest
-scripts/test_reproduce.py` in `research_universal_solver` covers the five
+scripts/test_reproduce.py` in `the private parent project` covers the five
 `probe_*.py`-backed claims, and `pytest scripts/test_reproduce.py` in
 `causal-quantum-gravity` covers the QNM frequency claim
 (`supplement/completeness-and-claims.md` §13's Schwarzschild addendum) —

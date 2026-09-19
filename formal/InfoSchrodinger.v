@@ -10,7 +10,7 @@
    under the global context).
 
    Provenance: extracted verbatim from a private research repo, no content changed.
-   Source: research_universal_solver/formal/URCF_RD_All.v, Module InfoSchrodinger, lines 9125-9150.
+   Source: formal/URCF_RD_All.v (in the private parent project), Module InfoSchrodinger, lines 9125-9150.
    ================================================================================================ *)
 Require Import Coq.QArith.QArith.
 Require Import Coq.micromega.Lqa.

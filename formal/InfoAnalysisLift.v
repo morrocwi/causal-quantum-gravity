@@ -2,7 +2,7 @@
 (* InfoAnalysisLift.v — TRIMMED EXTRACT for discrete-quantum-gravity-journal. *)
 (*                                                                            *)
 (* This is NOT the full file. The original, full InfoAnalysisLift.v lives at *)
-(* research_universal_solver/formal/InfoAnalysisLift.v and contains many     *)
+(* formal/InfoAnalysisLift.v (in the private parent project) and contains many     *)
 (* unrelated +reals lift theorems (relaxation ODE, harmonic oscillator,      *)
 (* unitary norm conservation, multivariable partials, etc). This extract     *)
 (* keeps ONLY the piece needed by InfoQuantumGravityRootBridge.v: the        *)

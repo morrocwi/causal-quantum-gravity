@@ -3,7 +3,7 @@
 (*                                                                            *)
 (* PROVENANCE NOTE (deviation from the usual pipeline, flagged explicitly):    *)
 (* every other _attempt.v file in this repo is developed in the sibling        *)
-(* private repo (research_universal_solver) first, then elevated here          *)
+(* private repo (the private parent project) first, then elevated here          *)
 (* dropping the suffix. This file is built DIRECTLY here instead, because its    *)
 (* entire point is to Require and compose with InfoAsymmetricSeedTrifurcation.v   *)
 (* and InfoQuantumRelativityUnification.v -- both of which exist as clean,         *)
